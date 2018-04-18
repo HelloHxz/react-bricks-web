@@ -1,6 +1,9 @@
+
+import 'babel-polyfill'
 import React from 'react';
 import Run from './navigator'
 import PageContainer from './pageContainer'
+import globalManager from './globalManager'
 import {PageView,observer} from './pageview'
 import {observable,extendObservable} from 'mobx'
 
@@ -11,6 +14,7 @@ import {observable,extendObservable} from 'mobx'
 export {
 	extendObservable,
 	PageContainer,
+	globalManager,
 	PageView,
 	observable,
 	observer,

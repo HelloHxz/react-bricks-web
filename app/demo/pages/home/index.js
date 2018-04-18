@@ -1,5 +1,11 @@
 import {React,PageView,observer} from "react-bricks"
+import './index.less';
 
+class PopLayer extends React.Component{
+  render(){
+    return (<div className='p-wrapper'></div>);
+  }
+}
 
 
 @observer
@@ -32,6 +38,8 @@ class HomeScreen extends React.Component {
 
   render() {
     return <div>home
+      <PopLayer/>
+      <div style={{height:'1000px',width:"100px"}}></div>
       <button onClick={this.go.bind(this)}>Go</button>
     </div>
   }

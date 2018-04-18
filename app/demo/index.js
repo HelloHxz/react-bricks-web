@@ -14,9 +14,9 @@ var config = {
 		}
 	},
 	pages:{
-		home:require("./main/pages/home").default,
-		buttonDemo:require("./main/pages/buttonDemo").default,
-		nest:require("./main/pages/nest").default,
+		home:require("./pages/home").default,
+		buttonDemo:require("./pages/buttonDemo").default,
+		nest:require("./pages/nest").default,
 	},
 };
 export default Run(config)

@@ -317,9 +317,9 @@ class Navigation extends React.Component {
 
     var ToPageInstance = this.props.config.pages[realpagename];
     
-    if(!ToPageInstance.prototype.__proto__.forceUpdate){
-      P = LazyLoadPage;
-    }
+    // if(!ToPageInstance.prototype.__proto__.forceUpdate){
+    //   P = LazyLoadPage;
+    // }
 
     if(!curParams[systemseedname]&&this.isInit&&ToPagePath.toLowerCase() === this.props.config.root.toLowerCase()){
         this.firstLoadToChangeHash = true;
