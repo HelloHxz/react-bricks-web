@@ -94,9 +94,6 @@ class PageView extends React.Component {
         this.store = ToPageInstance.connectStore(params);
       }
     }
-
-
-    //this.props.pkey
     var basePageClassName = "xz-page-base-page ";
     return (<div
         ref={(wrapper)=>{this.wrapper = wrapper;}}
@@ -116,7 +113,6 @@ class PageView extends React.Component {
             pkey={this.props.pkey+"_inner"} 
             key={this.props.pkey+"_inner"}>
           </ToPageInstance>
-          
       </div>);
   }
 }

@@ -4,32 +4,23 @@ import './index.less';
 class PopLayer extends React.Component{
 
   refLoad(ref){
-    console.log(ref);
+    if(!ref){return;}
     ref.onmousewheel = function(event) {
-
+      event.stopPropagation();
+      event.preventDefault();
       if(event.wheelDelta<0){
-        if(ref.scrollTop+ref.offsetHeight>=ref.scrollHeight){
-          event.stopPropagation();
-          event.preventDefault();
-        }
+        ref.scrollTop = ref.scrollTop + 40;
       }else{
-        if(ref.scrollTop<=0){
-          event.stopPropagation();
-          event.preventDefault();
-        }
+        ref.scrollTop = ref.scrollTop - 40;
       }
   };
   ref.addEventListener("DOMMouseScroll", function(event) {
+    event.stopPropagation();
+    event.preventDefault();
       if(event.detail>0){
-        if(ref.scrollTop+ref.offsetHeight>=ref.scrollHeight){
-          event.stopPropagation();
-          event.preventDefault();
-        }
+        ref.scrollTop = ref.scrollTop + 40;
       }else{
-        if(ref.scrollTop<=0){
-          event.stopPropagation();
-          event.preventDefault();
-        }
+        ref.scrollTop = ref.scrollTop - 40;
       }
   });
   }
