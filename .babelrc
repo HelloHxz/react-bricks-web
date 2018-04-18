@@ -1,0 +1,16 @@
+{
+  "presets": ["react-native"],
+  "plugins":[
+    "transform-decorators-legacy",
+  	[
+      "module-resolver",
+      {
+        "cwd":"babelrc",
+        "alias": {
+	        "react-bricks": "./src/components"
+	     },
+        "extensions": [".js",".ios.js",".android.js",".web.js"]
+      }
+    ]
+  ]
+}
