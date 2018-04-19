@@ -1,0 +1,20 @@
+/*
+    [
+        {
+            value:1,label:'xxx',children:[]
+        },
+        {
+            value:1,label:'xxx',children:[
+                  {
+                        value:1,label:'xxx',children:[]
+                  },
+                  {
+                        value:1,label:'xxx',children:[]
+                  },
+                  {
+                        value:1,label:'xxx',children:[]
+                  },
+            ]
+        },
+    ]
+*/

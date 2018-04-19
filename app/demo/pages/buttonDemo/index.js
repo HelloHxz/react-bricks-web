@@ -1,8 +1,5 @@
 import {React,PageView,observer,PageContainer} from "react-bricks"
 
-
-
-@observer
 @PageView
 class BottomDemo extends React.Component {
 

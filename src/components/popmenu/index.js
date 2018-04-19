@@ -53,17 +53,8 @@ class MenuSection extends React.Component{
     }
     render(){
         var children = [];
-        for(var i=0,j=this.state.data.children.length;i<j;i++){
-            var itemData = this.state.data.children[i];
-            if(itemData.children){
-                children.push(<MenuSection key={i} data={itemData}/>);
-            }else{
-                children.push(<MenuSectionItem key={i} data={itemData}/>);
-            }
-        }
         return <ul>
             <MenuSectionHeader data={this.state.data}/>
-            {children}
         </ul>;;
     }
 }

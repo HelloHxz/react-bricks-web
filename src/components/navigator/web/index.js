@@ -79,7 +79,6 @@ class Navigation extends React.Component {
     window.onhashchange=function(){
       _this.hashChange();
     };
-
     this.start();
   }
 
@@ -93,7 +92,7 @@ class Navigation extends React.Component {
     let config = this.props.config;
     this.appConfig = config;
     var toPage = this.getPageNameFromUrl();
-   this.hashChange();
+    this.hashChange();
   }
 
 
@@ -289,10 +288,6 @@ class Navigation extends React.Component {
       this.firstLoadToChangeHash = false;
       return;
     }
-
-
-
-   
 
     var P = PageView;
 
@@ -571,15 +566,6 @@ class Navigation extends React.Component {
     }else{
       NoAnimation(routeStack,pages);
     }
-    
-    // 因为动画 页面没有清楚干净 
-    // if(animationAction!=='前进'){
-    //   setTimeout(()=>{
-    //     var lastPages = [];
-    //     NoAnimation(routeStack,lastPages);
-    //     manager.setState({pages:lastPages});
-    //   },250);
-    // }
 
     setTimeout(()=>{
       var seedObj = manager.getUrlSeedObj();
