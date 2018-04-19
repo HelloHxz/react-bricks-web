@@ -22,13 +22,56 @@ var data = [{
 }
 ];
 
+class PopMenuRoot extends React.Component{
+    // 决定弹出方式 hover 还是 右键  延迟加载
+    render(){
+        <div>{this.props.children}</div>;
+    }
+}
+
 class Menu extends React.Component{
     constructor(props){
         super(props);
         this.state={
-            data:data
+            data:props.data||data,
+            subData:null
         }
     }
+    componentDidMount(){
+        if(this.props.isPop&&this.root){
+            document.body.appendChild(this.root);
+        }
+    }
+    componentWillUnmount(){
+        this._clearTime();
+        if(this.props.isPop&&this.root){
+            document.body.removeChild(this.root);
+        }
+    }
+    onMouseMove(e){
+        if(this.props.parent){
+            this.props.parent._clearTime();
+        }
+        e.stopPropagation();
+        console.log(this.state.data);
+        this.setState({
+            subData:[{label:'xxx',key:'xxx'},{label:'222',key:'xxx'}]
+        });
+    }
+    _clearTime(){
+        if(this.timeoutid){
+            window.clearTimeout(this.timeoutid);
+            this.timeoutid = null;
+        }
+    }
+    onMouseLeave(){
+       this.timeoutid =  setTimeout(()=>{
+            this.setState({
+                subData:null
+            });
+        },100);
+    }
+
     render(){
         var children = [];
         for(var i=0,j=this.state.data.length;i<j;i++){
@@ -39,9 +82,31 @@ class Menu extends React.Component{
                 children.push(<MenuSectionItem key={i} data={itemData}/>);
             }
         }
-        return <ul>
-            {children}
-        </ul>;
+        var subMenu = null;
+        var style={};
+        var mouseEvent = {
+            onMouseMove:this.onMouseMove.bind(this),
+            onMouseLeave:this.onMouseLeave.bind(this)
+        };
+        if(this.props.isPop){
+            style={
+                position:"fixed",
+                top:"100px",
+                left:"100px",
+                zIndex:111111
+            }
+        }
+        if(this.state.subData){
+            subMenu = <Menu key="1" parent={this} isPop={true} data={this.state.subData} />;
+        }
+    
+        return (<div style={{backgroundColor:"#fff"}}>
+                    <ul style={style} ref={(root)=>{this.root = root;}} {...mouseEvent}>
+                     {children}
+                    </ul>
+                    <div>
+                 {subMenu}</div>
+               </div>);
     }
 }
 class MenuSection extends React.Component{
@@ -54,7 +119,7 @@ class MenuSection extends React.Component{
     render(){
         var children = [];
         return <ul>
-            <MenuSectionHeader data={this.state.data}/>
+            <MenuSectionItem data={this.state.data}/>
         </ul>;;
     }
 }
@@ -71,16 +136,5 @@ class MenuSectionItem extends React.Component{
     }
 }
 
-class MenuSectionHeader extends React.Component{
-    constructor(props){
-        super(props); 
-        this.state={
-            data:props.data
-        }
-    }
-    render(){
-        return <li style={{backgroundColor:'red'}}>{this.state.data.label}</li>;
-    }
-}
 
-export default Menu;
+export {PopMenuRoot,Menu};

@@ -1,4 +1,5 @@
 import  React from 'react';
+import { Menu as MiniMenu } from '../popmenu'
 
 
 var data = [{
@@ -28,8 +29,10 @@ class Menu extends React.Component{
         this.state={
             data:data
         }
+        console.log(MiniMenu);
     }
     render(){
+        return <MiniMenu data={this.state.data}/>
         var children = [];
         for(var i=0,j=this.state.data.length;i<j;i++){
             var itemData = this.state.data[i];

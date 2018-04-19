@@ -33,7 +33,6 @@ class HomeScreen extends React.Component {
     return <div>home
       <Menu data={this.menudata}/>
       <div className='test'/>
-      <div style={{height:'1000px',width:"100px",overflow:'auto'}}></div>
       <button onClick={this.go.bind(this)}>Go</button>
     </div>
   }
