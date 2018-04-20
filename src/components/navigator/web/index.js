@@ -223,8 +223,6 @@ class Navigation extends React.Component {
     },200);
   }
 
-
-
   modifyParams(params){
     isWantToPreventRoute = true;
     var curParams = this.getParamsFromUrl();
@@ -292,7 +290,6 @@ class Navigation extends React.Component {
     var P = PageView;
 
     var curParams = this.getParamsFromUrl();
-
     var curseedStr = this.getUrlSeedStr();
     var curSeedObj =  this.convertUrlSeedToObj(curseedStr);
 

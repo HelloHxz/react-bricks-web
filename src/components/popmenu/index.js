@@ -47,14 +47,19 @@ class PopMenuRoot extends React.Component{
     }
     render(){
         var subMenu = null;
+        var p = {};
+     
         var mouseEvent = {
             onMouseOver:this.onMouseOver.bind(this),
             onMouseLeave:this.onMouseLeave.bind(this)
         };
+        if(this.props.className){
+            p.className = this.props.className;
+        }
         if(this.state.subData && this.root){
             subMenu = <Menu key="1" triggerRoot={this} isPop={true} rect={this.root.getBoundingClientRect()} data={this.state.subData} />;
         }
-        return (<div ref={(root)=>{this.root = root;}} {...mouseEvent}>
+        return (<div {...p} ref={(root)=>{this.root = root;}} {...mouseEvent}>
                 {this.props.children}
                 {subMenu}
              </div>);
@@ -124,9 +129,9 @@ class Menu extends React.Component{
         for(let i=0,j=this.state.data.length;i<j;i++){
             let itemData = this.state.data[i];
             if(itemData.children){
-                children.push(<PopMenuRoot triggerRoot={this.props.triggerRoot} key={i} data={itemData}><MenuSectionItem data={itemData}/></PopMenuRoot>);
+                children.push(<PopMenuRoot className='xz-mini-menu-item' triggerRoot={this.props.triggerRoot} key={i} data={itemData}><MenuSectionItem data={itemData}/></PopMenuRoot>);
             }else{
-                children.push(<MenuSectionItem key={i} data={itemData}/>);
+                children.push(<MenuSectionItem className='xz-mini-menu-item' key={i} data={itemData}/>);
             }
         }
        
@@ -159,7 +164,11 @@ class MenuSectionItem extends React.Component{
         }
     }
     render(){
-        return <div>{this.state.data.label}</div>;
+        var p = {};
+        if(this.props.className){
+            p.className = this.props.className;
+        }
+        return <div {...p}>{this.state.data.label}</div>;
     }
 }
 

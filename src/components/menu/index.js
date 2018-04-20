@@ -1,11 +1,10 @@
 import  React from 'react';
-import { Menu as MiniMenu } from '../popmenu'
+import { Menu as MiniMenu } from '../popmenu';
+import './index.less';
 
 
 
 var data = [
-   
-  
     {
     label:'1',
     key:'xxxxx',
@@ -46,19 +45,18 @@ class Menu extends React.Component{
         }
     }
     render(){
-        return <MiniMenu data={this.state.data}/>
         var children = [];
         for(var i=0,j=this.state.data.length;i<j;i++){
             var itemData = this.state.data[i];
             if(itemData.children){
-                children.push(<MenuSection key={i} data={itemData}/>);
+                children.push(<MenuSection level={0} key={i} data={itemData}/>);
             }else{
-                children.push(<MenuSectionItem key={i} data={itemData}/>);
+                children.push(<MenuSectionItem level={0} key={i} data={itemData}/>);
             }
         }
-        return <ul>
+        return <div className='xz-menu'>
             {children}
-        </ul>;
+        </div>;
     }
 }
 
@@ -66,23 +64,65 @@ class MenuSection extends React.Component{
     constructor(props){
         super(props); 
         this.state={
-            data:props.data
+            data:props.data,
+            open:false,
         }
+    }
+    headerClick(){
+        if(this.timeid||this.timeid2){
+            return;
+        }
+        if(this.state.open){
+            this.groupouter.style.height =  this.groupinner.offsetHeight+"px";
+        }
+        this.timeid = setTimeout(()=>{
+            this.timeid = null;
+            this.setState({
+                open:!this.state.open
+            },()=>{
+                if(this.state.open){
+                      this.timeid2 = setTimeout(()=>{
+                        this.timeid2 = null;
+                        this.groupouter.style.height = "auto";
+                      },210)
+                }else{
+                    this.groupouter.style.height = "0px";
+                }
+            });
+        },50);
+    }
+    outerLoad(groupouter){
+        this.groupouter = groupouter;
+    }
+    innerLoad(groupinner){
+        this.groupinner = groupinner;
     }
     render(){
         var children = [];
+        var outerStyle ={};
+        if(this.state.open){
+            if(this.groupinner){
+                outerStyle.height = this.groupinner.offsetHeight;
+            }
+        }else{
+            outerStyle.height = 0;
+        }
         for(var i=0,j=this.state.data.children.length;i<j;i++){
             var itemData = this.state.data.children[i];
             if(itemData.children){
-                children.push(<MenuSection key={i} data={itemData}/>);
+                children.push(<MenuSection level={this.props.level+1} key={i} data={itemData}/>);
             }else{
-                children.push(<MenuSectionItem key={i} data={itemData}/>);
+                children.push(<MenuSectionItem level={this.props.level+1} key={i} data={itemData}/>);
             }
         }
-        return <ul>
-            <MenuSectionHeader data={this.state.data}/>
-            {children}
-        </ul>;;
+        return (<div>
+            <MenuSectionHeader onClick={this.headerClick.bind(this)} level={this.props.level} data={this.state.data}/>
+            <div className='xz-menu-section' ref={this.outerLoad.bind(this)} style={outerStyle}>
+              <div ref={this.innerLoad.bind(this)}>
+                {children}
+              </div>
+            </div>
+        </div>);
     }
 }
 
@@ -94,7 +134,11 @@ class MenuSectionItem extends React.Component{
         }
     }
     render(){
-        return <li>{this.state.data.label}</li>;
+        var paddingLeft = 0;
+        if(this.props.level>0){
+            paddingLeft = (this.props.level)*20;
+        }
+        return (<div style={{paddingLeft:paddingLeft}}>{this.state.data.label}</div>);
     }
 }
 
@@ -105,8 +149,11 @@ class MenuSectionHeader extends React.Component{
             data:props.data
         }
     }
+    click(){
+        this.props.onClick();
+    }
     render(){
-        return <li style={{backgroundColor:'red'}}>{this.state.data.label}</li>;
+        return <div onClick={this.click.bind(this)} style={{backgroundColor:'red',paddingLeft:(this.props.level)*20}}>{this.state.data.label}</div>;
     }
 }
 

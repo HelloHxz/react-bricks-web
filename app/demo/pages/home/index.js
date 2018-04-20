@@ -32,7 +32,6 @@ class HomeScreen extends React.Component {
   render() {
     return <div>home
       <Menu data={this.menudata}/>
-      <div className='test'/>
       <button onClick={this.go.bind(this)}>Go</button>
     </div>
   }
