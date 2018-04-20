@@ -32,7 +32,7 @@ class PopMenuRoot extends React.Component{
     onMouseLeave(e){
        e.stopPropagation();
        e.preventDefault();
-      this.hidePop();
+       this.hidePop();
     }
     hidePop(){
         this._clearTime();
@@ -40,7 +40,7 @@ class PopMenuRoot extends React.Component{
             this.setState({
                 subData:null
             });
-        },500);
+        },300);
         if(this.props.triggerRoot){
             this.props.triggerRoot.hidePop();
         }
@@ -96,8 +96,7 @@ class Menu extends React.Component{
     getPopPositionStyle(){
         var rect = this.props.rect || {top:0,left:0,width:0,height:0,offsetX:0,offsetY:0};
         return {
-            top:Common.parseInt(rect.top)+
-                Common.parseInt(rect.height)+Common.parseInt(rect.offsetY),
+            top:Common.parseInt(rect.top)+Common.parseInt(rect.offsetY),
             left:Common.parseInt(rect.left)+
                 Common.parseInt(rect.width)+Common.parseInt(rect.offsetX),
         };
