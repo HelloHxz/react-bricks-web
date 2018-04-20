@@ -2,7 +2,11 @@ import  React from 'react';
 import { Menu as MiniMenu } from '../popmenu'
 
 
-var data = [{
+
+var data = [
+   
+  
+    {
     label:'1',
     key:'xxxxx',
 },
@@ -20,7 +24,18 @@ var data = [{
 {
     label:'3',
     key:'xxxxx',
-}
+},
+{
+    label:'4',
+    key:'frfrf',children:[
+        {label:"4.1",key:'xxxxxxx'},
+        {label:"4.2",key:'xxxxxxx',children:[
+            {label:'4.2.1',key:'xxxxxxxx'},
+            {label:'4.2.2',key:'xxxxxxxx'}
+        ]},
+    ]
+},
+
 ];
 
 class Menu extends React.Component{
@@ -29,7 +44,6 @@ class Menu extends React.Component{
         this.state={
             data:data
         }
-        console.log(MiniMenu);
     }
     render(){
         return <MiniMenu data={this.state.data}/>
@@ -47,6 +61,7 @@ class Menu extends React.Component{
         </ul>;
     }
 }
+
 class MenuSection extends React.Component{
     constructor(props){
         super(props); 

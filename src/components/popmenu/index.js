@@ -1,61 +1,23 @@
 import  React from 'react';
+import Common from '../../utils/common';
+import './index.less';
 
 
-var data = [{
-    label:'1',
-    key:'xxxxx',
-},
-{
-    label:"2",
-    key:"xxxxxxxx",
-    children:[
-        {label:"2.1",key:'xxxxxxx'},
-        {label:"2.2",key:'xxxxxxx',children:[
-            {label:'2.2.1',key:'xxxxxxxx'},
-            {label:'2.2.2',key:'xxxxxxxx'}
-        ]},
-    ]
-},
-{
-    label:'3',
-    key:'xxxxx',
-}
-];
 
 class PopMenuRoot extends React.Component{
-    // 决定弹出方式 hover 还是 右键  延迟加载
-    render(){
-        <div>{this.props.children}</div>;
-    }
-}
-
-class Menu extends React.Component{
     constructor(props){
         super(props);
         this.state={
-            data:props.data||data,
-            subData:null
+            data:props.data||[],
+            subData:null,
         }
     }
-    componentDidMount(){
-        if(this.props.isPop&&this.root){
-            document.body.appendChild(this.root);
-        }
-    }
-    componentWillUnmount(){
-        this._clearTime();
-        if(this.props.isPop&&this.root){
-            document.body.removeChild(this.root);
-        }
-    }
-    onMouseMove(e){
-        if(this.props.parent){
-            this.props.parent._clearTime();
-        }
+    onMouseOver(e){
         e.stopPropagation();
-        console.log(this.state.data);
+        e.preventDefault();
+        this._clearTime();
         this.setState({
-            subData:[{label:'xxx',key:'xxx'},{label:'222',key:'xxx'}]
+            subData:this.state.data.children
         });
     }
     _clearTime(){
@@ -63,50 +25,116 @@ class Menu extends React.Component{
             window.clearTimeout(this.timeoutid);
             this.timeoutid = null;
         }
+        if(this.props.triggerRoot){
+            this.props.triggerRoot._clearTime();
+        }
     }
-    onMouseLeave(){
-       this.timeoutid =  setTimeout(()=>{
+    onMouseLeave(e){
+       e.stopPropagation();
+       e.preventDefault();
+      this.hidePop();
+    }
+    hidePop(){
+        this._clearTime();
+        this.timeoutid = setTimeout(()=>{
             this.setState({
                 subData:null
             });
-        },100);
+        },500);
+        if(this.props.triggerRoot){
+            this.props.triggerRoot.hidePop();
+        }
+    }
+    render(){
+        var subMenu = null;
+        var mouseEvent = {
+            onMouseOver:this.onMouseOver.bind(this),
+            onMouseLeave:this.onMouseLeave.bind(this)
+        };
+        if(this.state.subData && this.root){
+            subMenu = <Menu key="1" triggerRoot={this} isPop={true} rect={this.root.getBoundingClientRect()} data={this.state.subData} />;
+        }
+        return (<div ref={(root)=>{this.root = root;}} {...mouseEvent}>
+                {this.props.children}
+                {subMenu}
+             </div>);
+    }
+}
+
+class Menu extends React.Component{
+    constructor(props){
+        super(props);
+        this.state={
+            data:props.data||[],
+            subData:null,
+            rect:props.rect
+        }
+    }
+    shouldComponentUpdate(nextProps,nextState){
+        if(this.props.isPop){
+            return JSON.stringify(this.state.data)!==JSON.stringify(nextProps.data)&&JSON.stringify(this.state.rect)!==JSON.stringify(nextProps.rect);
+        } 
+        return true;
+    }
+    onMouseOver(e){
+        e.stopPropagation();
+        e.preventDefault();
+        if(this.props.triggerRoot){
+            this.props.triggerRoot._clearTime();
+        }
+    }
+ 
+    onMouseLeave(e){
+       e.stopPropagation();
+       e.preventDefault();
+       if(this.props.triggerRoot){
+           this.props.triggerRoot.hidePop();
+       }
+      
+    }
+
+    getPopPositionStyle(){
+        var rect = this.props.rect || {top:0,left:0,width:0,height:0,offsetX:0,offsetY:0};
+        return {
+            top:Common.parseInt(rect.top)+
+                Common.parseInt(rect.height)+Common.parseInt(rect.offsetY),
+            left:Common.parseInt(rect.left)+
+                Common.parseInt(rect.width)+Common.parseInt(rect.offsetX),
+        };
     }
 
     render(){
-        var children = [];
-        for(var i=0,j=this.state.data.length;i<j;i++){
-            var itemData = this.state.data[i];
+        let children = [];
+        let style={};
+        let wrapperClassName = this.props.className||'';
+        var mouseEvent = {};
+        if(this.props.isPop){
+            wrapperClassName = wrapperClassName +' xz-pop-menu';
+            style=this.getPopPositionStyle();
+            mouseEvent ={
+                onMouseLeave:this.onMouseLeave.bind(this),
+                onMouseOver:this.onMouseOver.bind(this)
+            };
+        }else{
+            if(this.props.horizontal===true){
+                wrapperClassName = wrapperClassName +' xz-min-menu-hori';
+            }else{
+                wrapperClassName = wrapperClassName +' xz-min-menu-veri';
+            }
+        }
+        for(let i=0,j=this.state.data.length;i<j;i++){
+            let itemData = this.state.data[i];
             if(itemData.children){
-                children.push(<MenuSection key={i} data={itemData}/>);
+                children.push(<PopMenuRoot triggerRoot={this.props.triggerRoot} key={i} data={itemData}><MenuSectionItem data={itemData}/></PopMenuRoot>);
             }else{
                 children.push(<MenuSectionItem key={i} data={itemData}/>);
             }
         }
-        var subMenu = null;
-        var style={};
-        var mouseEvent = {
-            onMouseMove:this.onMouseMove.bind(this),
-            onMouseLeave:this.onMouseLeave.bind(this)
-        };
-        if(this.props.isPop){
-            style={
-                position:"fixed",
-                top:"100px",
-                left:"100px",
-                zIndex:111111
-            }
-        }
-        if(this.state.subData){
-            subMenu = <Menu key="1" parent={this} isPop={true} data={this.state.subData} />;
-        }
-    
-        return (<div style={{backgroundColor:"#fff"}}>
-                    <ul style={style} ref={(root)=>{this.root = root;}} {...mouseEvent}>
-                     {children}
-                    </ul>
-                    <div>
-                 {subMenu}</div>
-               </div>);
+       
+        return (<div {...mouseEvent} className={wrapperClassName} style={style} ref={(root)=>{this.root = root;}}>
+              {children}
+         </div>);
+      
     }
 }
 class MenuSection extends React.Component{
@@ -118,9 +146,9 @@ class MenuSection extends React.Component{
     }
     render(){
         var children = [];
-        return <ul>
+        return <div>
             <MenuSectionItem data={this.state.data}/>
-        </ul>;;
+        </div>;
     }
 }
 
@@ -132,7 +160,7 @@ class MenuSectionItem extends React.Component{
         }
     }
     render(){
-        return <li>{this.state.data.label}</li>;
+        return <div>{this.state.data.label}</div>;
     }
 }
 
