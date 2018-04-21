@@ -45,6 +45,7 @@ class Menu extends React.Component{
         }
     }
     render(){
+        return <MiniMenu data={data}/>
         var children = [];
         for(var i=0,j=this.state.data.length;i<j;i++){
             var itemData = this.state.data[i];
