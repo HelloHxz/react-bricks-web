@@ -86,7 +86,9 @@ return {
     publicPath: isProd?'./':'/'
   },
  
-
+  watchOptions: {
+    poll: true
+  },
   devtool: isProd ? 'cheap-module-source-map':'#source-map',
 
   devServer: {
