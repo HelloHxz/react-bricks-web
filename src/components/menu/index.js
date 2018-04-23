@@ -6,26 +6,30 @@ import './index.less';
 
 var data = [
     {
-    label:'1',
+    label:'关于',
     key:'xxxxx',
 },
 {
-    label:"2",
+    label:'快速上手',
+    key:'xxxxx',
+},
+{
+    label:"组件",
     key:"xxxxxxxx",
     children:[
-        {label:"2.1",key:'xxxxxxx'},
-        {label:"2.2",key:'xxxxxxx',children:[
+        {label:"Button",key:'xxxxxxx'},
+        {label:"Menu",key:'xxxxxxx',children:[
             {label:'2.2.1',key:'xxxxxxxx'},
             {label:'2.2.2',key:'xxxxxxxx'}
         ]},
     ]
 },
 {
-    label:'3',
+    label:'生命周期',
     key:'xxxxx',
 },
 {
-    label:'4',
+    label:'数据状态',
     key:'frfrf',children:[
         {label:"4.1",key:'xxxxxxx'},
         {label:"4.2",key:'xxxxxxx',children:[
@@ -33,6 +37,9 @@ var data = [
             {label:'4.2.2',key:'xxxxxxxx'}
         ]},
     ]
+},{
+    label:'打包发布',
+    key:'xxxxx',
 },
 
 ];
@@ -45,7 +52,7 @@ class Menu extends React.Component{
         }
     }
     render(){
-        return <MiniMenu data={data}/>
+        // return <MiniMenu data={data}/>
         var children = [];
         for(var i=0,j=this.state.data.length;i<j;i++){
             var itemData = this.state.data[i];
@@ -118,7 +125,7 @@ class MenuSection extends React.Component{
         }
         return (<div>
             <MenuSectionHeader onClick={this.headerClick.bind(this)} level={this.props.level} data={this.state.data}/>
-            <div className='xz-menu-section' ref={this.outerLoad.bind(this)} style={outerStyle}>
+            <div className='section' ref={this.outerLoad.bind(this)} style={outerStyle}>
               <div ref={this.innerLoad.bind(this)}>
                 {children}
               </div>

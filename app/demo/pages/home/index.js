@@ -30,10 +30,19 @@ class HomeScreen extends React.Component {
   }
 
   render() {
-    return <div>home
-      <Menu data={this.menudata}/>
-      <button onClick={this.go.bind(this)}>Go</button>
-    </div>
+    return (
+      <div>
+        <div style={{height:60,width:'100%'}}></div>
+        <div>
+          <div style={{width:120,height:'100%',float:'left'}}>
+          <Menu data={this.menudata}/>
+          </div>
+          <div style={{marginLeft:120}}>
+            <button onClick={this.go.bind(this)}>Go</button>
+          </div>
+        </div>
+      </div>
+    );
   }
 }
 

@@ -1,9 +1,12 @@
+@import '../../theme/index.less';
 .xz-menu{
     width: 120px;
+    background-color: @theme_background;
+    .item{
+        height:30px;
+    }
+    .section{
+        overflow: hidden;   
+        transition: height 0.2s ease;
+    }
 }
-
-.xz-menu-section{
-   overflow: hidden;   
-   transition: height 0.2s ease;
-}
-
