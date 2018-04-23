@@ -13,8 +13,7 @@ var PageView =   (WrappedComponent) => {
       onPageResume(){
 
       }
-
-       hidePopPage(pagekey){
+      hidePopPage(pagekey){
          this.poproot.hide(pagekey);
       }
 
@@ -29,10 +28,7 @@ var PageView =   (WrappedComponent) => {
       }
 
       render() {
-         return <div className='xz-pfull'>
-            <WrappedComponent ref={(pageInstance)=>{this.pageInstance = pageInstance;}} 
-             {...this.props} />
-         </div>
+         return (<WrappedComponent ref={(pageInstance)=>{this.pageInstance = pageInstance;}} {...this.props} />);
       }
    }
    return Wrapper;

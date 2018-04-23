@@ -95,9 +95,10 @@ class PageView extends React.Component {
       }
     }
     var basePageClassName = "xz-page-base-page ";
-    return (<div
-        ref={(wrapper)=>{this.wrapper = wrapper;}}
-       className='xz-pfull' key={this.props.pkey+"_outer"}>
+    // <div
+    //     ref={(wrapper)=>{this.wrapper = wrapper;}}
+    //    className='xz-pfull' key={this.props.pkey+"_outer"}>
+    return (
           <ToPageInstance 
             base={this} 
             {...this.store}
@@ -112,8 +113,7 @@ class PageView extends React.Component {
             basekey={this.props.pkey}
             pkey={this.props.pkey+"_inner"} 
             key={this.props.pkey+"_inner"}>
-          </ToPageInstance>
-      </div>);
+          </ToPageInstance>);
   }
 }
 export default PageView;
