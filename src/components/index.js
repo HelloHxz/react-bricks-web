@@ -6,6 +6,7 @@ import PageContainer from './pageContainer'
 import Menu from './Menu'
 import globalManager from './globalManager'
 import {PageView,observer} from './pageview'
+import PopView from './popview'
 import {observable,extendObservable} from 'mobx'
 /*
 	todo.. babel-plugin-import 按需加载
@@ -13,6 +14,7 @@ import {observable,extendObservable} from 'mobx'
 */
 export {
 	Menu,
+	PopView,
 	extendObservable,
 	PageContainer,
 	globalManager,

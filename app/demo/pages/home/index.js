@@ -1,4 +1,4 @@
-import {React,PageView,observer,Menu} from "react-bricks"
+import {React,PageView,observer,Menu,PopView} from "react-bricks"
 import './index.less';
 
 
@@ -29,6 +29,10 @@ class HomeScreen extends React.Component {
     return true;
   }
 
+  renderPopView(){
+    return <div>popopopopo</div>
+  }
+
   render() {
     return (
       <div>
@@ -38,6 +42,7 @@ class HomeScreen extends React.Component {
           <Menu data={this.menudata}/>
           </div>
           <div style={{marginLeft:120}}>
+            <PopView style={{display:'inline-block'}} mode='dbclick|click|hover|rightclick' mouseLeaveHide={true} renderContent={this.renderPopView.bind(this)}><button>hahha</button></PopView>
             <button onClick={this.go.bind(this)}>Go</button>
           </div>
         </div>
