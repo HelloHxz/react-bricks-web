@@ -23,11 +23,19 @@ class PopView extends React.Component{
         }
         e.stopPropagation();
         e.preventDefault();
-        this.timeoutid = setTimeout(()=>{
+        var mode = this.props.mode || 'hover';
+        if(mode==='hover'){
+            this.timeoutid = setTimeout(()=>{
+                this.setState({
+                    show:true
+                });
+            },300);
+        }else{
             this.setState({
                 show:true
             });
-        },300);
+        }
+       
     }
     _clearTime(){
         if(this.timeoutid){
@@ -46,17 +54,17 @@ class PopView extends React.Component{
             return;
         }
         this.timeoutid = setTimeout(()=>{
-            this.setState({
-                show:false
-            },()=>{
-                setTimeout(()=>{
-                    this.setState({show:'noinit'});
-                },300);
-            });
+           this.hide();
         },300);
     }
     hide(){
-        this.hidePop();
+        this.setState({
+            show:false
+        },()=>{
+            setTimeout(()=>{
+                this.setState({show:'noinit'});
+            },300);
+        });
     }
     getPopPositionStyle(){
         var rect = this.root.getBoundingClientRect();
