@@ -46,7 +46,8 @@ class HomeScreen extends React.Component {
           <Menu data={this.menudata}/>
           </div>
           <div style={{marginLeft:120}}>
-            <PopView style={{display:'inline-block'}} mode='dbclick|click|hover|rightclick' mouseLeaveHide={true} renderContent={this.renderPopView.bind(this)}><button>hahha</button></PopView>
+            <PopView style={{display:'inline-block'}} mode='click' mouseLeaveHide={true} renderContent={this.renderPopView.bind(this)}><button>click</button></PopView>
+            <PopView style={{display:'inline-block'}} mode='hover' mouseLeaveHide={true} renderContent={this.renderPopView.bind(this)}><button>hover</button></PopView>
             <button onClick={this.go.bind(this)}>Go</button>
           </div>
         </div>

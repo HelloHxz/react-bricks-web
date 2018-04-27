@@ -14,6 +14,9 @@ class PopView extends React.Component{
         }
     }
     onMouseOver(e){
+      this.show(e);
+    }
+    show(e){
         e.stopPropagation();
         e.preventDefault();
         this._clearTime();
@@ -38,9 +41,9 @@ class PopView extends React.Component{
             this.setState({
                 show:false
             },()=>{
-                // setTimeout(()=>{
-                //     this.setState({show:'noinit'});
-                // },300);
+                setTimeout(()=>{
+                    this.setState({show:'noinit'});
+                },300);
             });
         },300);
     }
@@ -54,6 +57,15 @@ class PopView extends React.Component{
             left:Common.parseInt(rect.left)+Common.parseInt(rect.offsetX),
         };
     }
+    getContentEvent(){
+        var mode = this.props.mode || 'hover'; //dbclick|click|hover|rightclick
+        if(mode==='click'){
+            return {
+                onClick:''
+            };
+        }
+        return {};
+    }
     renderContent(){
         if(this.state.show==='noinit'){
             return null;
@@ -66,12 +78,18 @@ class PopView extends React.Component{
     }
     getEvent(){
         var mode = this.props.mode || 'hover'; //dbclick|click|hover|rightclick
+        if(mode==='click'){
+            return {
+                onClick:this.show.bind(this)
+            };
+        }
         return {
             onMouseOver:this.onMouseOver.bind(this),
             onMouseLeave:this.onMouseLeave.bind(this)
         };
     }
     render(){
+        var mode = this.props.mode || 'hover';
         const p = {};
         const mouseEvent = this.getEvent();
         if(this.props.style){
@@ -80,9 +98,17 @@ class PopView extends React.Component{
         if(this.props.className){
             p.className = this.props.className;
         }
-        return (<div {...p} {...mouseEvent} ref={(root)=>{this.root = root;}}>
-            {this.props.children}
-            {this.renderContent()}
+        if(mode==='hover'){
+            return (<div {...p}  {...mouseEvent} ref={(root)=>{this.root = root;}}>
+                {this.props.children}
+                {this.renderContent()}
+            </div>);
+        }
+        return (<div {...p} ref={(root)=>{this.root = root;}}>
+                <div {...mouseEvent}>
+                {this.props.children}
+                </div>
+                {this.renderContent()}
              </div>);
     }
 }
