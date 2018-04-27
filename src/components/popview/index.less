@@ -8,20 +8,22 @@
     animation:xzpopanimatebottom .2s ease-in;
     transform: translate3d(0,0px,0);
     opacity: 1;
+    visibility: visible;
 }
 @keyframes xzpopanimatebottom
 {
-    from {transform: translate3d(0,-3px,0);opacity: 0;}
-    to {transform: translate3d(0,0px,0);opacity: 1;}
+    from {transform: translate3d(0,-3px,0);opacity: 0;visibility: hidden;}
+    to {transform: translate3d(0,0px,0);opacity: 1;visibility: visible;}
 }
 
 .xz-pop-animate-bottom-hide{
     animation:xzpopanimatebottomhide .2s ease-out;
     transform: translate3d(0,-3px,0);
     opacity: 0;
+    visibility: hidden;
 }
 @keyframes xzpopanimatebottomhide
 {
-    from {transform: translate3d(0,0px,0);opacity: 1;}
-    to {transform: translate3d(0,-6px,0);opacity: 0;}
+    from {transform: translate3d(0,0px,0);opacity: 1;visibility:visible;}
+    to {transform: translate3d(0,-6px,0);opacity: 0;visibility: hidden;}
 }
