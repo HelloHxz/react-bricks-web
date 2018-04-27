@@ -8,7 +8,7 @@ class HomeScreen extends React.Component {
   }
   constructor(props){
     super(props);
-
+    this.seed= 1;
     this.menudata = [
 
     ];
@@ -29,8 +29,12 @@ class HomeScreen extends React.Component {
     return true;
   }
 
+  test(){
+    alert(this.seed);
+  }
+
   renderPopView(){
-    return <div>popopopopo</div>
+    return <div><span style={{color:'green'}}>Pop Everything</span><button onClick={this.test.bind(this)}>Click</button></div>
   }
 
   render() {
