@@ -10,7 +10,7 @@ class PopView extends React.Component{
     constructor(props){
         super(props);
         this.state={
-            show:props.show
+            show:!props.show?'noinit':props.show
         }
     }
     onMouseOver(e){
@@ -37,6 +37,10 @@ class PopView extends React.Component{
         this.timeoutid = setTimeout(()=>{
             this.setState({
                 show:false
+            },()=>{
+                // setTimeout(()=>{
+                //     this.setState({show:'noinit'});
+                // },300);
             });
         },300);
     }
@@ -48,14 +52,14 @@ class PopView extends React.Component{
         };
     }
     renderContent(){
-        if(!this.state.show){
+        if(this.state.show==='noinit'){
             return null;
         }
         if(!this.props.renderContent){
             return null;
         }
-      
-        return <div className='xz-popview-content' style={this.getPopPositionStyle()}>{this.props.renderContent()}</div>;
+        var className ='xz-popview-content '+(this.state.show?'xz-pop-animate-bottom':'xz-pop-animate-bottom-hide')
+        return <div className={className} style={this.getPopPositionStyle()}>{this.props.renderContent()}</div>;
     }
     getEvent(){
         var mode = this.props.mode || 'hover'; //dbclick|click|hover|rightclick

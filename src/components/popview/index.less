@@ -3,3 +3,25 @@
     z-Index:1111;
     background-color:#fff;
 }
+
+.xz-pop-animate-bottom{
+    animation:xzpopanimatebottom .2s ease-in;
+    transform: translate3d(0,0px,0);
+    opacity: 1;
+}
+@keyframes xzpopanimatebottom
+{
+    from {transform: translate3d(0,-3px,0);opacity: 0;}
+    to {transform: translate3d(0,0px,0);opacity: 1;}
+}
+
+.xz-pop-animate-bottom-hide{
+    animation:xzpopanimatebottomhide .2s ease-out;
+    transform: translate3d(0,-3px,0);
+    opacity: 0;
+}
+@keyframes xzpopanimatebottomhide
+{
+    from {transform: translate3d(0,0px,0);opacity: 1;}
+    to {transform: translate3d(0,-6px,0);opacity: 0;}
+}
