@@ -69,7 +69,8 @@ class PopView extends React.Component{
         var mode = this.props.mode || 'hover'; //dbclick|click|hover|rightclick
         if(mode==='click'){
             return {
-                onClick:''
+                onMouseOver:this.onMouseOver.bind(this),
+                onMouseLeave:this.onMouseLeave.bind(this)
             };
         }
         return {};
@@ -82,13 +83,14 @@ class PopView extends React.Component{
             return null;
         }
         var className ='xz-popview-content '+(this.state.show?'xz-pop-animate-bottom':'xz-pop-animate-bottom-hide')
-        return <div className={className} style={this.getPopPositionStyle()}>{this.props.renderContent(this)}</div>;
+        return <div {...this.getContentEvent()} className={className} style={this.getPopPositionStyle()}>{this.props.renderContent(this)}</div>;
     }
     getEvent(){
         var mode = this.props.mode || 'hover'; //dbclick|click|hover|rightclick
         if(mode==='click'){
             return {
-                onClick:this.show.bind(this)
+                onClick:this.show.bind(this),
+                onMouseLeave:this.onMouseLeave.bind(this)
             };
         }
         return {
