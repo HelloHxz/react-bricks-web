@@ -17,12 +17,17 @@ class PopView extends React.Component{
       this.show(e);
     }
     show(e){
+        this._clearTime();
+        if(this.state.show===true){
+            return;
+        }
         e.stopPropagation();
         e.preventDefault();
-        this._clearTime();
-        this.setState({
-            show:true
-        });
+        this.timeoutid = setTimeout(()=>{
+            this.setState({
+                show:true
+            });
+        },300);
     }
     _clearTime(){
         if(this.timeoutid){
@@ -37,6 +42,9 @@ class PopView extends React.Component{
     }
     hidePop(){
         this._clearTime();
+        if(this.state.show===false||this.state.show==='noinit'){
+            return;
+        }
         this.timeoutid = setTimeout(()=>{
             this.setState({
                 show:false
