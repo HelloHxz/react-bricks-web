@@ -29,12 +29,12 @@ class HomeScreen extends React.Component {
     return true;
   }
 
-  test(){
-    alert(this.seed);
+  test(context){
+    context.hide();
   }
 
-  renderPopView(){
-    return <div><span style={{color:'green'}}>Pop Everything</span><button onClick={this.test.bind(this)}>Click</button></div>
+  renderPopView(context){
+    return <div style={{height:200,width:100,backgroundColor:'red'}}><span style={{color:'green'}}>Pop Everything</span><button onClick={this.test.bind(this,context)}>Click</button></div>
   }
 
   render() {

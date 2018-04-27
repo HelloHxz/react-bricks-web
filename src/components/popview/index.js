@@ -44,6 +44,9 @@ class PopView extends React.Component{
             });
         },300);
     }
+    hide(){
+        this.hidePop();
+    }
     getPopPositionStyle(){
         var rect = this.root.getBoundingClientRect();
         return {
@@ -59,7 +62,7 @@ class PopView extends React.Component{
             return null;
         }
         var className ='xz-popview-content '+(this.state.show?'xz-pop-animate-bottom':'xz-pop-animate-bottom-hide')
-        return <div className={className} style={this.getPopPositionStyle()}>{this.props.renderContent()}</div>;
+        return <div className={className} style={this.getPopPositionStyle()}>{this.props.renderContent(this)}</div>;
     }
     getEvent(){
         var mode = this.props.mode || 'hover'; //dbclick|click|hover|rightclick
