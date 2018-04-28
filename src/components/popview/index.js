@@ -114,7 +114,7 @@ class PopView extends React.Component{
         if(this.props.className){
             p.className = this.props.className;
         }
-        return (<div {...p}  {...mouseEvent} ref={(root)=>{this.root = root;}}>
+        return (<div {...p} {...mouseEvent} ref={(root)=>{this.root = root;}}>
             {this.props.children}
             {this.renderContent()}
         </div>);
