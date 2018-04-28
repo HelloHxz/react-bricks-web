@@ -77,8 +77,6 @@ class PopView extends React.Component{
         var mode = this.props.mode || 'hover'; //dbclick|click|hover|rightclick
         if(mode==='click'){
             return {
-                onMouseOver:this.onMouseOver.bind(this),
-                onMouseLeave:this.onMouseLeave.bind(this)
             };
         }
         return {};
@@ -91,7 +89,7 @@ class PopView extends React.Component{
             return null;
         }
         var className ='xz-popview-content '+(this.state.show?'xz-pop-animate-bottom':'xz-pop-animate-bottom-hide')
-        return <div {...this.getContentEvent()} className={className} style={this.getPopPositionStyle()}>{this.props.renderContent(this)}</div>;
+        return <div className={className} style={this.getPopPositionStyle()}>{this.props.renderContent(this)}</div>;
     }
     getEvent(){
         var mode = this.props.mode || 'hover'; //dbclick|click|hover|rightclick
@@ -116,18 +114,10 @@ class PopView extends React.Component{
         if(this.props.className){
             p.className = this.props.className;
         }
-        if(mode==='hover'){
-            return (<div {...p}  {...mouseEvent} ref={(root)=>{this.root = root;}}>
-                {this.props.children}
-                {this.renderContent()}
-            </div>);
-        }
-        return (<div {...p} ref={(root)=>{this.root = root;}}>
-                <div {...mouseEvent}>
-                {this.props.children}
-                </div>
-                {this.renderContent()}
-             </div>);
+        return (<div {...p}  {...mouseEvent} ref={(root)=>{this.root = root;}}>
+            {this.props.children}
+            {this.renderContent()}
+        </div>);
     }
 }
 
