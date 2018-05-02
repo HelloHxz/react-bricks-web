@@ -5,25 +5,25 @@
 }
 
 .xz-pop-animate-bottom{
-    animation:xzpopanimatebottom .2s ease-in;
-    transform: translate3d(0,0px,0);
-    opacity: 1;
+    animation:xzpopanimatebottom .15s cubic-bezier(.23,1,.32,1);
+    transform: scaleY(1);
+    opacity: 1;transform-origin: 0 0;
     visibility: visible;
 }
 @keyframes xzpopanimatebottom
 {
-    from {transform: translate3d(0,-4px,0);opacity: 0;visibility: hidden;}
-    to {transform: translate3d(0,0px,0);opacity: 1;visibility: visible;}
+    from { transform: scaleY(.8);opacity: 0;}
+    to { transform: scaleY(1);opacity: 1;}
 }
 
 .xz-pop-animate-bottom-hide{
-    animation:xzpopanimatebottomhide .2s ease-out;
-    transform: translate3d(0,-4px,0);
+    animation:xzpopanimatebottomhide .15s cubic-bezier(.755,.05,.855,.06);
+    transform: scaleY(.8);
+    transform-origin: 0 0;
     opacity: 0;
-    visibility: hidden;
 }
 @keyframes xzpopanimatebottomhide
 {
-    from {transform: translate3d(0,0px,0);opacity: 1;visibility:visible;}
-    to {transform: translate3d(0,-4px,0);opacity: 0;visibility: hidden;}
+    from {transform: scaleY(1);opacity: 1;}
+    to {transform: scaleY(.8);opacity: 0;}
 }

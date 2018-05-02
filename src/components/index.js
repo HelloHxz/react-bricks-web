@@ -5,7 +5,7 @@ import Run from './navigator'
 import PageContainer from './pageContainer'
 import Menu from './Menu'
 import globalManager from './globalManager'
-import {PageView,observer} from './pageview'
+import PageView from './pageview'
 import PopView from './popview'
 import {observable,extendObservable} from 'mobx'
 /*
@@ -20,7 +20,6 @@ export {
 	globalManager,
 	PageView,
 	observable,
-	observer,
 	React,
 	Run,
 }

@@ -1,8 +1,6 @@
-import {React,PageView,observer,PageContainer} from "react-bricks"
+import {React,PageView,PageContainer} from "react-bricks"
 
 
-
-@observer
 @PageView
 class nest extends React.Component {
 

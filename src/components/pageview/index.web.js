@@ -1,7 +1,7 @@
 import {observer} from 'mobx-react'
 import React from 'react'
 
-var PageView =   (WrappedComponent) => {
+var PageView = (WrappedComponent) => {
 	class Wrapper extends React.Component {
       static __role = "pageview"
       static connectStore(){
@@ -34,6 +34,4 @@ var PageView =   (WrappedComponent) => {
    return Wrapper;
 }
 
-export {
-	observer,PageView
-};
+export default PageView;
