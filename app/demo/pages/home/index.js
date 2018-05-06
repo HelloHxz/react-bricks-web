@@ -58,22 +58,19 @@ class HomeScreen extends React.Component {
             <PopView style={{display:'inline-block'}} mode='click' mouseLeaveHide={true} renderContent={this.renderPopView.bind(this)}><button>click</button></PopView>
             <PopView style={{display:'inline-block'}} mode='hover' mouseLeaveHide={true} renderContent={this.renderPopView.bind(this)}><button>hover</button></PopView>
             <button onClick={this.go.bind(this)}>Go</button>
-            <Form store={this.props.homestore} renderContent={(form)=>{
-              return <div>
-                <FormItem dataKey='inputValue' com={Input} store={this.props.homestore} />
-                <FormRepeat dataKey='Lists' store={this.props.homestore} renderRow={(rowdata,index)=>{
-                  return (
-                    <div key={index}>
-                      <div>
-                        <FormItem dataKey='name' store={rowdata} com={Input}/>
+            <Form renderContent={(formInstance)=>{
+              return (
+                <div>
+                  <FormItem rule={[]} form={formInstance} dataKey='inputValue' com={Input} store={this.props.homestore} />
+                  <FormRepeat form={formInstance} dataKey='Lists' store={this.props.homestore} renderRow={(rowdata,index)=>{
+                    return (
+                      <div key={index}>
+                          <FormItem form={formInstance} dataKey='name' store={rowdata} com={Input}/>
+                          <FormItem form={formInstance} dataKey='name1' store={rowdata} com={Input}/>
                       </div>
-                      <div>
-                        <FormItem dataKey='name1' store={rowdata} com={Input}/>
-                      </div>
-                    </div>
-                  );
-                }} />
-              </div>;
+                    );
+                  }} />
+                </div>);
             }}/>
             
 
