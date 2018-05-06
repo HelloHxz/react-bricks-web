@@ -3,7 +3,8 @@ import 'babel-polyfill'
 import React from 'react';
 import Run from './navigator'
 import PageContainer from './pageContainer'
-import Menu from './Menu'
+import Menu from './Menu';
+import Select from './select';
 import globalManager from './globalManager'
 import PageView from './pageview'
 import PopView from './popview'
@@ -18,6 +19,7 @@ export {
 	Menu,
 	Form,
 	PopView,
+	Select,
 	Input,
 	extendObservable,
 	PageContainer,

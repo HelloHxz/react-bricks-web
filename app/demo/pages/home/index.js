@@ -1,4 +1,4 @@
-import {React,PageView,Menu,PopView,Input,Form} from "react-bricks"
+import {React,PageView,Menu,PopView,Input,Form,Select} from "react-bricks"
 import './index.less';
 import HomeStore from './store'
 import {observer} from "mobx-react";
@@ -61,6 +61,7 @@ class HomeScreen extends React.Component {
             <Form renderContent={(formInstance)=>{
               return (
                 <div>
+                  <FormItem rule={[]} form={formInstance} dataKey='selectorValue' com={Select} store={this.props.homestore} />
                   <FormItem rule={[]} form={formInstance} dataKey='inputValue' com={Input} store={this.props.homestore} />
                   <FormRepeat form={formInstance} dataKey='Lists' store={this.props.homestore} renderRow={(rowdata,index)=>{
                     return (
