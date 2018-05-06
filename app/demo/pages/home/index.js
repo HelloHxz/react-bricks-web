@@ -1,9 +1,14 @@
-import {React,PageView,observer,Menu,PopView} from "react-bricks"
+import {React,PageView,Menu,PopView,Input,FormItem} from "react-bricks"
 import './index.less';
-
+import HomeStore from './store'
+import {observer} from "mobx-react";
 
 @PageView
 class HomeScreen extends React.Component {
+
+  static connectStore(){
+    return {homestore:new HomeStore}
+  }
   componentDidMount() {
   }
   constructor(props){
@@ -49,6 +54,7 @@ class HomeScreen extends React.Component {
             <PopView style={{display:'inline-block'}} mode='click' mouseLeaveHide={true} renderContent={this.renderPopView.bind(this)}><button>click</button></PopView>
             <PopView style={{display:'inline-block'}} mode='hover' mouseLeaveHide={true} renderContent={this.renderPopView.bind(this)}><button>hover</button></PopView>
             <button onClick={this.go.bind(this)}>Go</button>
+            <FormItem dataKey='inputValue' com={Input} store={this.props.homestore} />
           </div>
         </div>
       </div>

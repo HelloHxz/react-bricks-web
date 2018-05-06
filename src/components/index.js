@@ -7,6 +7,8 @@ import Menu from './Menu'
 import globalManager from './globalManager'
 import PageView from './pageview'
 import PopView from './popview'
+import Input from './input';
+import FormItem from './formItem';
 import {observable,extendObservable} from 'mobx'
 /*
 	todo.. babel-plugin-import 按需加载
@@ -14,7 +16,9 @@ import {observable,extendObservable} from 'mobx'
 */
 export {
 	Menu,
+	FormItem,
 	PopView,
+	Input,
 	extendObservable,
 	PageContainer,
 	globalManager,

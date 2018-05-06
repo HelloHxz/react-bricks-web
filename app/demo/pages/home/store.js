@@ -1,8 +1,7 @@
 import {observable} from 'mobx';
 class Store {
-    @observable popLayerConfig = {};
-    @observable popoverConfig = {};
+    @observable inputValue = "";
 }
 
-export default new Store;
+export default Store;
 
