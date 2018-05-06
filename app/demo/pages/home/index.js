@@ -24,7 +24,8 @@ class HomeScreen extends React.Component {
   }
 
   go(){
-    this.props.navigation.navigate("buttonDemo/nest",{test:'Lucy'});
+    console.log(this.props.homestore);
+    // this.props.navigation.navigate("buttonDemo/nest",{test:'Lucy'});
   }
 
   onPageBeforeLeave(params){
@@ -55,10 +56,10 @@ class HomeScreen extends React.Component {
             <PopView style={{display:'inline-block'}} mode='hover' mouseLeaveHide={true} renderContent={this.renderPopView.bind(this)}><button>hover</button></PopView>
             <button onClick={this.go.bind(this)}>Go</button>
             <FormItem dataKey='inputValue' com={Input} store={this.props.homestore} />
-            <FormRepeat renderRow={(rowdata)=>{
-              return <div><div>
+            <FormRepeat renderRow={(rowdata,index)=>{
+              return <div key={index}><div>
                   <FormItem dataKey='name' store={rowdata} com={Input}/>
-                </div><div><FormItem dataKey='name' store={rowdata} com={Input}/></div></div>
+                </div><div><FormItem dataKey='name1' store={rowdata} com={Input}/></div></div>
             }} dataKey='Lists' store={this.props.homestore} />
 
           </div>
