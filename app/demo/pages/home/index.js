@@ -1,4 +1,4 @@
-import {React,PageView,Menu,PopView,Input,FormItem} from "react-bricks"
+import {React,PageView,Menu,PopView,Input,FormItem,FormRepeat} from "react-bricks"
 import './index.less';
 import HomeStore from './store'
 import {observer} from "mobx-react";
@@ -55,6 +55,12 @@ class HomeScreen extends React.Component {
             <PopView style={{display:'inline-block'}} mode='hover' mouseLeaveHide={true} renderContent={this.renderPopView.bind(this)}><button>hover</button></PopView>
             <button onClick={this.go.bind(this)}>Go</button>
             <FormItem dataKey='inputValue' com={Input} store={this.props.homestore} />
+            <FormRepeat renderRow={()=>{
+              return <div><div>
+                  <FormItem dataKey='name' com={Input}/>
+                </div><div><FormItem dataKey='name' com={Input}/></div></div>
+            }} dataKey='Lists' store={this.props.homestore} />
+
           </div>
         </div>
       </div>
