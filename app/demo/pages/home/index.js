@@ -1,7 +1,10 @@
-import {React,PageView,Menu,PopView,Input,FormItem,FormRepeat} from "react-bricks"
+import {React,PageView,Menu,PopView,Input,Form} from "react-bricks"
 import './index.less';
 import HomeStore from './store'
 import {observer} from "mobx-react";
+
+const FormRepeat = Form.FormRepeat;
+const FormItem = Form.FormItem;
 
 @PageView
 class HomeScreen extends React.Component {
@@ -55,19 +58,24 @@ class HomeScreen extends React.Component {
             <PopView style={{display:'inline-block'}} mode='click' mouseLeaveHide={true} renderContent={this.renderPopView.bind(this)}><button>click</button></PopView>
             <PopView style={{display:'inline-block'}} mode='hover' mouseLeaveHide={true} renderContent={this.renderPopView.bind(this)}><button>hover</button></PopView>
             <button onClick={this.go.bind(this)}>Go</button>
-            <FormItem dataKey='inputValue' com={Input} store={this.props.homestore} />
-            <FormRepeat dataKey='Lists' store={this.props.homestore} renderRow={(rowdata,index)=>{
-              return (
-                <div key={index}>
-                  <div>
-                    <FormItem dataKey='name' store={rowdata} com={Input}/>
-                  </div>
-                  <div>
-                    <FormItem dataKey='name1' store={rowdata} com={Input}/>
-                  </div>
-                </div>
-              );
-            }} />
+            <Form store={this.props.homestore} renderContent={(form)=>{
+              return <div>
+                <FormItem dataKey='inputValue' com={Input} store={this.props.homestore} />
+                <FormRepeat dataKey='Lists' store={this.props.homestore} renderRow={(rowdata,index)=>{
+                  return (
+                    <div key={index}>
+                      <div>
+                        <FormItem dataKey='name' store={rowdata} com={Input}/>
+                      </div>
+                      <div>
+                        <FormItem dataKey='name1' store={rowdata} com={Input}/>
+                      </div>
+                    </div>
+                  );
+                }} />
+              </div>;
+            }}/>
+            
 
           </div>
         </div>
