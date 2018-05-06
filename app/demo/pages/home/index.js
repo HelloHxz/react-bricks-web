@@ -55,10 +55,10 @@ class HomeScreen extends React.Component {
             <PopView style={{display:'inline-block'}} mode='hover' mouseLeaveHide={true} renderContent={this.renderPopView.bind(this)}><button>hover</button></PopView>
             <button onClick={this.go.bind(this)}>Go</button>
             <FormItem dataKey='inputValue' com={Input} store={this.props.homestore} />
-            <FormRepeat renderRow={()=>{
+            <FormRepeat renderRow={(rowdata)=>{
               return <div><div>
-                  <FormItem dataKey='name' com={Input}/>
-                </div><div><FormItem dataKey='name' com={Input}/></div></div>
+                  <FormItem dataKey='name' store={rowdata} com={Input}/>
+                </div><div><FormItem dataKey='name' store={rowdata} com={Input}/></div></div>
             }} dataKey='Lists' store={this.props.homestore} />
 
           </div>
