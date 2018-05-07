@@ -61,11 +61,19 @@ class HomeScreen extends React.Component {
             <Form store={this.props.homestore} renderContent={(formInstance)=>{
               return (
                 <div>
-                  <FormItem rule={[]} form={formInstance} dataKey='selectorValue' com={Select}  />
+                  <FormItem rule={[
+                    {message:'必填!',regex:'required'},
+                    {message:'小于10',regex:(val)=>{
+                      if(val>10){
+                        return false;
+                      }
+                      return true;
+                    }}
+                  ]} form={formInstance} dataKey='selectorValue' com={Select}  />
                   <FormItem rule={[]} form={formInstance} dataKey='inputValue' com={Input}  />
                   <FormRepeat form={formInstance} dataKey='Lists' renderRow={(rowdata,index)=>{
                     return (
-                      <div key={index}>
+                      <div>
                           <FormItem form={formInstance} dataKey='name' rowData={rowdata} com={Input}/>
                           <FormItem form={formInstance} dataKey='name1' rowData={rowdata} com={Input}/>
                       </div>
