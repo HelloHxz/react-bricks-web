@@ -58,7 +58,7 @@ class HomeScreen extends React.Component {
             <PopView style={{display:'inline-block'}} mode='click' mouseLeaveHide={true} renderContent={this.renderPopView.bind(this)}><button>click</button></PopView>
             <PopView style={{display:'inline-block'}} mode='hover' mouseLeaveHide={true} renderContent={this.renderPopView.bind(this)}><button>hover</button></PopView>
             <button onClick={this.go.bind(this)}>Go</button>
-            <Form store={this.props.homestore} renderContent={(formInstance)=>{
+            <Form store={this.props.homestore} renderContent={(formProps)=>{
               return (
                 <div>
                   <FormItem rule={[
@@ -69,13 +69,13 @@ class HomeScreen extends React.Component {
                       }
                       return true;
                     }}
-                  ]} form={formInstance} dataKey='selectorValue' com={Select}  />
-                  <FormItem rule={[]} form={formInstance} dataKey='inputValue' com={Input}  />
-                  <FormRepeat form={formInstance} dataKey='Lists' renderRow={(rowdata,index)=>{
+                  ]} {...formProps} dataKey='selectorValue' com={Select}  />
+                  <FormItem {...formProps} rule={[]} dataKey='inputValue' com={Input}  />
+                  <FormRepeat {...formProps} dataKey='Lists' renderRow={(rowProps)=>{
                     return (
                       <div>
-                          <FormItem form={formInstance} dataKey='name' rowData={rowdata} com={Input}/>
-                          <FormItem form={formInstance} dataKey='name1' rowData={rowdata} com={Input}/>
+                          <FormItem {...rowProps} dataKey='name' com={Input}/>
+                          <FormItem {...rowProps} dataKey='name1' com={Input}/>
                       </div>
                     );
                   }} />

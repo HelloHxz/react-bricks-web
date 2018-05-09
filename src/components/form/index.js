@@ -6,7 +6,7 @@ export default class Form extends React.Component{
 
     }
     render(){
-        return <div>{this.props.renderContent(this)}</div>
+        return <div>{this.props.renderContent({form:this})}</div>
     }
 }
 
@@ -23,9 +23,7 @@ class FormItem extends React.Component{
     }
     render(){
         const store = this.props.rowData||this.props.form.props.store;
-        if(store._1_formrow_1_){
-            console.log("isinrow--->>");
-        }
+       
         const value = store[this.props.dataKey];
         const Com = this.props.com;
         return <Com {...this.props} onChange={this.onChange.bind(this)} value={value}/>;
@@ -38,8 +36,7 @@ class FormRow extends React.Component{
     }
     render(){
         const rowData = this.props.rowData;
-        rowData._1_formrow_1_ = this;
-        return this.props.renderRow(rowData,this.props.index)
+        return this.props.renderRow({rowData,index:this.props.index,rowInstance:this,form:this.props.form})
     }
 }
 class FormRepeat extends React.Component{
