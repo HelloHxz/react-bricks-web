@@ -70,7 +70,7 @@ class HomeScreen extends React.Component {
 
   go(){
     console.log(this.props.homestore);
-    // this.props.navigation.navigate("buttonDemo/nest",{test:'Lucy'});
+    this.props.navigation.navigate("button",{test:'Lucy'});
   }
 
   onPageBeforeLeave(params){

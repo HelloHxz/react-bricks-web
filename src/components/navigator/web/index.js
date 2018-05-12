@@ -42,7 +42,6 @@ class Navigation extends React.Component {
 
     super(props)
     this.routeStack = [];
-    this.seed = this.getMaxSeed();
     this.isForward = false;
     //浏览器并不会为第一个url记录hash记录 所以想禁止第一个页面离开 需要在第一次加载根路径的时候增加一个hash记录
     this.firstLoadToChangeHash = false;
@@ -63,16 +62,8 @@ class Navigation extends React.Component {
 
  
 
-  getMaxSeed(){
-    var seedObj = this.getUrlSeedObj();
 
-    return Math.max(seedObj.__r,seedObj.__pr);
-  }
 
-  getUniqueSeed(){
-    this.seed+=1;
-    return this.seed;
-  }
 
   componentDidMount(){
     var _this = this;
@@ -96,48 +87,7 @@ class Navigation extends React.Component {
   }
 
 
-  getUrlSeedStr(){
-    var params =  this.getParamsFromUrl();
-    return params[systemseedname]||("1"+splitchar+"0");
-  }
 
-
-
-  convertUrlSeedToObj(str){
-    str = str||"";
-    var arr = str.split(splitchar);
-    var re =  {
-      __r:arr[0],
-      __pr:arr[1],
-    };
-
-    if(isNaN(re.__r)||!re.__r){
-      re.__r = 0;
-
-    }else{
-       re.__r = parseInt(re.__r);
-    }
-
-    if(isNaN(re.__pr)||!re.__pr){
-      re.__pr = 0;
-    }else{
-       re.__pr = parseInt(re.__pr);
-    }
-
-   
-    return re;
-  }
-
-  getUrlSeedObj(){
-    var seedStr = this.getUrlSeedStr();
-    return this.convertUrlSeedToObj(seedStr);
-  }
-
-  getNewSeedStr(preSeedObj){
-    var Re = [this.getUniqueSeed(),preSeedObj.__r]
-
-    return Re.join(splitchar);
-  }
   prepareGo(pageKey, params,isNotForward,_isReplaceGo){
     
     if(isNotForward!==true){
@@ -148,14 +98,10 @@ class Navigation extends React.Component {
     var prePageName = this.getPageNameFromUrl();
     prePageName = prePageName.split("/").shift();
     var toPageName = pageKey.split("/").shift();
-    var seedStr = this.getUrlSeedStr();
-    if(!seedStr){
-      seedStr = [this.getUniqueSeed(),0].join(splitchar);
-    }
+  
     if((_isReplaceGo&&this.prePathArr.length===0)){
        //避免本不应该发生hashchange 被__r引发hashchange
        // 当是replace的时候也走这里 但是当前页面是多级的就不走了
-       params[systemseedname] =seedStr;
     }else{
       var paramsIsNotSame = false;
       if(prePageName===toPageName){
@@ -176,10 +122,7 @@ class Navigation extends React.Component {
         paramsIsNotSame = true;
       }
       if(!paramsIsNotSame){
-         params[systemseedname] =seedStr;
       }else{
-         var seedObj = this.convertUrlSeedToObj(seedStr);
-          params[systemseedname] = this.getNewSeedStr(seedObj);
       }
 
     }
@@ -284,203 +227,28 @@ class Navigation extends React.Component {
     return re;
   }
 
-  /*seed格式  id_preid*/
   hashChange(){
-
     if(isWantToPreventRoute){
       isWantToPreventRoute = false;
       this.firstLoadToChangeHash = false;
       return;
     }
-
-    var P = PageView;
-
     var curParams = this.getParamsFromUrl();
-    var curseedStr = this.getUrlSeedStr();
-    var curSeedObj =  this.convertUrlSeedToObj(curseedStr);
-
     var ToPagePath = this.getPageNameFromUrl()||this.props.config.root;
     var ToPageNameArr = ToPagePath.split("/");
     var ToPageName = ToPageNameArr.shift();
+    this.prePathArr = this.prePathArr||[];
 
     if(ToPageName===""){
       ToPageName = ToPageNameArr.shift();
     }
+    var key = ToPageName;
 
+    var P = PageView;
 
-    if(ToPageName.indexOf("&")>=0){
-      ToPageName = ToPageName.split("&")[1];
-    }
-    var realpagename = ToPageName.split("_")[0];
-
-    var ToPageInstance = this.props.config.pages[realpagename];
-    
-    // if(!ToPageInstance.prototype.__proto__.forceUpdate){
-    //   P = LazyLoadPage;
-    // }
-
-    if(!curParams[systemseedname]&&this.isInit&&ToPagePath.toLowerCase() === this.props.config.root.toLowerCase()){
-        this.firstLoadToChangeHash = true;
-    }
-    if(!this.props.config.pages){
-      console.error("没有配置pages属性");
-    }
-
-    this.FromPage = this.state.curpagename;
-    var r = curSeedObj.__r;
-    var key = ToPageName+"_"+curseedStr;
-
-
-  
-    var action = '前进',animationAction = '不动';
-
-    this.prePathArr = this.prePathArr||[];
-  
-    if(isReplaceGo){
-      if(this.prePathArr.length===0){
-        var popRoute=  this.routeStack.pop();
-      }else{
-        //this.routeStack.pop();
-        this.routeStack[this.routeStack.length-1].isDelete = true;
-      }
-    }
-
-    if(this.isForward){
-      action = '前进';
-      if(this.prePageName === ToPageName&&ToPageNameArr.length>0){
-        this.routeStack[this.routeStack.length-1].page = 
-        <P leftroute={ToPageNameArr} pagename={ToPageName} navigation={this} key={key} pkey={key}></P>;
-      }else{
-        animationAction = '前进';
-        this.routeStack.push({
-          pagename:ToPageName,
-          r:r,
-          _key:key,
-          page:<P leftroute={ToPageNameArr} pagename={ToPageName} navigation={this} key={key} pkey={key}></P>
-        });
-      }
-    }else{
-      if(this.routeStack.length===0){
-        action = '刷新';
-        this.routeStack.push({
-          pagename:ToPageName,
-          _key:key,
-          r:r,
-          page:<P leftroute={ToPageNameArr} pagename={ToPageName} navigation={this} key={key} pkey={key}></P>
-        });
-      }else{
-        if(!this.preUrlParams[systemseedname]){
-           action = '后退';
-        }else{
-          if(curSeedObj.__pr===this.preSeedObj.__r){
-            action = '前进';
-            animationAction = '前进';
-             this.routeStack.push({
-              pagename:ToPageName,
-              _key:key,
-              r:r,
-              page:<P leftroute={ToPageNameArr} pagename={ToPageName} navigation={this} key={key} pkey={key}></P>
-            });
-          }else{
-             action = '后退';
-             if(this.routeStack.length===1){
-                if(this.routeStack[0]._key !== key){
-                    animationAction = '后退删除最后';
-                    this.routeStack =[{
-                      pagename:ToPageName,
-                      _key:key,
-                      r:r,
-                      page:<P leftroute={ToPageNameArr} pagename={ToPageName} navigation={this} key={key} pkey={key}></P>
-                    }].concat(this.routeStack);
-                  }else{
-                      this.routeStack[0].page = 
-                      <P leftroute={ToPageNameArr} pagename={ToPageName} navigation={this} key={key} pkey={key}></P>;
-                  }
-              }else{
-
-               if( this.prePageName === ToPageName&&ToPageNameArr.length>0){
-                   this.routeStack[this.routeStack.length-1].page = 
-                      <P leftroute={ToPageNameArr} pagename={ToPageName} navigation={this} key={key} pkey={key}></P>;
-                }else{
-                    var _pi = this.pageInstanceDict[key];
-                    //修复多级别的时候replacego 回来之后显示页面需要显示正确
-                    if(_pi){
-                        _pi.instance.props.base.repaireUrlWhenRepalceGo({
-                          leftroute:ToPageNameArr,
-                          pagename:ToPageName
-                        });
-                    }
-
-                   animationAction = '后退删除最后';
-                }
-              }
-          }
-        }
-        
-      }
-    }
-
-
-    // if(action==="后退"){
-    //   isWantToPreventRoute = true;
-    //   window.history.go(1);
-    //   return;
-    // }
-
-    var ppprePath = this.prePath;
-  
-    var ppstr =this.preseedStr;
-    var _prePath = this.getPageNameFromUrl();
-    var preseedStr = this.getUrlSeedStr();
-    if(!this.callBeforeLeave(_prePath,ppstr||"",ppprePath||"",preseedStr,action)){
-      return;
-    }
-
-    this.preseedStr = preseedStr;
-
-    this.prePath = _prePath;
-    this.preUrlParams = this.getParamsFromUrl();
-    this.preSeedObj =  this.convertUrlSeedToObj(this.preseedStr);
-    this.prePathArr = this.prePath.split("/");
-    this.prePageName = this.prePathArr.shift();
-
-
-     var pages = this.pagelayout({
-      manager:this,
-      action:action,
-      animationAction:animationAction,
-      isReplaceGo:isReplaceGo,
-      key:key
-    });
-
-    if(!pages){
-      console.error("没有实现pagelayout！");
-    }
-
-    if(!curParams[systemseedname]&&!this.isForward&&!this.isInit){
-     
-      window.history.go(-1);
-
-      return;
-    }
-
-    this.isForward = false;
-    this.isInit = false;
-    isReplaceGo = false;
-
-    this.setState({pages:pages,isDestory:false});
-    if(this.firstLoadToChangeHash){
-        var p = this.getParamsFromUrl()||{};
-        isWantToPreventRoute = true;
-        setTimeout(()=>{
-          this.navigate(this.appConfig.root,p);
-        },300);
-    }
-
-    this.callResume(this.prePath,ppstr||"",ppprePath||"");
-    this.callLeave(this.prePath,ppstr||"",ppprePath||"");
-    this._triggerHashChange();
-
+    this.setState(
+      {pages:<P leftroute={ToPageNameArr} pagename={ToPageName} navigation={this} key={key} pkey={key}></P>}
+    );
   }
 
 
@@ -506,35 +274,7 @@ class Navigation extends React.Component {
     callBack(this.getUrlInfo());
   }
 
-  _triggerHashChange(){
-    var urlInfo = this.getUrlInfo();
-    var crKey = "";
-    var curPathArr = urlInfo.pathArr;
-    for(var i=0,j=curPathArr.length;i<j;i++){
-      if(i===0){
-        crKey = curPathArr[0]+"_"+urlInfo.seed;
-      }else{
-        crKey = crKey + "_" +curPathArr[i];
-      }
-      try{
-        var eventInfo = this.hashEvents[crKey];
-        if(eventInfo){
-          var now = new Date().valueOf();
-          var diffTime  = now-eventInfo.precalltime;
-
-          if(diffTime>80){
-            eventInfo.precalltime = now;
-            var urlInfoStr = JSON.stringify(urlInfo)
-            eventInfo.method(JSON.parse(urlInfoStr));
-          }
-        }
-      }catch(e){
-
-      }
-
-    }
-    
-  }
+  
 
  
 
@@ -546,147 +286,6 @@ class Navigation extends React.Component {
     });
     // this.hashChange();
   }
-
-  pagelayout(params){
-    var manager = params.manager;
-    var action = params.action;
-    var animationAction = params.animationAction;
-    var isReplaceGo = params.isReplaceGo;
-    var pages = [];
-    var routeStack = manager.routeStack;
-    var len = routeStack.length;
-    if(len>1){
-      if(animationAction==='前进'){
-        NoAnimation(routeStack,pages);
-      }else if(animationAction==="后退删除最后"){
-        routeStack.pop();
-        NoAnimation(routeStack,pages);
-       
-      }else{
-        NoAnimation(routeStack,pages);
-      }
-
-    }else{
-      NoAnimation(routeStack,pages);
-    }
-
-    setTimeout(()=>{
-      var seedObj = manager.getUrlSeedObj();
-      var r = seedObj.__r;
-      if(r){
-        r = parseInt(r);
-        for(var i=routeStack.length-1;i>=0;i--){
-          var rr = routeStack[i].r;
-          if(rr&&routeStack[i].isDelete){
-            rr = parseInt(rr);
-            if(rr>r){
-              routeStack.splice(i,1); 
-            }
-          }
-        }
-      }
-    },300);
-    return pages;
-
-  }
-
-  callBeforeLeave(goPath,curSeedStr,curPath,goSeedStr,action){
-    var goPathArr = goPath.split("/");
-    var curPathArr = curPath.split("/");
-
-    var crKey = "",pcKey = "";
-
-    var s = true;
-    for(var i=0,j=curPathArr.length;i<j;i++){
-      if(i===0){
-        crKey = curPathArr[0]+"_"+curSeedStr;
-        pcKey = goPathArr[0]+"_"+goSeedStr;
-      }else{
-        crKey = crKey + "_" +curPathArr[i];
-        pcKey = pcKey+"_"+(goPathArr[i]||"");
-      }
-      var instanceInfo = this.pageInstanceDict[crKey];
-      if(instanceInfo&&instanceInfo.instance){
-          if(crKey!==pcKey||(goSeedStr===curSeedStr&&curSeedStr===("1"+splitchar+"0"))){
-            var  pageLeaveR= instanceInfo.instance.onPageBeforeLeave({action:action});
-            var p = (pageLeaveR!==false||pageLeaveR)?true:false;
-            if(!p&&s){
-              s = p;
-            }
-          }
-      }else{
-        s = true;
-      }
-    }
-    if(s===false){
-      isWantToPreventRoute = true;
-      if(action!=='前进'){
-         window.history.go(1);
-       }else{
-         window.history.go(-1);
-       }
-    }
-    return s;
-  }
-
-  callLeave(curPath,preSeedStr,prePath){
-    //this.preseedStr
-  }
-
-  callResume(prePath,ppSeedStr,ppprePath){
-    this._callResume(prePath,ppSeedStr,ppprePath);
-  }
-
-  _callResume(prePath,ppSeedStr,ppprePath){
-    
-      var prePathArr = prePath.split("/");
-      var ppPathArr = ppprePath.split("/");
-
-      var crKey = "",pcKey = "";
-
-      for(var i=0,j=prePathArr.length;i<j;i++){
-        if(i===0){
-          crKey = prePathArr[0]+"_"+this.preseedStr;
-          pcKey = ppPathArr[0]+"_"+ppSeedStr;
-        }else{
-          crKey = crKey + "_" +prePathArr[i];
-          pcKey = pcKey+"_"+(ppPathArr[i]||"");
-        }
-
-        var instanceInfo = this.pageInstanceDict[crKey];
-        if(instanceInfo){
-          if(instanceInfo.isInit){
-            instanceInfo.isInit = false;
-          }else{
-            if(crKey!==pcKey&&instanceInfo.instance){
-              console.log(crKey+" >>>resume");
-              instanceInfo.instance.onPageResume();
-            }
-          }
-        }
-      }
-     
-
-      for(var i=0,j=ppPathArr.length;i<j;i++){
-        if(i===0){
-          pcKey = ppPathArr[0]+"_"+ppSeedStr;
-        }else{
-          pcKey = pcKey+"_"+(ppPathArr[i]||"");
-        }
-        var instanceInfo = this.pageInstanceDict[pcKey];
-        if(instanceInfo){
-          if(instanceInfo.isInit){
-            //第一次实例化不走resume
-            instanceInfo.isInit = false;
-          }else{
-
-          }
-        }
-
-      }
-  }
-
-
 
   render() {
     if(this.state.isDestory){
@@ -703,7 +302,6 @@ class Navigation extends React.Component {
       path:path,
       pathArr:path.split("/"),
       tabPath:path.split("/").splice(0,2).join("/"),
-      seed:this.getUrlSeedStr(),
       params:this.getParamsFromUrl()
     };
   }

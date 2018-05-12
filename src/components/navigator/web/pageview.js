@@ -50,11 +50,11 @@ class PageView extends React.Component {
 
   componentDidMount(){
     console.log(this.props.pkey+"     didmount>>>");
-    this.props.navigation.pageInstanceDict[this.props.pkey] = {
-      instance:this.pageInstance,
-      basePageView:this,
-      isInit:true
-    };
+    // this.props.navigation.pageInstanceDict[this.props.pkey] = {
+    //   instance:this.pageInstance,
+    //   basePageView:this,
+    //   isInit:true
+    // };
   }
 
    componentWillUpdate(nextProps,nextState){
