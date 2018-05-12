@@ -88,7 +88,7 @@ class MenuSection extends React.Component{
                 children.push(<MenuSectionItem onItemClick={this.props.onItemClick} level={this.props.level+1} key={i} data={itemData}/>);
             }
         }
-        return (<div>
+        return (<div className="xz-menu-group">
             <MenuSectionHeader open={this.state.open} onClick={this.headerClick.bind(this)} level={this.props.level} data={this.state.data}/>
             <div className="xz-menu-section" ref={this.outerLoad.bind(this)} style={outerStyle}>
               <div ref={this.innerLoad.bind(this)}>

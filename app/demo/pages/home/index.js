@@ -19,17 +19,32 @@ const menudata = [
 {
   label:'快速上手',
   key:'xxxxx',
+  href:"/home"
 },
 {
   label:"组件",
   key:"xxxxxxxx",
   children:[
       {label:"Button",key:'xxxxxxx',href:"/home/button"},
+      {label:"Input",key:'xxxxxxx'},
+      {label:"Icon",key:'xxxxxxx'},
+      {label:"CheckBox",key:'xxxxxxx'},
+      {label:"CheckList",key:'xxxxxxx'},
+      {label:"Radio",key:'xxxxxxx'},
+      {label:"PopView",key:'xxxxxxx'},
+      {label:"Model",key:'xxxxxxx'},
+      {label:"Select",key:'xxxxxxx'},
+      {label:"Tabs",key:'xxxxxxx'},
+      {label:"Tree",key:'xxxxxxx'},
       {label:"Menu",key:'xxxxxxx',children:[
           {label:'2.2.1',key:'xxxxxxxx'},
           {label:'2.2.2',key:'xxxxxxxx'}
       ]},
   ]
+},
+{
+  label:'页面路由',
+  key:'xxxxx',
 },
 {
   label:'生命周期',
@@ -44,6 +59,10 @@ const menudata = [
           {label:'4.2.2',key:'xxxxxxxx'}
       ]},
   ]
+},
+{
+  label:'异步加载',
+  key:'xxxxx',
 },{
   label:'打包发布',
   key:'xxxxx',
