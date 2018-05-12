@@ -1,12 +1,72 @@
 @import '../../theme/index.less';
 .xz-menu{
-    width: 120px;
-    background-color: @theme_background;
-    .item{
-        height:30px;
-    }
-    .section{
-        overflow: hidden;   
-        transition: height 0.2s ease;
-    }
+    user-select:none;
+}
+
+.xz-menu-item,.xz-menu-group-header{
+    height:40px;
+    line-height: 40px;
+    cursor: pointer;
+    position: relative;
+}
+.xz-menu-section{
+    overflow: hidden;   
+    transition: height 0.2s ease;
+}
+
+.xz-menu-submenu-arrow {
+    -webkit-transition: -webkit-transform .3s cubic-bezier(.645,.045,.355,1);
+    transition: -webkit-transform .3s cubic-bezier(.645,.045,.355,1);
+    transition: transform .3s cubic-bezier(.645,.045,.355,1);
+    transition: transform .3s cubic-bezier(.645,.045,.355,1),-webkit-transform .3s cubic-bezier(.645,.045,.355,1);
+    position: absolute;
+    top: 50%;
+    right: 16px;
+    width: 10px
+}
+
+.xz-menu-submenu-arrow:after,.xz-menu-submenu-arrow:before {
+    content: "";
+    position: absolute;
+    vertical-align: baseline;
+    background: #fff;
+    background-image: -webkit-gradient(linear,left top,right top,from(rgba(0,0,0,.65)),to(rgba(0,0,0,.65)));
+    background-image: -webkit-linear-gradient(left,rgba(0,0,0,.65),rgba(0,0,0,.65));
+    background-image: linear-gradient(90deg,rgba(0,0,0,.65),rgba(0,0,0,.65));
+    width: 6px;
+    height: 1.5px;
+    border-radius: 2px;
+    -webkit-transition: background .3s cubic-bezier(.645,.045,.355,1),top .3s cubic-bezier(.645,.045,.355,1),-webkit-transform .3s cubic-bezier(.645,.045,.355,1);
+    transition: background .3s cubic-bezier(.645,.045,.355,1),top .3s cubic-bezier(.645,.045,.355,1),-webkit-transform .3s cubic-bezier(.645,.045,.355,1);
+    transition: background .3s cubic-bezier(.645,.045,.355,1),transform .3s cubic-bezier(.645,.045,.355,1),top .3s cubic-bezier(.645,.045,.355,1);
+    transition: background .3s cubic-bezier(.645,.045,.355,1),transform .3s cubic-bezier(.645,.045,.355,1),top .3s cubic-bezier(.645,.045,.355,1),-webkit-transform .3s cubic-bezier(.645,.045,.355,1)
+}
+
+.xz-menu-submenu-arrow-right:before{
+    transform: rotate(45deg) translateY(-2px)
+}
+
+.xz-menu-submenu-arrow-right:after {
+    transform: rotate(-45deg) translateY(2px)
+}
+
+.xz-menu-group-header-close .xz-menu-submenu-arrow:after{
+    transform: rotate(45deg) translateX(-2px);
+}
+
+.xz-menu-group-header-close .xz-menu-submenu-arrow:before {
+    transform: rotate(-45deg) translateX(2px);
+}
+
+.xz-menu-group-header-open .xz-menu-submenu-arrow:after{
+    transform: rotate(-45deg) translateX(-2px);
+}
+
+.xz-menu-group-header-open .xz-menu-submenu-arrow:before {
+    transform: rotate(45deg) translateX(2px); 
+}
+
+
+.xz-menu-inline{
+    width:140px;
 }

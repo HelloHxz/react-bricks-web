@@ -6,6 +6,50 @@ import {observer} from "mobx-react";
 const FormRepeat = Form.FormRepeat;
 const FormItem = Form.FormItem;
 
+
+
+
+const menudata = [
+  {
+  icon:'',
+  label:'关于',
+  key:'xxxxx',
+},
+{
+  label:'快速上手',
+  key:'xxxxx',
+},
+{
+  label:"组件",
+  key:"xxxxxxxx",
+  children:[
+      {label:"Button",key:'xxxxxxx'},
+      {label:"Menu",key:'xxxxxxx',children:[
+          {label:'2.2.1',key:'xxxxxxxx'},
+          {label:'2.2.2',key:'xxxxxxxx'}
+      ]},
+  ]
+},
+{
+  label:'生命周期',
+  key:'xxxxx',
+},
+{
+  label:'数据状态',
+  key:'frfrf',children:[
+      {label:"4.1",key:'xxxxxxx'},
+      {label:"4.2",key:'xxxxxxx',children:[
+          {label:'4.2.1',key:'xxxxxxxx'},
+          {label:'4.2.2',key:'xxxxxxxx'}
+      ]},
+  ]
+},{
+  label:'打包发布',
+  key:'xxxxx',
+},
+
+];
+
 @PageView
 class HomeScreen extends React.Component {
 
@@ -17,9 +61,6 @@ class HomeScreen extends React.Component {
   constructor(props){
     super(props);
     this.seed= 1;
-    this.menudata = [
-
-    ];
   }
 
   goBack(){
@@ -51,8 +92,8 @@ class HomeScreen extends React.Component {
       <div>
         <div style={{height:60,width:'100%'}}></div>
         <div>
-          <div style={{width:120,height:'100%',float:'left'}}>
-          <Menu data={this.menudata}/>
+          <div style={{width:140,height:'100%',float:'left'}}>
+          <Menu data={menudata}/>
           </div>
           <div style={{marginLeft:120}}>
             <PopView style={{display:'inline-block'}} mode='click' mouseLeaveHide={true} renderContent={this.renderPopView.bind(this)}><button>click</button></PopView>
@@ -74,7 +115,7 @@ class HomeScreen extends React.Component {
                   <FormRepeat {...formProps} dataKey='Lists' renderRow={(rowProps)=>{
                     return (
                       <div>
-                          <FormItem {...rowProps} dataKey='name' com={Input}/>
+                          <FormItem {...rowProps} dataKey='name' label={"姓名"} com={Input}/>
                           <FormItem {...rowProps} dataKey='name1' com={Input}/>
                       </div>
                     );

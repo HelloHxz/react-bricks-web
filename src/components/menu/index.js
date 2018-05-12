@@ -4,51 +4,11 @@ import './index.less';
 
 
 
-var data = [
-    {
-    label:'关于',
-    key:'xxxxx',
-},
-{
-    label:'快速上手',
-    key:'xxxxx',
-},
-{
-    label:"组件",
-    key:"xxxxxxxx",
-    children:[
-        {label:"Button",key:'xxxxxxx'},
-        {label:"Menu",key:'xxxxxxx',children:[
-            {label:'2.2.1',key:'xxxxxxxx'},
-            {label:'2.2.2',key:'xxxxxxxx'}
-        ]},
-    ]
-},
-{
-    label:'生命周期',
-    key:'xxxxx',
-},
-{
-    label:'数据状态',
-    key:'frfrf',children:[
-        {label:"4.1",key:'xxxxxxx'},
-        {label:"4.2",key:'xxxxxxx',children:[
-            {label:'4.2.1',key:'xxxxxxxx'},
-            {label:'4.2.2',key:'xxxxxxxx'}
-        ]},
-    ]
-},{
-    label:'打包发布',
-    key:'xxxxx',
-},
-
-];
-
 class Menu extends React.Component{
     constructor(props){
         super(props);
         this.state={
-            data:data
+            data:props.data
         }
     }
     render(){
@@ -62,7 +22,7 @@ class Menu extends React.Component{
                 children.push(<MenuSectionItem level={0} key={i} data={itemData}/>);
             }
         }
-        return <div className='xz-menu'>
+        return <div className='xz-menu xz-menu-inline'>
             {children}
         </div>;
     }
@@ -124,8 +84,8 @@ class MenuSection extends React.Component{
             }
         }
         return (<div>
-            <MenuSectionHeader onClick={this.headerClick.bind(this)} level={this.props.level} data={this.state.data}/>
-            <div className='section' ref={this.outerLoad.bind(this)} style={outerStyle}>
+            <MenuSectionHeader open={this.state.open} onClick={this.headerClick.bind(this)} level={this.props.level} data={this.state.data}/>
+            <div className="xz-menu-section" ref={this.outerLoad.bind(this)} style={outerStyle}>
               <div ref={this.innerLoad.bind(this)}>
                 {children}
               </div>
@@ -146,7 +106,7 @@ class MenuSectionItem extends React.Component{
         if(this.props.level>0){
             paddingLeft = (this.props.level)*20;
         }
-        return (<div style={{paddingLeft:paddingLeft}}>{this.state.data.label}</div>);
+        return (<div className='xz-menu-item' style={{paddingLeft:paddingLeft}}>{this.state.data.label}</div>);
     }
 }
 
@@ -161,7 +121,16 @@ class MenuSectionHeader extends React.Component{
         this.props.onClick();
     }
     render(){
-        return <div onClick={this.click.bind(this)} style={{backgroundColor:'red',paddingLeft:(this.props.level)*20}}>{this.state.data.label}</div>;
+        var className = ["xz-menu-group-header"];
+        if(this.props.open){
+            className.push("xz-menu-group-header-open");
+        }else{
+            className.push("xz-menu-group-header-close");
+        }
+        return <div className={className.join(' ')} onClick={this.click.bind(this)} style={{paddingLeft:(this.props.level)*20}}>
+            {this.state.data.label}
+            <i className='xz-menu-submenu-arrow'></i>
+        </div>;
     }
 }
 
