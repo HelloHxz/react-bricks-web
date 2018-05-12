@@ -11,15 +11,20 @@ class Menu extends React.Component{
             data:props.data
         }
     }
+    onItemClick(params){
+        if(this.props.onItemClick){
+            this.props.onItemClick(params);
+        }
+    }
     render(){
         // return <MiniMenu data={data}/>
         var children = [];
         for(var i=0,j=this.state.data.length;i<j;i++){
             var itemData = this.state.data[i];
             if(itemData.children){
-                children.push(<MenuSection level={0} key={i} data={itemData}/>);
+                children.push(<MenuSection onItemClick={this.onItemClick.bind(this)} level={0} key={i} data={itemData}/>);
             }else{
-                children.push(<MenuSectionItem level={0} key={i} data={itemData}/>);
+                children.push(<MenuSectionItem onItemClick={this.onItemClick.bind(this)} level={0} key={i} data={itemData}/>);
             }
         }
         return <div className='xz-menu xz-menu-inline'>
@@ -78,9 +83,9 @@ class MenuSection extends React.Component{
         for(var i=0,j=this.state.data.children.length;i<j;i++){
             var itemData = this.state.data.children[i];
             if(itemData.children){
-                children.push(<MenuSection level={this.props.level+1} key={i} data={itemData}/>);
+                children.push(<MenuSection onItemClick={this.props.onItemClick} level={this.props.level+1} key={i} data={itemData}/>);
             }else{
-                children.push(<MenuSectionItem level={this.props.level+1} key={i} data={itemData}/>);
+                children.push(<MenuSectionItem onItemClick={this.props.onItemClick} level={this.props.level+1} key={i} data={itemData}/>);
             }
         }
         return (<div>
@@ -101,12 +106,18 @@ class MenuSectionItem extends React.Component{
             data:props.data
         }
     }
+    itemClick(){
+        this.props.onItemClick({
+            itemData:this.state.data,
+            itemInstance:this
+        });
+    }
     render(){
         var paddingLeft = 0;
         if(this.props.level>0){
             paddingLeft = (this.props.level)*20;
         }
-        return (<div className='xz-menu-item' style={{paddingLeft:paddingLeft}}>{this.state.data.label}</div>);
+        return (<div onClick={this.itemClick.bind(this)} className='xz-menu-item' style={{paddingLeft:paddingLeft}}>{this.state.data.label}</div>);
     }
 }
 

@@ -37,8 +37,8 @@ const menudata = [
 {
   label:'数据状态',
   key:'frfrf',children:[
-      {label:"4.1",key:'xxxxxxx'},
-      {label:"4.2",key:'xxxxxxx',children:[
+      {label:"Mobx",key:'xxxxxxx'},
+      {label:"AJAX",key:'xxxxxxx',children:[
           {label:'4.2.1',key:'xxxxxxxx'},
           {label:'4.2.2',key:'xxxxxxxx'}
       ]},
@@ -87,13 +87,17 @@ class HomeScreen extends React.Component {
     return <div style={{height:200,width:100,backgroundColor:'red'}}><span style={{color:'green'}}>Pop Everything</span><button onClick={this.test.bind(this,context)}>Click</button></div>
   }
 
+  MenuItemClick(params){
+    console.log(params);
+  }
+
   render() {
     return (
       <div>
         <div style={{height:60,width:'100%'}}></div>
         <div>
           <div style={{width:140,height:'100%',float:'left'}}>
-          <Menu data={menudata}/>
+          <Menu onItemClick={this.MenuItemClick.bind(this)} data={menudata}/>
           </div>
           <div style={{marginLeft:120}}>
             <PopView style={{display:'inline-block'}} mode='click' mouseLeaveHide={true} renderContent={this.renderPopView.bind(this)}><button>click</button></PopView>
