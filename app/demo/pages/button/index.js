@@ -1,8 +1,7 @@
-import {React,PageView,PageContainer} from "react-bricks"
-
+import {React,PageView,observer,PageContainer} from "react-bricks"
 
 @PageView
-class nest extends React.Component {
+class BottomDemo extends React.Component {
 
   componentDidMount() {
   }
@@ -24,9 +23,9 @@ class nest extends React.Component {
 
 
   render() {
-    return <div>nest
+    return <div>BottomDemo
     </div>
   }
 }
 
-export default nest;
+export default BottomDemo;

@@ -16,8 +16,7 @@ var config = {
 	},
 	pages:{
 		home:require("./pages/home").default,
-		buttonDemo:require("./pages/buttonDemo").default,
-		nest:require("./pages/nest").default,
+		button:require("./pages/button").default,
 	},
 };
 export default Run(config)

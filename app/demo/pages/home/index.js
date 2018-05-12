@@ -1,4 +1,4 @@
-import {React,PageView,Menu,PopView,Input,Form,Select} from "react-bricks"
+import {React,PageView,Menu,PopView,Input,Form,Select,PageContainer} from "react-bricks"
 import './index.less';
 import HomeStore from './store'
 import {observer} from "mobx-react";
@@ -14,6 +14,7 @@ const menudata = [
   icon:'',
   label:'关于',
   key:'xxxxx',
+  href:'home/about'
 },
 {
   label:'快速上手',
@@ -23,7 +24,7 @@ const menudata = [
   label:"组件",
   key:"xxxxxxxx",
   children:[
-      {label:"Button",key:'xxxxxxx'},
+      {label:"Button",key:'xxxxxxx',href:"/home/button"},
       {label:"Menu",key:'xxxxxxx',children:[
           {label:'2.2.1',key:'xxxxxxxx'},
           {label:'2.2.2',key:'xxxxxxxx'}
@@ -89,6 +90,9 @@ class HomeScreen extends React.Component {
 
   MenuItemClick(params){
     console.log(params);
+    if(params.itemData.href){
+      this.props.navigation.navigate(params.itemData.href,{test:'Lucy'});
+    }
   }
 
   render() {
@@ -127,7 +131,7 @@ class HomeScreen extends React.Component {
                 </div>);
             }}/>
             
-
+            <PageContainer {...this.props} owner={this}/>
           </div>
         </div>
       </div>

@@ -139,6 +139,7 @@ class Navigation extends React.Component {
     return Re.join(splitchar);
   }
   prepareGo(pageKey, params,isNotForward,_isReplaceGo){
+    
     if(isNotForward!==true){
       this.isForward = true;
     }
@@ -174,7 +175,6 @@ class Navigation extends React.Component {
       }else{
         paramsIsNotSame = true;
       }
-
       if(!paramsIsNotSame){
          params[systemseedname] =seedStr;
       }else{
@@ -192,6 +192,9 @@ class Navigation extends React.Component {
   }
 
   navigate(pageKey, params,isNotForward) {
+    if(pageKey[0]==="/"){
+      pageKey = pageKey.substring(1);
+    }
     var paramsArr = this.prepareGo(pageKey, params,isNotForward);
     if (paramsArr.length > 0) {
         location.hash = pageKey + "?" + paramsArr.join("&");
@@ -208,6 +211,9 @@ class Navigation extends React.Component {
 
 
   replace(pageKey, params) {
+    if(pageKey[0]==="/"){
+      pageKey = pageKey.substring(1);
+    }
     isReplaceGo = true;
     var paramsArr = this.prepareGo(pageKey, params,false,true);
     this.isForward = true;
@@ -600,7 +606,7 @@ class Navigation extends React.Component {
         pcKey = pcKey+"_"+(goPathArr[i]||"");
       }
       var instanceInfo = this.pageInstanceDict[crKey];
-      if(instanceInfo){
+      if(instanceInfo&&instanceInfo.instance){
           if(crKey!==pcKey||(goSeedStr===curSeedStr&&curSeedStr===("1"+splitchar+"0"))){
             var  pageLeaveR= instanceInfo.instance.onPageBeforeLeave({action:action});
             var p = (pageLeaveR!==false||pageLeaveR)?true:false;
@@ -608,6 +614,8 @@ class Navigation extends React.Component {
               s = p;
             }
           }
+      }else{
+        s = true;
       }
     }
     if(s===false){
@@ -650,7 +658,7 @@ class Navigation extends React.Component {
           if(instanceInfo.isInit){
             instanceInfo.isInit = false;
           }else{
-            if(crKey!==pcKey){
+            if(crKey!==pcKey&&instanceInfo.instance){
               console.log(crKey+" >>>resume");
               instanceInfo.instance.onPageResume();
             }

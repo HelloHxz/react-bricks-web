@@ -77,7 +77,7 @@ class PageView extends React.Component {
     var ToPageInstance = this.props.navigation.props.config.pages[realpagename];
     if(!ToPageInstance){
        console.error("pages属性中没有引入["+realpagename+"]页面");
-       return null;
+       return <div>未找到相关{realpagename}页面</div>;
     }
 
 

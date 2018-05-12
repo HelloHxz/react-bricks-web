@@ -24,18 +24,18 @@ class PageContainer extends React.Component {
       route = JSON.stringify(props.leftroute);
       route = JSON.parse(route);
     }
-    ToPageName = route.shift();
+    ToPageName = route.shift()||"$_hxz_$nofound$_$";
 
    
     this.curpagename = ToPageName;
     var key = props.owner.props.base.props.pkey+"_"+ToPageName;
     if(!this.arr[ToPageName]){
       var P = PageView;
+      if(ToPageName==='$_hxz_$nofound$_$'){
+        this.arr[ToPageName] = <div>Empty Page</div>
+        return;
+      }
       var ToPageInstance = props.owner.props.navigation.props.config.pages[ToPageName.split("_")[0]];
-      // if(!ToPageInstance.prototype.__proto__.forceUpdate){
-      //   P = LazyLoadPage;
-      // }
-
       this.arr[ToPageName]=(<P 
                     ref={(instance)=>{
                       this.dict[ToPageName] = instance;
