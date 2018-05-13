@@ -75,6 +75,7 @@ module.exports = function (env) {
 
 return {
   context: path.resolve(__dirname, 'app'),
+  mode:nodeEnv,
   entry:entry,
   output: {
     filename: '[name].[hash:8].js',
