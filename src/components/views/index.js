@@ -34,8 +34,11 @@ class PageContainer extends React.Component {
       var realpagename = ToPageName.split("_")[0];
       var ToPageClass = props.navigation.props.config.pages[realpagename];
       
-      if(!ToPageClass||ToPageName==='$_hxz_$nofound$_$'){
-        this.arr[ToPageName] = <div>NotFound Page</div>
+      if(ToPageName==='$_hxz_$nofound$_$'){
+        this.arr[ToPageName] = <div>Empty Page</div>
+        return;
+      }else if(!ToPageClass){
+        this.arr[ToPageName] = <div>NotFound {realpagename} Page</div>
         return;
       }
       if(ToPageClass.type==='dynamic'){
