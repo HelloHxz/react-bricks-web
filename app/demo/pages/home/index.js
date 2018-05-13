@@ -1,4 +1,4 @@
-import {React,PageView,Menu,PopView,Input,Form,Select,PageContainer} from "react-bricks"
+import {React,PageView,Menu,PopView,Input,Form,Select,Views} from "react-bricks"
 import './index.less';
 import HomeStore from './store'
 import {observer} from "mobx-react";
@@ -164,7 +164,7 @@ class HomeScreen extends React.Component {
                 </div>);
             }}/>
             
-            <PageContainer {...this.props} owner={this}/>
+            <Views {...this.props} owner={this}/>
           </div>
         </div>
       </div>

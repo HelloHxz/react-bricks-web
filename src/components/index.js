@@ -2,7 +2,7 @@
 import 'babel-polyfill'
 import React from 'react';
 import Run from './navigator'
-import PageContainer from './pageContainer'
+import Views from './views'
 import Menu from './Menu';
 import Select from './select';
 import globalManager from './globalManager'
@@ -24,7 +24,7 @@ export {
 	Select,
 	Input,
 	extendObservable,
-	PageContainer,
+	Views,
 	globalManager,
 	PageView,
 	observable,
