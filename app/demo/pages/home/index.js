@@ -25,9 +25,12 @@ const menudata = [
   label:"组件",
   key:"xxxxxxxx",
   children:[
+      {label:"Grid",key:'xxxxxxx'},
+      {label:"Layout",key:'xxxxxxx'},
       {label:"Button",key:'xxxxxxx',href:"/home/button"},
-      {label:"Input",key:'xxxxxxx'},
       {label:"Icon",key:'xxxxxxx'},
+      {label:"Form",key:"xxx"},
+      {label:"Input",key:'xxxxxxx'},
       {label:"CheckBox",key:'xxxxxxx'},
       {label:"CheckList",key:'xxxxxxx'},
       {label:"Radio",key:'xxxxxxx'},
@@ -35,6 +38,7 @@ const menudata = [
       {label:"Model",key:'xxxxxxx'},
       {label:"Select",key:'xxxxxxx'},
       {label:"Tabs",key:'xxxxxxx'},
+      {label:"Table",key:'xxxxxxx'},
       {label:"Tree",key:'xxxxxxx'},
       {label:"Menu",key:'xxxxxxx',children:[
           {label:'2.2.1',key:'xxxxxxxx'},
@@ -70,17 +74,26 @@ const menudata = [
 
 ];
 
+
 @PageView
 class HomeScreen extends React.Component {
 
   static connectStore(){
     return {homestore:new HomeStore}
   }
+
   componentDidMount() {
   }
   constructor(props){
     super(props);
     this.seed= 1;
+    // import(/* webpackChunkName: "search" */ '../input').then((e)=>{
+    //   console.log(e);
+    // }).catch((e)=>{
+
+    //   console.log(e);
+    // })
+    
   }
 
   goBack(){

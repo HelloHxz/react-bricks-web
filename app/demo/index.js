@@ -17,6 +17,7 @@ var config = {
 	pages:{
 		home:require("./pages/home").default,
 		button:require("./pages/button").default,
+		// input:()=>{ import("./pages/input") },
 	},
 };
 export default Run(config)

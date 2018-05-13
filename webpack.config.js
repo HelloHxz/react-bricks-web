@@ -121,10 +121,23 @@ return {
 
             "presets": [
               "react",
-              "env"
+              "env",
             ],
             "plugins": [
-              "transform-decorators-legacy","transform-class-properties","react-hot-loader/babel",[
+                [
+                  "module-resolver",
+                  {
+                    "cwd":"babelrc",
+                    "alias": {
+                      "react-bricks": "./src/components"
+                  },
+                    "extensions": [".js",".ios.js",".android.js",".web.js"]
+                  }
+                ],
+                "syntax-dynamic-import",
+              "transform-decorators-legacy",
+              "transform-class-properties",
+              "react-hot-loader/babel",[
                 "transform-runtime",
                 {
                   "helpers": false,
