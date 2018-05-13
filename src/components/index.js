@@ -8,6 +8,7 @@ import Select from './select';
 import globalManager from './globalManager'
 import PageView from './pageview'
 import PopView from './popview'
+import Dynamic from './dynamic'
 import Input from './input';
 import Form from './form';
 import {observable,extendObservable} from 'mobx'
@@ -18,6 +19,7 @@ import {observable,extendObservable} from 'mobx'
 export {
 	Menu,
 	Form,
+	Dynamic,
 	PopView,
 	Select,
 	Input,

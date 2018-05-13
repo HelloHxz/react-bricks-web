@@ -14,7 +14,6 @@ class PageView extends React.Component {
       pagename:props.pagename,
       isDestory:false
     };
-    this.repaireUrlWhenRepalceGo = this.repaireUrlWhenRepalceGo.bind(this);
 
     if(props.lazyowner){
       props.lazyowner.realPage = this;
@@ -39,10 +38,6 @@ class PageView extends React.Component {
     this.setState({isDestory:true});
   }
 
-  repaireUrlWhenRepalceGo(params){
-    this.setState(params);
-  }
-
   componentWillUnmount(){
     console.log(this.props.pkey+"     unmount>>>");
     this.props.navigation.pageUnmount(this);
@@ -50,11 +45,6 @@ class PageView extends React.Component {
 
   componentDidMount(){
     console.log(this.props.pkey+"     didmount>>>");
-    // this.props.navigation.pageInstanceDict[this.props.pkey] = {
-    //   instance:this.pageInstance,
-    //   basePageView:this,
-    //   isInit:true
-    // };
   }
 
    componentWillUpdate(nextProps,nextState){
@@ -73,14 +63,11 @@ class PageView extends React.Component {
     }
     var pagename = this.state.pagename||"";
     var realpagename = pagename.split("_")[0];
-
-    var ToPageInstance = this.props.navigation.props.config.pages[realpagename];
-    if(!ToPageInstance){
+    var ToPageClass = this.props.navigation.props.config.pages[realpagename];
+    if(!ToPageClass){
        console.error("pages属性中没有引入["+realpagename+"]页面");
        return <div>未找到相关{realpagename}页面</div>;
     }
-
-
     var params = {
       url:this.props.navigation.getUrlInfo(),
       pagemanager:this.props.pagemanager,
@@ -90,16 +77,14 @@ class PageView extends React.Component {
     };
 
     if(!this.store){
-      if(ToPageInstance.connectStore){
-        this.store = ToPageInstance.connectStore(params);
+      if(ToPageClass.connectStore){
+        this.store = ToPageClass.connectStore(params);
       }
     }
     var basePageClassName = "xz-page-base-page ";
-    // <div
-    //     ref={(wrapper)=>{this.wrapper = wrapper;}}
-    //    className='xz-pfull' key={this.props.pkey+"_outer"}>
+  
     return (
-          <ToPageInstance 
+          <ToPageClass 
             base={this} 
             {...this.store}
             ref={(instance)=>{
@@ -113,7 +98,7 @@ class PageView extends React.Component {
             basekey={this.props.pkey}
             pkey={this.props.pkey+"_inner"} 
             key={this.props.pkey+"_inner"}>
-          </ToPageInstance>);
+          </ToPageClass>);
   }
 }
 export default PageView;

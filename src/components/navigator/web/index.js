@@ -3,29 +3,6 @@ import PageView from "./pageview";
 import LazyLoadPage from "./lazyLoadPage";
 
 
-function NoAnimation(routeStack,pages){
-  for(var i=0,j=routeStack.length;i<j;i++){
-    var _key = routeStack[i]._key+"_wrapper";
-    var instance = routeStack[i].page;
-
-    if(i===j-1){
-        pages.push(<div className='xz-page-route-wrapper' key={_key}>{instance}</div>);
-    }else{
-        pages.push(<div className='xz-page-route-wrapper' style={{left:"-120%",visibility:"hidden"}} key={_key}>{instance}</div>);
-    }
-  }
-}
-
-function findPageIndex(key,routeStack){
-  var Re = null;
-  for(var i=0,j=routeStack.length;i<j;i++){
-    if(routeStack[i]._key===key){
-      Re = i;
-      break;
-    }
-  }
-  return Re;
-}
 
 /*
   路由需要支持：
@@ -246,6 +223,10 @@ class Navigation extends React.Component {
 
     var P = PageView;
 
+    if(P instanceof Promise){
+      alert("ss");
+      return;
+    }
     this.setState(
       {pages:<P leftroute={ToPageNameArr} pagename={ToPageName} navigation={this} key={key} pkey={key}></P>}
     );

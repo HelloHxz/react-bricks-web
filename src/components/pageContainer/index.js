@@ -31,11 +31,16 @@ class PageContainer extends React.Component {
     var key = props.owner.props.base.props.pkey+"_"+ToPageName;
     if(!this.arr[ToPageName]){
       var P = PageView;
-      if(ToPageName==='$_hxz_$nofound$_$'){
-        this.arr[ToPageName] = <div>Empty Page</div>
+      var realpagename = ToPageName.split("_")[0];
+      var ToPageClass = props.navigation.props.config.pages[realpagename];
+      
+      if(!ToPageClass||ToPageName==='$_hxz_$nofound$_$'){
+        this.arr[ToPageName] = <div>NotFound Page</div>
         return;
       }
-      var ToPageInstance = props.owner.props.navigation.props.config.pages[ToPageName.split("_")[0]];
+      if(ToPageClass.type==='dynamic'){
+         P = LazyLoadPage;
+      }
       this.arr[ToPageName]=(<P 
                     ref={(instance)=>{
                       this.dict[ToPageName] = instance;
@@ -73,9 +78,9 @@ class PageContainer extends React.Component {
     }
     for(var key in this.arr){
       if(key===this.curpagename){
-        re.push(<div className="full-screen" key={key+"_containerwrapper"}>{this.arr[key]}</div>);
+        re.push(<div key={key+"_containerwrapper"}>{this.arr[key]}</div>);
       }else{
-        re.push(<div  className="full-screen"  key={key+"_containerwrapper"} style={{display:"none"}}>{this.arr[key]}</div>);
+        re.push(<div key={key+"_containerwrapper"} style={{display:"none"}}>{this.arr[key]}</div>);
       }
     }
     return (<div className={className.join(" ")}>{re}</div>);

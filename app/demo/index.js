@@ -1,4 +1,4 @@
-import {Run} from "react-bricks"
+import {Run,Dynamic} from "react-bricks"
 import './grid.less';
 
 var config = {
@@ -17,7 +17,7 @@ var config = {
 	pages:{
 		home:require("./pages/home").default,
 		button:require("./pages/button").default,
-		// input:()=>{ import("./pages/input") },
+		input:Dynamic(()=>import(/* webpackChunkName: "inputpage" */ "./pages/input")),
 	},
 };
 export default Run(config)

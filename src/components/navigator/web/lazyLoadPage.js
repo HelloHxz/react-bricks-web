@@ -18,17 +18,18 @@ class LazyPageView extends React.Component {
   load(){
     var pagename = this.props.pagename||"";
     var realpagename = pagename.split("_")[0];
-    var Fuc = this.props.navigation.props.config.pages[realpagename];
-    Fuc((Com)=>{
-      this.props.navigation.props.config.pages[realpagename] = Com;
+    var Fuc = this.props.navigation.props.config.pages[realpagename].pagePromise;
+    Fuc().then((Com)=>{
+      this.props.navigation.props.config.pages[realpagename] = Com.default;
       this.setState({innerChild:<PageView lazyowner = {this} {...this.props}/>});
+    }).catch(()=>{
+
     });
   
   }
 
   render() {
-  		
-    return (<div className="xz-page-inner"><div className='xz-lazy-page-warp full-screen'>{this.state.innerChild}</div></div>);
+    return this.state.innerChild;
   }
 }
 export default LazyPageView;

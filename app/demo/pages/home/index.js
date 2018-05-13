@@ -30,7 +30,7 @@ const menudata = [
       {label:"Button",key:'xxxxxxx',href:"/home/button"},
       {label:"Icon",key:'xxxxxxx'},
       {label:"Form",key:"xxx"},
-      {label:"Input",key:'xxxxxxx'},
+      {label:"Input",key:'xxxxxxx',href:"/home/input"},
       {label:"CheckBox",key:'xxxxxxx'},
       {label:"CheckList",key:'xxxxxxx'},
       {label:"Radio",key:'xxxxxxx'},
@@ -87,7 +87,8 @@ class HomeScreen extends React.Component {
   constructor(props){
     super(props);
     this.seed= 1;
-    // import(/* webpackChunkName: "search" */ '../input').then((e)=>{
+    // import(/* webpackChunkName: "search" */ "../input").then((e)=>{
+    //   console.log("---->");
     //   console.log(e);
     // }).catch((e)=>{
 
@@ -102,7 +103,7 @@ class HomeScreen extends React.Component {
 
   go(){
     console.log(this.props.homestore);
-    this.props.navigation.navigate("button",{test:'Lucy'});
+    this.props.navigation.navigate("button");
   }
 
   onPageBeforeLeave(params){
