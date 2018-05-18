@@ -1,7 +1,6 @@
 import {observable} from 'mobx';
 class Store {
-    @observable inputValue = "";
-    @observable Lists =[{name:'sss',name1:"ssss"},{name:'sss1'}];
+    @observable FormData = {};
 }
 
 export default Store;

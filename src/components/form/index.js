@@ -1,5 +1,6 @@
 import React from 'react';
 import {observer} from "mobx-react";
+import {extendObservable} from 'mobx';
 
 export default class Form extends React.Component{
     validate(){
@@ -14,6 +15,15 @@ export default class Form extends React.Component{
 
 @observer
 class FormItem extends React.Component{
+    constructor(props){
+        super(props);
+        const store = props.rowData||props.form.props.store;
+        if(!store.hasOwnProperty(props.dataKey)){
+            const kv = {};
+            kv[this.props.dataKey] = "";
+            extendObservable(store,kv);
+        }
+    }
     validate(){
         
     }
@@ -23,7 +33,6 @@ class FormItem extends React.Component{
     }
     render(){
         const store = this.props.rowData||this.props.form.props.store;
-       
         const value = store[this.props.dataKey];
         const Com = this.props.com;
         return <Com {...this.props} onChange={this.onChange.bind(this)} value={value}/>;
@@ -40,10 +49,19 @@ class FormRow extends React.Component{
     }
 }
 class FormRepeat extends React.Component{
+    constructor(props){
+        super(props);
+        const store = props.rowData||props.form.props.store;
+        if(!store.hasOwnProperty(props.dataKey)){
+            const kv = {};
+            kv[this.props.dataKey] = "";
+            extendObservable(store,kv);
+        }
+    }
     validate(){
     }
     render(){
-        const store = this.props.form.props.store;
+        const store = this.props.rowData||this.props.form.props.store;
         const dataKey = this.props.dataKey;
         const values = store[dataKey]||[];
         var children = [];

@@ -87,14 +87,6 @@ class HomeScreen extends React.Component {
   constructor(props){
     super(props);
     this.seed= 1;
-    // import(/* webpackChunkName: "search" */ "../input").then((e)=>{
-    //   console.log("---->");
-    //   console.log(e);
-    // }).catch((e)=>{
-
-    //   console.log(e);
-    // })
-    
   }
 
   goBack(){
@@ -140,9 +132,11 @@ class HomeScreen extends React.Component {
             <PopView style={{display:'inline-block'}} mode='click' mouseLeaveHide={true} renderContent={this.renderPopView.bind(this)}><button>click</button></PopView>
             <PopView style={{display:'inline-block'}} mode='hover' mouseLeaveHide={true} renderContent={this.renderPopView.bind(this)}><button>hover</button></PopView>
             <button onClick={this.go.bind(this)}>Go</button>
-            <Form store={this.props.homestore} renderContent={(formProps)=>{
+            <Form store={this.props.homestore} dataKey='FormData' renderContent={(formProps)=>{
               return (
                 <div>
+                  <FormItem {...formProps} rule={[]} dataKey='inputValue' com={Input}  />
+                  <FormItem {...formProps} rule={[]} dataKey='inputValue1' com={Input}  />
                   <FormItem rule={[
                     {message:'必填!',regex:'required'},
                     {message:'小于10',regex:(val)=>{
@@ -152,7 +146,6 @@ class HomeScreen extends React.Component {
                       return true;
                     }}
                   ]} {...formProps} dataKey='selectorValue' com={Select}  />
-                  <FormItem {...formProps} rule={[]} dataKey='inputValue' com={Input}  />
                   <FormRepeat {...formProps} dataKey='Lists' renderRow={(rowProps)=>{
                     return (
                       <div>

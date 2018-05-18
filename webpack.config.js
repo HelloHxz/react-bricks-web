@@ -66,7 +66,7 @@ module.exports = function (env) {
   
   if(!isProd){
     var ip = arguments["1"].host||"localhost";
-    var port =   arguments["1"].port||8000;
+    var port =   arguments["1"].port||8080;
     var url = "http://"+ip+":"+port;
     entry.dev_patch = 'react-hot-loader/patch';
     entry.dev_client = 'webpack-dev-server/client?'+url;
