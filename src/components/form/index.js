@@ -13,8 +13,12 @@ export default class Form extends React.Component{
         }
     }
 
-    getFiledValue(){
-        
+    getFieldValue(key){
+
+    }
+
+    getFieldsValue(){
+        return this.store;
     }
 
     validate(){
@@ -26,24 +30,27 @@ export default class Form extends React.Component{
 }
 
 
+function extendObservableDataKey(props,initialValue){
+    const store = props.rowData||props.form.store;
+    if(!store.hasOwnProperty(props.dataKey)){
+        const kv = {};
+        kv[props.dataKey] = initialValue;
+        extendObservable(store,kv);
+    }
+}
 
 @observer
 class FormItem extends React.Component{
     constructor(props){
         super(props);
-        const store = props.rowData||props.form.store;
-        if(!store.hasOwnProperty(props.dataKey)){
-            const kv = {};
-            kv[this.props.dataKey] = "";
-            extendObservable(store,kv);
-        }
+        extendObservableDataKey(props,props.initialValue||"");
     }
     validate(){
         
     }
-    onChange(e){
+    onChange(e,params){
         const store = this.props.rowData||this.props.form.store;
-        store[this.props.dataKey] = e.target.value;
+        store[this.props.dataKey] = params.value;
     }
     render(){
         const store = this.props.rowData||this.props.form.store;
@@ -67,12 +74,11 @@ class FormRow extends React.Component{
 class FormRepeat extends React.Component{
     constructor(props){
         super(props);
-        const store = props.rowData||props.form.store;
-        if(!store.hasOwnProperty(props.dataKey)){
-            const kv = {};
-            kv[this.props.dataKey] = [];
-            extendObservable(store,kv);
+        let initialValue = [];
+        if(props.initialValue&&props.initialValue instanceof Array){
+            initialValue = props.initialValue;
         }
+        extendObservableDataKey(props,initialValue);
     }
     validate(){
     }

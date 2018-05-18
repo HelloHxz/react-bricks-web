@@ -140,7 +140,7 @@ class HomeScreen extends React.Component {
               return (
                 <div>
                   <FormItem {...formProps} rule={[]} dataKey='inputValue' com={Input}  />
-                  <FormItem {...formProps} rule={[]} dataKey='inputValue1' com={Input}  />
+                  <FormItem {...formProps} rule={[]} initialValue='200' dataKey='inputValue1' com={Input}  />
                   <FormItem rule={[
                     {message:'必填!',regex:'required'},
                     {message:'小于10',regex:(val)=>{
@@ -150,7 +150,7 @@ class HomeScreen extends React.Component {
                       return true;
                     }}
                   ]} {...formProps} dataKey='selectorValue' com={Select}  />
-                  <FormRepeat {...formProps} dataKey='Lists' renderRow={(rowProps)=>{
+                  <FormRepeat initialValue={[{name:"hxz"}]} {...formProps} dataKey='Lists' renderRow={(rowProps)=>{
                     return (
                       <div>
                           <FormItem {...rowProps} dataKey='name' label={"姓名"} com={Input}/>
