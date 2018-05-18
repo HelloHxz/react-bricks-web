@@ -53,6 +53,7 @@ class FormItem extends React.Component{
         store[this.props.dataKey] = params.value;
     }
     render(){
+        console.log("render item~ "+this.props.dataKey);
         const store = this.props.rowData||this.props.form.store;
         const value = store[this.props.dataKey];
         const Com = this.props.com;
@@ -86,7 +87,7 @@ class FormRepeat extends React.Component{
         const store = this.props.rowData||this.props.form.store;
         const dataKey = this.props.dataKey;
         const values = store[dataKey]||[];
-        console.log(values);
+        console.log("render repeat~");
         var children = [];
         for(var i=0,j=values.length;i<j;i++){
             const rowdata = values[i];
