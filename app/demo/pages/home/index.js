@@ -120,6 +120,10 @@ class HomeScreen extends React.Component {
     }
   }
 
+  add(formProps){
+    formProps.form.store.Lists.push({});
+  }
+
   render() {
     return (
       <div>
@@ -132,7 +136,7 @@ class HomeScreen extends React.Component {
             <PopView style={{display:'inline-block'}} mode='click' mouseLeaveHide={true} renderContent={this.renderPopView.bind(this)}><button>click</button></PopView>
             <PopView style={{display:'inline-block'}} mode='hover' mouseLeaveHide={true} renderContent={this.renderPopView.bind(this)}><button>hover</button></PopView>
             <button onClick={this.go.bind(this)}>Go</button>
-            <Form store={this.props.homestore} dataKey='FormData' renderContent={(formProps)=>{
+            <Form renderContent={(formProps)=>{
               return (
                 <div>
                   <FormItem {...formProps} rule={[]} dataKey='inputValue' com={Input}  />
@@ -154,6 +158,7 @@ class HomeScreen extends React.Component {
                       </div>
                     );
                   }} />
+                  <button onClick={this.add.bind(this,formProps)}>添加</button>
                 </div>);
             }}/>
             
