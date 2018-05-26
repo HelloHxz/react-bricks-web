@@ -25,11 +25,11 @@ const menudata = [
   label:"组件",
   key:"xxxxxxxx",
   children:[
-      {label:"Grid",key:'xxxxxxx'},
+      {label:"Grid",key:'xx',href:'/home/grid'},
       {label:"Layout",key:'xxxxxxx'},
       {label:"Button",key:'xxxxxxx',href:"/home/button"},
       {label:"Icon",key:'xxxxxxx'},
-      {label:"Form",key:"xxx"},
+      {label:"Form",key:"xxx",href:'home/form'},
       {label:"Input",key:'xxxxxxx',href:"/home/input"},
       {label:"CheckBox",key:'xxxxxxx'},
       {label:"CheckList",key:'xxxxxxx'},
@@ -114,14 +114,9 @@ class HomeScreen extends React.Component {
   }
 
   MenuItemClick(params){
-    console.log(params);
     if(params.itemData.href){
       this.props.navigation.navigate(params.itemData.href,{test:'Lucy'});
     }
-  }
-
-  add(formProps){
-    formProps.form.store.Lists.push({});
   }
 
   render() {
@@ -129,11 +124,7 @@ class HomeScreen extends React.Component {
       <div>
         <div style={{height:60,width:'100%'}}></div>
         <div>
-          <Row>
-            <Col offset={{md:2}} span={{ xs: 8, sm: 8, md: 6, lg: 6 }}>11</Col>
-            <Col span={{ xs: 8, sm: 8, md: 6, lg: 6 }}>11</Col>
-            <Col span={{ xs: 8, sm: 8}}>111</Col>
-          </Row>
+         
           <div style={{width:140,height:'100%',float:'left'}}>
           <Menu onItemClick={this.MenuItemClick.bind(this)} data={menudata}/>
           </div>
@@ -141,31 +132,7 @@ class HomeScreen extends React.Component {
             <PopView style={{display:'inline-block'}} mode='click' mouseLeaveHide={true} renderContent={this.renderPopView.bind(this)}><button>click</button></PopView>
             <PopView style={{display:'inline-block'}} mode='hover' mouseLeaveHide={true} renderContent={this.renderPopView.bind(this)}><button>hover</button></PopView>
             <button onClick={this.go.bind(this)}>Go</button>
-            <Form renderContent={(formProps)=>{
-              return (
-                <div>
-                  <FormItem {...formProps} rule={[]} dataKey='inputValue' com={Input}  />
-                  <FormItem {...formProps} rule={[]} initialValue='200' dataKey='inputValue1' com={Input}  />
-                  <FormItem rule={[
-                    {message:'必填!',regex:'required'},
-                    {message:'小于10',regex:(val)=>{
-                      if(val>10){
-                        return false;
-                      }
-                      return true;
-                    }}
-                  ]} {...formProps} dataKey='selectorValue' com={Select}  />
-                  <FormRepeat initialValue={[{name:"hxz"}]} {...formProps} dataKey='Lists' renderRow={(rowProps)=>{
-                    return (
-                      <div>
-                          <FormItem {...rowProps} dataKey='name' label={"姓名"} com={Input}/>
-                          <FormItem {...rowProps} dataKey='name1' com={Input}/>
-                      </div>
-                    );
-                  }} />
-                  <button onClick={this.add.bind(this,formProps)}>添加</button>
-                </div>);
-            }}/>
+           
             
             <Views {...this.props} owner={this}/>
           </div>
