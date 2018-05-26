@@ -1,4 +1,4 @@
-import {React,PageView,Menu,PopView,Input,Form,Select,Views,Row} from "react-bricks"
+import {React,PageView,Menu,PopView,Input,Form,Select,Views,Row,Col} from "react-bricks"
 import './index.less';
 import HomeStore from './store'
 import {observer} from "mobx-react";
@@ -129,7 +129,11 @@ class HomeScreen extends React.Component {
       <div>
         <div style={{height:60,width:'100%'}}></div>
         <div>
-          <Row/>
+          <Row>
+            <Col offset={{md:2}} span={{ xs: 8, sm: 8, md: 6, lg: 6 }}>11</Col>
+            <Col span={{ xs: 8, sm: 8, md: 6, lg: 6 }}>11</Col>
+            <Col span={{ xs: 8, sm: 8}}>111</Col>
+          </Row>
           <div style={{width:140,height:'100%',float:'left'}}>
           <Menu onItemClick={this.MenuItemClick.bind(this)} data={menudata}/>
           </div>

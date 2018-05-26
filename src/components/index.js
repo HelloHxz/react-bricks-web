@@ -6,6 +6,7 @@ import Views from './views'
 import Menu from './Menu';
 import Select from './select';
 import Row from './row';
+import Col from './col';
 import globalManager from './globalManager'
 import PageView from './pageview'
 import PopView from './popview'
@@ -20,6 +21,7 @@ import {observable,extendObservable} from 'mobx'
 export {
 	Menu,
 	Form,
+	Col,
 	Dynamic,
 	Row,
 	PopView,
