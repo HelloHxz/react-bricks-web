@@ -1,5 +1,4 @@
 import {Run,Dynamic} from "react-bricks"
-import './grid.less';
 
 var config = {
 	root:"home",
