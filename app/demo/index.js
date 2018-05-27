@@ -2,7 +2,7 @@ import {Run,Dynamic} from "react-bricks"
 
 var config = {
 	root:"home",
-	baseLayout:null,
+	baseLayout:require("./pages/baseLayout").default,
 	pages:{
 		home:require("./pages/home").default,
 		button:require("./pages/button").default,

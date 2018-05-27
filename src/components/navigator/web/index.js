@@ -269,11 +269,15 @@ class Navigation extends React.Component {
   }
 
   render() {
-    if(this.state.isDestory){
-      return (<div></div>);
-    }
-    return (<div className='xz-pageview-outer'>
+    const pages = (<div className='xz-pageview-outer'>
       {this.state.pages}</div>);
+    if(this.props.config.baseLayout){
+      const Wrapper = this.props.config.baseLayout;
+      return <Wrapper>
+        {pages}
+      </Wrapper>
+    }
+    return pages;
   }
 
 

@@ -2,17 +2,29 @@ import {React,PageView,observer,PageContainer} from "react-bricks"
 
 class BaseLayout extends React.PureComponent {
 
-  componentDidMount() {
-  }
-
   constructor(props){
     super(props);
+    this.state={
+      loading:true
+    } ;
   }
 
+  componentDidMount() {
+    setTimeout(()=>{
+      this.setState({
+        loading:false
+      });
+    },1000);
+  }
+
+ 
   render() {
-    return <div>
+    if(this.state.loading){
+      return <div>欢迎来到React-Brick,正在初始化数据中 ...</div>;
+    }
+    return <React.Fragment>
         {this.props.children}
-    </div>
+    </React.Fragment>
   }
 }
 
