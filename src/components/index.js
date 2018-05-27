@@ -7,6 +7,7 @@ import Menu from './Menu';
 import Select from './select';
 import Modal from './modal';
 import Row from './row';
+import message from './message';
 import Button from './button';
 import Col from './col';
 import globalManager from './globalManager'
@@ -23,6 +24,7 @@ import {observable,extendObservable} from 'mobx'
 export {
 	Menu,
 	Button,
+	message,
 	Form,
 	Col,
 	Modal,

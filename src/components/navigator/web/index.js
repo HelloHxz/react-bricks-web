@@ -1,6 +1,7 @@
 import React from "react";
 import PageView from "./pageview";
 import LazyLoadPage from "./lazyLoadPage";
+import ExtendsWrapper from './ExtendWrapper';
 
 
 
@@ -270,6 +271,7 @@ class Navigation extends React.Component {
 
   render() {
     const pages = (<div className='xz-pageview-outer'>
+      <ExtendsWrapper />
       {this.state.pages}</div>);
     if(this.props.config.baseLayout){
       const Wrapper = this.props.config.baseLayout;

@@ -33,6 +33,7 @@ const menudata = [
       {label:"Form",key:"xxx",href:'home/form'},
       {label:"Input",key:'xxxxxxx',href:"/home/input"},
       {label:"Modal",key:'xxxxxxx',href:"/home/modal"},
+      {label:"Message",key:'xxxxxxx',href:"/home/message"},
       {label:"CheckBox",key:'xxxxxxx'},
       {label:"CheckList",key:'xxxxxxx'},
       {label:"Radio",key:'xxxxxxx'},

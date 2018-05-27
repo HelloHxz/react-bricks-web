@@ -1,7 +1,7 @@
 import React from 'react';
-export default class Message extends React.Component{
-    
-    render(){
-        return (<input onChange={this.onChange.bind(this)} value={this.props.value} />)
+export default class Message{
+    static show(params){
+        window.HUXIAOZHONGEXTENDWRAPPER.showMessage(params);
     }
+    
 }
