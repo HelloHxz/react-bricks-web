@@ -1,6 +1,8 @@
 import {React,PageView,observer,PageContainer} from "react-bricks"
 
-@PageView
+
+
+@PageView()
 class BottomDemo extends React.PureComponent {
 
   componentDidMount() {
@@ -24,6 +26,8 @@ class BottomDemo extends React.PureComponent {
 
   render() {
     return <div>BottomDemo
+      <button onClick={()=>{
+      }}>log</button>
     </div>
   }
 }

@@ -1,15 +1,9 @@
 import {observer} from 'mobx-react'
 import React from 'react'
 
-var PageView = (WrappedComponent) => {
+var PageView = (store) =>(WrappedComponent)=> {
 	class Wrapper extends React.Component {
       static __role = "pageview"
-      static connectStore(){
-         if(!WrappedComponent.connectStore){
-            return {};
-         }
-         return WrappedComponent.connectStore();
-      }
       onPageResume(){
 
       }
@@ -28,7 +22,7 @@ var PageView = (WrappedComponent) => {
       }
 
       render() {
-         return (<WrappedComponent ref={(pageInstance)=>{this.pageInstance = pageInstance;}} {...this.props} />);
+         return (<WrappedComponent {...store} ref={(pageInstance)=>{this.pageInstance = pageInstance;}} {...this.props} />);
       }
    }
    return Wrapper;

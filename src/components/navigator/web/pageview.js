@@ -7,7 +7,6 @@ class PageView extends React.Component {
     this.curShowPageInfo = null;
     this.basePage = null;
     this.bkCover = null;
-    this.store = null;
     this.showPageDict = {};
     this.state={
       leftroute:props.leftroute,
@@ -72,17 +71,11 @@ class PageView extends React.Component {
       key:this.props.pkey
     };
 
-    if(!this.store){
-      if(ToPageClass.connectStore){
-        this.store = ToPageClass.connectStore(params);
-      }
-    }
     var basePageClassName = "xz-page-base-page ";
   
     return (
           <ToPageClass 
             base={this} 
-            {...this.store}
             ref={(instance)=>{
                this.pageInstance = instance;
             }}

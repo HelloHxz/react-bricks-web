@@ -1,6 +1,6 @@
 import {React,PageView,observer,PageContainer,Modal,Button,Select} from "react-bricks"
 
-@PageView
+@PageView()
 class SelectDemo extends React.PureComponent {
 
   componentDidMount() {

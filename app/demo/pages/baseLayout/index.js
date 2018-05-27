@@ -1,5 +1,7 @@
 import {React,PageView,observer,PageContainer} from "react-bricks"
+import BaseStore from './store';
 
+@PageView({baseStore:BaseStore})
 class BaseLayout extends React.PureComponent {
 
   constructor(props){
@@ -11,6 +13,7 @@ class BaseLayout extends React.PureComponent {
 
   componentDidMount() {
     setTimeout(()=>{
+      this.props.baseStore.UserInfo = {"name":'hxz'};
       this.setState({
         loading:false
       });

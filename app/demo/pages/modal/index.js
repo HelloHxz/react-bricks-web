@@ -1,6 +1,6 @@
 import {React,PageView,observer,PageContainer,Modal,Button} from "react-bricks"
 
-@PageView
+@PageView()
 class ModalDemo extends React.PureComponent {
 
   componentDidMount() {

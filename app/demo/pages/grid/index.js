@@ -1,6 +1,6 @@
 import {React,PageView,observer,PageContainer,Row,Col} from "react-bricks"
 
-@PageView
+@PageView()
 class GridDemo extends React.PureComponent {
 
   componentDidMount() {

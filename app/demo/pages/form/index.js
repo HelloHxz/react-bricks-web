@@ -1,7 +1,7 @@
 import {React,PageView,observer,PageContainer,Row,Col,Form,Input,Select} from "react-bricks"
 
 const {FormItem,FormRepeat} = Form;
-@PageView
+@PageView()
 class FormDemo extends React.PureComponent {
 
   componentDidMount() {

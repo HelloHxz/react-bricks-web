@@ -1,6 +1,7 @@
 import {React,PageView,Menu,PopView,Input,Form,Select,Views,Row,Col,Modal} from "react-bricks"
 import './index.less';
-import HomeStore from './store'
+import HomeStore from './store';
+import BaseStore from '../baseLayout/store';
 import {observer} from "mobx-react";
 
 const FormRepeat = Form.FormRepeat;
@@ -76,12 +77,8 @@ const menudata = [
 ];
 
 
-@PageView
+@PageView({homestore:new HomeStore,baseStore:BaseStore})
 class HomeScreen extends React.PureComponent {
-
-  static connectStore(){
-    return {homestore:new HomeStore}
-  }
 
   componentDidMount() {
   }
@@ -95,8 +92,9 @@ class HomeScreen extends React.PureComponent {
   }
 
   go(){
+    this.props.homestore.test = "huxiaohzong";
     console.log(this.props.homestore);
-    this.props.navigation.navigate("button");
+    // this.props.navigation.navigate("button");
   }
 
   onPageBeforeLeave(params){
@@ -117,6 +115,7 @@ class HomeScreen extends React.PureComponent {
   render() {
     return (
       <div>
+        {this.props.baseStore.UserInfo.name}
         <div style={{height:60,width:'100%'}}></div>
         <div>
           <div style={{width:140,height:'100%',float:'left'}}>
