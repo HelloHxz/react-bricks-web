@@ -10,6 +10,10 @@ export default class Modal extends React.Component{
         }
     }
 
+    static show(content){
+        alert("showhahahhah");
+    }
+
     componentWillReceiveProps(nextProps){
         if(nextProps.visible!==this.state.visible){
             this.setState({

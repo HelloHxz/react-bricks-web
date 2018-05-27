@@ -26,6 +26,10 @@ class ModalDemo extends React.PureComponent {
     });
   }
 
+  showTwo = ()=>{
+      Modal.show(<div>sssss</div>);
+  }
+
 
   render() {
     return <div>
@@ -34,6 +38,8 @@ class ModalDemo extends React.PureComponent {
             <Button onClick={this.hide.bind(this)}>Close</Button>
         </Modal>
         <Button onClick={this.show.bind(this)}>Show</Button>
+
+        <Button onClick={this.showTwo.bind(this)}>Modal.show</Button>
     </div>
   }
 }
