@@ -9,6 +9,8 @@ var config = {
 		grid:require("./pages/grid").default,
 		modal:require("./pages/modal").default,
 		form:require("./pages/form").default,
+		popview:require("./pages/popview").default,
+		select:require("./pages/select").default,
 		input:Dynamic(()=>import(/* webpackChunkName: "inputpage" */ "./pages/input")),
 	},
 };

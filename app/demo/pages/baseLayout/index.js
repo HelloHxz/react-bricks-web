@@ -1,6 +1,6 @@
 import {React,PageView,observer,PageContainer} from "react-bricks"
 
-class BaseLayout extends React.Component {
+class BaseLayout extends React.PureComponent {
 
   componentDidMount() {
   }

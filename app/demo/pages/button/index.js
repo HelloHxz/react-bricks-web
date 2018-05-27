@@ -1,7 +1,7 @@
 import {React,PageView,observer,PageContainer} from "react-bricks"
 
 @PageView
-class BottomDemo extends React.Component {
+class BottomDemo extends React.PureComponent {
 
   componentDidMount() {
   }

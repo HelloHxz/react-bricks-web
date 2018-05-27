@@ -2,7 +2,7 @@ import {React,PageView,observer,PageContainer,Row,Col,Form,Input,Select} from "r
 
 const {FormItem,FormRepeat} = Form;
 @PageView
-class FormDemo extends React.Component {
+class FormDemo extends React.PureComponent {
 
   componentDidMount() {
   }

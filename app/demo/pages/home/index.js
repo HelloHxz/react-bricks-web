@@ -36,8 +36,8 @@ const menudata = [
       {label:"CheckList",key:'xxxxxxx'},
       {label:"Radio",key:'xxxxxxx'},
       {label:"PopView",key:'xxxxxxx'},
-      {label:"Model",key:'xxxxxxx'},
-      {label:"Select",key:'xxxxxxx'},
+      {label:"Select",key:'xxxxxxx',href:'home/select'},
+      {label:"PopView",key:'xxxxxxx',href:'home/popview'},
       {label:"Tabs",key:'xxxxxxx'},
       {label:"Table",key:'xxxxxxx'},
       {label:"Tree",key:'xxxxxxx'},
@@ -77,7 +77,7 @@ const menudata = [
 
 
 @PageView
-class HomeScreen extends React.Component {
+class HomeScreen extends React.PureComponent {
 
   static connectStore(){
     return {homestore:new HomeStore}
@@ -106,13 +106,7 @@ class HomeScreen extends React.Component {
     return true;
   }
 
-  test(context){
-    context.hide();
-  }
 
-  renderPopView(context){
-    return <div style={{height:200,width:100,backgroundColor:'red'}}><span style={{color:'green'}}>Pop Everything</span><button onClick={this.test.bind(this,context)}>Click</button></div>
-  }
 
   MenuItemClick(params){
     if(params.itemData.href){
@@ -129,8 +123,7 @@ class HomeScreen extends React.Component {
           <Menu onItemClick={this.MenuItemClick.bind(this)} data={menudata}/>
           </div>
           <div style={{marginLeft:120}}>
-            <PopView style={{display:'inline-block'}} mode='click' mouseLeaveHide={true} renderContent={this.renderPopView.bind(this)}><button>click</button></PopView>
-            <PopView style={{display:'inline-block'}} mode='hover' mouseLeaveHide={true} renderContent={this.renderPopView.bind(this)}><button>hover</button></PopView>
+          
             <button onClick={this.go.bind(this)}>Go</button>
            
             
