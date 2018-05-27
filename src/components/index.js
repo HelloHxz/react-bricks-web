@@ -5,7 +5,9 @@ import Run from './navigator'
 import Views from './views'
 import Menu from './Menu';
 import Select from './select';
+import Modal from './modal';
 import Row from './row';
+import Button from './button';
 import Col from './col';
 import globalManager from './globalManager'
 import PageView from './pageview'
@@ -20,8 +22,10 @@ import {observable,extendObservable} from 'mobx'
 */
 export {
 	Menu,
+	Button,
 	Form,
 	Col,
+	Modal,
 	Dynamic,
 	Row,
 	PopView,

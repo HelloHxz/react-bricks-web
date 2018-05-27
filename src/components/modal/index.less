@@ -1,0 +1,68 @@
+
+.xz-modal-wrapper{
+    position: fixed;
+    z-index: 1000;
+    width: 100%;
+    left:0;
+    top:100px;
+}
+.xz-modal{
+   margin:auto;
+   background: #fff;
+   width:700px;
+}
+
+.xz-modal-bk{
+    position: fixed;
+    background-color:#000;
+    width: 100%;
+    top:0;
+    left: 0;
+    height: 100%;
+    z-index: 999;
+    filter:alpha(opacity=50);
+    opacity: .5;
+}
+
+.xz-modal-bk-hide{
+    animation:xzmodalhide .3s;
+    opacity: 0;
+}
+
+@keyframes xzmodalhide{
+    from {opacity:.5;}
+    to {opacity:0;}
+}
+
+.xz-modal-bk-show{
+    animation:xzmodalshow .3s;
+    opacity: .5;
+}
+
+@keyframes xzmodalshow{
+    from {opacity:0;}
+    to {opacity:0.5;}
+}
+
+.xz-modal-wrapper-show{
+    animation:xzwrappershow .2s;
+    transform: scale(1);
+}
+@keyframes xzwrappershow{
+    from { transform: scale(.4);}
+    to {transform: scale(1);}
+}
+
+.xz-modal-wrapper-hide{
+    animation:xzwrapperhide .3s;
+    transform: scale(0.3);
+    opacity: 0;
+}
+@keyframes xzwrapperhide{
+    from { transform: scale(1); opacity: 1;}
+    to {transform: scale(0.3);opacity: 0;}
+}
+
+
+
+

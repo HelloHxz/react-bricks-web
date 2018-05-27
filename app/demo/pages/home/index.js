@@ -1,4 +1,4 @@
-import {React,PageView,Menu,PopView,Input,Form,Select,Views,Row,Col} from "react-bricks"
+import {React,PageView,Menu,PopView,Input,Form,Select,Views,Row,Col,Modal} from "react-bricks"
 import './index.less';
 import HomeStore from './store'
 import {observer} from "mobx-react";
@@ -31,6 +31,7 @@ const menudata = [
       {label:"Icon",key:'xxxxxxx'},
       {label:"Form",key:"xxx",href:'home/form'},
       {label:"Input",key:'xxxxxxx',href:"/home/input"},
+      {label:"Modal",key:'xxxxxxx',href:"/home/modal"},
       {label:"CheckBox",key:'xxxxxxx'},
       {label:"CheckList",key:'xxxxxxx'},
       {label:"Radio",key:'xxxxxxx'},
@@ -124,7 +125,6 @@ class HomeScreen extends React.Component {
       <div>
         <div style={{height:60,width:'100%'}}></div>
         <div>
-         
           <div style={{width:140,height:'100%',float:'left'}}>
           <Menu onItemClick={this.MenuItemClick.bind(this)} data={menudata}/>
           </div>

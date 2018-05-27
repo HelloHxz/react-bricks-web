@@ -19,7 +19,7 @@ class FormDemo extends React.Component {
     return <div>
           <Form renderContent={(formProps)=>{
               return (
-                <div>
+                <React.Fragment>
                   <FormItem {...formProps} rule={[]} dataKey='inputValue' com={Input}  />
                   <FormItem {...formProps} rule={[]} initialValue='200' dataKey='inputValue1' com={Input}  />
                   <FormItem rule={[
@@ -40,7 +40,7 @@ class FormDemo extends React.Component {
                     );
                   }} />
                   <button onClick={this.add.bind(this,formProps)}>添加</button>
-                </div>);
+                </React.Fragment>);
             }}/>
     </div>
   }
