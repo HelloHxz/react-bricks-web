@@ -2,8 +2,8 @@ import {Run,Dynamic} from "react-bricks"
 
 var config = {
 	root:"home",
-	baseLayout:require("./pages/baseLayout").default,
 	pages:{
+		"/":require("./pages/basicLayout").default,
 		home:require("./pages/home").default,
 		button:require("./pages/button").default,
 		grid:require("./pages/grid").default,

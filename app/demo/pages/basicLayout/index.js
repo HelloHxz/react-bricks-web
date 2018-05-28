@@ -2,7 +2,7 @@ import {React,PageView,observer,PageContainer} from "react-bricks"
 import BaseStore from './store';
 
 @PageView({baseStore:BaseStore})
-class BaseLayout extends React.PureComponent {
+class BasicLayout extends React.PureComponent {
 
   constructor(props){
     super(props);
@@ -31,4 +31,4 @@ class BaseLayout extends React.PureComponent {
   }
 }
 
-export default BaseLayout;
+export default BasicLayout;

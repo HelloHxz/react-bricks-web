@@ -2,6 +2,7 @@ import ReactDOM from 'react-dom';
 import React from 'react';
 import "./web/index.less"
 import Navigation from './web'
+import XZ from '../xz';
 
 
 export default (config)=>{
@@ -17,6 +18,8 @@ export default (config)=>{
 		pageClass.__pagename = key;
 	}
 	ReactDOM.render(
-		<Navigation config={config}/>,
+		<Navigation ref={(instance) => {
+			XZ._setNavigator(instance);
+		}} config={config}/>,
 		document.getElementById('xz-lightapp-root'));
 }

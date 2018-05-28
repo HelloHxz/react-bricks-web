@@ -1,7 +1,7 @@
 import {React,PageView,Menu,PopView,Input,Form,Select,Views,Row,Col,Modal} from "react-bricks"
 import './index.less';
 import HomeStore from './store';
-import BaseStore from '../baseLayout/store';
+import BaseStore from '../basicLayout/store';
 import {observer} from "mobx-react";
 
 const FormRepeat = Form.FormRepeat;
