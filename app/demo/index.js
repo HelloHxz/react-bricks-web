@@ -1,4 +1,5 @@
-import {Run,Dynamic} from "react-bricks"
+import {Run,Dynamic} from "react-bricks";
+import BasicStore from './pages/basicLayout/store';
 
 var config = {
 	root:"home",
@@ -14,5 +15,11 @@ var config = {
 		select:require("./pages/select").default,
 		input:Dynamic(()=>import(/* webpackChunkName: "inputpage" */ "./pages/input")),
 	},
+	onPageRender(params){
+		if(params.pageKey!=='/'){
+			//BasicStore.MenuData params.pageKey
+			return <div>你没有权限看</div>;
+		}
+	}
 };
 export default Run(config)
