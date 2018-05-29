@@ -1,4 +1,4 @@
-import {React,PageView,observer,PageContainer} from "react-bricks"
+import {React,PageView,observer,PageContainer,Input} from "react-bricks"
 
 @PageView()
 class InputDemo extends React.PureComponent {
@@ -24,7 +24,11 @@ class InputDemo extends React.PureComponent {
 
   render() {
     return <div>
-        InputDemo
+        <div style={{maxWidth:600}}>
+           <Input label='姓名' />
+           <Input label='姓名' />
+        </div>
+        
     </div>
   }
 }
