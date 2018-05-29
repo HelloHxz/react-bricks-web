@@ -19,6 +19,7 @@ class Navigation extends React.Component {
   constructor(props) {
 
     super(props)
+    this.appConfig = props.config;
     this.routeStack = [];
     this.isForward = false;
     //浏览器并不会为第一个url记录hash记录 所以想禁止第一个页面离开 需要在第一次加载根路径的时候增加一个hash记录
@@ -59,7 +60,7 @@ class Navigation extends React.Component {
 
   start() {
     let config = this.props.config;
-    this.appConfig = config;
+    
     var toPage = this.getPageNameFromUrl();
     this.hashChange();
   }
@@ -275,7 +276,8 @@ class Navigation extends React.Component {
       {this.state.pages}</div>);
     if(this.props.config.pages["/"]){
       const Wrapper = this.props.config.pages["/"];
-      return <Wrapper>
+      return <Wrapper  pagename={'/'}
+          navigation={this}>
         {pages}
       </Wrapper>
     }

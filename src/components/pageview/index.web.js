@@ -22,13 +22,12 @@ var PageView = (store) =>(WrappedComponent)=> {
       }
 
       render() {
-         if(this.props.navigation&&this.props.navigation.appConfig&&this.props.navigation.appConfig.onPageRender){
-            console.log(this.props)
-            const re = this.props.navigation.appConfig.onPageRender({
-                  pageKey:this.props.pagename
-            });
-            console.log(re);
-         }
+        const re = this.props.navigation.appConfig.onPageRender({
+            pageKey:this.props.pagename
+        });
+        if(re!==null && re!==undefined){
+            return re;
+        }
          return (<WrappedComponent {...store} ref={(pageInstance)=>{this.pageInstance = pageInstance;}} {...this.props} />);
       }
    }

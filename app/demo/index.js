@@ -17,10 +17,10 @@ var config = {
 		input:Dynamic(()=>import(/* webpackChunkName: "inputpage" */ "./pages/input")),
 	},
 	onPageRender(params){
-		if(params.pageKey!=='/'){
-			//BasicStore.MenuData params.pageKey
-			return <div>你没有权限看</div>;
-		}
+		// if(params.pageKey!=='/'&&params.pageKey!=='home'){
+		// 	//BasicStore.MenuData params.pageKey
+		// 	return <div>你没有权限看</div>;
+		// }
 	}
 };
 export default Run(config)
