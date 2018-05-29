@@ -17,18 +17,15 @@ export default class Input extends React.Component{
         const C = <div className='xz-input xz-input-default'><input onChange={this.onChange.bind(this)} value={this.props.value} /></div>;
         if(this.props.label){
             return (
-                <div style={{position:'relative',marginBottom:14}}>
                 <Row>
                     <Col className='xz-input-label-wrapper xz-input-label-wrapper-default' span={{md:5}}>
                         <span>{this.props.label}</span>
                     </Col>
                     <Col span={{md:19}}>
                         {C}
+                        <span className='xz-input-mes'>填写错误了哟</span>
                     </Col>
                 </Row>
-                 <span className='xz-input-mes'>填写错误了哟</span>
-                 </div>
-                
             )
         }
         return <div className='xz-input-out'>{C}</div>;
