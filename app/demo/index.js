@@ -1,4 +1,5 @@
 import {Run,Dynamic} from "react-bricks";
+import React from 'react';
 import BasicStore from './pages/basicLayout/store';
 
 var config = {
