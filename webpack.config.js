@@ -99,7 +99,7 @@ return {
     contentBase: path.resolve(__dirname, 'dist'),
     // match the output path
     publicPath: isProd?'./':'/',
-    setup(app){  
+    before(app){  
       mockData(app);
     }
   },
