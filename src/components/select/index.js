@@ -9,12 +9,12 @@ export default class Select extends React.Component{
 
     }
     render(){
-        return <div>
+        return (<React.Fragment>
             <PopView 
                 style={{display:'inline-block'}} 
                 mode='click' mouseLeaveHide={true} 
                 renderContent={this.renderPopView.bind(this)}>
-                <input /></PopView>
-        </div>;
+                <input /></PopView></React.Fragment>)
+        ;
     }
 }
