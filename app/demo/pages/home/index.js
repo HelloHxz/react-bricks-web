@@ -48,14 +48,11 @@ class HomeScreen extends React.PureComponent {
         {this.props.baseStore.UserInfo.name}
         <div style={{height:60,width:'100%'}}></div>
         <div>
-          <div style={{width:140,height:'100%',float:'left'}}>
+          <div style={{height:'100%',float:'left'}}>
           <Menu onItemClick={this.MenuItemClick.bind(this)} data={this.props.baseStore.MenuData}/>
           </div>
-          <div style={{marginLeft:120}}>
-          
+          <div>
             <button onClick={this.go.bind(this)}>Go</button>
-           
-            
             <Views {...this.props} owner={this}/>
           </div>
         </div>
