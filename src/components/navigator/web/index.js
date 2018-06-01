@@ -222,13 +222,7 @@ class Navigation extends React.Component {
       ToPageName = ToPageNameArr.shift();
     }
     var key = ToPageName;
-
     var P = PageView;
-
-    if(P instanceof Promise){
-      alert("ss");
-      return;
-    }
     this.setState(
       {pages:<P leftroute={ToPageNameArr} pagename={ToPageName} navigation={this} key={key} pkey={key}></P>}
     );
