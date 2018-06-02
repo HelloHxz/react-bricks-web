@@ -9,8 +9,12 @@ class XZ {
     _setExtendWrapperInstance= (_instance) => {
         this._extendWrapperInstancer = _instance;
     }
-    showMessage = (params) => {
-        this._extendWrapperInstancer.showMessage(params);
+    showMessage = (content,timeout) => {
+        return this._extendWrapperInstancer.showMessage(content,timeout);
+    }
+    
+    hideMessage = (key) => {
+        this._extendWrapperInstancer.hideMessage(key);
     }
 
     go = (path,params)=>{

@@ -1,4 +1,4 @@
-import {React,PageView,observer,PageContainer,message} from "react-bricks"
+import {React,PageView,observer,PageContainer,message,Button} from "react-bricks"
 
 
 
@@ -15,11 +15,9 @@ class MessageDemo extends React.PureComponent {
 
   render() {
     return <div>Message
-      <button onClick={()=>{
-          message.show({
-              content:'xxxxxx'
-          });
-      }}>log</button>
+      <Button onClick={()=>{
+          const messid = message.show(<div style={{color:'red'}}>dashaogua</div>);
+      }}>log</Button>
     </div>
   }
 }

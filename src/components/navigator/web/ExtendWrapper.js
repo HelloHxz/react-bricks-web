@@ -15,16 +15,17 @@ export default class ExtendWrapper extends React.Component{
             Modals:[],
         };
     }
-    showMessage(params){
+    showMessage(content,timeout){
         this.seed += 1;
         const messageKey = `message${this.seed}`;
-        this.componentDict[messageKey] = <Message params={params} parent={this} messageKey={messageKey} key={messageKey}/>;
+        this.componentDict[messageKey] = <Message content={content} timeout={timeout} parent={this} messageKey={messageKey} key={messageKey}/>;
         this.state.messages.push(messageKey);
         this.setState({
             messages:this.state.messages
         });
+        return messageKey;
     }
-    destoryMessage(messageKey){
+    hideMessage(messageKey){
         delete this.componentDict[messageKey];
         for(let i = this.state.messages.length;i>=0;i-=1){
             if(this.state.messages[i] === messageKey){
