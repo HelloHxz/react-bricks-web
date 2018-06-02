@@ -9,8 +9,8 @@ class XZ {
     _setExtendWrapperInstance= (_instance) => {
         this._extendWrapperInstancer = _instance;
     }
-    showMessage = () => {
-        alert('new message');
+    showMessage = (params) => {
+        this._extendWrapperInstancer.showMessage(params);
     }
 
     go = (path,params)=>{
