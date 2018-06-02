@@ -1,4 +1,4 @@
-import {React,PageView,observer,PageContainer,Modal,Button} from "react-bricks"
+import {React,PageView,observer,PageContainer,Modal,Button,message} from "react-bricks"
 
 @PageView()
 class ModalDemo extends React.PureComponent {
@@ -21,6 +21,7 @@ class ModalDemo extends React.PureComponent {
   }
 
   hide(){
+    // message.show("show");
     this.setState({
         visible:false
     });
