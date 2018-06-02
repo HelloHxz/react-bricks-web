@@ -1,24 +1,21 @@
 
 @import '../theme/index.less';
-.xz-mes-wraper-tmmess{
+.xz-mes-container{
     position: fixed;
     top:0;
     height: 0px;
-}
-.xz-mes-wraper-tmmess{
     width: 100%;
     top: 10px;
     text-align: center;
     left:0;
 }
-.xz-mes-wraper-tmmess .xz-message-wraper{
+
+.xz-message-wraper{
     text-align: center;
-    padding-bottom: 6px;
     position: relative;
-    margin-top:-20px;
     opacity: 0;
 }
-.xz-mes-wraper-tmmess .xz-message-wraper .xz-message-wraper-inner{
+.xz-message-wraper .xz-message-wraper-inner{
     display: inline-block;
     border: 1px solid #eee;
     background-color: #fff;
@@ -27,13 +24,24 @@
     padding: 8px 16px;
 }
 
-.xz-mes-wraper-tmmess .xz-message-wraper-show{
+.xz-message-wraper-show{
     animation: show .3s ease;
+    padding-bottom: 6px;
     opacity: 1;
     margin-top:0;
 }
 
+.xz-message-wraper-hide{
+    animation: hide .3s ease;
+    opacity: 0;
+    max-height: 0;
+}
 @keyframes show{
     from {margin-top:-20px;opacity: 0;}
     to {margin-top:0;opacity: 1;}
+}
+@keyframes hide{
+    from {max-height: 40px;opacity: 1;}
+    to {max-height: 0;opacity: 0;}
+    
 }

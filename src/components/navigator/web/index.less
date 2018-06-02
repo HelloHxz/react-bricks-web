@@ -127,5 +127,32 @@ body{
 }
 
 
+.xz-close-icon {
+  position: relative;
+  display:block;
+  width: 15px;
+  height: 15px;
+  overflow: hidden;
+}
+.xz-close-icon:hover {
+  cursor: pointer;
+}
+.xz-close-icon::before, .xz-close-icon::after {
+  content: '';
+  position: absolute;
+  width: 2px;
+  top: 50%;
+  left: 50%;
+  height: 12px;
+  margin-top: -6px;
+  background: #333;
+}
+.xz-close-icon::before {
+  transform: rotate(45deg);
+}
+.xz-close-icon::after {
+  transform: rotate(-45deg);
+}
+
 
 
