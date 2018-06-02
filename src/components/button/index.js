@@ -1,4 +1,5 @@
 import React from 'react';
+import './index.less';
 
 export default class Button extends React.Component{
 
@@ -11,6 +12,6 @@ export default class Button extends React.Component{
     }
 
     render(){
-        return (<button onClick={this.onClick.bind(this)}>{this.props.children}</button>)
+        return (<button className='xz-btn xz-btn-default' onClick={this.onClick.bind(this)}>{this.props.children}</button>)
     }
 }

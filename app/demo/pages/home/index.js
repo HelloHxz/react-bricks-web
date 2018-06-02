@@ -1,4 +1,4 @@
-import {React,PageView,Menu,PopView,Input,Form,Select,Views,Row,Col,Modal} from "react-bricks"
+import {React,PageView,Menu,PopView,Input,Form,Select,Views,Row,Col,Modal,Button} from "react-bricks"
 import './index.less';
 import HomeStore from './store';
 import BaseStore from '../basicLayout/store';
@@ -52,7 +52,7 @@ class HomeScreen extends React.PureComponent {
           <Menu onItemClick={this.MenuItemClick.bind(this)} data={this.props.baseStore.MenuData}/>
           </div>
           <div>
-            <button onClick={this.go.bind(this)}>Go</button>
+            <Button onClick={this.go.bind(this)}>Go</Button>
             <Views {...this.props} owner={this}/>
           </div>
         </div>

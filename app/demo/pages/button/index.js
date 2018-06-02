@@ -1,4 +1,4 @@
-import {React,PageView,observer,PageContainer,XZ} from "react-bricks"
+import {React,PageView,observer,PageContainer,XZ,Button} from "react-bricks"
 
 
 
@@ -26,9 +26,9 @@ class BottomDemo extends React.PureComponent {
 
   render() {
     return <div>BottomDemo
-      <button onClick={()=>{
+      <Button onClick={()=>{
         XZ.go();
-      }}>log</button>
+      }}>log</Button>
     </div>
   }
 }
