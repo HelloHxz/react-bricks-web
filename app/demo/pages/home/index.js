@@ -46,6 +46,7 @@ class HomeScreen extends React.PureComponent {
     return (
       <div>
         {this.props.baseStore.UserInfo.name}
+        <i className="fas fa-camera-retro"></i>
         <div style={{height:60,width:'100%'}}></div>
         <div>
           <div style={{height:'100%',float:'left'}}>

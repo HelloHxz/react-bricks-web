@@ -101,7 +101,11 @@ class PopView extends React.Component{
             return null;
         }
         var className ='xz-popview-content '+(this.state.show?'xz-pop-animate-bottom':'xz-pop-animate-bottom-hide')
-        return <div className={className} style={this.getPopPositionStyle()}>{this.props.renderContent(this)}</div>;
+        return <div ref={(instance)=>{
+            if(instance){
+                console.log("_____>>>"+this.state.show);
+            }
+        }} className={className} style={this.getPopPositionStyle()}>{this.props.renderContent(this)}</div>;
     }
     getEvent(){
         var mode = this.props.mode || 'hover'; //dbclick|click|hover|rightclick
