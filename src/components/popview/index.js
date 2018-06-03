@@ -26,16 +26,20 @@ class PopView extends React.Component{
         var mode = this.props.mode || 'hover';
         if(mode==='hover'){
             this.timeoutid = setTimeout(()=>{
-                this.setState({
-                    show:true
-                });
+                this._show();
             },300);
         }else{
-            this.setState({
-                show:true
-            });
+            this._show();
         }
        
+    }
+    _show(){
+        this.setState({
+            show:true
+        });
+        if(this.props.onShow){
+            this.props.onShow(this);
+        }
     }
     _clearTime(){
         if(this.timeoutid){
@@ -47,6 +51,9 @@ class PopView extends React.Component{
        e.stopPropagation();
        e.preventDefault();
        this.hidePop();
+    }
+    onMouseOverWhenClickMode(){
+        this._clearTime();
     }
     hidePop(){
         this._clearTime();
@@ -63,14 +70,19 @@ class PopView extends React.Component{
         },()=>{
             setTimeout(()=>{
                 this.setState({show:'noinit'});
+                if(this.props.onHide){
+                    this.props.onHide(this);
+                }
             },300);
         });
     }
     getPopPositionStyle(){
+        // this.props.offset
+        const offset = this.props.offset || {};
         var rect = this.root.getBoundingClientRect();
         return {
-            top:Common.parseInt(rect.top)+Common.parseInt(rect.offsetY)+Common.parseInt(rect.height),
-            left:Common.parseInt(rect.left)+Common.parseInt(rect.offsetX),
+            top:Common.parseInt(rect.top)+Common.parseInt(rect.offsetY)+Common.parseInt(rect.height) + (offset.x||0),
+            left:Common.parseInt(rect.left)+Common.parseInt(rect.offsetX)+ (offset.y||0),
         };
     }
     getContentEvent(){
@@ -96,7 +108,8 @@ class PopView extends React.Component{
         if(mode==='click'){
             return {
                 onClick:this.show.bind(this),
-                onMouseLeave:this.onMouseLeave.bind(this)
+                onMouseLeave:this.onMouseLeave.bind(this),
+                onMouseOver:this.onMouseOverWhenClickMode.bind(this),
             };
         }
         return {
