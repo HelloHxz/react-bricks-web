@@ -1,8 +1,19 @@
 import React from 'react';
 import Col from '../col';
+import global from '../../utils/global';
 import './t.less';
 export default class Row extends React.Component{
     _ssd = "xxx";
+
+    componentDidMount = ()=>{
+        this.eventid = global.addEvent('resize',()=>{
+            console.log(this.eventid);
+        });
+    }
+
+    componentWillUnmount = ()=>{
+        global.removeEvent('resize',this.eventid);
+    }
 
     render(){
         const className = ['xz-row'];

@@ -10,7 +10,6 @@ import Row from './row';
 import message from './message';
 import Button from './button';
 import Col from './col';
-import globalManager from './globalManager'
 import PageView from './pageview'
 import PopView from './popview'
 import Dynamic from './dynamic'
@@ -37,7 +36,6 @@ export {
 	Input,
 	extendObservable,
 	Views,
-	globalManager,
 	PageView,
 	observable,
 	React,

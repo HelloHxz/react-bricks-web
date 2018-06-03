@@ -10,6 +10,7 @@ class PageContainer extends React.Component {
   constructor(props) {
     super(props)
     this.arr = {};
+    this.pageInstance = null;
     this.dict = {};
    
     this.prepareRoute(props);
@@ -35,29 +36,36 @@ class PageContainer extends React.Component {
       var ToPageClass = props.navigation.props.config.pages[realpagename];
       
       if(ToPageName==='$_hxz_$nofound$_$'){
-        this.arr[ToPageName] = <div>Empty Page</div>
+        this.setPageInstanceByKey(ToPageName,(<div>Empty Page</div>));
         return;
       }else if(!ToPageClass){
-        this.arr[ToPageName] = <div>NotFound {realpagename} Page</div>
+        this.setPageInstanceByKey(ToPageName,(<div>NotFound {realpagename} Page</div>));
         return;
       }
       if(ToPageClass.type==='dynamic'){
          P = LazyLoadPage;
       }
-      this.arr[ToPageName]=(<P 
-                    ref={(instance)=>{
-                      this.dict[ToPageName] = instance;
-                    }}
-                    propsstore={props.store}
-                    leftroute={route} 
-                    owner = {props.owner}
-                    pagename={ToPageName} 
-                    navigation={props.owner.props.navigation} 
-                    key={key} 
-                    pkey={key}></P>) ;
-
+      this.setPageInstanceByKey(ToPageName,(<P 
+        ref={(instance)=>{
+          this.dict[ToPageName] = instance;
+        }}
+        propsstore={props.store}
+        leftroute={route} 
+        owner = {props.owner}
+        pagename={ToPageName} 
+        navigation={props.owner.props.navigation} 
+        key={key} 
+        pkey={key}></P>));
     }else{
       cacheSuccess&&cacheSuccess(route,ToPageName);
+    }
+  }
+
+  setPageInstanceByKey = (key,instance) => {
+    if(this.props.cache === true){
+      this.arr[key] = instance;
+    }else{
+      this.pageInstance = instance;
     }
   }
 
@@ -79,13 +87,18 @@ class PageContainer extends React.Component {
     }else{
       className.push("xz-pconatiner");
     }
-    for(var key in this.arr){
-      if(key===this.curpagename){
-        re.push(<div key={key+"_containerwrapper"}>{this.arr[key]}</div>);
-      }else{
-        re.push(<div key={key+"_containerwrapper"} style={{display:"none"}}>{this.arr[key]}</div>);
+    if(this.props.cache===true){
+      for(var key in this.arr){
+        if(key===this.curpagename){
+          re.push(<div key={key+"_containerwrapper"}>{this.arr[key]}</div>);
+        }else{
+          re.push(<div key={key+"_containerwrapper"} style={{display:"none"}}>{this.arr[key]}</div>);
+        }
       }
+    }else{
+      re = this.pageInstance;
     }
+    
     return (<div className={className.join(" ")}>{re}</div>);
   }
 }
