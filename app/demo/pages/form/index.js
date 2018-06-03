@@ -1,4 +1,4 @@
-import {React,PageView,observer,PageContainer,Row,Col,Form,Input,Select} from "react-bricks"
+import {React,PageView,observer,PageContainer,Row,Col,Form,Input,Select,Button} from "react-bricks"
 
 const {FormItem,FormRepeat} = Form;
 @PageView()
@@ -20,7 +20,7 @@ class FormDemo extends React.PureComponent {
           <Form renderContent={(formProps)=>{
               return (
                 <React.Fragment>
-                  <FormItem {...formProps} rule={[]} dataKey='inputValue' com={Input}  />
+                  <FormItem {...formProps} rule={[]} dataKey='inputValue' placeholder='请输入' com={Input}  />
                   <FormItem {...formProps} rule={[]} initialValue='200' dataKey='inputValue1' com={Input}  />
                   <FormItem rule={[
                     {message:'必填!',regex:'required'},
@@ -30,7 +30,7 @@ class FormDemo extends React.PureComponent {
                       }
                       return true;
                     }}
-                  ]} {...formProps} dataKey='selectorValue' com={Select}  />
+                  ]} {...formProps} dataKey='selectorValue' placeholder='请选择' com={Select}  />
                   <FormRepeat initialValue={[{name:"hxz"}]} {...formProps} dataKey='Lists' renderRow={(rowProps)=>{
                     return (
                       <div>
@@ -39,7 +39,7 @@ class FormDemo extends React.PureComponent {
                       </div>
                     );
                   }} />
-                  <button onClick={this.add.bind(this,formProps)}>添加</button>
+                  <Button type='primary' onClick={this.add.bind(this,formProps)}>添加</Button>
                 </React.Fragment>);
             }}/>
     </div>

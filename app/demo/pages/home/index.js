@@ -51,7 +51,7 @@ class HomeScreen extends React.PureComponent {
           <div style={{height:'100%',float:'left'}}>
           <Menu onItemClick={this.MenuItemClick.bind(this)} data={this.props.baseStore.MenuData}/>
           </div>
-          <div>
+          <div style={{ overflow:'hidden'}}>
             <Button onClick={this.go.bind(this)}>Go</Button>
             <Views {...this.props} owner={this}/>
           </div>

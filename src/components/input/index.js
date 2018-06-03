@@ -1,6 +1,7 @@
 import React from 'react';
 import Row from '../row';
 import Col from '../col';
+import Theme from '../theme';
 import './index.less';
 
 export default class Input extends React.Component{
@@ -14,11 +15,11 @@ export default class Input extends React.Component{
         }
     }
     render(){
-        const C = <div className='xz-input xz-input-default'><input onChange={this.onChange.bind(this)} value={this.props.value} /></div>;
+        let C = <div className='xz-input'><input placeholder={this.props.placeholder} onChange={this.onChange.bind(this)} value={this.props.value} /></div>;
         if(this.props.label){
-            return (
+            C = (
                 <Row>
-                    <Col className='xz-input-label-wrapper xz-input-label-wrapper-default' span={{md:5}}>
+                    <Col className='xz-input-label-wrapper' span={{md:5}}>
                         <span>{this.props.label}</span>
                     </Col>
                     <Col span={{md:19}}>
@@ -28,6 +29,6 @@ export default class Input extends React.Component{
                 </Row>
             )
         }
-        return <div className='xz-input-out'>{C}</div>;
+        return <div className={`xz-input-out xz-input-size-${Theme.getConfig('size',this.props)}`}>{C}</div>;
     }
 }

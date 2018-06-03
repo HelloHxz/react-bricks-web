@@ -1,5 +1,7 @@
 import React from 'react';
 import PopView from '../popview';
+import Theme from '../theme';
+import './index.less';
 
 export default class Select extends React.Component{
     renderPopView(){
@@ -11,10 +13,13 @@ export default class Select extends React.Component{
     render(){
         return (<React.Fragment>
             <PopView 
-                style={{display:'inline-block'}} 
-                mode='click' mouseLeaveHide={true} 
+                mode='click' 
+                mouseLeaveHide={true} 
                 renderContent={this.renderPopView.bind(this)}>
-                <input /></PopView></React.Fragment>)
+                <div className={`xz-select xz-select-size-${Theme.getConfig('size',this.props)}`}>
+                    <span className='placeholder'>{this.props.placeholder}</span>
+                </div>
+            </PopView></React.Fragment>)
         ;
     }
 }

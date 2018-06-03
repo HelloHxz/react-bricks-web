@@ -1,10 +1,11 @@
+@import '../theme/index.less';
+
 .xz-input input{
     border:none;
     width:100%;
+    border:1px solid @input_border_color;
     padding-left: 6px;
-}
-.xz-input {
-    border:1px solid #bbb;
+    border-radius: @input_borderradius;
 }
 
 .xz-input-mes{
@@ -12,8 +13,9 @@
     padding-top:1px;
     color:red;
 }
-.xz-input:hover {
-    border:1px solid green;
+.xz-input input:hover,.xz-input input:focus {
+    border:1px solid @theme_color;
+    box-shadow: 0 0 0 2px rgba(24,144,255,.2);
 }
 .xz-input-label-wrapper{
     display: inline-block;
@@ -22,14 +24,17 @@
     overflow: hidden;
     font-size: 13px;
     white-space: nowrap;
-}
-.xz-input-label-wrapper-default{
-    line-height: 27px;
+    color:@input_label_color;
 }
 
-.xz-input-default input{
-    height: 25px;
+
+.xz-input-size-default input{
+    height: @input_default_height;
     line-height: 1.5;
+    font-size: 13px;
+}
+.xz-input-size-default .xz-input-label-wrapper{
+    line-height: @input_default_height;
 }
 .xz-input-default{
     overflow: hidden;
