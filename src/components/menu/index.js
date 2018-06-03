@@ -116,7 +116,14 @@ class MenuSectionItem extends React.Component{
         if(this.props.level>0){
             paddingLeft = (this.props.level)*20;
         }
-        return (<div onClick={this.itemClick.bind(this)} className='xz-menu-item' style={{paddingLeft:paddingLeft}}>{this.state.data.label}</div>);
+        let icon = null;
+        if(this.state.data.icon){
+            icon = <i className={`${this.state.data.icon} xz-menu-icon`}/>
+        }
+        return (<div onClick={this.itemClick.bind(this)} className='xz-menu-item' style={{paddingLeft:paddingLeft}}>
+            {icon}
+            {this.state.data.label}
+        </div>);
     }
 }
 
@@ -137,7 +144,12 @@ class MenuSectionHeader extends React.Component{
         }else{
             className.push("xz-menu-group-header-close");
         }
+        let icon = null;
+        if(this.state.data.icon){
+            icon = <i className={`${this.state.data.icon} xz-menu-icon`}/>
+        }
         return <div className={className.join(' ')} onClick={this.click.bind(this)} style={{paddingLeft:(this.props.level)*20}}>
+            {icon}
             {this.state.data.label}
             <i className='xz-menu-submenu-arrow'></i>
         </div>;
