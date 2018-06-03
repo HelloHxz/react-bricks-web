@@ -3,18 +3,20 @@ class Store {
     @observable UserInfo = {};
     @observable MenuData = [
         {
-        icon:'',
+        icon:'fas fa-camera-retro',
         label:'关于',
         key:'xxxxx',
         href:'home/about'
       },
       {
+        icon:'fas fa-camera-retro',
         label:'快速上手',
         key:'xxxxx',
         href:"/home"
       },
       {
         label:"组件",
+        icon:'fas fa-camera-retro',
         key:"xxxxxxxx",
         children:[
             {label:"Grid",key:'xx',href:'/home/grid'},
