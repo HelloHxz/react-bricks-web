@@ -2,6 +2,7 @@ import React from 'react';
 import Row from '../row';
 import Col from '../col';
 import Theme from '../theme';
+import Common from '../../utils/common';
 import './index.less';
 
 export default class Input extends React.Component{
@@ -15,6 +16,7 @@ export default class Input extends React.Component{
         }
     }
     render(){
+        // console.log(Common.isIE9());
         let C = <div className='xz-input'><input placeholder={this.props.placeholder} onChange={this.onChange.bind(this)} value={this.props.value} /></div>;
         if(this.props.label){
             C = (
