@@ -33,7 +33,6 @@ export default class Select extends React.Component{
     }
     render(){
         return (
-            <React.Fragment>
                 <PopView 
                     mode='click' 
                     ref={(instance)=>{this.root = instance;}}
@@ -46,8 +45,7 @@ export default class Select extends React.Component{
                     <div className={`xz-select xz-select-size-${Theme.getConfig('size',this.props)}`}>
                         <span className='placeholder'>{this.props.placeholder}</span>
                     </div>
-                </PopView>
-            </React.Fragment>)
+                </PopView>)
         ;
     }
 }

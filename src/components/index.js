@@ -10,10 +10,12 @@ import Row from './row';
 import message from './message';
 import Button from './button';
 import Col from './col';
+import Popover from './popover';
 import PageView from './pageview'
 import PopView from './popview'
 import Dynamic from './dynamic'
 import XZ from './xz';
+import Tooltip from './tooltip';
 import Input from './input';
 import Form from './form';
 import {observable,extendObservable} from 'mobx'
@@ -26,6 +28,8 @@ export {
 	XZ,
 	Button,
 	message,
+	Popover,
+	Tooltip,
 	Form,
 	Col,
 	Modal,

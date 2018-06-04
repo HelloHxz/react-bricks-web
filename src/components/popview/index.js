@@ -9,20 +9,39 @@ import './index.less';
 class PopView extends React.Component{
     constructor(props){
         super(props);
+        this.initShow = !props.show?'noinit':props.show;
         this.state={
-            show:!props.show?'noinit':props.show
+            show:'noinit'
         }
     }
     onMouseOver(e){
       this.show(e);
+    }
+    componentDidMount(){
+        if(this.initShow){
+            this.setState({
+                show:true
+            });
+        }
+    }
+    componentWillReceiveProps(nextPrps){
+        if(nextPrps.show !== this.state.show){
+            if(nextPrps.show){
+                this._show();
+            }else{
+                this.hide();
+            }
+        }
     }
     show(e){
         this._clearTime();
         if(this.state.show===true){
             return;
         }
-        e.stopPropagation();
-        e.preventDefault();
+        if(e){
+            e.stopPropagation();
+            e.preventDefault();
+        }
         var mode = this.props.mode || 'hover';
         if(mode==='hover'){
             this.timeoutid = setTimeout(()=>{
@@ -79,15 +98,20 @@ class PopView extends React.Component{
     getPopPositionStyle(){
         // this.props.offset
         const offset = this.props.offset || {};
+        const bodyHeight = document.body.offsetHeight;
+        const bodyWidth = document.body.offsetWidth;
         var rect = this.root.getBoundingClientRect();
-        let pos = 'top';
+        let pos = this.props.placement || 'bottom';
+        if(bodyHeight - rect.bottom < 100){
+            pos = 'top';
+        }
         let style = {
             left:Common.parseInt(rect.left)+Common.parseInt(rect.offsetX)+ (offset.y||0),
         };
         if(pos === 'bottom'){
             style.top = Common.parseInt(rect.top)+Common.parseInt(rect.offsetY)+Common.parseInt(rect.height) + (offset.x||0);
         } else if(pos === 'top'){
-            style.bottom = document.body.offsetHeight - Common.parseInt(rect.top) + Common.parseInt(rect.offsetY) + (offset.x||0);
+            style.bottom = bodyHeight - Common.parseInt(rect.top) + Common.parseInt(rect.offsetY) + (offset.x||0);
         }
         return {
             pos,
@@ -103,6 +127,9 @@ class PopView extends React.Component{
         return {};
     }
     renderContent(){
+        if(!this.root){
+            return null;
+        }
         if(this.state.show==='noinit'){
             return null;
         }
