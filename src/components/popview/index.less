@@ -5,11 +5,17 @@
     background-color:#fff;
 }
 
-.xz-pop-animate-bottom{
+.xz-pop-animate-bottom,.xz-pop-animate-top{
     animation:xzpopanimatebottom .15s cubic-bezier(.23,1,.32,1);
     transform: scaleY(1);
-    opacity: 1;transform-origin: 0 0;
+    opacity: 1;
     visibility: visible;
+}
+.xz-pop-animate-bottom,.xz-pop-animate-bottom-hide{
+    transform-origin: 0 0;
+}
+.xz-pop-animate-top,.xz-pop-animate-top-hide{
+    transform-origin: bottom;
 }
 @keyframes xzpopanimatebottom
 {
@@ -17,12 +23,12 @@
     to { transform: scaleY(1);opacity: 1;}
 }
 
-.xz-pop-animate-bottom-hide{
+.xz-pop-animate-bottom-hide,.xz-pop-animate-top-hide{
     animation:xzpopanimatebottomhide .15s cubic-bezier(.755,.05,.855,.06);
     transform: scaleY(.8);
-    transform-origin: 0 0;
     opacity: 0;
 }
+
 @keyframes xzpopanimatebottomhide
 {
     from {transform: scaleY(1);opacity: 1;}

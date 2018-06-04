@@ -80,9 +80,18 @@ class PopView extends React.Component{
         // this.props.offset
         const offset = this.props.offset || {};
         var rect = this.root.getBoundingClientRect();
-        return {
-            top:Common.parseInt(rect.top)+Common.parseInt(rect.offsetY)+Common.parseInt(rect.height) + (offset.x||0),
+        let pos = 'top';
+        let style = {
             left:Common.parseInt(rect.left)+Common.parseInt(rect.offsetX)+ (offset.y||0),
+        };
+        if(pos === 'bottom'){
+            style.top = Common.parseInt(rect.top)+Common.parseInt(rect.offsetY)+Common.parseInt(rect.height) + (offset.x||0);
+        } else if(pos === 'top'){
+            style.bottom = document.body.offsetHeight - Common.parseInt(rect.top) + Common.parseInt(rect.offsetY) + (offset.x||0);
+        }
+        return {
+            pos,
+            style,
         };
     }
     getContentEvent(){
@@ -100,12 +109,9 @@ class PopView extends React.Component{
         if(!this.props.renderContent){
             return null;
         }
-        var className ='xz-popview-content '+(this.state.show?'xz-pop-animate-bottom':'xz-pop-animate-bottom-hide')
-        return <div ref={(instance)=>{
-            if(instance){
-                console.log("_____>>>"+this.state.show);
-            }
-        }} className={className} style={this.getPopPositionStyle()}>{this.props.renderContent(this)}</div>;
+        const pos = this.getPopPositionStyle();
+        var className ='xz-popview-content '+(this.state.show?`xz-pop-animate-${pos.pos}`:`xz-pop-animate-${pos.pos}-hide`)
+        return <div className={className} style={pos.style}>{this.props.renderContent(this)}</div>;
     }
     getEvent(){
         var mode = this.props.mode || 'hover'; //dbclick|click|hover|rightclick
