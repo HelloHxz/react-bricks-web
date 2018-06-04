@@ -3,6 +3,7 @@ import PopView from '../popview';
 import Theme from '../theme';
 import './index.less';
 
+// tabindex 才能是div获取onKeyDown事件
 export default class Select extends React.Component{
     renderPopView(){
         let width = 200;
