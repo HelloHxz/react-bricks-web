@@ -18,7 +18,7 @@ class PopView extends React.Component{
       this.show(e);
     }
     componentDidMount(){
-        if(this.initShow){
+        if(this.initShow === true){
             this.setState({
                 show:true
             });
