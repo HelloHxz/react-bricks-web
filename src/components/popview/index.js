@@ -131,14 +131,7 @@ class PopView extends React.Component{
     }
     render(){
         var mode = this.props.mode || 'hover';
-        const p = {};
         const mouseEvent = this.getEvent();
-        if(this.props.style){
-            p.style = this.props.style;
-        }
-        if(this.props.className){
-            p.className = this.props.className;
-        }
         const element = this.props.children;
         return (
             <React.Fragment>

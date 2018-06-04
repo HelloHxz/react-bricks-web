@@ -23,8 +23,8 @@ class PopViewDemo extends React.PureComponent {
 
   render() {
     return <div>
-        <PopView style={{display:'inline-block'}} mode='click' mouseLeaveHide={true} renderContent={this.renderPopView.bind(this)}><Button>click</Button></PopView>
-        <PopView style={{display:'inline-block'}} mode='hover' mouseLeaveHide={true} renderContent={this.renderPopView.bind(this)}><Button>hover</Button></PopView>
+        <PopView mode='click' mouseLeaveHide={true} renderContent={this.renderPopView.bind(this)}><Button>click</Button></PopView>
+        <PopView mode='hover' mouseLeaveHide={true} renderContent={this.renderPopView.bind(this)}><Button>hover</Button></PopView>
     </div>
   }
 }
