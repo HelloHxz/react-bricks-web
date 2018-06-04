@@ -30,7 +30,6 @@ class Store {
             {label:"CheckBox",key:'xxxxxxx'},
             {label:"CheckList",key:'xxxxxxx'},
             {label:"Radio",key:'xxxxxxx'},
-            {label:"PopView",key:'xxxxxxx'},
             {label:"Select",key:'xxxxxxx',href:'home/select'},
             {label:"PopView",key:'xxxxxxx',href:'home/popview'},
             {label:"Tabs",key:'xxxxxxx'},
