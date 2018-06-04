@@ -138,6 +138,8 @@ class PopView extends React.Component{
             p.className = this.props.className;
         }
         // to do 使用 Fragment 和 cloneElement 去掉包装
+        // <element.type {...element.props} {...props}>{children}</element.type>
+        // https://reactjs.org/docs/react-api.html#cloneelement
         return (<div {...p} {...mouseEvent} ref={(root)=>{this.root = root;}}>
             {this.props.children}
             {this.renderContent()}
