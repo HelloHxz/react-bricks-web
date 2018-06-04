@@ -9,14 +9,8 @@ function _IEVersion() {
         var reIE = new RegExp("MSIE (\\d+\\.\\d+);");
         reIE.test(userAgent);
         var fIEVersion = parseFloat(RegExp["$1"]);
-        if(fIEVersion == 7) {
-            return 7;
-        } else if(fIEVersion == 8) {
-            return 8;
-        } else if(fIEVersion == 9) {
-            return 9;
-        } else if(fIEVersion == 10) {
-            return 10;
+        if(fIEVersion == 7||fIEVersion == 8||fIEVersion == 9||fIEVersion == 10) {
+            return fIEVersion;
         } else {
             return 6;//IE版本<=7
         }   
