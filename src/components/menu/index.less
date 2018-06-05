@@ -1,6 +1,7 @@
 @import '../theme/index.less';
 .xz-menu{
     user-select:none;
+    transition: width .3s ease;
 }
 .xz-menu>.xz-menu-item,.xz-menu>.xz-menu-group>.xz-menu-group-header{
     padding-left:8px !important;
@@ -75,8 +76,12 @@
 }
 
 
-.xz-menu-inline{
+.xz-menu-vertical{
     width:140px;
+}
+.xz-menu-vertical-mini{
+    width: 50px;
+    min-height: 1px;
 }
 
 .xz-menu-item:hover{

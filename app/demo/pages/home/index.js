@@ -3,6 +3,7 @@ import './index.less';
 import HomeStore from './store';
 import BaseStore from '../basicLayout/store';
 import {observer} from "mobx-react";
+import LeftMenu from './LeftMenu';
 
 const FormRepeat = Form.FormRepeat;
 const FormItem = Form.FormItem;
@@ -15,6 +16,9 @@ class HomeScreen extends React.PureComponent {
   constructor(props){
     super(props);
     this.seed= 1;
+    this.state = {
+      menuCollapsed:false
+    };
   }
 
   goBack(){
@@ -22,9 +26,10 @@ class HomeScreen extends React.PureComponent {
   }
 
   go(){
-    this.props.homestore.test = "huxiaohzong";
-    console.log(this.props.homestore);
+    // this.props.homestore.test = "huxiaohzong";
+    // console.log(this.props.homestore);
     // this.props.navigation.navigate("button");
+    this.props.homestore.menuCollapsed = !this.props.homestore.menuCollapsed;
   }
 
   onPageBeforeLeave(params){
@@ -32,14 +37,6 @@ class HomeScreen extends React.PureComponent {
       return false;
     }
     return true;
-  }
-
-
-
-  MenuItemClick(params){
-    if(params.itemData.href){
-      this.props.navigation.navigate(params.itemData.href,{test:'Lucy'});
-    }
   }
 
   render() {
@@ -53,9 +50,7 @@ class HomeScreen extends React.PureComponent {
         </div>
         <div style={{height:60,width:'100%'}}></div>
         <div>
-          <div style={{height:'100%',float:'left'}}>
-          <Menu onItemClick={this.MenuItemClick.bind(this)} data={this.props.baseStore.MenuData}/>
-          </div>
+          <LeftMenu {...this.props} />
           <div style={{ overflow:'hidden'}}>
             <Button onClick={this.go.bind(this)}>Go</Button>
             <Views {...this.props} owner={this}/>

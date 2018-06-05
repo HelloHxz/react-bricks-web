@@ -25,6 +25,9 @@ class PopView extends React.Component{
         }
     }
     componentWillReceiveProps(nextPrps){
+        if(nextPrps.show===undefined){
+            return;
+        }
         if(nextPrps.show !== this.state.show){
             if(nextPrps.show){
                 this._show();

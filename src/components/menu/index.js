@@ -8,7 +8,8 @@ class Menu extends React.Component{
     constructor(props){
         super(props);
         this.state={
-            data:props.data
+            data:props.data,
+            collapsed:props.collapsed
         }
     }
     onItemClick(params){
@@ -16,7 +17,14 @@ class Menu extends React.Component{
             this.props.onItemClick(params);
         }
     }
-    render(){
+    componentWillReceiveProps(nextPros){
+        if(nextPros.collapsed!==this.state.collapsed){
+            this.setState({
+                collapsed:nextPros.collapsed
+            });
+        }
+    }
+    _getVerticalItems = ()=>{
         var children = [];
         for(var i=0,j=this.state.data.length;i<j;i++){
             var itemData = this.state.data[i];
@@ -26,7 +34,22 @@ class Menu extends React.Component{
                 children.push(<MenuSectionItem onItemClick={this.onItemClick.bind(this)} level={0} key={i} data={itemData}/>);
             }
         }
-        return <div className='xz-menu xz-menu-inline'>
+        return children; 
+    }
+    _getMiniVerticalItems = ()=>{
+        return [];
+    }
+    render(){
+        let children = [];
+        let className = '';
+        if(this.state.collapsed === true){
+            children = this._getMiniVerticalItems();
+            className = 'xz-menu-vertical-mini';
+        }else {
+            children = this._getVerticalItems();
+            className = 'xz-menu-vertical';
+        }
+        return <div className={`xz-menu ${className}`}>
             {children}
         </div>;
     }
