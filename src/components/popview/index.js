@@ -139,7 +139,7 @@ class PopView extends React.Component{
         const pos = this.getPopPositionStyle();
         var className ='xz-popview-content '+(this.state.show?`xz-pop-animate-${pos.pos}`:`xz-pop-animate-${pos.pos}-hide`);
         // todo .. 将这个拎出一个组件 在组件中做一个mousewhell的位置重定位
-        return <div onMouseOver={()=>{
+        return <div onWheel={(e)=>{ e.preventDefault(); }} onMouseOver={()=>{
             this._clearTime();
         }} onMouseLeave={this.onMouseLeave.bind(this)} className={className} style={pos.style}>{this.props.renderContent(this)}</div>;
     }
