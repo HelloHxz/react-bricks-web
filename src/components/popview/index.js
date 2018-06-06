@@ -144,6 +144,9 @@ class PopView extends React.Component{
         // todo .. 将这个拎出一个组件 在组件中做一个mousewhell的位置重定位
         return <div onWheel={(e)=>{ e.preventDefault(); }} onMouseOver={()=>{
             this._clearTime();
+            if(this.props.parentPopview){
+                this.props.parentPopview._clearTime();
+            }
         }} onMouseLeave={this.onMouseLeave.bind(this)} className={className} style={pos.style}>{this.props.renderContent(this)}</div>;
     }
     getEvent(){

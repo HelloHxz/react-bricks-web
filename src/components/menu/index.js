@@ -1,5 +1,5 @@
 import  React from 'react';
-import { Menu as MiniMenu } from '../popmenu';
+import PopMenu from '../popmenu';
 import './index.less';
 
 
@@ -24,6 +24,20 @@ class Menu extends React.Component{
             });
         }
     }
+    _getMiniVerticalItems = ()=>{
+        var children = [];
+        for(var i=0,j=this.state.data.length;i<j;i++){
+            var itemData = this.state.data[i];
+            if(itemData.children){
+                children.push(<PopMenu level={0} key={i} data={itemData.children}>{
+                    <div>{itemData.label}</div>
+                }</PopMenu>);
+            }else{
+                children.push(<div key={i}>{itemData.label}</div>);
+            }
+        }
+        return children; 
+    }
     _getVerticalItems = ()=>{
         var children = [];
         for(var i=0,j=this.state.data.length;i<j;i++){
@@ -35,9 +49,6 @@ class Menu extends React.Component{
             }
         }
         return children; 
-    }
-    _getMiniVerticalItems = ()=>{
-        return [];
     }
     render(){
         let children = [];
