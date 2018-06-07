@@ -137,17 +137,35 @@ class PopView extends React.Component{
         let style = {
         };
         if(pos === 'bottom'){
-            style.top = Common.parseInt(rect.top)+Common.parseInt(rect.height) + (offset.x||0);
+            style.top = Common.parseInt(rect.bottom)+ (offset.x||0);
             style.left = Common.parseInt(rect.left)+ (offset.x||0) + rect.width/2;
         } else if(pos === 'top'){
             style.top = Common.parseInt(rect.top) + (offset.x||0);
-            style.left = Common.parseInt(rect.left)+ (offset.y||0) + rect.width/2;
+            style.left = Common.parseInt(rect.left)+ (offset.x||0) + rect.width/2;
         } else if(pos === 'left'){
             style.top =  Common.parseInt(rect.top) + (offset.y||0) + rect.height/2;
             style.left = Common.parseInt(rect.left)+ (offset.x||0);
         } else if(pos === 'right'){
             style.top =  Common.parseInt(rect.top) + (offset.y||0) + rect.height/2;
             style.left = Common.parseInt(rect.right)+ (offset.x||0);
+        }else if(pos === 'topleft'){
+            style.top = Common.parseInt(rect.top) + (offset.x||0); 
+            style.left = Common.parseInt(rect.left)+ (offset.x||0);
+        }else if(pos === 'topright'){
+            style.top = Common.parseInt(rect.top) + (offset.x||0); 
+            style.left = Common.parseInt(rect.right)+ (offset.x||0);
+        }else if(pos === 'righttop'){
+            style.top = Common.parseInt(rect.top) + (offset.x||0) + rect.height;
+            style.left = Common.parseInt(rect.right)+ (offset.x||0);
+        }else if(pos === 'rightbottom'){
+            style.top = Common.parseInt(rect.top) + (offset.x||0);
+            style.left = Common.parseInt(rect.right)+ (offset.x||0);
+        }else if(pos === 'bottomleft'){
+            style.top = Common.parseInt(rect.bottom)+ (offset.x||0);
+            style.left = Common.parseInt(rect.right)+ (offset.x||0);
+        }else if(pos === 'bottomright'){
+            style.top = Common.parseInt(rect.bottom)+ (offset.x||0);
+            style.left = Common.parseInt(rect.left)+ (offset.x||0);
         }
         return {
             pos,
@@ -174,7 +192,7 @@ class PopView extends React.Component{
             return null;
         }
         const pos = this.getPopPositionStyle();
-        var className =`xz-popview-content-${this.positionMode} `+(this.state.show?`xz-pop-animate-${pos.pos}`:`xz-pop-animate-${pos.pos}-hide`);
+        var className =`xz-popview-content-${this.positionMode} `+ `xz-popview-trans-${pos.pos} `;
         // todo .. 将这个拎出一个组件 在组件中做一个mousewhell的位置重定位
         return <div onWheel={(e)=>{ e.preventDefault(); }} onMouseOver={()=>{
             this._clearTime();
@@ -182,7 +200,7 @@ class PopView extends React.Component{
                 this.props.parentPopview._clearTime();
             }
         }} onMouseLeave={this.onMouseLeave.bind(this)} className={className} style={pos.style}>
-            <div className={`xz-popview-inner-${pos.pos} `}>{this.props.renderContent({instance:this,placement:pos.pos,rect:pos.rect})}</div>
+            <div className={(this.state.show?`xz-pop-animate-${pos.pos}`:`xz-pop-animate-${pos.pos}-hide`)}>{this.props.renderContent({instance:this,placement:pos.pos,rect:pos.rect})}</div>
         </div>;
     }
     getEvent(){

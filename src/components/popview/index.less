@@ -7,29 +7,71 @@
     position: absolute;
     z-Index:@popview_dp_zindex;
 }
-.xz-popview-inner-bottom {
+.xz-popview-trans-bottom {
     transform: translateX(-50%);
     -ms-transform: translateX(-50%);
 }
-.xz-popview-inner-top{
+.xz-popview-trans-top{
     transform: translateX(-50%) translateY(-100%);
-    -ms-transform: translateX(-50%) translateY(-100%);;
+    -ms-transform: translateX(-50%) translateY(-100%);
 }
-.xz-popview-inner-right{
+.xz-popview-trans-right{
     transform: translateY(-50%);
     -ms-transform: translateY(-50%);
 }
-
-.xz-popview-inner-left{
+.xz-popview-trans-topleft{
+    transform: translateY(-100%);
+    -ms-transform: translateY(-100%);
+}
+.xz-popview-trans-topright{
+    transform: translateX(-100%) translateY(-100%);
+    -ms-transform: translateX(-100%) translateY(-100%);
+}
+.xz-popview-trans-righttop{
+    transform:translateY(-100%);
+    -ms-transform:translateY(-100%);
+}
+.xz-popview-trans-bottomleft{
+    transform:translateX(-100%);
+    -ms-transform:translateX(-100%);
+}
+.xz-popview-trans-left{
     transform: translateY(-50%) translateX(-100%);
     -ms-transform: translateY(-50%) translateX(-100%);
 }
-.xz-pop-animate-bottom,.xz-pop-animate-top{
+
+.xz-pop-animate-right,.xz-pop-animate-right-hide,
+.xz-pop-animate-left,.xz-pop-animate-left-hide,
+.xz-pop-animate-righttop,.xz-pop-animate-righttop-hide,
+.xz-pop-animate-rightbottom,.xz-pop-animate-rightbottom-hide{
+    transform-origin: left;
+}
+.xz-pop-animate-bottom,.xz-pop-animate-bottom-hide,
+.xz-pop-animate-bottomleft,.xz-pop-animate-bottomleft-hide,
+.xz-pop-animate-bottomright,.xz-pop-animate-bottomright-hide{
+    transform-origin: 0 0;
+}
+.xz-pop-animate-top,.xz-pop-animate-top-hide,
+.xz-pop-animate-topleft,.xz-pop-animate-topleft-hide,
+.xz-pop-animate-topright,.xz-pop-animate-topright-hide{
+    transform-origin: bottom;
+}
+
+.xz-pop-animate-bottom,.xz-pop-animate-top,
+.xz-pop-animate-topleft,.xz-pop-animate-topright,
+.xz-pop-animate-bottomleft,.xz-pop-animate-bottomright{
     animation:xzpopanimatebottom .15s cubic-bezier(.23,1,.32,1);
     opacity: 1;
     visibility: visible;
 }
-.xz-pop-animate-right,.xz-pop-animate-left{
+
+@keyframes xzpopanimatebottom
+{
+    from { transform: scaleY(.8);opacity: 0;}
+    to { transform: scaleY(1);opacity: 1;}
+}
+
+.xz-pop-animate-right,.xz-pop-animate-left,.xz-pop-animate-righttop,.xz-pop-animate-rightbottom{
     animation:xzpopanimateright .15s cubic-bezier(.23,1,.32,1);
     opacity: 1;
     visibility: visible;
@@ -39,23 +81,9 @@
     from { transform: scaleX(.8);opacity: 0;}
     to { transform: scaleX(1);opacity: 1;}
 }
-.xz-pop-animate-right,.xz-pop-animate-right-hide,.xz-pop-animate-left,.xz-pop-animate-left-hide{
-    transform-origin: left;
-}
-.xz-pop-animate-bottom,.xz-pop-animate-bottom-hide{
-    transform-origin: 0 0;
-}
-.xz-pop-animate-top,.xz-pop-animate-top-hide{
-    transform-origin: bottom;
-}
 
-@keyframes xzpopanimatebottom
-{
-    from { transform: scaleY(.8);opacity: 0;}
-    to { transform: scaleY(1);opacity: 1;}
-}
-
-.xz-pop-animate-right-hide,.xz-pop-animate-left-hide{
+.xz-pop-animate-right-hide,.xz-pop-animate-left-hide,
+.xz-pop-animate-righttop-hide,.xz-pop-animate-rightbottom-hide{
     animation:xzpopanimaterighthide .15s cubic-bezier(.755,.05,.855,.06);
     transform: scaleX(.8);
     opacity: 0;
@@ -65,7 +93,9 @@
     from {transform: scaleX(1);opacity: 1;}
     to {transform: scaleX(.8);opacity: 0;}
 }
-.xz-pop-animate-bottom-hide,.xz-pop-animate-top-hide{
+.xz-pop-animate-bottom-hide,.xz-pop-animate-top-hide,
+.xz-pop-animate-topleft-hide,.xz-pop-animate-topright-hide,
+.xz-pop-animate-bottomleft-hide,.xz-pop-animate-bottomright-hide{
     animation:xzpopanimatebottomhide .15s cubic-bezier(.755,.05,.855,.06);
     transform: scaleY(.8);
     opacity: 0;
