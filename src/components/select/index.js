@@ -8,7 +8,7 @@ export default class Select extends React.Component{
     renderPopView(){
         let width = 200;
         if(this.root.root){
-            width = this.root.root.offsetWidth-2;
+            width = this.root.root.offsetWidth;
         }
         return <div className='xz-select-dropdown' style={{ width:width,maxHeight:250 }}>
             <div className='xz-select-item xz-select-item-size-default'>
@@ -34,6 +34,7 @@ export default class Select extends React.Component{
     render(){
         return (
                 <PopView 
+                    {...this.props}
                     mode='click' 
                     ref={(instance)=>{this.root = instance;}}
                     mouseLeaveHide={true} 

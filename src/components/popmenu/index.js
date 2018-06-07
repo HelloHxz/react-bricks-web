@@ -29,10 +29,11 @@ class PopMenu extends React.Component {
     render(){
         return (
             <PopView 
-                mode={this.props.mode||'hover'} 
+                mode={this.props.mode||'hover'}
+                positionMode='absolute'
                 parentPopview={this.props.parentPopview}
                 ref={(instance)=>{this.root = instance;}}
-                placement={this.props.placement||'lefttop'}
+                placement={this.props.placement||'right'}
                 onShow = {this.onShow.bind(this)}
                 onHide = {this.onHide.bind(this)}
                 offset = {{x: 2}}

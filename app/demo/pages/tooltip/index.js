@@ -16,7 +16,7 @@ class ToolTipDemo extends React.PureComponent {
   render() {
     return <div>
        <Tooltip placement='topleft'><Button>TopLeft</Button></Tooltip>
-       <Tooltip placement='top'><Button>Top</Button></Tooltip>
+       <Tooltip positionMode='absolute' placement='top'><Button>Top</Button></Tooltip>
        <Tooltip placement='topright'><Button>TopRight</Button></Tooltip>
        <Tooltip placement='righttop'><Button>RightTop</Button></Tooltip>
        <Tooltip placement='right'><Button>Right</Button></Tooltip>

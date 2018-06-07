@@ -1,8 +1,11 @@
 @import '../theme/index.less';
-.xz-popview-content{
+.xz-popview-content-fixed{
     position: fixed;
     z-Index:@popview_dp_zindex;
-    background-color:#fff;
+}
+.xz-popview-content-absolute{
+    position: absolute;
+    z-Index:@popview_dp_zindex;
 }
 .xz-popview-inner-top,.xz-popview-inner-bottom {
     transform: translateX(-50%);
@@ -15,13 +18,11 @@
 
 .xz-pop-animate-bottom,.xz-pop-animate-top{
     animation:xzpopanimatebottom .15s cubic-bezier(.23,1,.32,1);
-    transform: scaleY(1);
     opacity: 1;
     visibility: visible;
 }
 .xz-pop-animate-right,.xz-pop-animate-left{
     animation:xzpopanimateright .15s cubic-bezier(.23,1,.32,1);
-    transform: scaleX(1);
     opacity: 1;
     visibility: visible;
 }

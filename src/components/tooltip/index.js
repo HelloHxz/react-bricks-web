@@ -27,12 +27,12 @@ export default class ToolTip extends React.Component{
         return (
                 <PopView 
                     mode='hover' 
+                    {...this.props}
                     ref={(instance)=>{this.root = instance;}}
                     mouseLeaveHide={true} 
                     onShow = {this.onShow.bind(this)}
                     onHide = {this.onHide.bind(this)}
                     renderContent={this.renderPopView.bind(this)}
-                    {...this.props}
                 >
                     {this.props.children}
                 </PopView>)

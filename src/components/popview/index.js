@@ -9,6 +9,7 @@ import './index.less';
 class PopView extends React.Component{
     constructor(props){
         super(props);
+        this.positionMode = props.positionMode||'fixed';
         this.initShow = !props.show?'noinit':props.show;
         this.state={
             show:'noinit'
@@ -87,7 +88,6 @@ class PopView extends React.Component{
         },this.props.hideDelay||300);
     }
     hide(){
-        // return;
         this.setState({
             show:false
         },()=>{
@@ -99,13 +99,34 @@ class PopView extends React.Component{
             },300);
         });
     }
+    getBoundingClientRect(){
+        if(this.positionMode==='fixed'){
+            return this.root.getBoundingClientRect();
+        }
+        let target = this.root;
+        if(this.root.root){
+            target = this.root.root;
+        }
+        const left = target.offsetLeft;
+        const top = target.offsetTop;
+        const width=target.offsetWidth;
+        const height = target.offsetHeight;
+        return {
+            width,
+            height,
+            left,
+            top,
+            bottom:top+height,
+            right:left+width,
+        };
+    }
     getPopPositionStyle(){
         // this.props.offset
         // topleft|top|topright|righttop|right|rightbottom|bottomright|bottom|bottomleft|leftbottom|left|lefttop|
         const offset = this.props.offset || {};
         const bodyHeight = document.body.offsetHeight;
         const bodyWidth = document.body.offsetWidth;
-        var rect = this.root.getBoundingClientRect();
+        var rect = this.getBoundingClientRect();
         let pos = this.props.placement || 'bottom';
         if(bodyHeight - rect.bottom < 100){
             pos = 'top';
@@ -113,11 +134,14 @@ class PopView extends React.Component{
         let style = {
         };
         if(pos === 'bottom'){
-  1          //Common.parseInt(rect.offsetX)+
             style.top = Common.parseInt(rect.top)+Common.parseInt(rect.height) + (offset.x||0);
             style.left = Common.parseInt(rect.left)+ (offset.x||0) + rect.width/2;
         } else if(pos === 'top'){
-            style.bottom = bodyHeight - Common.parseInt(rect.top)  + (offset.y||0);
+            if(this.positionMode==='fixed'){
+                style.bottom = bodyHeight - Common.parseInt(rect.top)  + (offset.y||0);
+            }else{
+                style.bottom='100%';
+            }
             style.left = Common.parseInt(rect.left)+ (offset.y||0) + rect.width/2;
         } else if(pos === 'left'){
             style.top =  Common.parseInt(rect.top) + (offset.y||0) + rect.height/2;
@@ -151,7 +175,7 @@ class PopView extends React.Component{
             return null;
         }
         const pos = this.getPopPositionStyle();
-        var className ='xz-popview-content '+(this.state.show?`xz-pop-animate-${pos.pos}`:`xz-pop-animate-${pos.pos}-hide`);
+        var className =`xz-popview-content-${this.positionMode} `+(this.state.show?`xz-pop-animate-${pos.pos}`:`xz-pop-animate-${pos.pos}-hide`);
         // todo .. 将这个拎出一个组件 在组件中做一个mousewhell的位置重定位
         return <div onWheel={(e)=>{ e.preventDefault(); }} onMouseOver={()=>{
             this._clearTime();
