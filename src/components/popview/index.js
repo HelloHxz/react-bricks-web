@@ -111,14 +111,20 @@ class PopView extends React.Component{
             pos = 'top';
         }
         let style = {
-            left:Common.parseInt(rect.left)+Common.parseInt(rect.offsetX)+ (offset.y||0),
         };
         if(pos === 'bottom'){
-            style.top = Common.parseInt(rect.top)+Common.parseInt(rect.offsetY)+Common.parseInt(rect.height) + (offset.x||0);
-            style.left = Common.parseInt(rect.left)+Common.parseInt(rect.offsetX)+ (offset.y||0) + rect.width/2;
+  1          //Common.parseInt(rect.offsetX)+
+            style.top = Common.parseInt(rect.top)+Common.parseInt(rect.height) + (offset.x||0);
+            style.left = Common.parseInt(rect.left)+ (offset.x||0) + rect.width/2;
         } else if(pos === 'top'){
-            style.bottom = bodyHeight - Common.parseInt(rect.top) + Common.parseInt(rect.offsetY) + (offset.x||0);
-            style.left = Common.parseInt(rect.left)+Common.parseInt(rect.offsetX)+ (offset.y||0) + rect.width/2;
+            style.bottom = bodyHeight - Common.parseInt(rect.top)  + (offset.y||0);
+            style.left = Common.parseInt(rect.left)+ (offset.y||0) + rect.width/2;
+        } else if(pos === 'left'){
+            style.top =  Common.parseInt(rect.top) + (offset.y||0) + rect.height/2;
+            style.right = bodyWidth - Common.parseInt(rect.left)+ (offset.x||0);
+        } else if(pos === 'right'){
+            style.top =  Common.parseInt(rect.top) + (offset.y||0) + rect.height/2;
+            style.left = Common.parseInt(rect.right)+ (offset.x||0);
         }
         return {
             pos,
