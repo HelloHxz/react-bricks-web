@@ -4,9 +4,14 @@ import Theme from '../theme';
 import './index.less';
 
 export default class ToolTip extends React.Component{
-    renderPopView(){
-        return <div className='xz-tooltip-wrapper'>
-            ToolTip
+    renderPopView(params){
+        const clsArr = ['xz-tooltip-wrapper']
+        if(this.props.overlayClassName){
+            clsArr.push(this.props.overlayClassName);
+        }
+        return <div className={clsArr.join(' ')}>
+            <div className={`xz-tooltip-arrow xz-tooltip-arrow-${params.placement}`}></div>
+            <div className='xz-tooltip-inner'>ToolTipToolTipToolTipToolTip</div>
         </div>;
     }
     onChange(){
@@ -26,7 +31,6 @@ export default class ToolTip extends React.Component{
                     mouseLeaveHide={true} 
                     onShow = {this.onShow.bind(this)}
                     onHide = {this.onHide.bind(this)}
-                    offset = {{x: 2,y:5}}
                     renderContent={this.renderPopView.bind(this)}
                     {...this.props}
                 >

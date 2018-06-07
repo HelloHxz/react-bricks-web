@@ -49,7 +49,7 @@ class PopView extends React.Component{
         if(mode==='hover'){
             this.timeoutid = setTimeout(()=>{
                 this._show();
-            },300);
+            },this.props.showDelay||300);
         }else{
             this._show();
         }
@@ -84,9 +84,10 @@ class PopView extends React.Component{
         }
         this.timeoutid = setTimeout(()=>{
            this.hide();
-        },300);
+        },this.props.hideDelay||300);
     }
     hide(){
+        // return;
         this.setState({
             show:false
         },()=>{
@@ -100,6 +101,7 @@ class PopView extends React.Component{
     }
     getPopPositionStyle(){
         // this.props.offset
+        // topleft|top|topright|righttop|right|rightbottom|bottomright|bottom|bottomleft|leftbottom|left|lefttop|
         const offset = this.props.offset || {};
         const bodyHeight = document.body.offsetHeight;
         const bodyWidth = document.body.offsetWidth;
@@ -113,12 +115,15 @@ class PopView extends React.Component{
         };
         if(pos === 'bottom'){
             style.top = Common.parseInt(rect.top)+Common.parseInt(rect.offsetY)+Common.parseInt(rect.height) + (offset.x||0);
+            style.left = Common.parseInt(rect.left)+Common.parseInt(rect.offsetX)+ (offset.y||0) + rect.width/2;
         } else if(pos === 'top'){
             style.bottom = bodyHeight - Common.parseInt(rect.top) + Common.parseInt(rect.offsetY) + (offset.x||0);
+            style.left = Common.parseInt(rect.left)+Common.parseInt(rect.offsetX)+ (offset.y||0) + rect.width/2;
         }
         return {
             pos,
             style,
+            rect,
         };
     }
     getContentEvent(){
@@ -147,7 +152,9 @@ class PopView extends React.Component{
             if(this.props.parentPopview){
                 this.props.parentPopview._clearTime();
             }
-        }} onMouseLeave={this.onMouseLeave.bind(this)} className={className} style={pos.style}>{this.props.renderContent({instance:this})}</div>;
+        }} onMouseLeave={this.onMouseLeave.bind(this)} className={className} style={pos.style}>
+            <div className={`xz-popview-inner-${pos.pos} `}>{this.props.renderContent({instance:this,placement:pos.pos,rect:pos.rect})}</div>
+        </div>;
     }
     getEvent(){
         var mode = this.props.mode || 'hover'; //dbclick|click|hover|rightclick

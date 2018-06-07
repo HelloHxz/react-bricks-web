@@ -1,0 +1,41 @@
+.xz-tooltip-wrapper{
+    position: relative;
+    box-shadow: 0 2px 8px rgba(0,0,0,.15)
+}
+
+.xz-tooltip-inner{
+    padding:5px;
+    background-color: #000;
+    border-radius: 3px;
+    color: #fff;
+    z-index: 2;
+}
+
+.xz-tooltip-arrow {
+    background: #000;
+    z-index: -1;
+    width: 8.48528137px;
+    height: 8.48528137px;
+    transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    position: absolute;
+    display: block;
+    border-color: transparent;
+    border-style: solid
+}
+
+.xz-tooltip-arrow-bottom{
+    top: -3px;
+    box-shadow: -2px -2px 5px rgba(0,0,0,.06)
+}
+
+.xz-tooltip-arrow-top{
+    bottom: -3px;
+    box-shadow: 3px 3px 7px rgba(0,0,0,.07)
+}
+
+.xz-tooltip-arrow-bottom,.xz-tooltip-arrow-top{
+    left:50%;
+    transform:translateX(-50%) rotate(45deg);
+    -ms-transform:translateX(-50%) rotate(45deg);
+}

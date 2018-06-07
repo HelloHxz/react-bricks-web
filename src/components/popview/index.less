@@ -4,6 +4,10 @@
     z-Index:@popview_dp_zindex;
     background-color:#fff;
 }
+.xz-popview-inner-top,.xz-popview-inner-bottom {
+    transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+}
 
 .xz-pop-animate-bottom,.xz-pop-animate-top{
     animation:xzpopanimatebottom .15s cubic-bezier(.23,1,.32,1);
@@ -17,6 +21,7 @@
 .xz-pop-animate-top,.xz-pop-animate-top-hide{
     transform-origin: bottom;
 }
+
 @keyframes xzpopanimatebottom
 {
     from { transform: scaleY(.8);opacity: 0;}
