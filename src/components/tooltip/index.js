@@ -19,6 +19,10 @@ export default class ToolTip extends React.Component{
             style = { right:params.rect.width/2};
         }else if(params.placement ==='bottomright'){
             style = { left:params.rect.width/2};
+        }else if(params.placement==='leftbottom'){
+            style = { top:params.rect.height/2};
+        }else if(params.placement ==='lefttop'){
+            style = { bottom:params.rect.height/2};
         }
 
         if(style === null){

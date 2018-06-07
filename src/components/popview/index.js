@@ -166,6 +166,12 @@ class PopView extends React.Component{
         }else if(pos === 'bottomright'){
             style.top = Common.parseInt(rect.bottom)+ (offset.x||0);
             style.left = Common.parseInt(rect.left)+ (offset.x||0);
+        }else if(pos === 'leftbottom'){
+            style.top = Common.parseInt(rect.top) + (offset.x||0);
+            style.left = Common.parseInt(rect.left)+ (offset.x||0);
+        }else if(pos ==='lefttop'){
+            style.top = Common.parseInt(rect.top) + (offset.x||0) + rect.height;
+            style.left = Common.parseInt(rect.left)+ (offset.x||0);
         }
         return {
             pos,
