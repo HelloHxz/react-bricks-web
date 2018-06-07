@@ -147,7 +147,7 @@ class PopView extends React.Component{
             if(this.props.parentPopview){
                 this.props.parentPopview._clearTime();
             }
-        }} onMouseLeave={this.onMouseLeave.bind(this)} className={className} style={pos.style}>{this.props.renderContent(this)}</div>;
+        }} onMouseLeave={this.onMouseLeave.bind(this)} className={className} style={pos.style}>{this.props.renderContent({instance:this})}</div>;
     }
     getEvent(){
         var mode = this.props.mode || 'hover'; //dbclick|click|hover|rightclick
