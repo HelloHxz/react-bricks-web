@@ -19,6 +19,16 @@ class XZ {
 
     go = (path,params)=>{
     }
+
+    // 作为事件总线 用作于组件之间的交互
+    listener = (eventkey,cb) => {
+
+    }
+
+    removeListener = (eventkey,cb) => {
+
+    }
+
 }
 
 export default new XZ();
