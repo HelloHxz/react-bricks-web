@@ -2,11 +2,13 @@
 
 ### Vbox & Hbox
     ```
+
         <Vbox>
             <Vbox.Top allowResize></Vbox.Top>
             <Vbox.Middle></Vbox.Middle>
             <Vbox.Bottom></Vbox.Bottom>
         </Vbox>
+        
     ```
 
 
@@ -14,17 +16,20 @@
 ---
 
     ```
+
         <Hbox>
             <Hbox.Left allowResize></Hbox.Left>
             <Hbox.Middle></Hbox.Middle>
             <Hbox.Right></Hbox.Right>
         </Hbox>
+
     ```
 
 ---
     
 
     ```
+
     <!DOCTYPE html>
     <html style="width:100%;height: 100%;margin:0;padding: 0">
     <head>
@@ -44,6 +49,7 @@
     </div>
     </body>
     </html>
+
     ```
 
 ### Table
