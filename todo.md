@@ -9,6 +9,10 @@
         </Vbox>
     ```
 
+
+
+---
+
     ```
         <Hbox>
             <Hbox.Left allowResize></Hbox.Left>
@@ -16,6 +20,9 @@
             <Hbox.Right></Hbox.Right>
         </Hbox>
     ```
+
+---
+    
 
     ```
     <!DOCTYPE html>
