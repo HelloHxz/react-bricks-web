@@ -2,13 +2,15 @@
 
 ### Vbox & Hbox
     ```
-
+    top|bottom|left|right
+    state:  mini|dock|close|pop
+    
         <Vbox>
             <Vbox.Top allowResize></Vbox.Top>
             <Vbox.Middle></Vbox.Middle>
             <Vbox.Bottom></Vbox.Bottom>
         </Vbox>
-        
+
     ```
 
 
