@@ -51,10 +51,12 @@ export default class ToolTip extends React.Component{
         console.log("hide");
     }
     render(){
+        const overlayClassName = this.props.overlayClassName || '';
         return (
                 <PopView 
                     mode='hover' 
                     {...this.props}
+                    overlayClassName={`xz-tooltip-overlayer ${overlayClassName}`}
                     ref={(instance)=>{this.root = instance;}}
                     mouseLeaveHide={true} 
                     onShow = {this.onShow.bind(this)}

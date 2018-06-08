@@ -1,4 +1,4 @@
-import {React,PageView,Menu,PopView,Input,Form,Select,Views,Row,Col,Modal,Button} from "react-bricks"
+import {React,PageView,Menu,PopView,Input,Form,Select,RouteView,Row,Col,Modal,Button} from "react-bricks"
 import './index.less';
 import HomeStore from './store';
 import BaseStore from '../basicLayout/store';
@@ -53,7 +53,7 @@ class HomeScreen extends React.PureComponent {
           <LeftMenu {...this.props} />
           <div style={{ overflow:'hidden'}}>
             <Button onClick={this.go.bind(this)}>Go</Button>
-            <Views {...this.props} owner={this}/>
+            <RouteView {...this.props} owner={this}/>
           </div>
         </div>
       </div>

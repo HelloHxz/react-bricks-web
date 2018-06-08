@@ -2,7 +2,7 @@
 import 'babel-polyfill'
 import React from 'react';
 import Run from './navigator'
-import Views from './views'
+import RouteView from './routeview'
 import Menu from './Menu';
 import Select from './select';
 import Modal from './modal';
@@ -39,7 +39,7 @@ export {
 	Select,
 	Input,
 	extendObservable,
-	Views,
+	RouteView,
 	PageView,
 	observable,
 	React,
