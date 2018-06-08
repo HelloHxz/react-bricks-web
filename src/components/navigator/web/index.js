@@ -265,10 +265,10 @@ class Navigation extends React.Component {
   }
 
   render() {
-    const pages = (<div className='xz-pageview-outer'>
+    const pages = (<React.Fragment>
       {this.state.pages}
        <ExtendsWrapper />
-      </div>);
+      </React.Fragment>);
     if(this.props.config.pages["/"]){
       const Wrapper = this.props.config.pages["/"];
       return <Wrapper  pagename={'/'}
