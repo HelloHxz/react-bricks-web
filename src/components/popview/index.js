@@ -137,10 +137,10 @@ class PopView extends React.Component{
         let style = {
         };
         if(pos === 'bottom'){
-            style.top = Common.parseInt(rect.bottom)+ (offset.x||0);
+            style.top = Common.parseInt(rect.bottom)+ (offset.y||0);
             style.left = Common.parseInt(rect.left)+ (offset.x||0) + rect.width/2;
         } else if(pos === 'top'){
-            style.top = Common.parseInt(rect.top) + (offset.x||0);
+            style.top = Common.parseInt(rect.top) + (offset.y||0);
             style.left = Common.parseInt(rect.left)+ (offset.x||0) + rect.width/2;
         } else if(pos === 'left'){
             style.top =  Common.parseInt(rect.top) + (offset.y||0) + rect.height/2;
@@ -149,28 +149,28 @@ class PopView extends React.Component{
             style.top =  Common.parseInt(rect.top) + (offset.y||0) + rect.height/2;
             style.left = Common.parseInt(rect.right)+ (offset.x||0);
         }else if(pos === 'topleft'){
-            style.top = Common.parseInt(rect.top) + (offset.x||0); 
-            style.left = Common.parseInt(rect.left)+ (offset.x||0);
-        }else if(pos === 'topright'){
-            style.top = Common.parseInt(rect.top) + (offset.x||0); 
+            style.top = Common.parseInt(rect.top) + (offset.y||0); 
             style.left = Common.parseInt(rect.right)+ (offset.x||0);
+        }else if(pos === 'topright'){
+            style.top = Common.parseInt(rect.top) + (offset.y||0); 
+            style.left = Common.parseInt(rect.left)+ (offset.x||0);
         }else if(pos === 'righttop'){
-            style.top = Common.parseInt(rect.top) + (offset.x||0) + rect.height;
+            style.top = Common.parseInt(rect.top) + (offset.y||0) + rect.height;
             style.left = Common.parseInt(rect.right)+ (offset.x||0);
         }else if(pos === 'rightbottom'){
-            style.top = Common.parseInt(rect.top) + (offset.x||0);
+            style.top = Common.parseInt(rect.top) + (offset.y||0);
             style.left = Common.parseInt(rect.right)+ (offset.x||0);
         }else if(pos === 'bottomleft'){
             style.top = Common.parseInt(rect.bottom)+ (offset.x||0);
             style.left = Common.parseInt(rect.right)+ (offset.x||0);
         }else if(pos === 'bottomright'){
-            style.top = Common.parseInt(rect.bottom)+ (offset.x||0);
+            style.top = Common.parseInt(rect.bottom)+ (offset.y||0);
             style.left = Common.parseInt(rect.left)+ (offset.x||0);
         }else if(pos === 'leftbottom'){
-            style.top = Common.parseInt(rect.top) + (offset.x||0);
+            style.top = Common.parseInt(rect.top) + (offset.y||0);
             style.left = Common.parseInt(rect.left)+ (offset.x||0);
         }else if(pos ==='lefttop'){
-            style.top = Common.parseInt(rect.top) + (offset.x||0) + rect.height;
+            style.top = Common.parseInt(rect.top) + (offset.y||0) + rect.height;
             style.left = Common.parseInt(rect.left)+ (offset.x||0);
         }
         return {

@@ -8,9 +8,9 @@ export default class ToolTip extends React.Component{
     _getArrowLeft = (params)=>{
         let style = null;
         if(params.placement==='topleft'){
-            style = { left:params.rect.width/2};
-        }else if(params.placement==='topright'){
             style = { right:params.rect.width/2};
+        }else if(params.placement==='topright'){
+            style = { left:params.rect.width/2};
         }else if(params.placement==='righttop'){
             style = { bottom:params.rect.height/2};
         }else if(params.placement==='rightbottom'){

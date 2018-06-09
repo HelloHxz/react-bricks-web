@@ -36,11 +36,12 @@ export default class Select extends React.Component{
                 <PopView 
                     {...this.props}
                     mode='click' 
+                    placement='bottomright'
                     ref={(instance)=>{this.root = instance;}}
                     mouseLeaveHide={true} 
                     onShow = {this.onShow.bind(this)}
                     onHide = {this.onHide.bind(this)}
-                    offset = {{x: 2}}
+                    offset = {{y: 2}}
                     renderContent={this.renderPopView.bind(this)}
                 >
                     <div className={`xz-select xz-select-size-${Theme.getConfig('size',this.props)}`}>
