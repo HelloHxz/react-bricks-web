@@ -11,6 +11,7 @@ import message from './message';
 import Button from './button';
 import VBox from './vbox';
 import Col from './col';
+import HBox from './hbox';
 import Popover from './popover';
 import PageView from './pageview'
 import PopView from './popview'
@@ -28,6 +29,7 @@ export {
 	Menu,
 	XZ,
 	VBox,
+	HBox,
 	Button,
 	message,
 	Popover,

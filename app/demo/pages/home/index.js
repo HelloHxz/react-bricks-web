@@ -1,4 +1,4 @@
-import {React,PageView,Menu,PopView,Input,Form,Select,RouteView,Row,Col,Modal,Button,VBox} from "react-bricks"
+import {React,PageView,Menu,PopView,Input,Form,Select,RouteView,Row,Col,Modal,Button,VBox,HBox} from "react-bricks"
 import './index.less';
 import HomeStore from './store';
 import BaseStore from '../basicLayout/store';
@@ -42,16 +42,20 @@ class HomeScreen extends React.PureComponent {
   render() {
     return (
         <VBox>
-          <VBox.Panel height={100}>header</VBox.Panel>
-          <VBox.Panel>
-            <LeftMenu {...this.props} />
-            <div style={{ overflow:'hidden'}}>
-              <Button onClick={this.go.bind(this)}>Go</Button>
-              <RouteView {...this.props} owner={this}/>
-            </div>
-          </VBox.Panel>
-          <VBox.Panel height={80}>footer</VBox.Panel>
-        </VBox>
+         <VBox.Panel style={{height:50,backgroundColor:'#eee'}}>header</VBox.Panel>
+         <VBox.Panel>
+             <HBox style={{width:'100%',height:'100%'}}>
+              <HBox.Panel>
+                  <LeftMenu {...this.props} />
+              </HBox.Panel>
+              <HBox.Panel>
+                <Button onClick={this.go.bind(this)}>Go</Button>
+                <RouteView {...this.props} owner={this}/>
+              </HBox.Panel>
+            </HBox>
+         </VBox.Panel>
+         <VBox.Panel style={{height:70,backgroundColor:'#eee'}}>footer</VBox.Panel>
+       </VBox>
     );
   }
 }

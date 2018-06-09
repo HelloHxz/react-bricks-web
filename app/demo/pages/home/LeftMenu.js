@@ -12,9 +12,7 @@ class LeftMenu extends React.Component {
 
   render() {
     return (
-    <div style={{height:'100%',float:'left'}}>
         <Menu collapsed={this.props.homestore.menuCollapsed} onItemClick={this.MenuItemClick.bind(this)} data={this.props.baseStore.MenuData}/>
-      </div>
     );
   }
 }
