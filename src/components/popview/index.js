@@ -10,6 +10,7 @@ class PopView extends React.Component{
     constructor(props){
         super(props);
         this.positionMode = props.positionMode||'fixed';
+        this.hideMode = props.hideMode || 'mouseleave'; // mouseleave|blur
         if(['relative','absolute'].indexOf(this.positionMode)<0){
             this.positionMode = 'fixed';
         }
@@ -36,13 +37,14 @@ class PopView extends React.Component{
             if(nextPrps.show){
                 this._show();
             }else{
-                this.hide();
+                this._hide();
             }
         }
     }
     show(e){
-        this._clearTime();
+        this.clearTimeout();
         if(this.state.show===true){
+            this.focus();
             return;
         }
         if(e){
@@ -63,11 +65,12 @@ class PopView extends React.Component{
         this.setState({
             show:true
         });
+        this.focus();
         if(this.props.onShow){
             this.props.onShow(this);
         }
     }
-    _clearTime(){
+    clearTimeout(){
         if(this.timeoutid){
             window.clearTimeout(this.timeoutid);
             this.timeoutid = null;
@@ -76,21 +79,25 @@ class PopView extends React.Component{
     onMouseLeave(e){
        e.stopPropagation();
        e.preventDefault();
-       this.hidePop();
+       if(this.hideMode === 'blur'){
+           return;
+       }
+       this.hide();
     }
     onMouseOverWhenClickMode(){
-        this._clearTime();
+        this.clearTimeout();
     }
-    hidePop(){
-        this._clearTime();
+  
+    hide(){
+        this.clearTimeout();
         if(this.state.show===false||this.state.show==='noinit'){
             return;
         }
         this.timeoutid = setTimeout(()=>{
-           this.hide();
+           this._hide();
         },this.props.hideDelay||300);
     }
-    hide(){
+    _hide(){
         this.setState({
             show:false
         },()=>{
@@ -101,6 +108,13 @@ class PopView extends React.Component{
                 }
             },300);
         });
+    }
+    getRootWidth(){
+        let target = this.root;
+        if(this.root.root){
+            target = this.root.root;
+        }
+        return target.offsetWidth;
     }
     getBoundingClientRect(){
         if(this.positionMode==='fixed'){
@@ -129,6 +143,7 @@ class PopView extends React.Component{
         const offset = this.props.offset || {};
         const bodyHeight = document.body.offsetHeight;
         const bodyWidth = document.body.offsetWidth;
+        const rootWidth = this.getRootWidth();
         var rect = this.getBoundingClientRect();
         let pos = this.props.placement || 'bottom';
         if(bodyHeight - rect.bottom < 100){
@@ -139,9 +154,15 @@ class PopView extends React.Component{
         if(pos === 'bottom'){
             style.top = Common.parseInt(rect.bottom)+ (offset.y||0);
             style.left = Common.parseInt(rect.left)+ (offset.x||0) + rect.width/2;
+            if(this.props.initOverLayerWidth){
+                style.width = rootWidth;
+            }
         } else if(pos === 'top'){
             style.top = Common.parseInt(rect.top) + (offset.y||0);
             style.left = Common.parseInt(rect.left)+ (offset.x||0) + rect.width/2;
+            if(this.props.initOverLayerWidth){
+                style.width = rootWidth;
+            }
         } else if(pos === 'left'){
             style.top =  Common.parseInt(rect.top) + (offset.y||0) + rect.height/2;
             style.left = Common.parseInt(rect.left)+ (offset.x||0);
@@ -151,9 +172,15 @@ class PopView extends React.Component{
         }else if(pos === 'topleft'){
             style.top = Common.parseInt(rect.top) + (offset.y||0); 
             style.left = Common.parseInt(rect.right)+ (offset.x||0);
+            if(this.props.initOverLayerWidth){
+                style.width = rootWidth;
+            }
         }else if(pos === 'topright'){
             style.top = Common.parseInt(rect.top) + (offset.y||0); 
             style.left = Common.parseInt(rect.left)+ (offset.x||0);
+            if(this.props.initOverLayerWidth){
+                style.width = rootWidth;
+            }
         }else if(pos === 'righttop'){
             style.top = Common.parseInt(rect.top) + (offset.y||0) + rect.height;
             style.left = Common.parseInt(rect.right)+ (offset.x||0);
@@ -163,9 +190,15 @@ class PopView extends React.Component{
         }else if(pos === 'bottomleft'){
             style.top = Common.parseInt(rect.bottom)+ (offset.x||0);
             style.left = Common.parseInt(rect.right)+ (offset.x||0);
+            if(this.props.initOverLayerWidth){
+                style.width = rootWidth;
+            }
         }else if(pos === 'bottomright'){
             style.top = Common.parseInt(rect.bottom)+ (offset.y||0);
             style.left = Common.parseInt(rect.left)+ (offset.x||0);
+            if(this.props.initOverLayerWidth){
+                style.width = rootWidth;
+            }
         }else if(pos === 'leftbottom'){
             style.top = Common.parseInt(rect.top) + (offset.y||0);
             style.left = Common.parseInt(rect.left)+ (offset.x||0);
@@ -202,14 +235,15 @@ class PopView extends React.Component{
         var className =`xz-popview-content-${this.positionMode} ${classOverlayClassName}`+ ` xz-popview-trans-${pos.pos} `;
         // todo .. 将这个拎出一个组件 在组件中做一个mousewhell的位置重定位
         return <div onWheel={(e)=>{ e.preventDefault(); }} onMouseOver={()=>{
-            this._clearTime();
+            this.clearTimeout();
             if(this.props.parentPopview){
-                this.props.parentPopview._clearTime();
+                this.props.parentPopview.clearTimeout();
             }
         }} onMouseLeave={this.onMouseLeave.bind(this)} className={className} style={pos.style}>
             <div className={(this.state.show?`xz-pop-animate-${pos.pos}`:`xz-pop-animate-${pos.pos}-hide`)}>{this.props.renderContent({instance:this,placement:pos.pos,rect:pos.rect})}</div>
         </div>;
     }
+  
     getEvent(){
         var mode = this.props.mode || 'hover'; //dbclick|click|hover|rightclick
         if(mode==='click'){
@@ -221,15 +255,30 @@ class PopView extends React.Component{
         }
         return {
             onMouseOver:this.onMouseOver.bind(this),
-            onMouseLeave:this.onMouseLeave.bind(this)
+            onMouseLeave:this.onMouseLeave.bind(this),
         };
+    }
+    onBlur=()=>{
+        this.hide();
+    }
+    focus=()=>{
+        if(this.hideMode==='blur'&&this.AInstance){
+            this.AInstance.focus();
+        }
     }
     render(){
         var mode = this.props.mode || 'hover';
         const mouseEvent = this.getEvent();
         const element = this.props.children;
+        let A = null;
+        if(this.hideMode==='blur'){
+            A= <input style={{width:0,height:0,position:'fixed',left:-999}}  onBlur={this.onBlur.bind(this)} ref={(focusA)=>{
+                this.AInstance = focusA;
+            }}/>
+        }
         return (
             <React.Fragment>
+                {A}
                 <element.type {...element.props} {...mouseEvent} ref={(root)=>{this.root = root;}}></element.type>
                 {this.renderContent()}
             </React.Fragment>
