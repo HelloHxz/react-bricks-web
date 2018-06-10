@@ -6,12 +6,17 @@
 .xz-menu>.xz-menu-item,.xz-menu>.xz-menu-group>.xz-menu-group-header{
     padding-left:8px !important;
 }
+
 .xz-menu-item,.xz-menu-group-header{
     height:40px;
     line-height: 40px;
     position: relative;
     cursor: pointer;
-    color:@menu_text_color;
+    color:@menu_headertext_color;
+}
+
+.xz-menu-group .xz-menu-item{
+    color:@menu_itemtext_color;
 }
 .xz-menu-section{
     overflow: hidden;   
