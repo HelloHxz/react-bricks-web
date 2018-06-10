@@ -15,11 +15,10 @@ export default class FormComponentWrapper extends React.Component{
                     </Col>
                     <Col span={{md:19}}>
                         {this.props.children}
-                        <span className='xz-input-mes'>填写错误了哟</span>
                     </Col>
                 </Row>
             )
         }
-        return <div className={`xz-form-com-wrapper`}>{this.props.children}</div>;
+        return <React.Fragment>{this.props.children}</React.Fragment>;
     }
 }

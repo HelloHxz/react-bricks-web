@@ -4,6 +4,7 @@ import Col from '../col';
 import Theme from '../theme';
 import Common from '../../utils/common';
 import './index.less';
+import FormItemWrapper from '../formComponentWrapper';
 
 export default class Input extends React.Component{
     onChange(e){
@@ -16,21 +17,9 @@ export default class Input extends React.Component{
         }
     }
     render(){
-        // console.log(Common.isIE9());
-        let C = <div className='xz-input'><input placeholder={this.props.placeholder} onChange={this.onChange.bind(this)} value={this.props.value} /></div>;
-        if(this.props.label){
-            C = (
-                <Row>
-                    <Col className='xz-input-label-wrapper' span={{md:5}}>
-                        <span>{this.props.label}</span>
-                    </Col>
-                    <Col span={{md:19}}>
-                        {C}
-                        <span className='xz-input-mes'>填写错误了哟</span>
-                    </Col>
-                </Row>
-            )
-        }
-        return <div className={`xz-input-out xz-input-size-${Theme.getConfig('size',this.props)}`}>{C}</div>;
+        return <FormItemWrapper {...this.props}>
+            <div className={`xz-input xz-input-size-${Theme.getConfig('size',this.props)}`}>
+            <input placeholder={this.props.placeholder} onChange={this.onChange.bind(this)} value={this.props.value} />
+         </div></FormItemWrapper>;
     }
 }

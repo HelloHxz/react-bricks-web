@@ -2,6 +2,7 @@ import React from 'react';
 import PopView from '../popview';
 import Theme from '../theme';
 import './index.less';
+import FormItemWrapper from '../formComponentWrapper';
 
 
 class SelectItem extends React.Component {
@@ -76,8 +77,9 @@ export default class Select extends React.Component{
                 style:this.props.style
             };
         }
-        return (
-                <PopView 
+      
+        return <FormItemWrapper {...this.props}>
+            <PopView 
                     {...this.props}
                     mode='click' 
                     placement='bottomright'
@@ -96,7 +98,7 @@ export default class Select extends React.Component{
                         {this.state.value?<span className='xz-select-value'>{this.state.value}</span>:
                             (<span className='placeholder'>{this.props.placeholder}</span>)}
                     </div>
-                </PopView>)
-        ;
+                </PopView>
+        </FormItemWrapper>
     }
 }

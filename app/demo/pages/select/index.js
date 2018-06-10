@@ -16,6 +16,7 @@ class SelectDemo extends React.PureComponent {
   render() {
     return <div>
        <Select
+       label="下拉框"
        data={[
          {label:'xx2',value:'xxxx1x'},
          {label:'xx3',value:'xxxxx2'},
