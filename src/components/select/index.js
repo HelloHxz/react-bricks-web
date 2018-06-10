@@ -37,7 +37,7 @@ class OverLayer extends React.Component{
         }else {
             for(let i = 0,j=this.props.data.length;i<j;i+=1){
                 const itemData = this.props.data[i];
-                if(!itemData.children){
+                if(!itemData.group){
                     children.push(<SelectItem select={this.props.select} key={itemData.value} data={itemData}/>);
                 }
             }

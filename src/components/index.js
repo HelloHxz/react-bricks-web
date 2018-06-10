@@ -10,7 +10,6 @@ import Row from './row';
 import message from './message';
 import Button from './button';
 import VBox from './vbox';
-import Col from './col';
 import HBox from './hbox';
 import Popover from './popover';
 import PageView from './pageview'
@@ -35,7 +34,6 @@ export {
 	Popover,
 	Tooltip,
 	Form,
-	Col,
 	Modal,
 	Dynamic,
 	Row,

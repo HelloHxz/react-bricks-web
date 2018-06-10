@@ -1,6 +1,5 @@
 import React from 'react';
 import Row from '../row';
-import Col from '../col';
 import Theme from '../theme';
 import Common from '../../utils/common';
 import './index.less';

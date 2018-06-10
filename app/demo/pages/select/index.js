@@ -21,7 +21,7 @@ class SelectDemo extends React.PureComponent {
          {label:'xx2',value:'xxxx1x'},
          {label:'xx3',value:'xxxxx2'},
          {label:'xx4',value:'xxxxx3'},
-         {label:'xxx5',children:[
+         {label:'xxx5',group:[
            {label:'xxx6',value:'xxxx4'}
          ]}
        ]}
