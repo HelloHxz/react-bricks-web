@@ -9,8 +9,8 @@ export default class FormComponentWrapper extends React.Component{
         // this.props.className this.props.vertical
         if(this.props.label){
             return (
-                <Row>
-                    <Col className='xz-input-label-wrapper' span={{md:5}}>
+                <Row className={`xz-formitem-size-${Theme.getConfig('size',this.props)}`}>
+                    <Col className='xz-formitem-label-wrapper' span={{md:5}}>
                         <span>{this.props.label}</span>
                     </Col>
                     <Col span={{md:19}}>

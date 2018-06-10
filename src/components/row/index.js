@@ -3,8 +3,6 @@ import Col from '../col';
 import global from '../../utils/global';
 import './t.less';
 export default class Row extends React.Component{
-    _ssd = "xxx";
-
     componentDidMount = ()=>{
         this.eventid = global.addEvent('resize',()=>{
             console.log(this.eventid);
@@ -17,6 +15,9 @@ export default class Row extends React.Component{
 
     render(){
         const className = ['xz-row'];
+        if(this.props.className){
+            className.push(this.props.className);
+        }
         const child = [];
         for(let i = 0,j = this.props.children.length;i<j;i++){
             if(this.props.children[i].type === Col){
