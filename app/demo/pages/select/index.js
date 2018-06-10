@@ -15,8 +15,17 @@ class SelectDemo extends React.PureComponent {
 
   render() {
     return <div>
-       <Select style={{width:300}} dropdownStyle={{width:350}}/>
-       <Select />
+       <Select
+       data={[
+         {label:'xx2',value:'xxxx1x'},
+         {label:'xx3',value:'xxxxx2'},
+         {label:'xx4',value:'xxxxx3'},
+         {label:'xxx5',children:[
+           {label:'xxx6',value:'xxxx4'}
+         ]}
+       ]}
+       hideMode="mouseleave" placeholder='请选择' style={{width:300}} dropdownStyle={{width:350}}/>
+       <Select placeholder='请选择'/>
     </div>
   }
 }

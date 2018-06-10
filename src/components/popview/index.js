@@ -52,10 +52,14 @@ class PopView extends React.Component{
             e.preventDefault();
         }
         var mode = this.props.mode || 'hover';
+        let delay = 300;
+        if(this.props.showDelay||this.props.showDelay===0){
+            delay = this.props.hideDelay;
+        }
         if(mode==='hover'){
             this.timeoutid = setTimeout(()=>{
                 this._show();
-            },this.props.showDelay||300);
+            },delay);
         }else{
             this._show();
         }
@@ -93,9 +97,13 @@ class PopView extends React.Component{
         if(this.state.show===false||this.state.show==='noinit'){
             return;
         }
+        let delay = 300;
+        if(this.props.showDelay||this.props.showDelay===0){
+            delay = this.props.hideDelay;
+        }
         this.timeoutid = setTimeout(()=>{
            this._hide();
-        },this.props.hideDelay||300);
+        },delay);
     }
     _hide(){
         this.setState({
