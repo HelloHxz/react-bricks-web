@@ -1,4 +1,4 @@
-import {Run,Dynamic} from "react-bricks";
+import {Run,Dynamic} from "react-bricks-web";
 import React from 'react';
 import BasicStore from './pages/basicLayout/store';
 import './icon/index.css';

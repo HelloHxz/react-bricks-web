@@ -1,4 +1,4 @@
-import {React,PageView,observer,PageContainer} from "react-bricks"
+import {React,PageView,observer,PageContainer} from "react-bricks-web"
 import BaseStore from './store';
 
 @PageView({baseStore:BaseStore})

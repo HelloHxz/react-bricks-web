@@ -1,4 +1,4 @@
-import {React,PageView,observer,PageContainer,Input} from "react-bricks"
+import {React,PageView,observer,PageContainer,Input} from "react-bricks-web"
 
 @PageView()
 class InputDemo extends React.PureComponent {

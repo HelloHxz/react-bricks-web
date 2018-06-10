@@ -8,7 +8,7 @@ class SelectItem extends React.Component {
     onClick(){
         this.props.root.clearTimeout();
         this.props.root.focus();
-        this.props.root.hide();
+        // this.props.root.hide();
     }
     render(){
         return (<div onClick={this.onClick.bind(this)} className='xz-select-item xz-select-item-size-default'>
@@ -19,8 +19,13 @@ class SelectItem extends React.Component {
 
 class OverLayer extends React.Component{
     render(){
+        const className = `xz-select-dropdown ${this.props.dropdownClassName||''}`;
+        const dropDownStyle = {
+            ...{ width:'100%',maxHeight:250 },
+            ...(this.props.dropdownStyle||{}),
+        };
         return (
-            <div className='xz-select-dropdown' style={{ width:'100%',maxHeight:250 }}>
+            <div className={className} style={dropDownStyle}>
                 <SelectItem root={this.props.root}/>
                 <SelectItem root={this.props.root}/>
                 <SelectItem root={this.props.root}/>
@@ -33,7 +38,7 @@ class OverLayer extends React.Component{
 // tabindex 才能是div获取onKeyDown事件
 export default class Select extends React.Component{
     renderPopView(){
-        return <OverLayer root={this.root}/>;
+        return <OverLayer root={this.root} {...this.props}/>;
     }
     onChange(){
 
@@ -45,6 +50,12 @@ export default class Select extends React.Component{
         console.log("hide");
     }
     render(){
+        let style = {};
+        if(this.props.style){
+            style = {
+                style:this.props.style
+            };
+        }
         return (
                 <PopView 
                     {...this.props}
@@ -55,11 +66,13 @@ export default class Select extends React.Component{
                     hideMode={this.props.hideMode||'blur'}
                     onShow = {this.onShow.bind(this)}
                     onHide = {this.onHide.bind(this)}
+                    showDelay={this.props.showDelay||0}
+                    hideDelay={this.props.hideDelay||0}
                     offset = {{y: 2}}
                     initOverLayerWidth={true}
                     renderContent={this.renderPopView.bind(this)}
                 >
-                    <div className={`xz-select xz-select-size-${Theme.getConfig('size',this.props)}`}>
+                    <div {...style} className={`xz-select xz-select-size-${Theme.getConfig('size',this.props)} ${this.props.className||''}`}>
                         <span className='placeholder'>{this.props.placeholder}</span>
                     </div>
                 </PopView>)

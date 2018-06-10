@@ -1,4 +1,4 @@
-# react-bricks-web
+# react-bricks-web-web
 
 Web端框架
 

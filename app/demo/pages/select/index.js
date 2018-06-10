@@ -1,4 +1,4 @@
-import {React,PageView,observer,PageContainer,Modal,Button,Select} from "react-bricks"
+import {React,PageView,observer,PageContainer,Modal,Button,Select} from "react-bricks-web"
 
 @PageView()
 class SelectDemo extends React.PureComponent {
@@ -15,6 +15,7 @@ class SelectDemo extends React.PureComponent {
 
   render() {
     return <div>
+       <Select style={{width:300}} dropdownStyle={{width:350}}/>
        <Select />
     </div>
   }

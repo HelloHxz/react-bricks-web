@@ -118,10 +118,10 @@ return {
           loader:'babel-loader',
 
           options:{
-
             "presets": [
               "react",
               "env",
+              "stage-3"
             ],
             "plugins": [
                 [
@@ -129,7 +129,7 @@ return {
                   {
                     "cwd":"babelrc",
                     "alias": {
-                      "react-bricks": "./src/components"
+                      "react-bricks-web": "./src/components"
                   },
                     "extensions": [".js",".ios.js",".android.js",".web.js"]
                   }

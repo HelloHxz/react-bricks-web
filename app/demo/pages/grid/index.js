@@ -1,4 +1,4 @@
-import {React,PageView,observer,PageContainer,Row,Col} from "react-bricks"
+import {React,PageView,observer,PageContainer,Row,Col} from "react-bricks-web"
 
 @PageView()
 class GridDemo extends React.PureComponent {

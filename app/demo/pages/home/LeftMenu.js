@@ -1,4 +1,4 @@
-import {React,PageView,Menu,PopView,Input,Form,Select,Views,Row,Col,Modal,Button} from "react-bricks"
+import {React,PageView,Menu,PopView,Input,Form,Select,Views,Row,Col,Modal,Button} from "react-bricks-web"
 import {observer} from "mobx-react";
 
 @observer
