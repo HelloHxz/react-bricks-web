@@ -13,6 +13,7 @@ import CheckBox from './checkbox';
 import VBox from './vbox';
 import HBox from './hbox';
 import Popover from './popover';
+import Table from './table';
 import PageView from './pageview'
 import PopView from './popview'
 import Dynamic from './dynamic'
@@ -29,6 +30,7 @@ export {
 	Menu,
 	XZ,
 	CheckBox,
+	Table,
 	VBox,
 	HBox,
 	Button,

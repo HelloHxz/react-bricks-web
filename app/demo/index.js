@@ -12,6 +12,7 @@ var config = {
 		grid:require("./pages/grid").default,
 		modal:require("./pages/modal").default,
 		tooltip:require("./pages/tooltip").default,
+		table:require("./pages/table").default,
 		popover:require("./pages/popover").default,
 		message:require("./pages/message").default,
 		checkbox:require("./pages/checkbox").default,

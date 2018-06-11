@@ -30,7 +30,7 @@ class FormDemo extends React.PureComponent {
                       }
                       return true;
                     }}
-                  ]} {...formProps} dataKey='selectorValue' placeholder='请选择' com={Select}  />
+                  ]} {...formProps} dataKey='selectorValue' data={[{label:"江西",value:'1'}]} placeholder='请选择' com={Select}  />
                   <FormRepeat initialValue={[{name:"hxz"}]} {...formProps} dataKey='Lists' renderRow={(rowProps)=>{
                     return (
                       <div>

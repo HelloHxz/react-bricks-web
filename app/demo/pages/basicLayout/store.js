@@ -35,7 +35,7 @@ class Store {
             {label:"Radio",key:'xxxxxxx'},
             {label:"Select",key:'xxxxxxx',href:'home/select'},
             {label:"Tabs",key:'xxxxxxx'},
-            {label:"Table",key:'xxxxxxx'},
+            {label:"Table",key:'xxxxxxx',href:'home/table'},
             {label:"Tree",key:'xxxxxxx'},
             {label:"Menu",key:'xxxxxxx',children:[
                 {label:'2.2.1',key:'xxxxxxxx'},
