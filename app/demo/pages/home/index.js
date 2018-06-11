@@ -42,19 +42,22 @@ class HomeScreen extends React.PureComponent {
   render() {
     return (
         <VBox>
-         <VBox.Panel style={{height:50,backgroundColor:'#eee'}}>header</VBox.Panel>
+         <VBox.Panel style={{height:50,backgroundColor:'#eee'}}>header
+          <Button onClick={this.go.bind(this)}>Go</Button>
+         </VBox.Panel>
          <VBox.Panel>
              <HBox style={{width:'100%',height:'100%'}}>
               <HBox.Panel>
+                <div style={{overflow:'auto',width:'100%',height:'100%'}}>
                   <LeftMenu {...this.props} />
+                </div>
               </HBox.Panel>
               <HBox.Panel>
-                <Button onClick={this.go.bind(this)}>Go</Button>
                 <RouteView {...this.props} owner={this}/>
               </HBox.Panel>
             </HBox>
          </VBox.Panel>
-         <VBox.Panel style={{height:70,backgroundColor:'#eee'}}>footer</VBox.Panel>
+         <VBox.Panel style={{height:60,backgroundColor:'#eee'}}>footer</VBox.Panel>
        </VBox>
     );
   }
