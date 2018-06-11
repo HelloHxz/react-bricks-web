@@ -12,7 +12,7 @@ export default class CheckBox extends React.Component {
     }
 
     prepareValue = (val)=>{
-        if(val===undefined||val===null||val===false){
+        if(!val){
             return false;
         }else if(val ==='indeterminate'){
             return 'indeterminate';
