@@ -14,6 +14,7 @@ var config = {
 		tooltip:require("./pages/tooltip").default,
 		popover:require("./pages/popover").default,
 		message:require("./pages/message").default,
+		checkbox:require("./pages/checkbox").default,
 		form:require("./pages/form").default,
 		popview:require("./pages/popview").default,
 		select:require("./pages/select").default,

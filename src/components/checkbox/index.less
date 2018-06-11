@@ -1,0 +1,58 @@
+@import '../theme/index.less';
+.xz-checkbox{
+    position: relative;
+    display: inline-block;
+    user-select: none;
+    cursor: pointer;
+}
+
+.xz-checkbox-inner{
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    vertical-align: middle;
+    border: 1px solid #d9d9d9;
+    border-radius: 2px;
+    background-color: #fff;
+    transition: all .3s;
+}
+.xz-checkbox-true .xz-checkbox-inner{
+    position: relative;
+    background-color: @theme_color;
+    border-color:@theme_color;
+}
+.xz-checkbox-true .xz-checkbox-inner::after{
+    transform: translateX(-50%) translateY(-50%) rotate(45deg) scale(1);
+    -ms-transform: translateX(-50%) translateY(-50%) rotate(45deg) scale(1);
+    position: absolute;
+    display: table;
+    width: 4px;
+    height: 8px;
+    left: 50%;
+    top:45%;
+    border: 2px solid #fff;
+    border-top: 0;
+    border-left: 0;
+    content: " ";
+    transition: all .2s cubic-bezier(.12,.4,.29,1.46) .1s;
+}
+.xz-checkbox-false{
+
+}
+.xz-checkbox-indeterminate{
+
+}
+.xz-checkbox:hover .xz-checkbox-inner{
+    border-color:@theme_color;
+}
+
+.xz-checkbox-label{
+    color:@theme_textcolor;
+    vertical-align: middle;
+}
+.xz-checkbox-label-left{
+    margin-left: 8px;
+}
+.xz-checkbox-label-right{
+    margin-right: 8px;
+}

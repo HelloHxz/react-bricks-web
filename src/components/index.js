@@ -9,6 +9,7 @@ import Modal from './modal';
 import Row from './row';
 import message from './message';
 import Button from './button';
+import CheckBox from './checkbox';
 import VBox from './vbox';
 import HBox from './hbox';
 import Popover from './popover';
@@ -27,6 +28,7 @@ import {observable,extendObservable} from 'mobx'
 export {
 	Menu,
 	XZ,
+	CheckBox,
 	VBox,
 	HBox,
 	Button,
