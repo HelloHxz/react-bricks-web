@@ -54,10 +54,12 @@ class TableHeaderCell extends React.Component{
         if(cellConfig.__colspan && cellConfig.__colspan!==1){
             p.colSpan = cellConfig.__colspan;
         }
+        let style = {};
         if(cellConfig.__isRootCell){
             console.log(cellConfig);
+            style = {style:{width:100}};
         }
-        return <th {...p}><div style={{width:100}}>{cellConfig.title}</div></th>;
+        return <th {...p}><div {...style}>{cellConfig.title}</div></th>;
     }
 }
 
