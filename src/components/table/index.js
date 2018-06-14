@@ -65,11 +65,24 @@ class TableHeaderCell extends React.Component{
 }
 class TableBody extends React.Component{
     render(){
+        const dataSource = this.props.dataSource || [];
+        const rows = [];
+        for(let i = 0,j=dataSource.length;i<j;i+=1){
+            const rowdata = dataSource[i];
+            if(!rowdata.__hxzdatarowkey__){
+                rowdata.__hxzdatarowkey__ = 'tablerow_'+XZ._getSystemUniqueNum();
+            }
+            const cells = [];
+            for(let n = 0,m=this.props.table.rootCellArr.length;n<m;n+=1){
+                const cellConfig = this.props.table.rootCellArr[n];
+                cells.push(<TableCell key={cellConfig.key} {...this.props} cellConfig={cellConfig} data={rowdata}/>);
+            }
+            rows.push(<TableRow {...this.props} key={rowdata.__hxzdatarowkey__}>
+            {cells}
+            </TableRow>);
+        }
         return (<tbody>
-                <TableRow />
-                <TableRow />
-                <TableRow />
-                <TableRow />
+                {rows}
             </tbody>);
     }
 }
@@ -85,8 +98,11 @@ class TableRow extends React.Component{
 
 class TableCell extends React.Component{
     render(){
-        const p = {};
-        return <td {...p}>xxx</td>;
+        const {cellConfig,table} = this.props;
+        var innerp = {
+            className:StyleManager._getCellClassName(table.tableid,cellConfig.key)
+        };
+        return <td><div {...innerp}>asdasdas</div></td>;
     }
 }
 
@@ -234,7 +250,7 @@ export default class Table extends React.Component{
         return (<div>
             <table className={className.join(" ")}>
                 <TableHeader {...this.props} table={this}/>
-                <TableBody table={this}/>
+                <TableBody {...this.props} table={this} />
             </table>
             <StyleManager table={this}/>
         </div>)

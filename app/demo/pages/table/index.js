@@ -99,7 +99,7 @@ const columns = [{
 
 
 @PageView()
-class TableDemo extends React.PureComponent {
+class TableDemo extends React.Component {
 
   componentDidMount() {
   }
@@ -107,20 +107,24 @@ class TableDemo extends React.PureComponent {
   constructor(props){
     super(props);
     this.state={
-        visible:false
+        visible:false,
+        firstTableData:[{},{},{},{},{},{}]
     }
+  }
+
+  changeData = ()=>{
+    this.state.firstTableData.splice(0,1);
+    this.setState({
+      firstTableData:this.state.firstTableData
+    });
   }
 
   render() {
     return <div>
+        <Button onClick={this.changeData.bind(this)} type='primary'>Change Data</Button>
         <Table 
-        datasource={[]}
+        dataSource={this.state.firstTableData}
         columns={columns}
-        />
-
-        <Table 
-        datasource={[]}
-        columns={columnsTwo}
         />
     </div>
   }
