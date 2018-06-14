@@ -10,6 +10,13 @@ import './index.less';
 */
 
 class TableHeader extends React.Component {
+    constructor(props){
+        super(props);
+      
+        const level = TableUtil._getLevel(props.columns);
+        TableUtil._setRowSpan(props.columns,level);
+        console.log(props.columns)
+    }
     render(){
         return (<thead>
             <TableRow isHeader={true}>
@@ -47,19 +54,9 @@ class TableCell extends React.Component{
     }
 }
 
-export default class Table extends React.Component{
-    constructor(props){
-        super(props);
-        
-        const level = this._getLevel(props.columns);
-        console.log(level);
-
-        for(let i=0,j=props.columns.length;i<j;i+=1){
-            console.log(this._getRootCellCountOfColumn(props.columns[i]));
-        }
-    }
-    // 获取到表头深度
-    _getLevel(columns,_level){
+class TableUtil {
+    // 获取表头层次深度也就是表头行数 
+    static _getLevel = (columns,_level) => {
         let curLevel = 1;
         if(_level){
             curLevel = _level;
@@ -67,16 +64,30 @@ export default class Table extends React.Component{
         const levelRe = [];
         for(let i = 0,j=columns.length;i<j;i+=1){
             const colItem = columns[i];
+            colItem.__level = curLevel;
+            colItem.__colspan = TableUtil._getRootCellCountOfColumn(colItem);
             if(colItem.children){
-                levelRe[i] = this._getLevel(colItem.children,curLevel+1);
+                levelRe[i] = TableUtil._getLevel(colItem.children,curLevel+1);
             }else{
                 levelRe[i] = curLevel;
             }
         }
-        return this._maxOfArr(levelRe);
+        return TableUtil._maxOfArr(levelRe);
     }
 
-    _maxOfArr(arr){
+    static _setRowSpan = (columns,level) => {
+        for(let i = 0,j=columns.length;i<j;i+=1){
+            const colItem = columns[i];
+            if(colItem.children){
+                colItem.__rowspan = 1;
+                TableUtil._setRowSpan(colItem.children,level-1);
+            }else{
+                colItem.__rowspan = level;
+            }
+        }
+    }
+    
+    static _maxOfArr = (arr) => {
         let re = 0;
         for(let i = 0,j=arr.length;i<j;i+=1){
             if(re<arr[i]){
@@ -86,7 +97,7 @@ export default class Table extends React.Component{
         return re;
     }
     // 获取到根Cell的个数
-    _getRootCellCountOfColumn(column){
+    static _getRootCellCountOfColumn = (column)=>{
         let re = 0;
         const children = column.children;
         if(!children){
@@ -95,14 +106,35 @@ export default class Table extends React.Component{
         for(let i = 0,j=children.length;i<j;i+=1){
             const colItem = children[i];
             if(colItem.children){
-                re += this._getRootCellCountOfColumn(colItem);
+                re += TableUtil._getRootCellCountOfColumn(colItem);
             }else{
                 re += 1;
             }
         }
         return re;
     }
-  
+
+    static _getRootCellArr = (columns,outArr) => {
+        for(let i=0,j=columns.length;i<j;i+=1){
+            const colItem = columns[i];
+            if(colItem.children){
+                TableUtil._getRootCellArr(colItem.children,outArr);
+            }else{
+                outArr.push(colItem);
+            }
+        }
+    }
+}
+
+export default class Table extends React.Component{
+    constructor(props){
+        super(props);
+
+        const rootCellArr = [];
+        TableUtil._getRootCellArr(props.columns,rootCellArr);
+        console.log(rootCellArr);
+    }
+    
    
     render(){
         const className = ['xz-table'];
@@ -111,7 +143,7 @@ export default class Table extends React.Component{
         }
         return (<div>
             <table className={className.join(" ")}>
-                <TableHeader/>
+                <TableHeader {...this.props}/>
                 <TableBody/>
             </table>
             <style>{'.c{color:red}'}</style>
