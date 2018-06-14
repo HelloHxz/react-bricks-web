@@ -12,16 +12,52 @@ import './index.less';
 class TableHeader extends React.Component {
     constructor(props){
         super(props);
-      
-        const level = TableUtil._getLevel(props.columns);
-        TableUtil._setRowSpan(props.columns,level);
-        console.log(props.columns)
+  
+    }
+    _createRows = (columns,rows) => {
+        for(let i = 0,j=columns.length;i<j;i+=1){
+            const colItem = columns[i];
+            const _level = colItem.__level - 1;
+            if(!rows[_level]){
+                rows[_level] = [];
+            }
+            rows[_level].push(
+                <TableHeaderCell key={`${colItem.key||''}_${colItem.title}`} cellConfig={colItem} />
+            );
+            if(colItem.children){
+                this._createRows(colItem.children,rows);
+            }
+        }
     }
     render(){
+        const headerRows = [];
+        this._createRows(this.props.columns,headerRows);
+        const rows = [];
+        for(var i=0,j=headerRows.length;i<j;i+=1){
+            rows.push(<TableRow key={i}>
+                    {headerRows[i]}
+                </TableRow>);
+        }
         return (<thead>
-            <TableRow isHeader={true}>
-            </TableRow>
+            {rows}
         </thead>);
+    }
+}
+
+class TableHeaderCell extends React.Component{
+    render(){
+        const p = {};
+        const {cellConfig} = this.props;
+        if(cellConfig.__rowspan && cellConfig.__rowspan!==1){
+            p.rowSpan = cellConfig.__rowspan;
+        }
+        if(cellConfig.__colspan && cellConfig.__colspan!==1){
+            p.colSpan = cellConfig.__colspan;
+        }
+        if(cellConfig.__isRootCell){
+            console.log(cellConfig);
+        }
+        return <th {...p}><div style={{width:100}}>{cellConfig.title}</div></th>;
     }
 }
 
@@ -39,18 +75,16 @@ class TableBody extends React.Component{
 class TableRow extends React.Component{
     render(){
         return (<tr>
-            <TableCell isHeader={this.props.isHeader}></TableCell>
-            <TableCell isHeader={this.props.isHeader}></TableCell>
+           {this.props.children}
         </tr>);
     }
 }
 
+
 class TableCell extends React.Component{
     render(){
-        if(this.props.isHeader){
-            return <th>sdas</th>;
-        }
-        return <td>asdas</td>;
+        const p = {};
+        return <td {...p}>xxx</td>;
     }
 }
 
@@ -120,6 +154,7 @@ class TableUtil {
             if(colItem.children){
                 TableUtil._getRootCellArr(colItem.children,outArr);
             }else{
+                colItem.__isRootCell = true;
                 outArr.push(colItem);
             }
         }
@@ -129,10 +164,12 @@ class TableUtil {
 export default class Table extends React.Component{
     constructor(props){
         super(props);
-
         const rootCellArr = [];
-        TableUtil._getRootCellArr(props.columns,rootCellArr);
         console.log(rootCellArr);
+        const level = TableUtil._getLevel(props.columns);
+        TableUtil._setRowSpan(props.columns,level);
+        TableUtil._getRootCellArr(props.columns,rootCellArr);
+        console.log(props.columns)
     }
     
    
