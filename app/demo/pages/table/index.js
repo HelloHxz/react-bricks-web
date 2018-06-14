@@ -42,11 +42,11 @@ const columns = [{
   }, {
     title: 'Company',
     children: [{
-      title: 'Company Address',
+      title: 'Address',
       dataIndex: 'companyAddress',
       key: 'companyAddress',
     }, {
-      title: 'Company Name',
+      title: 'Name',
       dataIndex: 'companyName',
       key: 'companyName',
     }],
@@ -56,6 +56,46 @@ const columns = [{
     key: 'gender',
     width: 60,
   }];
+
+
+  const columnsTwo = [
+    {
+      title: 'Gender',
+      dataIndex: 'gender',
+      key: 'gender1',
+      width: 60,
+    },
+    {
+      title: 'Gender',
+      dataIndex: 'gender',
+      key: 'gender2',
+      width: 60,
+    },
+    {
+      title: 'Gender',
+      dataIndex: 'gender',
+      key: 'gender3',
+      width: 60,
+    },
+    {
+      title: 'Address',
+      children: [{
+        title: 'Street',
+        dataIndex: 'street',
+        key: 'street',
+        width: 200,
+      }, {
+        title: 'Block',
+        key:'xxx'
+      }],
+    },
+    {
+      title: 'Gende1r',
+      dataIndex: 'gender',
+      key: 'gender4',
+      width: 60,
+    }
+  ];
 
 
 @PageView()
@@ -76,6 +116,11 @@ class TableDemo extends React.PureComponent {
         <Table 
         datasource={[]}
         columns={columns}
+        />
+
+        <Table 
+        datasource={[]}
+        columns={columnsTwo}
         />
     </div>
   }

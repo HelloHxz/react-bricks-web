@@ -62,7 +62,6 @@ class TableHeaderCell extends React.Component{
         return <th {...p}><div {...style}>{cellConfig.title}</div></th>;
     }
 }
-
 class TableBody extends React.Component{
     render(){
         return (<tbody>
@@ -167,11 +166,9 @@ export default class Table extends React.Component{
     constructor(props){
         super(props);
         const rootCellArr = [];
-        console.log(rootCellArr);
         const level = TableUtil._getLevel(props.columns);
         TableUtil._setRowSpan(props.columns,level);
         TableUtil._getRootCellArr(props.columns,rootCellArr);
-        console.log(props.columns)
     }
     
    
