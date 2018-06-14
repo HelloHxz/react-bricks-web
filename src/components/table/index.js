@@ -1,5 +1,6 @@
 import React from 'react';
 import Theme from '../theme';
+import XZ from '../xz';
 import './index.less';
 
 /* 
@@ -22,7 +23,7 @@ class TableHeader extends React.Component {
                 rows[_level] = [];
             }
             rows[_level].push(
-                <TableHeaderCell key={`${colItem.key||''}_${colItem.title}`} cellConfig={colItem} />
+                <TableHeaderCell {...this.props} key={`${colItem.key||''}_${colItem.title}`} cellConfig={colItem} />
             );
             if(colItem.children){
                 this._createRows(colItem.children,rows);
@@ -54,12 +55,12 @@ class TableHeaderCell extends React.Component{
         if(cellConfig.__colspan && cellConfig.__colspan!==1){
             p.colSpan = cellConfig.__colspan;
         }
-        let style = {};
+        let innnerClassName = {};
+
         if(cellConfig.__isRootCell){
-            console.log(cellConfig);
-            style = {style:{width:100}};
+            innnerClassName.className = StyleManager._getCellClassName(this.props.table.tableid,cellConfig.key);
         }
-        return <th {...p}><div {...style}>{cellConfig.title}</div></th>;
+        return <th {...p}><div {...innnerClassName}>{cellConfig.title}</div></th>;
     }
 }
 class TableBody extends React.Component{
@@ -162,16 +163,69 @@ class TableUtil {
     }
 }
 
+class StyleManager extends React.Component{
+    constructor(props){
+        super(props);
+        this.state = {
+            columnsWidthInfo:this.convertRootArrToWidthInfo(props)
+        };
+    }
+    componentWillReceiveProps = (nextProps) => {
+        const columnsWidthInfo = this.convertRootArrToWidthInfo(nextProps);
+        if(JSON.stringify(this.state.columnsWidthInfo)!==JSON.stringify(columnsWidthInfo)){
+            this.setState({
+                columnsWidthInfo,
+            });
+        }
+    }
+    static _getCellClassName = (tableid,key) => {
+        return `xz-table-cell-${tableid}-${key}`;
+    }
+
+    parseWidth = (w) => {
+        if(!w){
+            return '100px';
+        }
+        let _w = w.toString();
+        if(_w.indexOf('px')<0&&_w.indexOf('%')<0){
+            _w = _w+'px';
+        }
+        return _w;
+    }
+
+    convertRootArrToWidthInfo = (props)=>{
+        const re = [];
+        for(let i =0,j=props.table.rootCellArr.length;i<j;i+=1){
+            const item = props.table.rootCellArr[i];
+            re.push({
+                key:item.key,
+                width:this.parseWidth(item.width)
+            });
+        }
+        return re;
+    }
+    
+    render(){
+        const re = [];
+        for(let i =0,j=this.state.columnsWidthInfo.length;i<j;i+=1){
+            const item = this.state.columnsWidthInfo[i];
+            re.push(`.${StyleManager._getCellClassName(this.props.table.tableid,item.key)}{ width:${item.width} } `);
+        }
+        return <style>{re}</style>
+    }
+}
+
 export default class Table extends React.Component{
     constructor(props){
         super(props);
-        const rootCellArr = [];
+        this.rootCellArr = [];
         const level = TableUtil._getLevel(props.columns);
         TableUtil._setRowSpan(props.columns,level);
-        TableUtil._getRootCellArr(props.columns,rootCellArr);
+        TableUtil._getRootCellArr(props.columns,this.rootCellArr);
+        this.tableid = 'xztable-'+ XZ._getSystemUniqueNum();
     }
-    
-   
+
+ 
     render(){
         const className = ['xz-table'];
         if(this.props.className){
@@ -179,10 +233,10 @@ export default class Table extends React.Component{
         }
         return (<div>
             <table className={className.join(" ")}>
-                <TableHeader {...this.props}/>
-                <TableBody/>
+                <TableHeader {...this.props} table={this}/>
+                <TableBody table={this}/>
             </table>
-            <style>{'.c{color:red}'}</style>
+            <StyleManager table={this}/>
         </div>)
     }
 }

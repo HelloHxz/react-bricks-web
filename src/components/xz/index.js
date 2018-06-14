@@ -2,6 +2,12 @@ class XZ {
     constructor(){
         this._navigator = null;
         this._extendWrapperInstancer = null;
+        this._seed = 0;
+    }
+
+    _getSystemUniqueNum = ()=>{
+        this._seed+=1;
+        return this._seed;
     }
     _setNavigator = (_navigator) => {
         this._navigator = _navigator;
