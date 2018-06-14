@@ -50,16 +50,71 @@ class TableCell extends React.Component{
 export default class Table extends React.Component{
     constructor(props){
         super(props);
+        
+        const level = this._getLevel(props.columns);
+        console.log(level);
+
+        for(let i=0,j=props.columns.length;i<j;i+=1){
+            console.log(this._getRootCellCountOfColumn(props.columns[i]));
+        }
     }
+    // 获取到表头深度
+    _getLevel(columns,_level){
+        let curLevel = 1;
+        if(_level){
+            curLevel = _level;
+        }
+        const levelRe = [];
+        for(let i = 0,j=columns.length;i<j;i+=1){
+            const colItem = columns[i];
+            if(colItem.children){
+                levelRe[i] = this._getLevel(colItem.children,curLevel+1);
+            }else{
+                levelRe[i] = curLevel;
+            }
+        }
+        return this._maxOfArr(levelRe);
+    }
+
+    _maxOfArr(arr){
+        let re = 0;
+        for(let i = 0,j=arr.length;i<j;i+=1){
+            if(re<arr[i]){
+                re = arr[i];
+            }
+        }
+        return re;
+    }
+    // 获取到根Cell的个数
+    _getRootCellCountOfColumn(column){
+        let re = 0;
+        const children = column.children;
+        if(!children){
+            return 1;
+        }
+        for(let i = 0,j=children.length;i<j;i+=1){
+            const colItem = children[i];
+            if(colItem.children){
+                re += this._getRootCellCountOfColumn(colItem);
+            }else{
+                re += 1;
+            }
+        }
+        return re;
+    }
+  
    
     render(){
         const className = ['xz-table'];
         if(this.props.className){
             className.push(this.props.className);
         }
-        return (<table className={className.join(" ")}>
-            <TableHeader/>
-            <TableBody/>
-        </table>)
+        return (<div>
+            <table className={className.join(" ")}>
+                <TableHeader/>
+                <TableBody/>
+            </table>
+            <style>{'.c{color:red}'}</style>
+        </div>)
     }
 }
