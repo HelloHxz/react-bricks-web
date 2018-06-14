@@ -244,10 +244,14 @@ export default class Table extends React.Component{
  
     render(){
         const className = ['xz-table'];
+        const p = {};
+        if(this.props.style){
+            p.style = this.props.style;
+        }
         if(this.props.className){
             className.push(this.props.className);
         }
-        return (<div>
+        return (<div {...p}>
             <table className={className.join(" ")}>
                 <TableHeader {...this.props} table={this}/>
                 <TableBody {...this.props} table={this} />

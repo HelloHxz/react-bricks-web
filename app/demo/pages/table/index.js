@@ -108,7 +108,7 @@ class TableDemo extends React.Component {
     super(props);
     this.state={
         visible:false,
-        firstTableData:[{},{},{},{},{},{}]
+        firstTableData:[{},{},{},{},{},{},{},{},{},{},{},{},{},{}]
     }
   }
 
@@ -123,6 +123,7 @@ class TableDemo extends React.Component {
     return <div>
         <Button onClick={this.changeData.bind(this)} type='primary'>Change Data</Button>
         <Table 
+        style={{height:400,overflow:'auto'}}
         dataSource={this.state.firstTableData}
         columns={columns}
         />
