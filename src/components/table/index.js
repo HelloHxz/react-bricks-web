@@ -203,7 +203,7 @@ class StyleManager extends React.Component{
             return '100px';
         }
         let _w = w.toString();
-        if(_w.indexOf('px')<0&&_w.indexOf('%')<0){
+        if(_w.indexOf('px')<0&&_w.indexOf('%')<0&&_w!=='auto'){
             _w = _w+'px';
         }
         return _w;
@@ -251,11 +251,13 @@ export default class Table extends React.Component{
         if(this.props.className){
             className.push(this.props.className);
         }
-        return (<div {...p}>
-            <table className={className.join(" ")}>
-                <TableHeader {...this.props} table={this}/>
-                <TableBody {...this.props} table={this} />
-            </table>
+        return (<div>
+            <div {...p} className='xz-table-inner-wrapper'>
+                <table className={className.join(" ")}>
+                    <TableHeader {...this.props} table={this}/>
+                    <TableBody {...this.props} table={this} />
+                </table>
+            </div>
             <StyleManager table={this}/>
         </div>)
     }

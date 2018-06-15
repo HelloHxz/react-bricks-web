@@ -54,7 +54,6 @@ const columns = [{
     title: 'Gender',
     dataIndex: 'gender',
     key: 'gender',
-    width: 60,
   }];
 
 
@@ -108,7 +107,7 @@ class TableDemo extends React.Component {
     super(props);
     this.state={
         visible:false,
-        firstTableData:[{},{},{},{},{},{},{},{},{},{},{},{},{},{}]
+        firstTableData:[{},{},{},{},{},{},{},{},{},{},{},{},{},]
     }
   }
 
