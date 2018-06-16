@@ -11,6 +11,7 @@ var config = {
 		button:require("./pages/button").default,
 		grid:require("./pages/grid").default,
 		modal:require("./pages/modal").default,
+		tabs:require("./pages/tabs").default,
 		tooltip:require("./pages/tooltip").default,
 		table:require("./pages/table").default,
 		popover:require("./pages/popover").default,
