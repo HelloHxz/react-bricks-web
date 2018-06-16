@@ -9,6 +9,7 @@ var config = {
 		"/":require("./pages/basicLayout").default,
 		home:require("./pages/home").default,
 		button:require("./pages/button").default,
+		swiper:require("./pages/swiper").default,
 		grid:require("./pages/grid").default,
 		modal:require("./pages/modal").default,
 		tabs:require("./pages/tabs").default,

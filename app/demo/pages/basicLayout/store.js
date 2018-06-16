@@ -36,6 +36,7 @@ class Store {
             {label:"Select 选择",key:'xxxxxxx',href:'home/select'},
             {label:"Tabs 标签",key:'xxxxxxx',href:'/home/tabs'},
             {label:"Table 表格",key:'xxxxxxx',href:'home/table'},
+            {label:"Swiper 幻灯片",key:'xxxxxxx',href:'home/swiper'},
             {label:"Tree 树状",key:'xxxxxxx'},
             {label:"Menu 菜单",key:'xxxxxxx',children:[
                 {label:'2.2.1',key:'xxxxxxxx'},

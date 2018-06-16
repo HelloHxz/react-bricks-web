@@ -4,6 +4,7 @@ const sourceMap = {
     'size':['default','sm','lg']
 };
 
+let translateKeys = null;
 class Theme {
     static getConfig = (key,props)=>{
         let rkey = key;
@@ -17,6 +18,32 @@ class Theme {
             return source[0];
         }
         return value;
+    }
+    static getTransitionKeys () {
+        if (translateKeys) {
+            return translateKeys;
+        }
+        var testStyle = document.createElement("DIV").style;
+        var me = {};
+        if ("-webkit-transform" in testStyle) {
+            me.transitionend = "webkitTransitionEnd";
+            me.transform = "WebkitTransform";
+            me.cssTransform = "-webkit-transform";
+            me.transition = "WebkitTransition";
+        }
+        else if ("-ms-transform" in testStyle) {
+            me.transitionend = "msTransitionEnd";
+            me.transform = "msTransform";
+            me.cssTransform = "-ms-transform";
+            me.transition = "msTransition";
+        } else {
+            me.transitionend = "transitionend";
+            me.transform = "transform";
+            me.cssTransform = "transform";
+            me.transition = "transition";
+        }
+        translateKeys = me;
+        return me;
     }
 }
 

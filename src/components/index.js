@@ -19,6 +19,7 @@ import PopView from './popview'
 import Dynamic from './dynamic'
 import XZ from './xz';
 import Tabs from './tabs';
+import Swiper from './swiper';
 import Tooltip from './tooltip';
 import Input from './input';
 import Form from './form';
@@ -30,6 +31,7 @@ import {observable,extendObservable} from 'mobx'
 export {
 	Menu,
 	XZ,
+	Swiper,
 	Tabs,
 	CheckBox,
 	Table,
