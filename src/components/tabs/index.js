@@ -3,18 +3,101 @@ import Theme from '../theme';
 import XZ from '../xz';
 import './index.less';
 
+
+class ConatinerItem extends React.Component {
+    render(){
+        const realKey = this.props.pkey.split("_")[0];;
+        return <div>{this.props.renderItem(realKey)}</div>
+    }
+}
+
+const getSelectedKey = (selectedKey,data) => {
+
+    return selectedKey;
+}
+
+class Container extends React.Component {
+    constructor(props) {
+      super(props)
+      this.dict = {};
+      var curSelectedKey = getSelectedKey(props.selectedKey,props.data||[]);
+      this.state = {
+          selectedKey:curSelectedKey
+      };
+      this.createItem(curSelectedKey,props.data||[]);
+    }
+
+    createItem = (selectedKey,data)=>{
+        if(this.props.cache){
+            for(var key in this.dict){
+                var isExistsInDict = false;
+                for(var i=0,j=data.length;i<j;i+=1){
+                    if(key === data[i].key){
+                        isExistsInDict = true;
+                        break;
+                    }
+                }
+                if(!isExistsInDict){
+                    delete this.dict[key];
+                }
+            }
+            if(this.dict[selectedKey]){
+                return;
+            }
+        }
+        this.dict[selectedKey] = <ConatinerItem pkey={selectedKey} {...this.props} container={this}/>
+    }
+  
+   
+    componentWillReceiveProps(nextProps){
+      const curSelectedKey = getSelectedKey(nextProps.selectedKey,nextProps.data||[]);
+      if(curSelectedKey!==this.state.selectedKey){
+        this.createItem(curSelectedKey,nextProps.data||[]);
+        this.setState({
+            selectedKey:curSelectedKey
+        });
+      }
+      
+    }
+  
+  
+    render() {
+      var re = [];
+      var className = ["xz-tabs_container-default"];
+      if(this.props.className){
+        className.push(this.props.className);
+      }else{
+        className.push("xz-tabs-container");
+      }
+      if(this.props.cache===true){
+        for(var key in this.dict){
+          if(key===this.state.selectedKey){
+            re.push(<div key={key+"_containerwrapper"}>{this.dict[key]}</div>);
+          }else{
+            re.push(<div key={key+"_containerwrapper"} style={{display:"none"}}>{this.dict[key]}</div>);
+          }
+        }
+      }else{
+        re = this.dict[this.state.selectedKey];
+      }
+      
+      return (<div className={className.join(" ")}>{re}</div>);
+    }
+  }
+
+
 export default class Tabs extends React.Component{
     constructor(props){
         super(props);
-       
         this.state = {
-            selectedKey:this.props.selectedKey || this.props.defaultSelectedKey
+            selectedKey: getSelectedKey(props.selectedKey,props.data)
         };
     }
     componentWillReceiveProps(nextProps){
-        if(nextProps.selectedKey!==this.state.selectedKey){
+        var curKey = getSelectedKey(nextProps.selectedKey,nextProps.data)
+        if(curKey!==this.state.selectedKey){
             this.setState({
-                selectedKey:nextProps.selectedKey
+                selectedKey: curKey
             });
         }
     }
@@ -33,13 +116,10 @@ export default class Tabs extends React.Component{
         for(let i=0,j=data.length;i<j;i+=1){
             const itemdata = data[i];
             const p = {};
-            if(!itemdata.__xztabsitemkey__){
-                itemdata.__xztabsitemkey__ = 'xzitem_'+XZ._getSystemUniqueNum();
-            }
             if(itemdata.key === this.state.selectedKey){
                 p.className = selectedItemClassName;
             }
-            tabs.push(<TabsItem {...p} key={itemdata.__xztabsitemkey__} {...this.props} tabs={this} data={itemdata}/>);
+            tabs.push(<TabsItem {...p} key={itemdata.key} {...this.props} tabs={this} data={itemdata}/>);
         }
         return (<div className={`xz-tabs xz-tabs-${Theme.getConfig('size',this.props)} xz-tabs-hor`}>
             {tabs}</div>)
@@ -60,4 +140,4 @@ class TabsItem extends React.Component{
     }
 }
 
-Tabs.Item = TabsItem;
+Tabs.Container = Container;
