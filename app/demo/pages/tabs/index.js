@@ -1,7 +1,7 @@
 import {React,PageView,observer,PageContainer,Modal,Button,Select,Tabs} from "react-bricks-web"
 
 @PageView()
-class TabsDemo extends React.PureComponent {
+class TabsDemo extends React.Component {
 
   componentDidMount() {
   }
@@ -41,10 +41,18 @@ class TabsDemo extends React.PureComponent {
     })
   }
 
+  modify = () => {
+    this.state.data1[0].label="ssss";
+    this.setState({
+      data1:this.state.data1,
+    })
+  }
+
   render() {
     return <div>
         <div>
           <Button onClick={this.add.bind(this)}>Add</Button>
+          <Button onClick={this.modify.bind(this)}>Modify</Button>
         </div>
         <br/>
         <Tabs selectedKey='home' onChange={this.unControlChange.bind(this)} size='sm' data={[
