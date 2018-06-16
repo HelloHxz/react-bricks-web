@@ -1,6 +1,8 @@
-import {React,PageView,observer,PageContainer,Modal,Button,Select,Tabs} from "react-bricks-web"
+import {React,PageView,observer,PageContainer,Modal,Button,Select,Tabs} from "react-bricks-web";
+import TabsOne from './TabsOne';
+import TabsStore from './store';
 
-@PageView()
+@PageView({tabsstore:new TabsStore})
 class TabsDemo extends React.Component {
 
   componentDidMount() {
@@ -71,7 +73,7 @@ class TabsDemo extends React.Component {
         <br/>
         <Tabs onChange={this.tabOnChange.bind(this)} selectedKey={this.state.selectedKey1} data={this.state.data1} />
         <Tabs.Container cache={true} renderItem={this.renderItem1.bind(this)} selectedKey={this.state.selectedKey1} data={this.state.data1}/>
-       
+       <TabsOne {...this.props}/>
     </div>
   }
 }
