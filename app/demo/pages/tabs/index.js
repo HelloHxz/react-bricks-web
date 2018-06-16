@@ -43,19 +43,24 @@ class TabsDemo extends React.PureComponent {
 
   render() {
     return <div>
-        <Button onClick={this.add.bind(this)}>Add</Button>
+        <div>
+          <Button onClick={this.add.bind(this)}>Add</Button>
+        </div>
+        <br/>
         <Tabs selectedKey='home' onChange={this.unControlChange.bind(this)} size='sm' data={[
              {label:"首页",key:'home',allowClose:true},
              {label:"邮箱",key:'email',allowClose:true},
              {label:"动态",key:'info',allowClose:true},
         ]}>
         </Tabs>
+        <br/>
         <Tabs size='lg' data={[
              {label:"首页",key:'home',allowClose:true},
              {label:"邮箱",key:'email',allowClose:true},
              {label:"动态",key:'info',allowClose:true},
         ]}>
         </Tabs>
+        <br/>
         <Tabs onChange={this.tabOnChange.bind(this)} selectedKey={this.state.selectedKey1} data={this.state.data1} />
         <Tabs.Container cache={true} renderItem={this.renderItem1.bind(this)} selectedKey={this.state.selectedKey1} data={this.state.data1}/>
        

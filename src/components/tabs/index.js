@@ -122,7 +122,8 @@ export default class Tabs extends React.Component{
             tabs.push(<TabsItem {...p} key={itemdata.key} {...this.props} tabs={this} data={itemdata}/>);
         }
         return (<div className={`xz-tabs xz-tabs-${Theme.getConfig('size',this.props)} xz-tabs-hor`}>
-            {tabs}</div>)
+            <div className='xz-tabs-inner'>{tabs}</div>
+        </div>)
     }
 }
 

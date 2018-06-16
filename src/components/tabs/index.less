@@ -1,22 +1,22 @@
 @import '../theme/index.less';
 
 .xz-tabs{
-
+    border-bottom: 1px solid #aaa;
 }
 
 .xz-tabs-item{
     display: inline-block;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
 }
 
 .xz-tabs-default .xz-tabs-item{
-    height: 30px;
     line-height: 30px;
     padding-left:10px;
     padding-right:10px;
 }
 
 .xz-tabs-sm .xz-tabs-item{
-    height: 25px;
     line-height: 25px;
     padding-left:6px;
     padding-right:6px;
@@ -27,8 +27,15 @@
 }
 
 .xz-tabs-lg .xz-tabs-item{
-    height: 34px;
     line-height: 34px;
     padding-left:12px;
     padding-right:12px;
+}
+.xz-tabs-inner{
+    margin-bottom:-1px;
+}
+.xz-tabs-item-selected{
+    border:1px solid #aaa;
+    border-bottom: 0;
+    background-color: #fff;
 }
