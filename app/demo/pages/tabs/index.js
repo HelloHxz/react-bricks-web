@@ -32,9 +32,18 @@ class TabsDemo extends React.PureComponent {
     return <div>{key}</div>
   }
 
+  add = ()=>{
+    var key = new Date().valueOf().toString();
+    this.state.data1.push({key:key,label:"new"});
+    this.setState({
+      data1:this.state.data1,
+      selectedKey1:key
+    })
+  }
+
   render() {
     return <div>
-        <Button>s</Button>
+        <Button onClick={this.add.bind(this)}>Add</Button>
         <Tabs selectedKey='home' onChange={this.unControlChange.bind(this)} size='sm' data={[
              {label:"首页",key:'home',allowClose:true},
              {label:"邮箱",key:'email',allowClose:true},
