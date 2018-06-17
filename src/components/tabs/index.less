@@ -3,6 +3,13 @@
 .xz-tabs{
     border-bottom: 1px solid #bbb;
     position: relative;
+    user-select: none;
+}
+.xz-tabs-scroll{
+    float: left;
+    position: relative;
+    width: 100%;
+    overflow: auto;
 }
 
 .xz-tabs-item{
@@ -10,7 +17,7 @@
     cursor: pointer;
 }
 
-.xz-tabs-item-2{
+.xz-tabs-item-card{
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
 }
@@ -47,7 +54,7 @@
     white-space: nowrap;
     overflow: hidden;
 }
-.xz-tabs-item-selected-2{
+.xz-tabs-item-selected-card{
     border:1px solid #bbb;
     border-bottom: 0;
     background-color: #fff;
@@ -58,9 +65,6 @@
 }
 .xz-tabs-indicator{
     position: absolute;
-    left:0;
-    bottom:0;
-    height:2px;
-    width:45px;
+    transition: all .15s ease;
     background-color: @theme_color;
 }

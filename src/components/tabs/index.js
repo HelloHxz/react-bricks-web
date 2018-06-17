@@ -91,6 +91,7 @@ export default class Tabs extends React.Component{
     constructor(props){
         super(props);
         this.state = {
+            indicatorStyle:{},
             selectedKey: getSelectedKey(props.selectedKey,props.data)
         };
         this.itemsDict = {};
@@ -113,6 +114,8 @@ export default class Tabs extends React.Component{
         if(curKey!==this.state.selectedKey){
             this.setState({
                 selectedKey: curKey
+            },()=>{
+                this._renderIndicator();
             });
         }
     }
@@ -125,15 +128,35 @@ export default class Tabs extends React.Component{
     }
 
     renderIndicator(){
-        console.log("sss");
+        if(!this.isRenderIndicator()){
+            return;
+        }
         this._clearTimeout();
         this.renderIndicatorTimeout = window.setTimeout(()=>{
             this._renderIndicator();
         },80);
     }
     _renderIndicator(){
-        console.log("_realrenderindicator");
-        console.log(this.itemsDict);
+        if(!this.isRenderIndicator()){
+            return;
+        }
+        const curTabInstance = this.itemsDict[this.state.selectedKey];
+        if(!curTabInstance){
+            return;
+        }
+        const dom = curTabInstance.root;
+        const rect = dom.getBoundingClientRect();
+        this.setState({
+            indicatorStyle:{
+                width:rect.width,
+                height:2,
+                left:dom.offsetLeft,
+                bottom:0
+            }
+        });
+    }
+    isRenderIndicator(){
+        return this.props.indicator !== false && this.props.classType !=='card';
     }
     itemClick(data,tabItem){
         if(this.props.onChange){
@@ -161,10 +184,12 @@ export default class Tabs extends React.Component{
             outp.style = this.props.style;
         }
         return (<div {...outp}>
-            <div className='xz-tabs-inner'>
-                {tabs}
-                <div className='xz-tabs-indicator' />
-            </div>
+                <div className='xz-tabs-inner'>
+                    <div className='xz-tabs-scroll'>
+                        {tabs}
+                        { this.isRenderIndicator() ?  <div style={this.state.indicatorStyle} className='xz-tabs-indicator' />:null }
+                    </div>
+                </div>
         </div>)
     }
 }
@@ -184,7 +209,10 @@ class TabsItem extends React.Component{
     render(){
         const { data } = this.props;
         const p = {};
-        const className = ['xz-tabs-item',`xz-tabs-item-${this.props.classType||'1'}`];
+        const className = ['xz-tabs-item'];
+        if(this.props.classType==='card'){
+            className.push("xz-tabs-item-card");
+        }
         if(this.props.className){
             className.push(this.props.className);
         }
@@ -195,7 +223,7 @@ class TabsItem extends React.Component{
         }
 
         p.className = className.join(' ');
-        return (<div {...p}>{data.label||''}</div>)
+        return (<div {...p} ref={(root)=>{ this.root = root; }}>{data.label||''}</div>)
     }
 }
 

@@ -1,6 +1,6 @@
 import React from 'react'
 import PageView from '../navigator/web/pageview'
-
+import './index.less';
 import LazyLoadPage from "../navigator/web/lazyLoadPage";
 /*
   如果在同一个container中需要展示同一个页面多次  那么这个页面的名称格式为 页面名称_唯一标示
@@ -81,25 +81,28 @@ class RouteView extends React.Component {
 
   render() {
     var re = [];
-    var className = ["xz-pconatiner-default"];
+    const p = {};
+    var className = ["xz-routerview"];
     if(this.props.className){
       className.push(this.props.className);
-    }else{
-      className.push("xz-pconatiner");
     }
     if(this.props.cache===true){
       for(var key in this.arr){
         if(key===this.curpagename){
-          re.push(<div key={key+"_containerwrapper"}>{this.arr[key]}</div>);
+          re.push(<div key={key}>{this.arr[key]}</div>);
         }else{
-          re.push(<div key={key+"_containerwrapper"} style={{display:"none"}}>{this.arr[key]}</div>);
+          re.push(<div key={key} style={{display:"none"}}>{this.arr[key]}</div>);
         }
       }
     }else{
       re = this.pageInstance;
     }
+    p.className = className.join(" ");
+    if(this.props.style){
+      p.style = this.props.style;
+    }
     
-    return (<div className={className.join(" ")}>{re}</div>);
+    return (<div {...p}>{re}</div>);
   }
 }
 export default  RouteView;

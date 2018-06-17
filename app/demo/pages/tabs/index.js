@@ -51,7 +51,7 @@ class TabsDemo extends React.Component {
   }
 
   render() {
-    return <div>
+    return <div style={{overflow:"auto",height:'100%'}}>
         <div>
           <Button onClick={this.add.bind(this)}>Add</Button>
           <Button onClick={this.modify.bind(this)}>Modify</Button>

@@ -5,6 +5,7 @@ class Store {
         {label:"首页",key:'home',disabled:true},
         {label:"邮箱",key:'email'},
         {label:"动态",key:'info'},
+        {label:"其他(10)",key:'other'},
     ];
     @observable selectedKey = 'home';
     @observable btnName ="xxx";
