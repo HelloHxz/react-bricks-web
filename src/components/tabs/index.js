@@ -2,7 +2,7 @@ import React from 'react';
 import Theme from '../theme';
 import XZ from '../xz';
 import './index.less';
-import {observer} from 'mobx-react';
+import observer from '../observer';
 
 //https://github.com/mobxjs/mobx/issues/101
 

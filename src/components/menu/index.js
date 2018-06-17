@@ -1,9 +1,9 @@
 import  React from 'react';
 import PopMenu from '../popmenu';
 import './index.less';
+import observer from '../observer';
 
-
-
+@observer
 class Menu extends React.Component{
     constructor(props){
         super(props);
@@ -66,6 +66,7 @@ class Menu extends React.Component{
     }
 }
 
+@observer
 class MenuSection extends React.Component{
     constructor(props){
         super(props); 
@@ -132,6 +133,7 @@ class MenuSection extends React.Component{
     }
 }
 
+@observer
 class MenuSectionItem extends React.Component{
     constructor(props){
         super(props); 
@@ -161,6 +163,7 @@ class MenuSectionItem extends React.Component{
     }
 }
 
+@observer
 class MenuSectionHeader extends React.Component{
     constructor(props){
         super(props); 

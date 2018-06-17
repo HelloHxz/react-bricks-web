@@ -2,7 +2,6 @@ import {React,PageView,Menu,PopView,Input,Form,Select,RouteView,Row,Col,Modal,Bu
 import './index.less';
 import HomeStore from './store';
 import BaseStore from '../basicLayout/store';
-import {observer} from "mobx-react";
 import LeftMenu from './LeftMenu';
 
 const FormRepeat = Form.FormRepeat;
@@ -29,7 +28,8 @@ class HomeScreen extends React.PureComponent {
     // this.props.homestore.test = "huxiaohzong";
     // console.log(this.props.homestore);
     // this.props.navigation.navigate("button");
-    this.props.homestore.menuCollapsed = !this.props.homestore.menuCollapsed;
+    this.props.baseStore.MenuData[0].label = "hahah";
+    // this.props.homestore.menuCollapsed = !this.props.homestore.menuCollapsed;
   }
 
   onPageBeforeLeave(params){

@@ -1,7 +1,7 @@
 import {React,PageView,PageContainer,observer,Modal,Button,Select,Tabs} from "react-bricks-web"
 
 @observer
-class TabsOne extends React.Component {
+class TabsOne extends React.PureComponent {
 
   tabOnChange = (data,params) => {
     this.props.tabsstore.selectedKey = data.key;
