@@ -1,24 +1,35 @@
 @import '../theme/index.less';
 
 .xz-tabs{
-    border-bottom: 1px solid #aaa;
+    border-bottom: 1px solid #bbb;
+    position: relative;
 }
 
 .xz-tabs-item{
     display: inline-block;
+    cursor: pointer;
+}
+
+.xz-tabs-item-2{
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
 }
 
+.xz-tabs-item-disabled{
+    cursor: not-allowed; 
+    opacity: .5;
+}
+
 .xz-tabs-default .xz-tabs-item{
-    line-height: 30px;
-    padding-left:10px;
-    padding-right:10px;
+    line-height: 34px;
+    padding-left:12px;
+    padding-right:12px;
 }
 
 .xz-tabs-sm .xz-tabs-item{
     line-height: 25px;
     padding-left:6px;
+    padding-bottom: 1px;
     padding-right:6px;
 }
 
@@ -33,9 +44,23 @@
 }
 .xz-tabs-inner{
     margin-bottom:-1px;
+    white-space: nowrap;
+    overflow: hidden;
 }
-.xz-tabs-item-selected{
-    border:1px solid #aaa;
+.xz-tabs-item-selected-2{
+    border:1px solid #bbb;
     border-bottom: 0;
     background-color: #fff;
+}
+
+.xz-tabs-item-selected-1{
+
+}
+.xz-tabs-indicator{
+    position: absolute;
+    left:0;
+    bottom:0;
+    height:2px;
+    width:45px;
+    background-color: @theme_color;
 }

@@ -9,8 +9,7 @@ import observer from '../observer';
 @observer
 class ConatinerItem extends React.Component {
     render(){
-        const realKey = this.props.pkey.split("_")[0];;
-        return <div>{this.props.renderItem(realKey)}</div>
+        return <div>{this.props.renderItem(this.props.pkey)}</div>
     }
 }
 
@@ -94,7 +93,21 @@ export default class Tabs extends React.Component{
         this.state = {
             selectedKey: getSelectedKey(props.selectedKey,props.data)
         };
+        this.itemsDict = {};
+        this.renderIndicatorTimeout = null;
     }
+
+    componentWillUnmount(){
+        this._clearTimeout();
+    }
+
+    _clearTimeout(){
+        if(this.renderIndicatorTimeout){
+            window.clearTimeout(this.renderIndicatorTimeout);
+            this.renderIndicatorTimeout = null;
+        }
+    }
+
     componentWillReceiveProps(nextProps){
         var curKey = getSelectedKey(nextProps.selectedKey,nextProps.data)
         if(curKey!==this.state.selectedKey){
@@ -102,6 +115,25 @@ export default class Tabs extends React.Component{
                 selectedKey: curKey
             });
         }
+    }
+    registerTab(key,Instance){
+        this.itemsDict[key] = Instance;
+    }
+
+    unRegisterTab(key){
+        delete this.itemsDict[key];
+    }
+
+    renderIndicator(){
+        console.log("sss");
+        this._clearTimeout();
+        this.renderIndicatorTimeout = window.setTimeout(()=>{
+            this._renderIndicator();
+        },80);
+    }
+    _renderIndicator(){
+        console.log("_realrenderindicator");
+        console.log(this.itemsDict);
     }
     itemClick(data,tabItem){
         if(this.props.onChange){
@@ -113,7 +145,8 @@ export default class Tabs extends React.Component{
     }
     render(){
         const data = this.props.data||[];
-        const selectedItemClassName = this.props.selectedItemClassName || 'xz-tabs-item-selected';
+        const outp = {};
+        const selectedItemClassName = this.props.selectedItemClassName || `xz-tabs-item-selected xz-tabs-item-selected-${this.props.classType||'1'}`;
         const tabs = [];
         for(let i=0,j=data.length;i<j;i+=1){
             const itemdata = data[i];
@@ -123,8 +156,15 @@ export default class Tabs extends React.Component{
             }
             tabs.push(<TabsItem {...p} key={itemdata.key} {...this.props} tabs={this} data={itemdata}/>);
         }
-        return (<div className={`xz-tabs xz-tabs-${Theme.getConfig('size',this.props)} xz-tabs-hor`}>
-            <div className='xz-tabs-inner'>{tabs}</div>
+        outp.className = `xz-tabs xz-tabs-${Theme.getConfig('size',this.props)} xz-tabs-hor`;
+        if(this.props.style){
+            outp.style = this.props.style;
+        }
+        return (<div {...outp}>
+            <div className='xz-tabs-inner'>
+                {tabs}
+                <div className='xz-tabs-indicator' />
+            </div>
         </div>)
     }
 }
@@ -134,13 +174,28 @@ class TabsItem extends React.Component{
     itemClick(data){
         this.props.tabs.itemClick(data,this);
     }
+    componentDidMount(){
+        this.props.tabs.registerTab(this.props.data.key,this);
+        this.props.tabs.renderIndicator();
+    }
+    componentWillUnmount(){
+        this.props.tabs.unRegisterTab(this.props.data.key);
+    }
     render(){
         const { data } = this.props;
-        const className = ['xz-tabs-item'];
+        const p = {};
+        const className = ['xz-tabs-item',`xz-tabs-item-${this.props.classType||'1'}`];
         if(this.props.className){
             className.push(this.props.className);
         }
-        return (<div onClick={this.itemClick.bind(this,data)} className={className.join(' ')}>{data.label||''}</div>)
+        if(data.disabled === true || data.disabled === 'disabled'){
+            className.push("xz-tabs-item-disabled");
+        }else{
+            p.onClick = this.itemClick.bind(this,data);
+        }
+
+        p.className = className.join(' ');
+        return (<div {...p}>{data.label||''}</div>)
     }
 }
 

@@ -2,7 +2,7 @@ import {observable} from 'react-bricks-web';
 
 class Store {
     @observable TabsData = [
-        {label:"首页",key:'home'},
+        {label:"首页",key:'home',disabled:true},
         {label:"邮箱",key:'email'},
         {label:"动态",key:'info'},
     ];

@@ -68,11 +68,19 @@ class TabsDemo extends React.Component {
              {label:"首页",key:'home',allowClose:true},
              {label:"邮箱",key:'email',allowClose:true},
              {label:"动态",key:'info',allowClose:true},
-        ]}>
-        </Tabs>
+        ]} />
         <br/>
-        <Tabs onChange={this.tabOnChange.bind(this)} selectedKey={this.state.selectedKey1} data={this.state.data1} />
+          <Tabs size='lg' classType='2' data={[
+              {label:"首页",key:'home',allowClose:true},
+              {label:"邮箱",key:'email',allowClose:true},
+              {label:"动态",key:'info',allowClose:true},
+          ]} />
+        <br/>
+        <br/>
+        <br/>
+        <Tabs style={{width:500}} onChange={this.tabOnChange.bind(this)} selectedKey={this.state.selectedKey1} data={this.state.data1} />
         <Tabs.Container cache={true} renderItem={this.renderItem1.bind(this)} selectedKey={this.state.selectedKey1} data={this.state.data1}/>
+        <br/>
        <TabsOne {...this.props}/>
     </div>
   }
