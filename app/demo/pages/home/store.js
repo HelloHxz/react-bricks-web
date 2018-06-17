@@ -1,4 +1,4 @@
-import {observable} from 'mobx';
+import {observable} from 'react-bricks-web';
 class Store {
     @observable FormData = {};
     @observable menuCollapsed = false;

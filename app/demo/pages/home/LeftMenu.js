@@ -1,5 +1,4 @@
-import {React,PageView,Menu,PopView,Input,Form,Select,Views,Row,Col,Modal,Button} from "react-bricks-web"
-import {observer} from "mobx-react";
+import {React,observer,PageView,Menu,PopView,Input,Form,Select,Views,Row,Col,Modal,Button} from "react-bricks-web"
 
 @observer
 class LeftMenu extends React.Component {

@@ -1,4 +1,5 @@
-import {observable} from 'mobx';
+import {observable} from 'react-bricks-web';
+
 class Store {
     @observable TabsData = [
         {label:"首页",key:'home'},
@@ -6,6 +7,7 @@ class Store {
         {label:"动态",key:'info'},
     ];
     @observable selectedKey = 'home';
+    @observable btnName ="xxx";
 }
 
 export default Store;

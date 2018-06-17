@@ -2,8 +2,11 @@ import React from 'react';
 import Theme from '../theme';
 import XZ from '../xz';
 import './index.less';
+import {observer} from 'mobx-react';
 
+//https://github.com/mobxjs/mobx/issues/101
 
+@observer
 class ConatinerItem extends React.Component {
     render(){
         const realKey = this.props.pkey.split("_")[0];;
@@ -16,6 +19,7 @@ const getSelectedKey = (selectedKey,data) => {
     return selectedKey;
 }
 
+@observer
 class Container extends React.Component {
     constructor(props) {
       super(props)
@@ -47,7 +51,6 @@ class Container extends React.Component {
         }
         this.dict[selectedKey] = <ConatinerItem pkey={selectedKey} {...this.props} container={this}/>
     }
-  
    
     componentWillReceiveProps(nextProps){
       const curSelectedKey = getSelectedKey(nextProps.selectedKey,nextProps.data||[]);
@@ -57,7 +60,6 @@ class Container extends React.Component {
             selectedKey:curSelectedKey
         });
       }
-      
     }
   
   
@@ -85,7 +87,7 @@ class Container extends React.Component {
     }
   }
 
-
+@observer
 export default class Tabs extends React.Component{
     constructor(props){
         super(props);
@@ -127,6 +129,7 @@ export default class Tabs extends React.Component{
     }
 }
 
+@observer
 class TabsItem extends React.Component{
     itemClick(data){
         this.props.tabs.itemClick(data,this);
