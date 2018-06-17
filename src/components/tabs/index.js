@@ -146,13 +146,24 @@ export default class Tabs extends React.Component{
         }
         const dom = curTabInstance.root;
         const rect = dom.getBoundingClientRect();
-        this.setState({
-            indicatorStyle:{
+        let indicatorStyle = {};
+        if(this.props.direction==='vertical'){
+            indicatorStyle = {
+                height:rect.height,
+                width:2,
+                right:0,
+                top:dom.offsetTop,
+            }
+        }else{
+            indicatorStyle = {
                 width:rect.width,
                 height:2,
                 left:dom.offsetLeft,
                 bottom:0
             }
+        }
+        this.setState({
+            indicatorStyle
         });
     }
     isRenderIndicator(){
@@ -170,6 +181,7 @@ export default class Tabs extends React.Component{
         const data = this.props.data||[];
         const outp = {};
         const selectedItemClassName = this.props.selectedItemClassName || `xz-tabs-item-selected xz-tabs-item-selected-${this.props.classType||'1'}`;
+
         const tabs = [];
         for(let i=0,j=data.length;i<j;i+=1){
             const itemdata = data[i];
@@ -179,7 +191,7 @@ export default class Tabs extends React.Component{
             }
             tabs.push(<TabsItem {...p} key={itemdata.key} {...this.props} tabs={this} data={itemdata}/>);
         }
-        outp.className = `xz-tabs xz-tabs-${Theme.getConfig('size',this.props)} xz-tabs-hor`;
+        outp.className = `xz-tabs xz-tabs-${Theme.getConfig('size',this.props)} xz-tabs-${this.props.direction||'horizontal'}`;
         if(this.props.style){
             outp.style = this.props.style;
         }
@@ -210,7 +222,7 @@ class TabsItem extends React.Component{
         const { data } = this.props;
         const p = {};
         const className = ['xz-tabs-item'];
-        if(this.props.classType==='card'){
+        if(this.props.classType==='card'&&this.props.direction!=='vertical'){
             className.push("xz-tabs-item-card");
         }
         if(this.props.className){

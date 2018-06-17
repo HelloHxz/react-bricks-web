@@ -70,13 +70,18 @@ class TabsDemo extends React.Component {
              {label:"动态",key:'info',allowClose:true},
         ]} />
         <br/>
-          <Tabs size='lg' classType='2' data={[
+          <Tabs size='lg' data={[
               {label:"首页",key:'home',allowClose:true},
               {label:"邮箱",key:'email',allowClose:true},
               {label:"动态",key:'info',allowClose:true},
           ]} />
         <br/>
         <br/>
+        <Tabs selectedKey={this.state.selectedKey1} size='lg' direction='vertical' data={[
+              {label:"首页",key:'home',allowClose:true},
+              {label:"邮箱",key:'email',allowClose:true},
+              {label:"动态",key:'info',allowClose:true},
+          ]} />
         <br/>
         <Tabs style={{width:500}} onChange={this.tabOnChange.bind(this)} selectedKey={this.state.selectedKey1} data={this.state.data1} />
         <Tabs.Container cache={true} renderItem={this.renderItem1.bind(this)} selectedKey={this.state.selectedKey1} data={this.state.data1}/>
