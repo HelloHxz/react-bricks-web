@@ -264,6 +264,12 @@ class SingleTable extends React.Component{
     constructor(props){
         super(props);
     }
+
+    onScroll = (e)=>{
+        const mark = e.target.getAttribute("data-mark");
+        this.props.root.onScroll(mark,e);
+    }
+
     render(){
         const tableClassName = ['xz-table'];
         const p = {};
@@ -278,11 +284,11 @@ class SingleTable extends React.Component{
         const outerClassName = ["xz-table-outer-wrapper"];
         if(this.props.fixedLeftCount){
             outerClassName.push("xz-table-outer-fixedleft");
-        }else if(this.props.fiexdRightCount){
+        }else if(this.props.fixedRightCount){
             outerClassName.push("xz-table-outer-fixedright");
         }
         return (<div className={outerClassName.join(' ')}>
-            <div {...p} className='xz-table-inner-wrapper'>
+            <div data-mark={this.props.mark} ref={(scrollY)=>{ this.scrollY = scrollY; }} {...p} onScroll={this.onScroll.bind(this)} className='xz-table-inner-wrapper'>
                 <table className={tableClassName.join(" ")}>
                     <TableHeader ref={(mainHeader)=>{ this.mainHeader = mainHeader; }} {...this.props} table={this.props.root}/>
                     <TableBody ref={(mainBody)=>{ this.mainBody = mainBody; }} {...this.props} table={this.props.root} />
@@ -306,6 +312,31 @@ export default class Table extends React.Component{
         TableUtil._setRowSpan(props.columns,level);
         TableUtil._getRootCellArr(props.columns,this.rootCellArr);
         this.tableid = 'xztable-'+ XZ._getSystemUniqueNum();
+        this.i = 0;
+        this.curMark = null;
+        this.setClearMarkTimeout = null;
+    }
+
+    onScroll(mark,e){
+        if(!this.curMark){
+            this.curMark = mark;
+        }
+        if(this.curMark!==mark){
+            return;
+        }
+        if(mark==='left'){
+            this.mainTable.scrollY.scrollTop = e.target.scrollTop;
+        }else if(mark==='main'){
+          this.leftTable.scrollY.scrollTop = e.target.scrollTop;
+        }
+        if(this.setClearMarkTimeout){
+            window.clearTimeout(this.setClearMarkTimeout);
+            this.setClearMarkTimeout = null;
+        }
+        this.setClearMarkTimeout = setTimeout(()=>{
+            this.curMark = null;
+        },40);
+        
     }
  
     render(){
@@ -315,11 +346,11 @@ export default class Table extends React.Component{
         }
         return (<div {...p}>
             <div style={{position:'relative',height:'100%',width:'100%'}}>
-                <SingleTable ref={(mainTable)=>{ this.mainTable = mainTable; }} extends={()=>{
+                <SingleTable mark='main' ref={(mainTable)=>{ this.mainTable = mainTable; }} extends={()=>{
                 return <StyleManager root={this}/>;
             }} {...this.props} root={this}/>
                 <div style={{position:'absolute',left:0,top:0,height:'100%'}}>
-                    <SingleTable fixedLeftCount={1} {...this.props} root={this}/>
+                    <SingleTable mark='left' ref={(leftTable)=>{this.leftTable = leftTable;}} fixedLeftCount={1} {...this.props} root={this}/>
                 </div>
                 <div style={{position:'absolute',right:0,top:0,height:'100%',zIndex:1}}>
                     sadasdasasdas>>>>d
