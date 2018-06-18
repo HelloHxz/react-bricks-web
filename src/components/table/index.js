@@ -3,118 +3,7 @@ import Theme from '../theme';
 import XZ from '../xz';
 import './index.less';
 
-/* 
-    colspan : 当前字段对应的根字段的个数
-    rowspan ：先得到头部行数为rowCount,当前字段从上到下进行分配，可分配数为rowCount，
-    如果该字段有子字段那么分配1，rowspan为1，可分配数减去1，再遍历下去分配。
-    如果没有子字段 那么rowspan为可分配的所剩下的值。
-*/
 
-class TableHeader extends React.Component {
-    constructor(props){
-        super(props);
-  
-    }
-    _createRows = (columns,rows,isInit) => {
-        const range = [0,columns.length];
-        if(this.props.fixedLeftCount&&isInit){
-            range[1] = this.props.fixedLeftCount; 
-        }
-        for(let i = range[0],j=range[1];i<j;i+=1){
-            const colItem = columns[i];
-            const _level = colItem.__level - 1;
-            if(!rows[_level]){
-                rows[_level] = [];
-            }
-            rows[_level].push(
-                <TableHeaderCell {...this.props} key={`${colItem.key||''}_${colItem.title}`} cellConfig={colItem} />
-            );
-            if(colItem.children){
-                this._createRows(colItem.children,rows,false);
-            }
-        }
-    }
-    render(){
-        const headerRows = [];
-        this._createRows(this.props.columns,headerRows,true);
-        const rows = [];
-        console.log(headerRows);
-        for(var i=0,j=headerRows.length;i<j;i+=1){
-            rows.push(<TableRow key={i}>
-                    {headerRows[i]}
-                </TableRow>);
-        }
-        return (<thead>
-            {rows}
-        </thead>);
-    }
-}
-
-class TableHeaderCell extends React.Component{
-    render(){
-        const p = {};
-        const {cellConfig} = this.props;
-        if(cellConfig.__rowspan && cellConfig.__rowspan!==1){
-            p.rowSpan = cellConfig.__rowspan;
-        }
-        if(cellConfig.__colspan && cellConfig.__colspan!==1){
-            p.colSpan = cellConfig.__colspan;
-        }
-        let innnerClassName = {};
-
-        if(cellConfig.__isRootCell){
-            innnerClassName.className = StyleManager._getCellClassName(this.props.root.tableid,cellConfig.key);
-        }
-        return <th {...p}><div {...innnerClassName}>{cellConfig.title}</div></th>;
-    }
-}
-class TableBody extends React.Component{
-    render(){
-        const dataSource = this.props.dataSource || [];
-        const rows = [];
-        for(let i = 0,j=dataSource.length;i<j;i+=1){
-            const rowdata = dataSource[i];
-            if(!rowdata.__hxzdatarowkey__){
-                rowdata.__hxzdatarowkey__ = 'tablerow_'+XZ._getSystemUniqueNum();
-            }
-            const cells = [];
-            for(let n = 0,m=this.props.root.rootCellArr.length;n<m;n+=1){
-                const cellConfig = this.props.root.rootCellArr[n];
-                if(this.props.fixedLeftCount){
-                    if(cellConfig.__groupIndex>=this.props.fixedLeftCount){
-                        break;
-                    }
-                }
-                cells.push(<TableCell key={cellConfig.key} {...this.props} cellConfig={cellConfig} data={rowdata}/>);
-            }
-            rows.push(<TableRow {...this.props} key={rowdata.__hxzdatarowkey__}>
-            {cells}
-            </TableRow>);
-        }
-        return (<tbody>
-                {rows}
-            </tbody>);
-    }
-}
-
-class TableRow extends React.Component{
-    render(){
-        return (<tr>
-           {this.props.children}
-        </tr>);
-    }
-}
-
-
-class TableCell extends React.Component{
-    render(){
-        const {cellConfig,table} = this.props;
-        var innerp = {
-            className:StyleManager._getCellClassName(table.tableid,cellConfig.key)
-        };
-        return <td><div {...innerp}>asdasdas</div></td>;
-    }
-}
 
 class TableUtil {
     // 获取表头层次深度也就是表头行数 
@@ -242,6 +131,134 @@ class StyleManager extends React.Component{
         return <style>{re}</style>
     }
 }
+/* 
+    colspan : 当前字段对应的根字段的个数
+    rowspan ：先得到头部行数为rowCount,当前字段从上到下进行分配，可分配数为rowCount，
+    如果该字段有子字段那么分配1，rowspan为1，可分配数减去1，再遍历下去分配。
+    如果没有子字段 那么rowspan为可分配的所剩下的值。
+*/
+
+class TableHeader extends React.Component {
+    constructor(props){
+        super(props);
+  
+    }
+    componentDidMount = ()=>{
+        if(this.props.fixedLeftCount){
+            setTimeout(()=>{
+                const mainHeaderRows = this.props.root.mainTable.mainHeader.headerDom.children;
+                const curHeaderRows = this.headerDom.children;
+                for(var i=0,j=curHeaderRows.length;i<j;i+=1){
+                    var cells = curHeaderRows[i].children;
+                    for(var n=0,m=cells.length;n<m;n+=1){
+                        cells[n].style.height = mainHeaderRows[i].children[n].offsetHeight+"px";
+                    }
+                }
+            },10);
+        }
+    }
+    _createRows = (columns,rows,isInit) => {
+        const range = [0,columns.length];
+        if(this.props.fixedLeftCount&&isInit){
+            range[1] = this.props.fixedLeftCount; 
+        }
+        for(let i = range[0],j=range[1];i<j;i+=1){
+            const colItem = columns[i];
+            const _level = colItem.__level - 1;
+            if(!rows[_level]){
+                rows[_level] = [];
+            }
+            rows[_level].push(
+                <TableHeaderCell {...this.props} key={`${colItem.key||''}_${colItem.title}`} cellConfig={colItem} />
+            );
+            if(colItem.children){
+                this._createRows(colItem.children,rows,false);
+            }
+        }
+    }
+    render(){
+        const headerRows = [];
+        this._createRows(this.props.columns,headerRows,true);
+        const rows = [];
+        for(var i=0,j=headerRows.length;i<j;i+=1){
+            rows.push(<TableRow key={i}>
+                    {headerRows[i]}
+                </TableRow>);
+        }
+        return (<thead ref={(headerDom)=>{ this.headerDom = headerDom; }}>
+            {rows}
+        </thead>);
+    }
+}
+
+class TableHeaderCell extends React.Component{
+    render(){
+        const p = {};
+        const {cellConfig} = this.props;
+        if(cellConfig.__rowspan && cellConfig.__rowspan!==1){
+            p.rowSpan = cellConfig.__rowspan;
+        }
+        if(cellConfig.__colspan && cellConfig.__colspan!==1){
+            p.colSpan = cellConfig.__colspan;
+        }
+        let innnerClassName = {};
+
+        if(cellConfig.__isRootCell){
+            innnerClassName.className =`xz-table-cell-inner ${StyleManager._getCellClassName(this.props.root.tableid,cellConfig.key)}` ;
+        }else{
+            innnerClassName.className ='xz-table-cell-inner';
+        }
+        return <th {...p}><div {...innnerClassName}>{cellConfig.title}</div></th>;
+    }
+}
+class TableBody extends React.Component{
+    render(){
+        const dataSource = this.props.dataSource || [];
+        const rows = [];
+        for(let i = 0,j=dataSource.length;i<j;i+=1){
+            const rowdata = dataSource[i];
+            if(!rowdata.__hxzdatarowkey__){
+                rowdata.__hxzdatarowkey__ = 'tablerow_'+XZ._getSystemUniqueNum();
+            }
+            const cells = [];
+            for(let n = 0,m=this.props.root.rootCellArr.length;n<m;n+=1){
+                const cellConfig = this.props.root.rootCellArr[n];
+                if(this.props.fixedLeftCount){
+                    if(cellConfig.__groupIndex>=this.props.fixedLeftCount){
+                        break;
+                    }
+                }
+                cells.push(<TableCell key={cellConfig.key} {...this.props} cellConfig={cellConfig} data={rowdata}/>);
+            }
+            rows.push(<TableRow {...this.props} key={rowdata.__hxzdatarowkey__}>
+            {cells}
+            </TableRow>);
+        }
+        return (<tbody>
+                {rows}
+            </tbody>);
+    }
+}
+
+class TableRow extends React.Component{
+    render(){
+        return (<tr>
+           {this.props.children}
+        </tr>);
+    }
+}
+
+
+class TableCell extends React.Component{
+    render(){
+        const {cellConfig,table} = this.props;
+        var innerp = {
+            className:`xz-table-cell-inner ${StyleManager._getCellClassName(table.tableid,cellConfig.key)}`
+        };
+        return <td><div {...innerp}>asdasdas</div></td>;
+    }
+}
+
 
 class SingleTable extends React.Component{
     constructor(props){
@@ -260,16 +277,22 @@ class SingleTable extends React.Component{
         if(this.props.extends){
             Ex = this.props.extends();
         }
-        return (<div className='xz-table-outer-wrapper'>
+        const outerClassName = ["xz-table-outer-wrapper"];
+        if(this.props.fixedLeftCount){
+            outerClassName.push("xz-table-outer-fixedleft");
+        }else if(this.props.fiexdRightCount){
+            outerClassName.push("xz-table-outer-fixedright");
+        }
+        return (<div className={outerClassName.join(' ')}>
             <div {...p} className='xz-table-inner-wrapper'>
                 <table className={tableClassName.join(" ")}>
-                    <TableHeader {...this.props} table={this.props.root}/>
-                    <TableBody {...this.props} table={this.props.root} />
+                    <TableHeader ref={(mainHeader)=>{ this.mainHeader = mainHeader; }} {...this.props} table={this.props.root}/>
+                    <TableBody ref={(mainBody)=>{ this.mainBody = mainBody; }} {...this.props} table={this.props.root} />
                 </table>
             </div>
             <div style={{position:'absolute',top:1,left:0,zIndex:1}}>
               <table className={tableClassName.join(" ")}>
-                 <TableHeader {...this.props} table={this.props.root}/>
+                 <TableHeader ref={(fixedTopHeader)=>{ this.fixedTopHeader = fixedTopHeader; }} {...this.props} table={this.props.root}/>
               </table>
             </div>
             {Ex}
@@ -291,10 +314,10 @@ export default class Table extends React.Component{
         //
         return (<div>
             <div style={{position:'relative'}}>
-                <SingleTable extends={()=>{
+                <SingleTable ref={(mainTable)=>{ this.mainTable = mainTable; }} extends={()=>{
                 return <StyleManager root={this}/>;
             }} {...this.props} root={this}/>
-                <div style={{position:'absolute',left:0,top:0}}>
+                <div style={{position:'absolute',left:0,top:0,height:'100%'}}>
                     <SingleTable fixedLeftCount={1} {...this.props} root={this}/>
                 </div>
             </div>
