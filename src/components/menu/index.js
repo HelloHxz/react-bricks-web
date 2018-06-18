@@ -52,15 +52,18 @@ class Menu extends React.Component{
     }
     render(){
         let children = [];
-        let className = '';
+        const p = {};
         if(this.state.collapsed === true){
             children = this._getMiniVerticalItems();
-            className = 'xz-menu-vertical-mini';
+            p.className = 'xz-menu xz-menu-vertical-mini';
         }else {
             children = this._getVerticalItems();
-            className = 'xz-menu-vertical';
+            p.className = 'xz-menu xz-menu-vertical';
         }
-        return <div className={`xz-menu ${className}`}>
+        if(this.props.style){
+            p.style = this.props.style;
+        }
+        return <div {...p}>
             {children}
         </div>;
     }

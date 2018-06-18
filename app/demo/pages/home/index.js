@@ -48,7 +48,7 @@ class HomeScreen extends React.PureComponent {
          <VBox.Panel>
              <HBox style={{width:'100%',height:'100%'}}>
               <HBox.Panel>
-                <div style={{overflow:'auto',width:'100%',height:'100%'}}>
+                <div style={{overflow:'auto',marginRight:-20,paddingRight:20,height:'100%'}}>
                   <LeftMenu {...this.props} />
                 </div>
               </HBox.Panel>
