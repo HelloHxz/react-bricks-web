@@ -119,7 +119,6 @@ class TableDemo extends React.Component {
   }
 
   render() {
-    // style={{position:'absolute',top:120,bottom:100,left:0,right:0}}
     return <div>
         <Button onClick={this.changeData.bind(this)} type='primary'>Change Data</Button>
         <Table 

@@ -270,6 +270,23 @@ class SingleTable extends React.Component{
         this.props.root.onScroll(mark,e);
     }
 
+    componentDidMount = () => {
+        // register window resize
+        // register column resize
+
+        if(this.props.mark==='main'){
+            if(this.table.offsetWidth>=this.scrollY.offsetWidth){
+                alert("有滚动条");
+            }else{
+                alert("meiyou");
+            }
+        }
+    }
+
+    checkHasScroll = ()=>{
+
+    }
+
     render(){
         const tableClassName = ['xz-table'];
         const p = {};
@@ -289,12 +306,12 @@ class SingleTable extends React.Component{
         }
         return (<div className={outerClassName.join(' ')}>
             <div data-mark={this.props.mark} ref={(scrollY)=>{ this.scrollY = scrollY; }} {...p} onScroll={this.onScroll.bind(this)} className='xz-table-inner-wrapper'>
-                <table className={tableClassName.join(" ")}>
+                <table ref={(table)=>{this.table = table;}} className={tableClassName.join(" ")}>
                     <TableHeader ref={(mainHeader)=>{ this.mainHeader = mainHeader; }} {...this.props} table={this.props.root}/>
                     <TableBody ref={(mainBody)=>{ this.mainBody = mainBody; }} {...this.props} table={this.props.root} />
                 </table>
             </div>
-            <div style={{position:'absolute',top:1,left:0,zIndex:1}}>
+            <div ref={(mainFixedHeader)=>{this.mainFixedHeader = mainFixedHeader;}} style={{overflow:'hidden',position:'absolute',top:1,left:0,width:'100%',zIndex:1}}>
               <table className={tableClassName.join(" ")}>
                  <TableHeader ref={(fixedTopHeader)=>{ this.fixedTopHeader = fixedTopHeader; }} {...this.props} table={this.props.root}/>
               </table>
@@ -328,6 +345,8 @@ export default class Table extends React.Component{
             this.mainTable.scrollY.scrollTop = e.target.scrollTop;
         }else if(mark==='main'){
           this.leftTable.scrollY.scrollTop = e.target.scrollTop;
+          this.mainTable.mainFixedHeader.scrollLeft = e.target.scrollLeft;
+          console.log(this.mainTable.mainFixedHeader);
         }
         if(this.setClearMarkTimeout){
             window.clearTimeout(this.setClearMarkTimeout);
