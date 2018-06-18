@@ -30,7 +30,7 @@ const columns = [{
           title: 'Door No.',
           dataIndex: 'number',
           key: 'number',
-          width: 100,
+          width: 200,
         }, {
             title: 'ex No.',
             dataIndex: 'ex',
@@ -45,15 +45,18 @@ const columns = [{
       title: 'Address',
       dataIndex: 'companyAddress',
       key: 'companyAddress',
+      width: 200,
     }, {
       title: 'Name',
       dataIndex: 'companyName',
       key: 'companyName',
+      width: 200,
     }],
   }, {
     title: 'Gender',
     dataIndex: 'gender',
     key: 'gender',
+    width: 200,
   }];
 
 
@@ -62,19 +65,19 @@ const columns = [{
       title: 'Gender',
       dataIndex: 'gender',
       key: 'gender1',
-      width: 60,
+      width: 160,
     },
     {
       title: 'Gender',
       dataIndex: 'gender',
       key: 'gender2',
-      width: 60,
+      width: 160,
     },
     {
       title: 'Gender',
       dataIndex: 'gender',
       key: 'gender3',
-      width: 60,
+      width: 100,
     },
     {
       title: 'Address',
@@ -82,7 +85,7 @@ const columns = [{
         title: 'Street',
         dataIndex: 'street',
         key: 'street',
-        width: 200,
+        width: 230,
       }, {
         title: 'Block',
         key:'xxx'

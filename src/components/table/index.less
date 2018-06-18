@@ -1,5 +1,18 @@
 .xz-table{
     border-collapse: collapse;
+    background-color: #fff;
+}
+.xz-table-outer-wrapper{
+    overflow-x:auto;
+    position: relative;
+    overflow-y:hidden;
+}
+.xz-table-inner-wrapper{
+    border-top:1px solid #eee; 
+    display: inline-block;
+    position: relative;
+    overflow-y:auto;
+    overflow-x:hidden;
 }
 
 .xz-table thead th,.xz-table tbody td{
@@ -12,7 +25,3 @@
 // .xz-table tbody tr td:last-child,.xz-table thead tr th:last-child{
     
 // }
-.xz-table-inner-wrapper{
-    border-top:1px solid #eee; 
-    display: inline-block;
-}

@@ -15,8 +15,12 @@ class TableHeader extends React.Component {
         super(props);
   
     }
-    _createRows = (columns,rows) => {
-        for(let i = 0,j=columns.length;i<j;i+=1){
+    _createRows = (columns,rows,isInit) => {
+        const range = [0,columns.length];
+        if(this.props.fixedLeftCount&&isInit){
+            range[1] = this.props.fixedLeftCount; 
+        }
+        for(let i = range[0],j=range[1];i<j;i+=1){
             const colItem = columns[i];
             const _level = colItem.__level - 1;
             if(!rows[_level]){
@@ -26,14 +30,15 @@ class TableHeader extends React.Component {
                 <TableHeaderCell {...this.props} key={`${colItem.key||''}_${colItem.title}`} cellConfig={colItem} />
             );
             if(colItem.children){
-                this._createRows(colItem.children,rows);
+                this._createRows(colItem.children,rows,false);
             }
         }
     }
     render(){
         const headerRows = [];
-        this._createRows(this.props.columns,headerRows);
+        this._createRows(this.props.columns,headerRows,true);
         const rows = [];
+        console.log(headerRows);
         for(var i=0,j=headerRows.length;i<j;i+=1){
             rows.push(<TableRow key={i}>
                     {headerRows[i]}
@@ -58,7 +63,7 @@ class TableHeaderCell extends React.Component{
         let innnerClassName = {};
 
         if(cellConfig.__isRootCell){
-            innnerClassName.className = StyleManager._getCellClassName(this.props.table.tableid,cellConfig.key);
+            innnerClassName.className = StyleManager._getCellClassName(this.props.root.tableid,cellConfig.key);
         }
         return <th {...p}><div {...innnerClassName}>{cellConfig.title}</div></th>;
     }
@@ -73,8 +78,13 @@ class TableBody extends React.Component{
                 rowdata.__hxzdatarowkey__ = 'tablerow_'+XZ._getSystemUniqueNum();
             }
             const cells = [];
-            for(let n = 0,m=this.props.table.rootCellArr.length;n<m;n+=1){
-                const cellConfig = this.props.table.rootCellArr[n];
+            for(let n = 0,m=this.props.root.rootCellArr.length;n<m;n+=1){
+                const cellConfig = this.props.root.rootCellArr[n];
+                if(this.props.fixedLeftCount){
+                    if(cellConfig.__groupIndex>=this.props.fixedLeftCount){
+                        break;
+                    }
+                }
                 cells.push(<TableCell key={cellConfig.key} {...this.props} cellConfig={cellConfig} data={rowdata}/>);
             }
             rows.push(<TableRow {...this.props} key={rowdata.__hxzdatarowkey__}>
@@ -166,13 +176,15 @@ class TableUtil {
         return re;
     }
 
-    static _getRootCellArr = (columns,outArr) => {
+    static _getRootCellArr = (columns,outArr,parentGroupIndex) => {
         for(let i=0,j=columns.length;i<j;i+=1){
             const colItem = columns[i];
+            const p = (!parentGroupIndex&&parentGroupIndex!==0)?i:parentGroupIndex;
             if(colItem.children){
-                TableUtil._getRootCellArr(colItem.children,outArr);
+                TableUtil._getRootCellArr(colItem.children,outArr,p);
             }else{
                 colItem.__isRootCell = true;
+                colItem.__groupIndex = p;
                 outArr.push(colItem);
             }
         }
@@ -211,8 +223,8 @@ class StyleManager extends React.Component{
 
     convertRootArrToWidthInfo = (props)=>{
         const re = [];
-        for(let i =0,j=props.table.rootCellArr.length;i<j;i+=1){
-            const item = props.table.rootCellArr[i];
+        for(let i =0,j=props.root.rootCellArr.length;i<j;i+=1){
+            const item = props.root.rootCellArr[i];
             re.push({
                 key:item.key,
                 width:this.parseWidth(item.width)
@@ -225,9 +237,43 @@ class StyleManager extends React.Component{
         const re = [];
         for(let i =0,j=this.state.columnsWidthInfo.length;i<j;i+=1){
             const item = this.state.columnsWidthInfo[i];
-            re.push(`.${StyleManager._getCellClassName(this.props.table.tableid,item.key)}{ width:${item.width} } `);
+            re.push(`.${StyleManager._getCellClassName(this.props.root.tableid,item.key)}{ width:${item.width} } `);
         }
         return <style>{re}</style>
+    }
+}
+
+class SingleTable extends React.Component{
+    constructor(props){
+        super(props);
+    }
+    render(){
+        const tableClassName = ['xz-table'];
+        const p = {};
+        if(this.props.style){
+            p.style = this.props.style;
+        }
+        if(this.props.tableClassName){
+            tableClassName.push(this.props.tableClassName);
+        }
+        let Ex = null;
+        if(this.props.extends){
+            Ex = this.props.extends();
+        }
+        return (<div className='xz-table-outer-wrapper'>
+            <div {...p} className='xz-table-inner-wrapper'>
+                <table className={tableClassName.join(" ")}>
+                    <TableHeader {...this.props} table={this.props.root}/>
+                    <TableBody {...this.props} table={this.props.root} />
+                </table>
+            </div>
+            <div style={{position:'absolute',top:1,left:0,zIndex:1}}>
+              <table className={tableClassName.join(" ")}>
+                 <TableHeader {...this.props} table={this.props.root}/>
+              </table>
+            </div>
+            {Ex}
+        </div>)
     }
 }
 
@@ -240,25 +286,18 @@ export default class Table extends React.Component{
         TableUtil._getRootCellArr(props.columns,this.rootCellArr);
         this.tableid = 'xztable-'+ XZ._getSystemUniqueNum();
     }
-
  
     render(){
-        const className = ['xz-table'];
-        const p = {};
-        if(this.props.style){
-            p.style = this.props.style;
-        }
-        if(this.props.className){
-            className.push(this.props.className);
-        }
+        //
         return (<div>
-            <div {...p} className='xz-table-inner-wrapper'>
-                <table className={className.join(" ")}>
-                    <TableHeader {...this.props} table={this}/>
-                    <TableBody {...this.props} table={this} />
-                </table>
+            <div style={{position:'relative'}}>
+                <SingleTable extends={()=>{
+                return <StyleManager root={this}/>;
+            }} {...this.props} root={this}/>
+                <div style={{position:'absolute',left:0,top:0}}>
+                    <SingleTable fixedLeftCount={1} {...this.props} root={this}/>
+                </div>
             </div>
-            <StyleManager table={this}/>
         </div>)
     }
 }
