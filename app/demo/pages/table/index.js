@@ -45,18 +45,15 @@ const columns = [{
       title: 'Address',
       dataIndex: 'companyAddress',
       key: 'companyAddress',
-      width: 200,
     }, {
       title: 'Name',
       dataIndex: 'companyName',
       key: 'companyName',
-      width: 200,
     }],
   }, {
     title: 'Gender',
     dataIndex: 'gender',
     key: 'gender',
-    width: 200,
   }];
 
 
@@ -122,10 +119,11 @@ class TableDemo extends React.Component {
   }
 
   render() {
+    // style={{position:'absolute',top:120,bottom:100,left:0,right:0}}
     return <div>
         <Button onClick={this.changeData.bind(this)} type='primary'>Change Data</Button>
         <Table 
-        style={{height:400,overflow:'auto'}}
+        style={{height:400}}
         dataSource={this.state.firstTableData}
         columns={columns}
         />

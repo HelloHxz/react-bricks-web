@@ -267,9 +267,7 @@ class SingleTable extends React.Component{
     render(){
         const tableClassName = ['xz-table'];
         const p = {};
-        if(this.props.style){
-            p.style = this.props.style;
-        }
+       
         if(this.props.tableClassName){
             tableClassName.push(this.props.tableClassName);
         }
@@ -311,16 +309,23 @@ export default class Table extends React.Component{
     }
  
     render(){
-        //
-        return (<div>
-            <div style={{position:'relative'}}>
+        const p={};
+        if(this.props.style){
+            p.style = this.props.style;
+        }
+        return (<div {...p}>
+            <div style={{position:'relative',height:'100%',width:'100%'}}>
                 <SingleTable ref={(mainTable)=>{ this.mainTable = mainTable; }} extends={()=>{
                 return <StyleManager root={this}/>;
             }} {...this.props} root={this}/>
                 <div style={{position:'absolute',left:0,top:0,height:'100%'}}>
                     <SingleTable fixedLeftCount={1} {...this.props} root={this}/>
                 </div>
+                <div style={{position:'absolute',right:0,top:0,height:'100%',zIndex:1}}>
+                    sadasdasasdas>>>>d
+                </div>
             </div>
+           
         </div>)
     }
 }
