@@ -145,16 +145,14 @@ class TableHeader extends React.Component {
     }
     componentDidMount = ()=>{
         if(this.props.fixedLeftCount||this.props.fixedRightCount){
-            setTimeout(()=>{
-                const mainHeaderRows = this.props.root.mainTable.mainHeader.headerDom.children;
-                const curHeaderRows = this.headerDom.children;
-                for(var i=0,j=curHeaderRows.length;i<j;i+=1){
-                    var cells = curHeaderRows[i].children;
-                    for(var n=0,m=cells.length;n<m;n+=1){
-                        cells[n].style.height = mainHeaderRows[i].children[n].offsetHeight+"px";
-                    }
+            const mainHeaderRows = this.props.root.mainTable.mainHeader.headerDom.children;
+            const curHeaderRows = this.headerDom.children;
+            for(var i=0,j=curHeaderRows.length;i<j;i+=1){
+                var cells = curHeaderRows[i].children;
+                for(var n=0,m=cells.length;n<m;n+=1){
+                    cells[n].style.height = mainHeaderRows[i].children[n].offsetHeight+"px";
                 }
-            },10);
+            }
         }
     }
     _createRows = (columns,rows,isInit) => {
