@@ -230,6 +230,7 @@ class TableBody extends React.Component{
                 }
                 cells.push(<TableCell key={cellConfig.key} {...this.props} cellConfig={cellConfig} data={rowdata}/>);
             }
+            // todo props.render prerowdata nextrowdata
             rows.push(<TableRow {...this.props} key={rowdata.__hxzdatarowkey__}>
             {cells}
             </TableRow>);
