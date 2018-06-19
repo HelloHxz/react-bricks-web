@@ -144,7 +144,7 @@ class TableHeader extends React.Component {
   
     }
     componentDidMount = ()=>{
-        if(this.props.fixedLeftCount){
+        if(this.props.fixedLeftCount||this.props.fixedRightCount){
             setTimeout(()=>{
                 const mainHeaderRows = this.props.root.mainTable.mainHeader.headerDom.children;
                 const curHeaderRows = this.headerDom.children;
@@ -161,6 +161,9 @@ class TableHeader extends React.Component {
         const range = [0,columns.length];
         if(this.props.fixedLeftCount&&isInit){
             range[1] = this.props.fixedLeftCount; 
+        }
+        if(this.props.fixedRightCount&&isInit){
+            range[0] = columns.length - this.props.fixedRightCount; 
         }
         for(let i = range[0],j=range[1];i<j;i+=1){
             const colItem = columns[i];
@@ -226,6 +229,11 @@ class TableBody extends React.Component{
                 if(this.props.fixedLeftCount){
                     if(cellConfig.__groupIndex>=this.props.fixedLeftCount){
                         break;
+                    }
+                }
+                if(this.props.fixedRightCount){
+                    if(cellConfig.__groupIndex<this.props.table.props.columns.length-this.props.fixedRightCount){
+                        continue;
                     }
                 }
                 cells.push(<TableCell key={cellConfig.key} {...this.props} cellConfig={cellConfig} data={rowdata}/>);
@@ -300,6 +308,8 @@ class SingleTable extends React.Component{
             outerClassName.push("xz-table-outer-fixedleft");
         }else if(this.props.fixedRightCount){
             outerClassName.push("xz-table-outer-fixedright");
+        }else{
+            outerClassName.push("xz-table-outer-fixedmain");
         }
         return (<div className={outerClassName.join(' ')}>
             <div data-mark={this.props.mark} ref={(scrollY)=>{ this.scrollY = scrollY; }} {...p} onScroll={this.onScroll.bind(this)} className='xz-table-inner-wrapper'>
@@ -341,9 +351,14 @@ export default class Table extends React.Component{
         }
         if(mark==='left'){
             this.mainTable.scrollY.scrollTop = e.target.scrollTop;
+            this.rightTable.scrollY.scrollTop = e.target.scrollTop;
         }else if(mark==='main'){
           this.leftTable.scrollY.scrollTop = e.target.scrollTop;
           this.mainTable.mainFixedHeader.scrollLeft = e.target.scrollLeft;
+          this.rightTable.scrollY.scrollTop = e.target.scrollTop;
+        }else if(mark==='right'){
+            this.leftTable.scrollY.scrollTop = e.target.scrollTop;
+            this.mainTable.scrollY.scrollTop = e.target.scrollTop;
         }
         if(this.setClearMarkTimeout){
             window.clearTimeout(this.setClearMarkTimeout);
@@ -362,12 +377,12 @@ export default class Table extends React.Component{
         }
         return (<div {...p}>
             <div style={{position:'relative',height:'100%',width:'100%'}}>
-               <div style={{position:'absolute',left:0,top:0,zIndex:2,height:'100%'}}>
+               <div style={{position:'absolute',left:0,top:0,zIndex:2,bottom:17}}>
                     <SingleTable mark='left' ref={(leftTable)=>{this.leftTable = leftTable;}} fixedLeftCount={1} {...this.props} root={this}/>
                 </div>
                 <SingleTable mark='main' ref={(mainTable)=>{ this.mainTable = mainTable; }} {...this.props} root={this}/>
-                <div style={{position:'absolute',right:0,top:0,height:'100%',zIndex:1}}>
-                    sadasdasasdas>>>>d
+                <div style={{position:'absolute',right:0,top:0,bottom:17,zIndex:1}}>
+                    <SingleTable mark='right' ref={(rightTable)=>{this.rightTable = rightTable;}} fixedRightCount={1} {...this.props} root={this}/>
                 </div>
             </div>
             <StyleManager root={this}/>
