@@ -365,12 +365,12 @@ export default class Table extends React.Component{
         }
         return (<div {...p}>
             <div style={{position:'relative',height:'100%',width:'100%'}}>
+               <div style={{position:'absolute',left:0,top:0,zIndex:1,height:'100%'}}>
+                    <SingleTable mark='left' ref={(leftTable)=>{this.leftTable = leftTable;}} fixedLeftCount={1} {...this.props} root={this}/>
+                </div>
                 <SingleTable mark='main' ref={(mainTable)=>{ this.mainTable = mainTable; }} extends={()=>{
                 return <StyleManager root={this}/>;
             }} {...this.props} root={this}/>
-                <div style={{position:'absolute',left:0,top:0,height:'100%'}}>
-                    <SingleTable mark='left' ref={(leftTable)=>{this.leftTable = leftTable;}} fixedLeftCount={1} {...this.props} root={this}/>
-                </div>
                 <div style={{position:'absolute',right:0,top:0,height:'100%',zIndex:1}}>
                     sadasdasasdas>>>>d
                 </div>
