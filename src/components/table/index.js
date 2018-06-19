@@ -282,18 +282,9 @@ class SingleTable extends React.Component{
     componentDidMount = () => {
         // register window resize
         // register column resize
-
         if(this.props.mark==='main'){
-            if(this.table.offsetWidth>=this.scrollY.offsetWidth){
-                alert("有滚动条");
-            }else{
-                alert("meiyou");
-            }
+           
         }
-    }
-
-    checkHasScroll = ()=>{
-
     }
 
     render(){
@@ -337,9 +328,38 @@ export default class Table extends React.Component{
         TableUtil._setRowSpan(props.columns,level);
         TableUtil._getRootCellArr(props.columns,this.rootCellArr);
         this.tableid = 'xztable-'+ XZ._getSystemUniqueNum();
-        this.i = 0;
         this.curMark = null;
         this.setClearMarkTimeout = null;
+        this.os = XZ.isMac()?'mac':'other';
+        this.state = {
+            overflow:{x:false,y:false}
+        };
+    }
+
+    componentDidMount = ()=>{
+        this.resizeID = XZ.listenerResizeEvent(()=>{
+            this.reLayout();
+        });
+    }
+    componentWillUnmount = ()=>{
+        XZ.removeResizeListener(this.resizeID);
+    }
+    reLayout = ()=>{
+        if(!this.mainTable){
+            return;
+        }
+        const overflow = {x:false,y:false};
+        overflow.x = this.mainTable.table.offsetWidth>=this.mainTable.scrollY.offsetWidth;
+        // overflow.y = this.mainTable.offsetHeight>=this.mainTable.scrollY.offsetHeight;
+        if(overflow.x!==this.state.overflow.x){
+            this.setState({
+                overflow
+            });
+        }
+    }
+
+    resetPos = ()=>{
+
     }
 
     onScroll(mark,e){
@@ -351,14 +371,26 @@ export default class Table extends React.Component{
         }
         if(mark==='left'){
             this.mainTable.scrollY.scrollTop = e.target.scrollTop;
-            this.rightTable.scrollY.scrollTop = e.target.scrollTop;
+            if(this.rightTable){
+                this.rightTable.scrollY.scrollTop = e.target.scrollTop;
+            }
         }else if(mark==='main'){
-          this.leftTable.scrollY.scrollTop = e.target.scrollTop;
-          this.mainTable.mainFixedHeader.scrollLeft = e.target.scrollLeft;
-          this.rightTable.scrollY.scrollTop = e.target.scrollTop;
+            if(this.leftTable){
+                this.leftTable.scrollY.scrollTop = e.target.scrollTop;
+            }
+            if(this.mainTable.mainFixedHeader){
+                this.mainTable.mainFixedHeader.scrollLeft = e.target.scrollLeft;
+            }
+            if(this.rightTable){
+                this.rightTable.scrollY.scrollTop = e.target.scrollTop;
+            }
         }else if(mark==='right'){
-            this.leftTable.scrollY.scrollTop = e.target.scrollTop;
-            this.mainTable.scrollY.scrollTop = e.target.scrollTop;
+            if(this.leftTable){
+                this.leftTable.scrollY.scrollTop = e.target.scrollTop;
+            }
+            if(this.mainTable){
+                this.mainTable.scrollY.scrollTop = e.target.scrollTop;
+            }
         }
         if(this.setClearMarkTimeout){
             window.clearTimeout(this.setClearMarkTimeout);
@@ -377,13 +409,18 @@ export default class Table extends React.Component{
         }
         return (<div {...p}>
             <div style={{position:'relative',height:'100%',width:'100%'}}>
-               <div style={{position:'absolute',left:0,top:0,zIndex:2,bottom:17}}>
+                <SingleTable mark='main' ref={(mainTable)=>{ 
+                    this.mainTable = mainTable;  
+                    if(this.mainTable){
+                        this.reLayout();
+                    }
+                }} {...this.props} root={this}/>
+                { this.state.overflow.x?(<div className={`xz-table-pos-left xz-table-pos-${this.os}`}>
                     <SingleTable mark='left' ref={(leftTable)=>{this.leftTable = leftTable;}} fixedLeftCount={1} {...this.props} root={this}/>
-                </div>
-                <SingleTable mark='main' ref={(mainTable)=>{ this.mainTable = mainTable; }} {...this.props} root={this}/>
-                <div style={{position:'absolute',right:0,top:0,bottom:17,zIndex:1}}>
+                </div>):null }
+                { this.state.overflow.x?(<div className={`xz-table-pos-right xz-table-pos-${this.os}`}>
                     <SingleTable mark='right' ref={(rightTable)=>{this.rightTable = rightTable;}} fixedRightCount={1} {...this.props} root={this}/>
-                </div>
+                </div>):null }
             </div>
             <StyleManager root={this}/>
         </div>)

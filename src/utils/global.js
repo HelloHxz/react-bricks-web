@@ -23,10 +23,10 @@ class manager{
                     try{
                         this.resizeEvent[key]();
                     }catch(e){
-
+                        delete this.resizeEvent[key];
                     }
                 }
-            },600);
+            },200);
         }
     }
 
@@ -36,6 +36,7 @@ class manager{
         if(type==='resize'){
             this.resizeEvent[eventId] = func;
         }
+        
         return eventId;
     }
     removeEvent = (type,eventid) => {
