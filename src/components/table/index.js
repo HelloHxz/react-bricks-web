@@ -294,10 +294,6 @@ class SingleTable extends React.Component{
         if(this.props.tableClassName){
             tableClassName.push(this.props.tableClassName);
         }
-        let Ex = null;
-        if(this.props.extends){
-            Ex = this.props.extends();
-        }
         const outerClassName = ["xz-table-outer-wrapper"];
         if(this.props.fixedLeftCount){
             outerClassName.push("xz-table-outer-fixedleft");
@@ -318,7 +314,6 @@ class SingleTable extends React.Component{
                 </table>
               </div>
             </div>
-            {Ex}
         </div>)
     }
 }
@@ -369,13 +364,12 @@ export default class Table extends React.Component{
                <div style={{position:'absolute',left:0,top:0,zIndex:2,height:'100%'}}>
                     <SingleTable mark='left' ref={(leftTable)=>{this.leftTable = leftTable;}} fixedLeftCount={1} {...this.props} root={this}/>
                 </div>
-                <SingleTable mark='main' ref={(mainTable)=>{ this.mainTable = mainTable; }} extends={()=>{
-                return <StyleManager root={this}/>;
-            }} {...this.props} root={this}/>
+                <SingleTable mark='main' ref={(mainTable)=>{ this.mainTable = mainTable; }} {...this.props} root={this}/>
                 <div style={{position:'absolute',right:0,top:0,height:'100%',zIndex:1}}>
                     sadasdasasdas>>>>d
                 </div>
             </div>
+            <StyleManager root={this}/>
         </div>)
     }
 }
