@@ -311,10 +311,12 @@ class SingleTable extends React.Component{
                     <TableBody ref={(mainBody)=>{ this.mainBody = mainBody; }} {...this.props} table={this.props.root} />
                 </table>
             </div>
-            <div ref={(mainFixedHeader)=>{this.mainFixedHeader = mainFixedHeader;}} style={{overflow:'hidden',position:'absolute',top:1,left:0,width:'100%',zIndex:1}}>
-              <table className={tableClassName.join(" ")}>
-                 <TableHeader ref={(fixedTopHeader)=>{ this.fixedTopHeader = fixedTopHeader; }} {...this.props} table={this.props.root}/>
-              </table>
+            <div className='xz-table-fixed-header-outer'>
+              <div ref={(mainFixedHeader)=>{this.mainFixedHeader = mainFixedHeader;}} className='xz-table-fixed-header-inner'>
+                <table className={tableClassName.join(" ")}>
+                    <TableHeader ref={(fixedTopHeader)=>{ this.fixedTopHeader = fixedTopHeader; }} {...this.props} table={this.props.root}/>
+                </table>
+              </div>
             </div>
             {Ex}
         </div>)
@@ -346,7 +348,6 @@ export default class Table extends React.Component{
         }else if(mark==='main'){
           this.leftTable.scrollY.scrollTop = e.target.scrollTop;
           this.mainTable.mainFixedHeader.scrollLeft = e.target.scrollLeft;
-          console.log(this.mainTable.mainFixedHeader);
         }
         if(this.setClearMarkTimeout){
             window.clearTimeout(this.setClearMarkTimeout);
@@ -365,7 +366,7 @@ export default class Table extends React.Component{
         }
         return (<div {...p}>
             <div style={{position:'relative',height:'100%',width:'100%'}}>
-               <div style={{position:'absolute',left:0,top:0,zIndex:1,height:'100%'}}>
+               <div style={{position:'absolute',left:0,top:0,zIndex:2,height:'100%'}}>
                     <SingleTable mark='left' ref={(leftTable)=>{this.leftTable = leftTable;}} fixedLeftCount={1} {...this.props} root={this}/>
                 </div>
                 <SingleTable mark='main' ref={(mainTable)=>{ this.mainTable = mainTable; }} extends={()=>{
@@ -375,7 +376,6 @@ export default class Table extends React.Component{
                     sadasdasasdas>>>>d
                 </div>
             </div>
-           
         </div>)
     }
 }
