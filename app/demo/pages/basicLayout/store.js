@@ -35,7 +35,7 @@ class Store {
             {label:"CheckList 复选列表",key:'xxxxxxx'},
             {label:"Radio 单选框",key:'xxxxxxx'},
             {label:"Select 选择",key:'xxxxxxx',href:'home/select'},
-            {label:"Tabs 标签",key:'xxxxxxx',href:'/home/tabs'},
+            {label:"Tabs 页签",key:'xxxxxxx',href:'/home/tabs'},
             {label:"Table 表格",key:'xxxxxxx',href:'home/table'},
             {label:"Swiper 幻灯片",key:'xxxxxxx',href:'home/swiper'},
             {label:"Tree 树状",key:'xxxxxxx'},
