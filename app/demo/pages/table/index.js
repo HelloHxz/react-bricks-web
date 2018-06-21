@@ -122,10 +122,13 @@ class TableDemo extends React.Component {
     return <div>
         <Button onClick={this.changeData.bind(this)} type='primary'>Change Data</Button>
         <Table 
-        fixedHeader
-        style={{height:400}}
-        dataSource={this.state.firstTableData}
-        columns={columns}
+          // rowKey={(record,index)=>{
+          //   return index;
+          // }}
+          fixedHeader
+          style={{height:400}}
+          dataSource={this.state.firstTableData}
+          columns={columns}
         />
     </div>
   }

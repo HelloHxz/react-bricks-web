@@ -223,9 +223,21 @@ class TableBody extends React.Component{
         const rows = [];
         for(let i = 0,j=dataSource.length;i<j;i+=1){
             const rowdata = dataSource[i];
-            if(!rowdata.__hxzdatarowkey__){
-                rowdata.__hxzdatarowkey__ = 'tablerow_'+XZ._getSystemUniqueNum();
+            let rowKey = '';
+            if(!this.props.rowKey){
+                if(!rowdata.__hxzdatarowkey__){
+                    rowdata.__hxzdatarowkey__ = 'tablerow_'+XZ._getSystemUniqueNum();
+                }
+                rowKey = rowdata.__hxzdatarowkey__;
+            }else{
+                const typeofRowKey = typeof(this.props.rowKey);
+                if(typeofRowKey==='function'){
+                    rowKey = this.props.rowKey(rowdata,i);
+                }else if(typeofRowKey==='string'){
+                    rowKey = rowdata[this.props.rowKey];
+                }
             }
+           
             const cells = [];
             for(let n = 0,m=this.props.root.rootCellArr.length;n<m;n+=1){
                 const cellConfig = this.props.root.rootCellArr[n];
@@ -242,8 +254,8 @@ class TableBody extends React.Component{
                 cells.push(<TableCell key={cellConfig.key} {...this.props} cellConfig={cellConfig} data={rowdata}/>);
             }
             // todo props.render prerowdata nextrowdata
-            rows.push(<TableRow {...this.props} key={rowdata.__hxzdatarowkey__}>
-            {cells}
+            rows.push(<TableRow {...this.props} rowKey={rowKey} key={rowKey}>
+             {cells}
             </TableRow>);
         }
         return (<tbody>
@@ -254,7 +266,7 @@ class TableBody extends React.Component{
 
 class TableRow extends React.Component{
     render(){
-        return (<tr>
+        return (<tr data-rowkey={this.props.rowKey}>
            {this.props.children}
         </tr>);
     }
