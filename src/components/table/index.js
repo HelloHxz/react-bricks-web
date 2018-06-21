@@ -149,9 +149,14 @@ class TableHeader extends React.Component {
             const curHeaderRows = this.headerDom.children;
             for(var i=0,j=curHeaderRows.length;i<j;i+=1){
                 var cells = curHeaderRows[i].children;
-                for(var n=0,m=cells.length;n<m;n+=1){
-                    cells[n].style.height = mainHeaderRows[i].children[n].offsetHeight+"px";
-                }
+                    for(var n=0,m=cells.length;n<m;n+=1){
+                        if(this.props.fixedRightCount){
+                            const allCount = mainHeaderRows[i].children.length;
+                            cells[n].style.height = mainHeaderRows[i].children[allCount-m+n].offsetHeight+"px";
+                        }else{
+                            cells[n].style.height = mainHeaderRows[i].children[n].offsetHeight+"px";
+                        }
+                    }
             }
         }
     }
@@ -421,7 +426,7 @@ export default class Table extends React.Component{
                     <SingleTable mark='left' ref={(leftTable)=>{this.leftTable = leftTable;}} fixedLeftCount={1} {...this.props} root={this}/>
                 </div>):null }
                 { this.state.overflow.x?(<div className={`xz-table-pos-right xz-table-pos-${this.os}`}>
-                    <SingleTable mark='right' ref={(rightTable)=>{this.rightTable = rightTable;}} fixedRightCount={1} {...this.props} root={this}/>
+                    <SingleTable mark='right' ref={(rightTable)=>{this.rightTable = rightTable;}} fixedRightCount={2} {...this.props} root={this}/>
                 </div>):null }
             </div>
             <StyleManager root={this}/>
