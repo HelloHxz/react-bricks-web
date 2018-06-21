@@ -300,6 +300,16 @@ class SingleTable extends React.Component{
         }else{
             outerClassName.push("xz-table-outer-fixedmain");
         }
+        let fixedHeader = null;
+        if(this.props.fixedHeader){
+            fixedHeader = (<div className='xz-table-fixed-header-outer'>
+            <div ref={(mainFixedHeader)=>{this.mainFixedHeader = mainFixedHeader;}} className='xz-table-fixed-header-inner'>
+              <table className={tableClassName.join(" ")}>
+                  <TableHeader ref={(fixedTopHeader)=>{ this.fixedTopHeader = fixedTopHeader; }} {...this.props} table={this.props.root}/>
+              </table>
+            </div>
+          </div>);
+        }
         return (<div className={outerClassName.join(' ')}>
             <div data-mark={this.props.mark} ref={(scrollY)=>{ this.scrollY = scrollY; }} {...p} onScroll={this.onScroll.bind(this)} className='xz-table-inner-wrapper'>
                 <table ref={(table)=>{this.table = table;}} className={tableClassName.join(" ")}>
@@ -307,13 +317,7 @@ class SingleTable extends React.Component{
                     <TableBody ref={(mainBody)=>{ this.mainBody = mainBody; }} {...this.props} table={this.props.root} />
                 </table>
             </div>
-            <div className='xz-table-fixed-header-outer'>
-              <div ref={(mainFixedHeader)=>{this.mainFixedHeader = mainFixedHeader;}} className='xz-table-fixed-header-inner'>
-                <table className={tableClassName.join(" ")}>
-                    <TableHeader ref={(fixedTopHeader)=>{ this.fixedTopHeader = fixedTopHeader; }} {...this.props} table={this.props.root}/>
-                </table>
-              </div>
-            </div>
+            {fixedHeader}
         </div>)
     }
 }
