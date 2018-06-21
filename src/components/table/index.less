@@ -14,19 +14,29 @@
     overflow:auto;
 }
 .xz-table-outer-fixedleft .xz-table-inner-wrapper{
-    margin-right:-20px;
-    padding-right:20px;
+    margin-right:-17px;
+    padding-right:17px;
+}
+.xz-table-outer-fixedright-ie .xz-table-inner-wrapper{
+    padding-right:17px;
 }
 .xz-table-pos-left,.xz-table-pos-right{
     position:absolute;
     top:0;
     z-index:2;
+    overflow-x:hidden;
+}
+.xz-table-pos-left .xz-table-inner-wrapper,.xz-table-pos-right .xz-table-inner-wrapper{
+    overflow-x:hidden;
 }
 .xz-table-pos-left{
     left:0;
 }
 .xz-table-pos-right{
     right:0;
+}
+.xz-table-pos-right-ie{
+    right:17px;
 }
 .xz-table-pos-mac{
     height: 100%;
@@ -40,20 +50,23 @@
     position:absolute;
     left:0;
     top:0;
-    margin-right:-20px;
-    padding-right:20px;
+    margin-right:-17px;
+    padding-right:17px;
     z-index:1;
     width: 100%;
 }
 .xz-table-outer-fixedmain .xz-table-fixed-header-inner{
-    padding-bottom: 20px;
-    margin-bottom: -20px;
+    padding-bottom: 17px;
+    margin-bottom: -17px;
     overflow-x:auto;
 }
 .xz-table thead th,.xz-table tbody td{
     border: 1px solid #eee;
     font-weight: normal;
     
+}
+.xz-table-row-hover{
+    background-color: red;
 }
 .xz-table thead th .xz-table-cell-inner,.xz-table tbody td .xz-table-cell-inner{
    height: 30px;

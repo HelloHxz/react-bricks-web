@@ -187,13 +187,24 @@ class TableHeader extends React.Component {
         this._createRows(this.props.columns,headerRows,true);
         const rows = [];
         for(var i=0,j=headerRows.length;i<j;i+=1){
-            rows.push(<TableRow key={i}>
+            rows.push(<TableHeaderRow key={i}>
                     {headerRows[i]}
-                </TableRow>);
+                </TableHeaderRow>);
         }
         return (<thead ref={(headerDom)=>{ this.headerDom = headerDom; }}>
             {rows}
         </thead>);
+    }
+}
+
+class TableHeaderRow extends React.Component{
+    render(){
+        return (
+            <tr
+                data-rowkey={this.props.rowKey}>
+                {this.props.children}
+            </tr>
+        );
     }
 }
 
@@ -218,9 +229,13 @@ class TableHeaderCell extends React.Component{
     }
 }
 class TableBody extends React.Component{
+    onMouseLeave = (e) => {
+        this.props.root.onBodyMouseLeave(e);
+    }
     render(){
         const dataSource = this.props.dataSource || [];
         const rows = [];
+        const p = {};
         for(let i = 0,j=dataSource.length;i<j;i+=1){
             const rowdata = dataSource[i];
             let rowKey = '';
@@ -258,17 +273,33 @@ class TableBody extends React.Component{
              {cells}
             </TableRow>);
         }
-        return (<tbody>
+        p.onMouseLeave = this.onMouseLeave.bind(this);
+        return (<tbody {...p}>
                 {rows}
             </tbody>);
     }
 }
 
 class TableRow extends React.Component{
+    onMouseOver(e){
+        this.props.root.onRowMouseOver(e);
+    }
+    onMouseLeave(e){
+        this.props.root.onRowMouseLeave(e);
+    }
     render(){
-        return (<tr data-rowkey={this.props.rowKey}>
-           {this.props.children}
-        </tr>);
+        const p = {};
+        p.onMouseOver = this.onMouseOver.bind(this);
+        if(this.props.hoverRowKey === this.props.rowKey){
+            p.className = 'xz-table-row-hover';
+        }
+        // p.onMouseLeave = this.onMouseLeave.bind(this);
+        return (
+            <tr {...p}
+                data-rowkey={this.props.rowKey}>
+                {this.props.children}
+            </tr>
+        );
     }
 }
 
@@ -314,6 +345,9 @@ class SingleTable extends React.Component{
             outerClassName.push("xz-table-outer-fixedleft");
         }else if(this.props.fixedRightCount){
             outerClassName.push("xz-table-outer-fixedright");
+            if(XZ.browser.isIE9()){
+                outerClassName.push("xz-table-outer-fixedright-ie");
+            }
         }else{
             outerClassName.push("xz-table-outer-fixedmain");
         }
@@ -349,9 +383,10 @@ export default class Table extends React.Component{
         this.tableid = 'xztable-'+ XZ._getSystemUniqueNum();
         this.curMark = null;
         this.setClearMarkTimeout = null;
-        this.os = XZ.isMac()?'mac':'other';
+        this.os = XZ.browser.isMac()?'mac':'other';
         this.state = {
-            overflow:{x:false,y:false}
+            overflow:{x:false,y:false},
+            hoverRowKey:''
         };
     }
 
@@ -377,8 +412,29 @@ export default class Table extends React.Component{
         }
     }
 
-    resetPos = ()=>{
+    resetScrollPosition = ()=>{
 
+    }
+    onRowMouseLeave = (e) => {
+        console.log("leave");
+    }
+    onBodyMouseLeave = (e)=>{
+        if(this.state.hoverRowKey===""){
+            return;
+        }
+        this.setState({
+            hoverRowKey:""
+        });
+    }
+    
+    onRowMouseOver = (e) => {
+        const rowKey = e.currentTarget.getAttribute("data-rowkey");
+        console.log("over:"+rowKey);
+        if(this.state.hoverRowKey!==rowKey){
+            this.setState({
+                hoverRowKey:rowKey
+            });
+        }
     }
 
     onScroll(mark,e){
@@ -388,29 +444,32 @@ export default class Table extends React.Component{
         if(this.curMark!==mark){
             return;
         }
+        const scrollTop = e.target.scrollTop;
+        const scrollLeft = e.target.scrollLeft;
         if(mark==='left'){
-            this.mainTable.scrollY.scrollTop = e.target.scrollTop;
+            this.mainTable.scrollY.scrollTop =scrollTop;
             if(this.rightTable){
-                this.rightTable.scrollY.scrollTop = e.target.scrollTop;
+                this.rightTable.scrollY.scrollTop = scrollTop;
             }
         }else if(mark==='main'){
             if(this.leftTable){
-                this.leftTable.scrollY.scrollTop = e.target.scrollTop;
+                this.leftTable.scrollY.scrollTop = scrollTop;
             }
             if(this.mainTable.mainFixedHeader){
-                this.mainTable.mainFixedHeader.scrollLeft = e.target.scrollLeft;
+                this.mainTable.mainFixedHeader.scrollLeft = scrollLeft;
             }
             if(this.rightTable){
-                this.rightTable.scrollY.scrollTop = e.target.scrollTop;
+                this.rightTable.scrollY.scrollTop = scrollTop;
             }
         }else if(mark==='right'){
             if(this.leftTable){
-                this.leftTable.scrollY.scrollTop = e.target.scrollTop;
+                this.leftTable.scrollY.scrollTop = scrollTop;
             }
             if(this.mainTable){
-                this.mainTable.scrollY.scrollTop = e.target.scrollTop;
+                this.mainTable.scrollY.scrollTop = scrollTop;
             }
         }
+
         if(this.setClearMarkTimeout){
             window.clearTimeout(this.setClearMarkTimeout);
             this.setClearMarkTimeout = null;
@@ -428,17 +487,23 @@ export default class Table extends React.Component{
         }
         return (<div {...p}>
             <div style={{position:'relative',height:'100%',width:'100%'}}>
-                <SingleTable mark='main' ref={(mainTable)=>{ 
+                <SingleTable mark='main' hoverRowKey={this.state.hoverRowKey} ref={(mainTable)=>{ 
                     this.mainTable = mainTable;  
                     if(this.mainTable){
                         this.reLayout();
                     }
                 }} {...this.props} root={this}/>
                 { this.state.overflow.x?(<div className={`xz-table-pos-left xz-table-pos-${this.os}`}>
-                    <SingleTable mark='left' ref={(leftTable)=>{this.leftTable = leftTable;}} fixedLeftCount={1} {...this.props} root={this}/>
+                    <SingleTable mark='left' hoverRowKey={this.state.hoverRowKey} ref={(leftTable)=>{this.leftTable = leftTable;}} fixedLeftCount={1} {...this.props} root={this}/>
                 </div>):null }
                 { this.state.overflow.x?(<div className={`xz-table-pos-right xz-table-pos-${this.os}`}>
-                    <SingleTable mark='right' ref={(rightTable)=>{this.rightTable = rightTable;}} fixedRightCount={2} {...this.props} root={this}/>
+                    <SingleTable
+                        mark='right'
+                        hoverRowKey={this.state.hoverRowKey}
+                        ref={(rightTable)=>{this.rightTable = rightTable;}}
+                        fixedRightCount={2}
+                        {...this.props} 
+                        root={this}/>
                 </div>):null }
             </div>
             <StyleManager root={this}/>
