@@ -493,10 +493,10 @@ export default class Table extends React.Component{
                         this.reLayout();
                     }
                 }} {...this.props} root={this}/>
-                { this.state.overflow.x?(<div className={`xz-table-pos-left xz-table-pos-${this.os}`}>
+                { this.state.overflow.x?(<div className={`xz-table-pos-left xz-table-fixed-left-shadow xz-table-pos-${this.os}`}>
                     <SingleTable mark='left' hoverRowKey={this.state.hoverRowKey} ref={(leftTable)=>{this.leftTable = leftTable;}} fixedLeftCount={1} {...this.props} root={this}/>
                 </div>):null }
-                { this.state.overflow.x?(<div className={`xz-table-pos-right xz-table-pos-${this.os}`}>
+                { this.state.overflow.x?(<div className={`xz-table-pos-right xz-table-fixed-right-shadow xz-table-pos-${this.os}`}>
                     <SingleTable
                         mark='right'
                         hoverRowKey={this.state.hoverRowKey}
