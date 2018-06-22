@@ -324,6 +324,17 @@ class SingleTable extends React.Component{
         const mark = e.target.getAttribute("data-mark");
         this.props.root.onScroll(mark,e);
     }
+    onWheel = (e)=>{
+        e.preventDefault();
+        const mark = e.target.getAttribute("data-mark");
+        let scrollTop = this.scrollY.scrollTop;
+        if(e.nativeEvent.deltaY>0){
+            scrollTop+=40;
+        }else{
+            scrollTop-=40;
+        }
+        this.props.root.onBodyWheel(mark,scrollTop,e);
+    }
 
     componentDidMount = () => {
         // register window resize
@@ -336,6 +347,11 @@ class SingleTable extends React.Component{
     render(){
         const tableClassName = ['xz-table'];
         const p = {};
+        const scroll = {};
+        scroll.onScroll = this.onScroll.bind(this);
+        if(this.props.root.useWheelToScroll()){
+          scroll.onWheel = this.onWheel.bind(this);
+        }
        
         if(this.props.tableClassName){
             tableClassName.push(this.props.tableClassName);
@@ -343,6 +359,9 @@ class SingleTable extends React.Component{
         const outerClassName = ["xz-table-outer-wrapper"];
         if(this.props.fixedLeftCount){
             outerClassName.push("xz-table-outer-fixedleft");
+            if(XZ.browser.isIE9()){
+                outerClassName.push("xz-table-outer-fixedleft-ie");
+            }
         }else if(this.props.fixedRightCount){
             outerClassName.push("xz-table-outer-fixedright");
             if(XZ.browser.isIE9()){
@@ -362,7 +381,7 @@ class SingleTable extends React.Component{
           </div>);
         }
         return (<div className={outerClassName.join(' ')}>
-            <div data-mark={this.props.mark} ref={(scrollY)=>{ this.scrollY = scrollY; }} {...p} onScroll={this.onScroll.bind(this)} className='xz-table-inner-wrapper'>
+            <div data-mark={this.props.mark} ref={(scrollY)=>{ this.scrollY = scrollY; }} {...p} {...scroll} className='xz-table-inner-wrapper'>
                 <table ref={(table)=>{this.table = table;}} className={tableClassName.join(" ")}>
                     <TableHeader ref={(mainHeader)=>{ this.mainHeader = mainHeader; }} {...this.props} table={this.props.root}/>
                     <TableBody ref={(mainBody)=>{ this.mainBody = mainBody; }} {...this.props} table={this.props.root} />
@@ -437,6 +456,21 @@ export default class Table extends React.Component{
         }
     }
 
+    useWheelToScroll(){
+        // 在IE下滚动不是很协调 所以统一用wheel去滚动
+        return XZ.browser.isIE9()&&this.state.overflow.x;
+    }
+
+    onBodyWheel(mark,scrollTop,e){
+        if(this.rightTable){
+            this.rightTable.scrollY.scrollTop = scrollTop;
+        }
+        this.mainTable.scrollY.scrollTop = scrollTop;
+        if(this.leftTable){
+            this.leftTable.scrollY.scrollTop = scrollTop;
+        }
+    }
+
     onScroll(mark,e){
         if(!this.curMark){
             this.curMark = mark;
@@ -447,14 +481,22 @@ export default class Table extends React.Component{
         const scrollTop = e.target.scrollTop;
         const scrollLeft = e.target.scrollLeft;
         if(mark==='left'){
-            this.mainTable.scrollY.scrollTop =scrollTop;
-            if(this.rightTable){
-                this.rightTable.scrollY.scrollTop = scrollTop;
+            if(!this.useWheelToScroll()){
+                this.mainTable.scrollY.scrollTop =scrollTop;
+                if(this.rightTable){
+                    this.rightTable.scrollY.scrollTop = scrollTop;
+                }
             }
         }else if(mark==='main'){
-            if(this.leftTable){
-                this.leftTable.scrollY.scrollTop = scrollTop;
+            if(!this.useWheelToScroll()){
+                if(this.leftTable){
+                    this.leftTable.scrollY.scrollTop = scrollTop;
+                }
+                if(this.rightTable){
+                    this.rightTable.scrollY.scrollTop = scrollTop;
+                }
             }
+            
             if(this.mainTable.mainFixedHeader){
                 this.mainTable.mainFixedHeader.scrollLeft = scrollLeft;
               
@@ -465,21 +507,21 @@ export default class Table extends React.Component{
                 }else{
                     this.leftWrapper.className = `xz-table-pos-left xz-table-fixed-left-shadow xz-table-pos-${this.os}`;
                 }
-                if(scrollLeft+this.mainTable.scrollY.offsetWidth === this.mainTable.scrollY.scrollWidth){
+                if(scrollLeft+this.mainTable.scrollY.offsetWidth >= this.mainTable.scrollY.scrollWidth){
                     this.rightWrapper.className = `xz-table-pos-right xz-table-pos-${this.os}`
                 }else{
                     this.rightWrapper.className = `xz-table-pos-right xz-table-fixed-right-shadow xz-table-pos-${this.os}`;
                 }
             }
-            if(this.rightTable){
-                this.rightTable.scrollY.scrollTop = scrollTop;
-            }
+            
         }else if(mark==='right'){
-            if(this.leftTable){
-                this.leftTable.scrollY.scrollTop = scrollTop;
-            }
-            if(this.mainTable){
-                this.mainTable.scrollY.scrollTop = scrollTop;
+            if(!this.useWheelToScroll()){
+                if(this.leftTable){
+                    this.leftTable.scrollY.scrollTop = scrollTop;
+                }
+                if(this.mainTable){
+                    this.mainTable.scrollY.scrollTop = scrollTop;
+                }
             }
         }
 
