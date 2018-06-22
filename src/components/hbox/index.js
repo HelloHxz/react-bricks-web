@@ -43,8 +43,12 @@ export default class HBox extends React.Component{
 
 class Panel extends React.Component {
     render(){
+        const p = {};
+        if(this.props.style){
+            p.style = this.props.style;
+        }
         return (
-             <div className={`xz-hbox-panel xz-hbox-panel-${this.props.position}`}>{this.props.children}</div>
+             <div {...p} className={`xz-hbox-panel xz-hbox-panel-${this.props.position}`}>{this.props.children}</div>
         )
     }
 }
