@@ -327,11 +327,11 @@ class SingleTable extends React.Component{
     onWheel = (e)=>{
         e.preventDefault();
         const mark = e.target.getAttribute("data-mark");
-        let scrollTop = this.scrollY.scrollTop;
+        let scrollTop = this.ScrollView.scrollTop;
         if(e.nativeEvent.deltaY>0){
-            scrollTop+=40;
+            scrollTop+=20;
         }else{
-            scrollTop-=40;
+            scrollTop-=20;
         }
         this.props.root.onBodyWheel(mark,scrollTop,e);
     }
@@ -381,7 +381,7 @@ class SingleTable extends React.Component{
           </div>);
         }
         return (<div className={outerClassName.join(' ')}>
-            <div data-mark={this.props.mark} ref={(scrollY)=>{ this.scrollY = scrollY; }} {...p} {...scroll} className='xz-table-inner-wrapper'>
+            <div data-mark={this.props.mark} ref={(ScrollView)=>{ this.ScrollView = ScrollView; }} {...p} {...scroll} className='xz-table-inner-wrapper'>
                 <table ref={(table)=>{this.table = table;}} className={tableClassName.join(" ")}>
                     <TableHeader ref={(mainHeader)=>{ this.mainHeader = mainHeader; }} {...this.props} table={this.props.root}/>
                     <TableBody ref={(mainBody)=>{ this.mainBody = mainBody; }} {...this.props} table={this.props.root} />
@@ -424,8 +424,8 @@ export default class Table extends React.Component{
             return;
         }
         const overflow = {x:false,y:false};
-        overflow.x = this.mainTable.table.offsetWidth>=this.mainTable.scrollY.offsetWidth;
-        // overflow.y = this.mainTable.offsetHeight>=this.mainTable.scrollY.offsetHeight;
+        overflow.x = this.mainTable.table.offsetWidth>=this.mainTable.ScrollView.offsetWidth;
+        // overflow.y = this.mainTable.offsetHeight>=this.mainTable.ScrollView.offsetHeight;
         if(overflow.x!==this.state.overflow.x){
             this.setState({
                 overflow
@@ -450,7 +450,6 @@ export default class Table extends React.Component{
     
     onRowMouseOver = (e) => {
         const rowKey = e.currentTarget.getAttribute("data-rowkey");
-        console.log("over:"+rowKey);
         if(this.state.hoverRowKey!==rowKey){
             this.setState({
                 hoverRowKey:rowKey
@@ -471,13 +470,13 @@ export default class Table extends React.Component{
         }
         this.mouseWheeelTimeout = setTimeout(()=>{
             this.isWheeling = false;
-        },200);
+        },400);
         if(this.rightTable){
-            this.rightTable.scrollY.scrollTop = scrollTop;
+            this.rightTable.ScrollView.scrollTop = scrollTop;
         }
-        this.mainTable.scrollY.scrollTop = scrollTop;
+        this.mainTable.ScrollView.scrollTop = scrollTop;
         if(this.leftTable){
-            this.leftTable.scrollY.scrollTop = scrollTop;
+            this.leftTable.ScrollView.scrollTop = scrollTop;
         }
     }
 
@@ -492,18 +491,18 @@ export default class Table extends React.Component{
         const scrollLeft = e.target.scrollLeft;
         if(mark==='left'){
             if(!(this.isWheeling &&this.useWheelToScroll())){
-                this.mainTable.scrollY.scrollTop =scrollTop;
+                this.mainTable.ScrollView.scrollTop =scrollTop;
                 if(this.rightTable){
-                    this.rightTable.scrollY.scrollTop = scrollTop;
+                    this.rightTable.ScrollView.scrollTop = scrollTop;
                 }
             }
         }else if(mark==='main'){
             if(!(this.isWheeling &&this.useWheelToScroll())){
                 if(this.leftTable){
-                    this.leftTable.scrollY.scrollTop = scrollTop;
+                    this.leftTable.ScrollView.scrollTop = scrollTop;
                 }
                 if(this.rightTable){
-                    this.rightTable.scrollY.scrollTop = scrollTop;
+                    this.rightTable.ScrollView.scrollTop = scrollTop;
                 }
             }
             
@@ -517,7 +516,7 @@ export default class Table extends React.Component{
                 }else{
                     this.leftWrapper.className = `xz-table-pos-left xz-table-fixed-left-shadow xz-table-pos-${this.os}`;
                 }
-                if(scrollLeft+this.mainTable.scrollY.offsetWidth >= this.mainTable.scrollY.scrollWidth){
+                if(scrollLeft+this.mainTable.ScrollView.offsetWidth >= this.mainTable.ScrollView.scrollWidth){
                     this.rightWrapper.className = `xz-table-pos-right xz-table-pos-${this.os}`
                 }else{
                     this.rightWrapper.className = `xz-table-pos-right xz-table-fixed-right-shadow xz-table-pos-${this.os}`;
@@ -527,10 +526,10 @@ export default class Table extends React.Component{
         }else if(mark==='right'){
             if(!(this.isWheeling &&this.useWheelToScroll())){
                 if(this.leftTable){
-                    this.leftTable.scrollY.scrollTop = scrollTop;
+                    this.leftTable.ScrollView.scrollTop = scrollTop;
                 }
                 if(this.mainTable){
-                    this.mainTable.scrollY.scrollTop = scrollTop;
+                    this.mainTable.ScrollView.scrollTop = scrollTop;
                 }
             }
         }
