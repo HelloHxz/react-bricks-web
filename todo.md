@@ -84,6 +84,22 @@
 
 ### ScrollView
 
+```
+
+<ScrollView
+    renderContent={(props)=>{
+        return <div>
+            <StickView {...props}></StickView>
+            asdad
+            sadasd
+        </div>
+    }}
+>
+</ScrollView>
+
+
+```
+
 > stickyview
 
 ### 完善路由
