@@ -402,6 +402,8 @@ export default class Table extends React.Component{
         this.tableid = 'xztable-'+ XZ._getSystemUniqueNum();
         this.curMark = null;
         this.setClearMarkTimeout = null;
+        this.mouseWheeelTimeout = null;
+        this.isWheeling = false;
         this.os = XZ.browser.isMac()?'mac':'other';
         this.state = {
             overflow:{x:false,y:false},
@@ -462,6 +464,14 @@ export default class Table extends React.Component{
     }
 
     onBodyWheel(mark,scrollTop,e){
+        this.isWheeling = true;
+        if(this.mouseWheeelTimeout){
+            window.clearTimeout(this.mouseWheeelTimeout);
+            this.mouseWheeelTimeout = null;
+        }
+        this.mouseWheeelTimeout = setTimeout(()=>{
+            this.isWheeling = false;
+        },200);
         if(this.rightTable){
             this.rightTable.scrollY.scrollTop = scrollTop;
         }
@@ -481,14 +491,14 @@ export default class Table extends React.Component{
         const scrollTop = e.target.scrollTop;
         const scrollLeft = e.target.scrollLeft;
         if(mark==='left'){
-            if(!this.useWheelToScroll()){
+            if(!(this.isWheeling &&this.useWheelToScroll())){
                 this.mainTable.scrollY.scrollTop =scrollTop;
                 if(this.rightTable){
                     this.rightTable.scrollY.scrollTop = scrollTop;
                 }
             }
         }else if(mark==='main'){
-            if(!this.useWheelToScroll()){
+            if(!(this.isWheeling &&this.useWheelToScroll())){
                 if(this.leftTable){
                     this.leftTable.scrollY.scrollTop = scrollTop;
                 }
@@ -515,7 +525,7 @@ export default class Table extends React.Component{
             }
             
         }else if(mark==='right'){
-            if(!this.useWheelToScroll()){
+            if(!(this.isWheeling &&this.useWheelToScroll())){
                 if(this.leftTable){
                     this.leftTable.scrollY.scrollTop = scrollTop;
                 }
