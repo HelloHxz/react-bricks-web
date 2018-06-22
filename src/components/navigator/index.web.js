@@ -1,6 +1,5 @@
 import ReactDOM from 'react-dom';
 import React from 'react';
-import global from '../../utils/global';
 import "./web/index.less"
 import Navigation from './web'
 import XZ from '../xz';

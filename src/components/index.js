@@ -1,6 +1,6 @@
 
-import 'babel-polyfill'
-import React from 'react';
+
+import React from './react';
 import Run from './navigator'
 import RouteView from './routeview'
 import Menu from './Menu';
