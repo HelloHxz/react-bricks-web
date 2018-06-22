@@ -48,7 +48,17 @@ export default class Table extends React.Component{
     }
 
     resetScrollPosition = ()=>{
-
+        const scrollTop = this.mainTable.ScrollView.scrollTop;
+        const scrollLeft = this.mainTable.ScrollView.scrollLeft;
+        if(this.rightTable){
+            this.rightTable.ScrollView.scrollTop = scrollTop;
+        }
+        if(this.leftTable){
+            this.leftTable.ScrollView.scrollTop = scrollTop;
+        }
+        if(this.mainTable.mainFixedHeader){
+            this.mainTable.mainFixedHeader.scrollLeft = scrollLeft;
+        }
     }
     onRowMouseLeave = (e) => {
         console.log("leave");
