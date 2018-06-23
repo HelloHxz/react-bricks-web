@@ -32,12 +32,26 @@
     box-shadow:1px 1px 3px rgba(0,0,0,.1);
 }
 
-.xz-select-item{
+.xz-select-groupheader{
     padding-left: 10px;
+    color:gray;
+}
+.xz-select-item{
+    color:@theme_textcolor;
+}
+.xz-select-item-1{
+    padding-left: 10px;
+    cursor: pointer;
+}
+.xz-select-item-2{
+    padding-left: 20px;
     cursor: pointer;
 }
 .xz-select-item:hover{
     background-color: @select_hover_background_color;
+}
+.xz-select-item-selected{
+    background-color: @select_selected_background_color !important;
     color:#fff;
 }
 .xz-select-item-size-default{

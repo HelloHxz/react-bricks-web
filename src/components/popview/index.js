@@ -91,7 +91,12 @@ class PopView extends React.Component{
     onMouseOverWhenClickMode(){
         this.clearTimeout();
     }
-  
+    
+    preventHide(){
+        this.clearTimeout();
+        this.focus();
+    }
+
     hide(){
         this.clearTimeout();
         if(this.state.show===false||this.state.show==='noinit'){
