@@ -10,7 +10,7 @@ class SelectDemo extends React.PureComponent {
     super(props);
     this.state={
         visible:false,
-        value:null
+        value:"111xxxxx"
     }
   }
 

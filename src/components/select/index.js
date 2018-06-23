@@ -84,7 +84,7 @@ export default class Select extends React.Component{
         return <OverLayer select={this} {...this.props}/>;
     }
     componentWillReceiveProps(nextProps){
-        const selectedData = this._getSelectedDataByValue(nextProps.value,nextProps.data);
+        const selectedData = this._getSelectedDataByValue(nextProps.value,nextProps.data,true);
         this.setState({
             selectedData:selectedData,
         });
@@ -113,9 +113,19 @@ export default class Select extends React.Component{
         }
        return this._findLabelByValue(this.props.data,value);
     }
-    _getSelectedDataByValue(value,data){
+    _getSelectedDataByValue(value,data,fromReceiveProps){
         const label = this._getLabelByValue(value);
-        return {label,value:label===null?null:value};
+        const curValue = label===null?null:value;
+        if(fromReceiveProps){
+            //如果修改修改了数据源 里面没有当前选中的值 那么触发一下
+            this.onChange({
+                data:{
+                    value:curValue,
+                    label,
+                }
+            });
+        }
+        return {label,value:curValue};
     }
     onChange(params){
         if(this.props.onChange){
@@ -124,7 +134,6 @@ export default class Select extends React.Component{
             }
             this.props.onChange(params.data.value,{
                 instance:this,
-                itemInstance:params.instance,
                 record:params.data
             });
         }

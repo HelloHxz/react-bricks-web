@@ -46,11 +46,10 @@ class FormItem extends React.Component{
         extendObservableDataKey(props,props.initialValue||"");
     }
     validate(){
-        
     }
-    onChange(e,params){
+    onChange(value,params){
         const store = this.props.rowData||this.props.form.store;
-        store[this.props.dataKey] = params.value;
+        store[this.props.dataKey] = value;
     }
     render(){
         console.log("render item~ "+this.props.dataKey);

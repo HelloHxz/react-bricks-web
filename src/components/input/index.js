@@ -8,10 +8,10 @@ import FormItemWrapper from '../formComponentWrapper';
 export default class Input extends React.Component{
     onChange(e){
         if(this.props.onChange){
-            this.props.onChange(e,{
+            this.props.onChange(e.target.value,{
                 instance:this,
                 type:'input',
-                value:e.target.value
+                e,
             });
         }
     }
