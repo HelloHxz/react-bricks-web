@@ -22,6 +22,7 @@ import Tabs from './tabs';
 import Swiper from './swiper';
 import Tooltip from './tooltip';
 import Input from './input';
+import TableLayout from './tablelayout';
 import Form from './form';
 import observable from './observable';
 import extendObservable from './extendObservable';
@@ -33,6 +34,7 @@ import observer from './observer'
 export {
 	Menu,
 	XZ,
+	TableLayout,
 	Swiper,
 	Tabs,
 	CheckBox,

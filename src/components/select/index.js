@@ -116,15 +116,6 @@ export default class Select extends React.Component{
     _getSelectedDataByValue(value,data,fromReceiveProps){
         const label = this._getLabelByValue(value);
         const curValue = label===null?null:value;
-        if(fromReceiveProps){
-            //如果修改修改了数据源 里面没有当前选中的值 那么触发一下
-            this.onChange({
-                data:{
-                    value:curValue,
-                    label,
-                }
-            });
-        }
         return {label,value:curValue};
     }
     onChange(params){

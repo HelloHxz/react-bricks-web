@@ -20,7 +20,8 @@ class Store {
         icon:'fas fa-camera-retro',
         key:"xxxxxxxx",
         children:[
-            {label:"Grid 表格布局",key:'xx',href:'/home/grid'},
+            {label:"Grid 栅栏布局",key:'xx',href:'/home/grid'},
+            {label:"TableLayout 表格布局",key:'xx',href:'/home/tableLayout'},
             {label:"Layout",key:'xxxxxxx'},
             {label:"Button 按钮",key:'xxxxxxx',href:"/home/button"},
             {label:"PopView 弹出层",key:'xxxxxxx',href:'home/popview'},
