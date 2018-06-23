@@ -17,6 +17,9 @@ class FormDemo extends React.PureComponent {
   showData(formProps){
     alert(JSON.stringify(formProps.form.store));
   }
+  Reset(formProps){
+    formProps.form.reset();
+  }
 
   render() {
     return <div>
@@ -59,6 +62,7 @@ class FormDemo extends React.PureComponent {
                   }} />
                   <Button type='primary' onClick={this.add.bind(this,formProps)}>添加</Button>
                   <Button type='primary' onClick={this.showData.bind(this,formProps)}>ShowData</Button>
+                  <Button type='primary' onClick={this.Reset.bind(this,formProps)}>Reset</Button>
                 </React.Fragment>);
             }}/>
     </div>

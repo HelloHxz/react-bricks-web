@@ -2,14 +2,24 @@ import React from 'react';
 import {observer} from "mobx-react";
 import {extendObservable,observable} from 'mobx';
 
-export default class Form extends React.Component{
+class Form extends React.Component{
 
     constructor(props){
         super(props);
-        if(!props.store||!props.dataKey){
-            this.store = observable({});
-        }else{
-            this.store = props.store[props.dataKey];
+        this.store = observable({});
+    }
+    componentDidMount(){
+        this.originStoreData = {};
+        setTimeout(()=>{
+            this.originStoreData = this.cloneData(this.store);
+        },200)
+    }
+    cloneData(data){
+        return JSON.parse(JSON.stringify(data));
+    }
+    reset(){
+        for(var key in this.originStoreData){
+            this.store[key] = this.originStoreData[key];
         }
     }
 
@@ -60,6 +70,7 @@ class FormItem extends React.Component{
     }
 }
 
+@observer
 class FormRow extends React.Component{
     validate(){
         
@@ -98,4 +109,7 @@ class FormRepeat extends React.Component{
 
 Form.FormItem = FormItem;
 Form.FormRepeat = FormRepeat;
+
+export default Form;
+
 
