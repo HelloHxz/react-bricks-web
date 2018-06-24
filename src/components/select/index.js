@@ -115,6 +115,9 @@ export default class Select extends React.Component{
     }
     _getSelectedDataByValue(value,data,fromReceiveProps){
         const label = this._getLabelByValue(value);
+        if(this.props.exact === true){
+            // 如果是精准模式的话 不存在的就移除
+        }
         const curValue = label===null?null:value;
         return {label,value:curValue};
     }

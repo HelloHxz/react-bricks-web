@@ -1,5 +1,10 @@
 import {React,PageView,observer,PageContainer,Modal,Button,Select} from "react-bricks-web"
 
+/*
+  data: Array|'error'|'loading'|
+
+*/
+
 @PageView()
 class SelectDemo extends React.PureComponent {
 
@@ -36,7 +41,10 @@ class SelectDemo extends React.PureComponent {
        ]}
        onChange={this.handleOnChange.bind(this)}
        hideMode="mouseleave" placeholder='请选择' style={{width:300}} dropdownStyle={{width:350}}/>
-       <Select mode='multiple' placeholder='请选择'/>
+       <Select
+       onShow={}
+       mode='multiple' placeholder='请选择'/>
+
     </div>
   }
 }
