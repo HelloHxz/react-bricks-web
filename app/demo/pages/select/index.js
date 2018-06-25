@@ -42,7 +42,6 @@ class SelectDemo extends React.PureComponent {
        onChange={this.handleOnChange.bind(this)}
        hideMode="mouseleave" placeholder='请选择' style={{width:300}} dropdownStyle={{width:350}}/>
        <Select
-       onShow={}
        mode='multiple' placeholder='请选择'/>
 
     </div>

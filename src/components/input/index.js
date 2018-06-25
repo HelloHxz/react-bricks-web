@@ -18,7 +18,7 @@ export default class Input extends React.Component{
     render(){
         return <FormItemWrapper {...this.props}>
             <div className={`xz-input xz-input-size-${Theme.getConfig('size',this.props)}`}>
-            <input placeholder={this.props.placeholder} onChange={this.onChange.bind(this)} value={this.props.value} />
+            <input placeholder={this.props.placeholder} onInput={this.onChange.bind(this)} value={this.props.value} />
          </div></FormItemWrapper>;
     }
 }
