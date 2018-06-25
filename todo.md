@@ -107,6 +107,12 @@
 
 ### ScrollView
 
+> pushLoadMore
+
+> lazyLoadImage
+
+> stickyView
+
 ```
 
 <ScrollView
