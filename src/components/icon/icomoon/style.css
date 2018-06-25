@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'icomoon';
-  src:  url('fonts/icomoon.eot?xnhdpe');
-  src:  url('fonts/icomoon.eot?xnhdpe#iefix') format('embedded-opentype'),
-    url('fonts/icomoon.ttf?xnhdpe') format('truetype'),
-    url('fonts/icomoon.woff?xnhdpe') format('woff'),
-    url('fonts/icomoon.svg?xnhdpe#icomoon') format('svg');
+  src:  url('fonts/icomoon.eot?l7yrnd');
+  src:  url('fonts/icomoon.eot?l7yrnd#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?l7yrnd') format('truetype'),
+    url('fonts/icomoon.woff?l7yrnd') format('woff'),
+    url('fonts/icomoon.svg?l7yrnd#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -102,6 +102,9 @@
 .icon-left:before {
   content: "\e620";
 }
+.icon-minussquareo:before {
+  content: "\e621";
+}
 .icon-minuscircle:before {
   content: "\e622";
 }
@@ -162,14 +165,26 @@
 .icon-questioncircleo:before {
   content: "\e63c";
 }
+.icon-plussquareo:before {
+  content: "\e645";
+}
 .icon-menufold:before {
   content: "\e658";
+}
+.icon-linechart:before {
+  content: "\e65d";
+}
+.icon-home:before {
+  content: "\e65e";
 }
 .icon-star:before {
   content: "\e660";
 }
 .icon-staro:before {
   content: "\e661";
+}
+.icon-filter:before {
+  content: "\e663";
 }
 .icon-user:before {
   content: "\e66a";
@@ -185,6 +200,12 @@
 }
 .icon-tagso:before {
   content: "\e67e";
+}
+.icon-circledowno:before {
+  content: "\e693";
+}
+.icon-circledown:before {
+  content: "\e694";
 }
 .icon-delete:before {
   content: "\e69f";
@@ -207,6 +228,12 @@
 .icon-download:before {
   content: "\e6b7";
 }
+.icon-lock1:before {
+  content: "\e6b9";
+}
+.icon-unlock:before {
+  content: "\e6ba";
+}
 .icon-tag:before {
   content: "\e6d2";
 }
@@ -225,8 +252,17 @@
 .icon-search1:before {
   content: "\e670";
 }
+.icon-ellipsis1:before {
+  content: "\e647";
+}
 .icon-calendar:before {
   content: "\e6bb";
+}
+.icon-loading1:before {
+  content: "\e6ae";
+}
+.icon-loading2:before {
+  content: "\e64d";
 }
 .icon-like2:before {
   content: "\e69d";
@@ -248,6 +284,9 @@
 }
 .icon-reload1:before {
   content: "\e616";
+}
+.icon-message1:before {
+  content: "\e6ab";
 }
 .icon-scan1:before {
   content: "\e697";
