@@ -80,6 +80,25 @@
 ```
     <Icon type='' text='xx' textPlacement='bottom'></Icon>
     <Icon type='' text={()=>{}} textPlacement='bottom'></Icon>
+
+
+    .fa-spin {
+    animation: a 2s infinite linear
+}
+
+.fa-pulse {
+    animation: a 1s infinite steps(8)
+}
+
+@keyframes a {
+    0% {
+        transform: rotate(0deg)
+    }
+
+    to {
+        transform: rotate(1turn)
+    }
+}
 ```
 
 ### 11.Image
