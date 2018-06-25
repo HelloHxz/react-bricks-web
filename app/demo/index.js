@@ -13,6 +13,8 @@ var config = {
 		swiper:require("./pages/swiper").default,
 		tableLayout:require("./pages/tablelayout").default,
 		grid:require("./pages/grid").default,
+		icon:require("./pages/icon").default,
+		spin:require("./pages/spin").default,
 		modal:require("./pages/modal").default,
 		tabs:require("./pages/tabs").default,
 		tooltip:require("./pages/tooltip").default,

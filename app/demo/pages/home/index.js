@@ -57,7 +57,7 @@ class HomeScreen extends React.PureComponent {
               </HBox.Panel>
             </HBox>
          </VBox.Panel>
-         <VBox.Panel style={{height:60,backgroundColor:'#eee'}}>footer</VBox.Panel>
+         <VBox.Panel style={{height:40,backgroundColor:'#ddd'}}>footer</VBox.Panel>
        </VBox>
     );
   }

@@ -9,10 +9,13 @@ import React from 'react';
     className='' style={}>
     </LoadingWrapper>
 */
-class LoadingWrapper extends React.Component{
+class Spin extends React.Component{
     render(){
-        return <div/>
+        if(this.props.children){
+            
+        }
+        return <div>Spin</div>
     }
 }
 
-export default LoadingWrapper;
+export default Spin;
