@@ -106,6 +106,25 @@
 
 > stickyview
 
+
+### 12 Spin
+
+```
+    <Spin />
+
+    <Spin text='xx' textPlacement='' />
+
+    <Spin
+        loading={}
+        error={}
+        text={()=>{}}
+        errorContent={()=>{}}
+    >
+        <Table/>
+    </Spin>
+
+```
+
 ### 完善路由
 
 > 阻止离开

@@ -6,8 +6,12 @@ class XZ {
         this._navigator = null;
         this._extendWrapperInstancer = null;
         this._seed = 0;
+        this.appConfig = null;
         this.browser = browser;
         browser.init();
+    }
+    _setAppConfig = (config) =>{
+        this.appConfig = config;
     }
    
     _getSystemUniqueNum = ()=>{

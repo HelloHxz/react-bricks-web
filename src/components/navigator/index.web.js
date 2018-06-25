@@ -6,6 +6,7 @@ import XZ from '../xz';
 
 
 export default (config)=>{
+	XZ._setAppConfig(config);
 	for(var key in config.pages){
 		var pageClass = config.pages[key];
 		if(pageClass.__role!=='pageview'){
