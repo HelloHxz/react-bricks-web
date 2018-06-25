@@ -77,6 +77,10 @@
 
 ### 10.Icon
 
+```
+    <Icon type='' text='xx' textPlacement='bottom'></Icon>
+    <Icon type='' text={()=>{}} textPlacement='bottom'></Icon>
+```
 
 ### 11.Image
 
