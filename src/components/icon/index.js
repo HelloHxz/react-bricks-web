@@ -10,13 +10,16 @@ export default class Icon extends React.Component{
         const {textPlacement,text,className,style} = this.props;
 
         if(className){
-            outP.join(className);
+            outP.className.push(className);
         }
         if(style){
             outP.style = style;
         }
         
-        const children = [<i key='icon' className='xz-icon icon-bars'/>];
+        const children = [];
+        if(this.props.type){
+            children.push(<i key='icon' className={`xz-icon icon-${this.props.type}`}/>);
+        }
         if(text){
             outP.className.push(`xz-icon-text-${textPlacement||'right'}`);
             if(typeof(text)==='function'){
@@ -27,6 +30,7 @@ export default class Icon extends React.Component{
             if(textPlacement==='left' || textPlacement==='top'){
                 children.reverse();
             }
+        }else{
         }
 
        

@@ -14,8 +14,10 @@ class IconDemo extends React.PureComponent {
 
   render() {
     return <div>
-      <Icon textPlacement='left' text='图标'/>
-      <Icon text='图标'/>
+      <Icon textPlacement='left' type='bars' text='图标'/>
+      <Icon type='questioncircleo' text='图标'/>
+
+      <Icon type='questioncircleo'/>
     </div>
   }
 }

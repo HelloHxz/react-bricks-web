@@ -69,4 +69,29 @@ body{
 }
 
 
+.xz-spin-fast{
+  animation: a .7s infinite linear
+}
+.xz-spin-slow {
+  animation: a 1.6s infinite linear
+}
+.xz-spin-default {
+  animation: a 1s infinite linear
+}
+
+.xz-pulse {
+  animation: a 1s infinite steps(8)
+}
+
+@keyframes a {
+  0% {
+      transform: rotate(0deg)
+  }
+
+  to {
+      transform: rotate(1turn)
+  }
+}
+
+
 

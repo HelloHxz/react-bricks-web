@@ -1,4 +1,5 @@
-import {React,PageView,observer,PageContainer,XZ,Button,Spin} from "react-bricks-web"
+import {React,PageView,observer,PageContainer,XZ,Button,Spin} from "react-bricks-web";
+import './index.less';
 
 
 
@@ -14,7 +15,9 @@ class SpinDemo extends React.PureComponent {
 
   render() {
     return <div>
+      <Spin speed='fast'/>
       <Spin/>
+      <Spin speed='slow'/>
     </div>
   }
 }
