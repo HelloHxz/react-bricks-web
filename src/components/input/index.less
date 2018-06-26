@@ -21,8 +21,8 @@
 }
 
 .xz-input-size-default input{
-    height: unit(unit(@input_default_height),px);
-    line-height: 1.5;
+    height: @input_default_height;
+    line-height:unit(unit(@input_default_height) - 2,px);
     font-size: 13px;
 }
 
