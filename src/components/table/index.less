@@ -1,3 +1,5 @@
+@import '../theme/index.less';
+
 .xz-table{
     border-collapse: collapse;
     background-color: #fff;
@@ -74,7 +76,7 @@
     
 }
 .xz-table-row-hover{
-    background-color: lightblue;
+    background-color: @table_row_hover_background_color;
 }
 .xz-table thead th .xz-table-cell-inner,.xz-table tbody td .xz-table-cell-inner{
    height: 30px;

@@ -8,8 +8,8 @@
     border-radius: @input_borderradius;
 }
 .xz-select-size-default{
-    height: @input_default_height;
-    line-height: 2;
+    height: unit(unit(@input_default_height),px);
+    line-height:unit(unit(@input_default_height) - 2,px);
     font-size: 13px;
 }
 .xz-select-value{

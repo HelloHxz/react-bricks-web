@@ -14,7 +14,8 @@ class IconDemo extends React.PureComponent {
 
   render() {
     return <div>
-      <Icon/>
+      <Icon textPlacement='left' text='图标'/>
+      <Icon text='图标'/>
     </div>
   }
 }
