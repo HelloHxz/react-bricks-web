@@ -34,6 +34,7 @@ class Store {
             {label:"Modal 弹出层",key:'xxxxxxx',href:"/home/modal"},
             {label:"Message 消息",key:'xxxxxxx',href:"/home/message"},
             {label:"CheckBox 复选框",key:'xxxxxxx',href:"/home/checkbox"},
+            {label:"Radio 单选框",key:'xxxxxxx',href:"/home/radio"},
             {label:"CheckList 复选列表",key:'xxxxxxx'},
             {label:"Radio 单选框",key:'xxxxxxx'},
             {label:"Select 选择",key:'xxxxxxx',href:'home/select'},

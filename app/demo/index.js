@@ -22,6 +22,7 @@ var config = {
 		popover:require("./pages/popover").default,
 		message:require("./pages/message").default,
 		checkbox:require("./pages/checkbox").default,
+		radio:require("./pages/radio").default,
 		form:require("./pages/form").default,
 		popview:require("./pages/popview").default,
 		select:require("./pages/select").default,

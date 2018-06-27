@@ -21,6 +21,7 @@ import XZ from './xz';
 import Tabs from './tabs';
 import Swiper from './swiper';
 import Tooltip from './tooltip';
+import Radio from './radio';
 import Input from './input';
 import TableLayout from './tablelayout';
 import Form from './form';
@@ -39,6 +40,7 @@ export {
 	TableLayout,
 	Swiper,
 	Tabs,
+	Radio,
 	Icon,
 	CheckBox,
 	Table,

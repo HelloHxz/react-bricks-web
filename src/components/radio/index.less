@@ -1,0 +1,55 @@
+@import '../theme/index.less';
+.xz-radio{
+    position: relative;
+    display: inline-block;
+    user-select: none;
+    cursor: pointer;
+}
+
+.xz-radio-inner{
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    vertical-align: middle;
+    border: 1px solid #d9d9d9;
+    border-radius: 100%;
+    background-color: #fff;
+    transition: all .3s;
+}
+.xz-radio-true .xz-radio-inner{
+    position: relative;
+    border: 1px solid @theme_color;
+}
+.xz-radio-true .xz-radio-inner::after{
+    transform: translateX(-50%) translateY(-50%) scale(1);
+    -ms-transform: translateX(-50%) translateY(-50%) scale(1);
+    position: absolute;
+    display: table;
+    width: 8px;
+    background-color: @theme_color;
+    height: 8px;
+    border-radius: 100%;
+    left: 50%;
+    top:50%;
+    content: " ";
+    transition: all .2s cubic-bezier(.12,.4,.29,1.46) .1s;
+}
+.xz-radio-false{
+
+}
+.xz-radio-indeterminate{
+
+}
+.xz-radio:hover .xz-radio-inner{
+    border-color:@theme_color;
+}
+.xz-radio-label{
+    color:@theme_textcolor;
+    vertical-align: middle;
+}
+.xz-radio-label-left{
+    margin-left: 6px;
+}
+.xz-radio-label-right{
+    margin-right: 6px;
+}
