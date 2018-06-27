@@ -18,6 +18,7 @@ class IconDemo extends React.PureComponent {
       <Icon type='questioncircleo' text='图标'/>
 
       <Icon type='questioncircleo'/>
+
     </div>
   }
 }

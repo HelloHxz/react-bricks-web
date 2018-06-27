@@ -18,6 +18,11 @@ class SpinDemo extends React.PureComponent {
       <Spin speed='fast'/>
       <Spin/>
       <Spin speed='slow'/>
+
+      
+      <Spin speed='slow'>
+        <div>asdasdasdasdasdasdasdasdasdasd</div>
+      </Spin>
     </div>
   }
 }
