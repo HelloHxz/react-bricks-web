@@ -21,16 +21,14 @@
     border: 1px solid @theme_color;
 }
 .xz-radio-true .xz-radio-inner::after{
-    transform: translateX(-50%) translateY(-50%) scale(1);
-    -ms-transform: translateX(-50%) translateY(-50%) scale(1);
     position: absolute;
     display: table;
     width: 8px;
     background-color: @theme_color;
     height: 8px;
+    left:3px;
+    top:3px;
     border-radius: 100%;
-    left: 50%;
-    top:50%;
     content: " ";
     transition: all .2s cubic-bezier(.12,.4,.29,1.46) .1s;
 }
