@@ -97,7 +97,7 @@ class FormRepeat extends React.Component{
         const store = this.props.rowData||this.props.form.store;
         const dataKey = this.props.dataKey;
         const values = store[dataKey]||[];
-        console.log("render repeat~");
+        console.log("render repeat~!!");
         var children = [];
         for(var i=0,j=values.length;i<j;i++){
             const rowdata = values[i];
