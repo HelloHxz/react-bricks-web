@@ -1,4 +1,4 @@
-import {React,PageView,observer,PageContainer,Row,Col,CheckBox,Form,Input,Select,Button} from "react-bricks-web"
+import {React,PageView,observer,PageContainer,Row,Col,CheckBox,Form,Input,Select,Button,CheckGroup} from "react-bricks-web"
 const {FormItem,FormRepeat} = Form;
 
 @PageView()
@@ -51,6 +51,10 @@ class FormDemo extends React.PureComponent {
                 <React.Fragment>
                   <FormItem {...formProps} rule={[]} dataKey='inputValue' placeholder='请输入' com={Input}  />
                   <FormItem {...formProps} rule={[]} initialValue='200' dataKey='inputValue1' com={Input}  />
+                  <FormItem {...formProps} rule={[]} initialValue={[0]} data={[
+                    {label:'check1',value:0},
+                    {label:'check2',value:1}
+                  ]} dataKey='checkgroup' com={CheckGroup}  />
                   <FormItem 
                   initialValue='2'
                   rule={[

@@ -29,6 +29,7 @@ import Spin from './spin';
 import Icon from './icon';
 import Image from './image';
 import observable from './observable';
+import CheckGroup from './checkgroup';
 import extendObservable from './extendObservable';
 import observer from './observer'
 /*
@@ -38,6 +39,7 @@ import observer from './observer'
 export {
 	Menu,
 	XZ,
+	CheckGroup,
 	Image,
 	TableLayout,
 	Swiper,

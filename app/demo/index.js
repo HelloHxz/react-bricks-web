@@ -14,6 +14,7 @@ var config = {
 		tableLayout:require("./pages/tablelayout").default,
 		grid:require("./pages/grid").default,
 		icon:require("./pages/icon").default,
+		checkgroup:require("./pages/checkgroup").default,
 		spin:require("./pages/spin").default,
 		image:require("./pages/image").default,
 		modal:require("./pages/modal").default,
