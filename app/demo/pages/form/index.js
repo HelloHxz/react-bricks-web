@@ -62,7 +62,7 @@ class FormDemo extends React.PureComponent {
                       return true;
                     }}
                   ]} {...formProps} dataKey='selectorValue' data={[{label:"江西",value:'1'},{label:"湖南",value:'2'},{label:"湖北",value:'3'}]} placeholder='请选择' com={Select}  />
-                  <FormRepeat initialValue={[{name:"hxz"}]} {...formProps} dataKey='Lists' renderRow={(rowProps)=>{
+                  <FormRepeat initialValue={[{name:"hxz",isChecked:true}]} {...formProps} dataKey='Lists' renderRow={(rowProps)=>{
                     return this.createRow(rowProps);
                   }} />
                   <Button type='primary' onClick={this.add.bind(this,formProps)}>添加</Button>
