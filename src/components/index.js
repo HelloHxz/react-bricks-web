@@ -27,6 +27,7 @@ import TableLayout from './tablelayout';
 import Form from './form';
 import Spin from './spin';
 import Icon from './icon';
+import Image from './image';
 import observable from './observable';
 import extendObservable from './extendObservable';
 import observer from './observer'
@@ -37,6 +38,7 @@ import observer from './observer'
 export {
 	Menu,
 	XZ,
+	Image,
 	TableLayout,
 	Swiper,
 	Tabs,

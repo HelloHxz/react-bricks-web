@@ -15,6 +15,7 @@ var config = {
 		grid:require("./pages/grid").default,
 		icon:require("./pages/icon").default,
 		spin:require("./pages/spin").default,
+		image:require("./pages/image").default,
 		modal:require("./pages/modal").default,
 		tabs:require("./pages/tabs").default,
 		tooltip:require("./pages/tooltip").default,

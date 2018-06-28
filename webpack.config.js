@@ -48,12 +48,6 @@ module.exports = function (env) {
             url:JSON.stringify("1333")
           }
       }),
-      //【主要是为了使用变量引用本地图片】这个静态文件 拷贝到dist的imgs下  其他的js boundle也是拷贝至dist下 
-      //所以在js通过!!!变量!!!(通过字符串变量引用本地的图片)引用图片的时候直接 ./imgs/xxx.jpg就可以
-      //【css less中以及import 图片资源 会由url-loader完成】
-      // new CopyWebpackPlugin([
-      //   {from:"./site1/imgs",to:"imgs"}
-      //   ]),
   ];
 
   plugins = plugins.concat(entryAndHtmlPlugin.htmlplugins);
