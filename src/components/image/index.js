@@ -60,22 +60,31 @@ class ImageCom extends React.Component {
 
   loadSuccess(image,src){
     var style = {};
+    var p = {};
     if(this.resizeMode==="orgin"){
     }else if(this.resizeMode==="contain"||this.resizeMode==="bl"){
      if(image.width>image.height){
         style.width = "100%";
+        p.width = "100%";
       }else{
         style.height = "100%";
+        p.height = "100%";
       }
     }else if(this.resizeMode==="stretch"){
       style.width = "100%";
       style.height = "100%";
+      p.width = "100%";
+      p.height = "100%";
+    }else if(this.resizeMode==="orign"){
+     
     }else{
       //cover
       if(image.width>image.height){
         style.width = "100%";
+        p.width = "100%";
       }else{
         style.height = "100%";
+        p.height = "100%";
       }
     }
     var propsStyle = this.props.style||{};
@@ -86,7 +95,7 @@ class ImageCom extends React.Component {
       }
     }
     this.setState({
-      child:<img width={style.width} height={style.height} style={{...style,...exStyle}} src={src}/>,
+      child:<img {...p} style={{...style,...exStyle}} src={src}/>,
     });
   }
 

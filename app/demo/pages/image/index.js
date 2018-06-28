@@ -32,10 +32,12 @@ class ImageDemo extends React.PureComponent {
         <Image style={{width:200,height:400}} resizeMode="contain" src={img}/>
         <Image style={{width:200,height:400}} resizeMode="stretch" src={img}/>
         <Image style={{width:200,height:400}} resizeMode="cover" src={img}/>
+        <Image style={{width:200,height:400}} resizeMode="orgin" src={img}/>
 
         <Image style={{width:330,height:400}} resizeMode="contain" src={img2}/>
         <Image style={{width:330,height:400}} resizeMode="stretch" src={img2}/>
         <Image style={{width:330,height:400}} resizeMode="cover" src={img2}/>
+        <Image style={{width:330,height:400}} resizeMode="orgin" src={img2}/>
     </div>
   }
 }
