@@ -53,7 +53,7 @@ function extendObservableDataKey(props,initialValue){
 class FormItem extends React.Component{
     constructor(props){
         super(props);
-        extendObservableDataKey(props,props.initialValue||"");
+        extendObservableDataKey(props,props.initialValue);
     }
     validate(){
     }
