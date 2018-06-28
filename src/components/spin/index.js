@@ -1,18 +1,21 @@
 
 import React from 'react';
 import Icon from '../icon';
+import XZ from '../xz';
 import './index.less';
 
 /*
-    <LoadingWarpper
+    <Spin
      loadingContent={}
      errorContent={}
-     content={}
+     loading={}
+     error={}
     className='' style={}>
-    </LoadingWrapper>
+    </Spin>
 */
 class Spin extends React.Component{
     render(){
+        //XZ.browser.isIE9()
         if(this.props.children){
             return <div>
                 <div className='xz-spin-inner'>
