@@ -1,5 +1,6 @@
 import {React,PageView,observer,PageContainer,Row,Col,Form,Input,Select,Button} from "react-bricks-web"
 
+
 const {FormItem,FormRepeat} = Form;
 @PageView()
 class FormDemo extends React.PureComponent {
@@ -19,6 +20,26 @@ class FormDemo extends React.PureComponent {
   }
   Reset(formProps){
     formProps.form.reset();
+  }
+
+  createRow(rowProps){
+    return (
+      <div>
+          <FormItem {...rowProps} dataKey='name' label={"姓名"} com={Input}/>
+          <FormItem {...rowProps} dataKey='name1' com={Input}/>
+          <FormItem 
+          initialValue='2'
+          rule={[
+            {message:'必填!',regex:'required'},
+            {message:'小于10',regex:(val)=>{
+              if(val>10){
+                return false;
+              }
+              return true;
+            }}
+          ]} {...rowProps} dataKey='itemselectValue' data={[{label:"江西",value:'1'},{label:"湖南",value:'2'},{label:"湖北",value:'3'}]} placeholder='请选择' com={Select}  />
+      </div>
+    )
   }
 
   render() {
@@ -42,23 +63,7 @@ class FormDemo extends React.PureComponent {
                     }}
                   ]} {...formProps} dataKey='selectorValue' data={[{label:"江西",value:'1'},{label:"湖南",value:'2'},{label:"湖北",value:'3'}]} placeholder='请选择' com={Select}  />
                   <FormRepeat initialValue={[{name:"hxz"}]} {...formProps} dataKey='Lists' renderRow={(rowProps)=>{
-                    return (
-                      <div>
-                          <FormItem {...rowProps} dataKey='name' label={"姓名"} com={Input}/>
-                          <FormItem {...rowProps} dataKey='name1' com={Input}/>
-                          <FormItem 
-                          initialValue='2'
-                          rule={[
-                            {message:'必填!',regex:'required'},
-                            {message:'小于10',regex:(val)=>{
-                              if(val>10){
-                                return false;
-                              }
-                              return true;
-                            }}
-                          ]} {...rowProps} dataKey='itemselectValue' data={[{label:"江西",value:'1'},{label:"湖南",value:'2'},{label:"湖北",value:'3'}]} placeholder='请选择' com={Select}  />
-                      </div>
-                    );
+                    return this.createRow(rowProps);
                   }} />
                   <Button type='primary' onClick={this.add.bind(this,formProps)}>添加</Button>
                   <Button type='primary' onClick={this.showData.bind(this,formProps)}>ShowData</Button>
