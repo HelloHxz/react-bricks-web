@@ -86,7 +86,7 @@ class ImageCom extends React.Component {
       }
     }
     this.setState({
-      child:<img style={{...style,...exStyle}} src={src}/>,
+      child:<img width={style.width} height={style.height} style={{...style,...exStyle}} src={src}/>,
     });
   }
 
@@ -134,8 +134,8 @@ class ImageCom extends React.Component {
   }
 
   onClick(){
-    if(this.props.onPress){
-      this.props.onPress();
+    if(this.props.onClick){
+      this.props.onClick();
     }
   }
 
