@@ -1,8 +1,8 @@
 const path = require('path');
 const webpack = require('webpack');
 var mockData = require("./mock")
-var fs= require('fs');
-var CopyWebpackPlugin = require('copy-webpack-plugin');
+// var fs= require('fs');
+// var CopyWebpackPlugin = require('copy-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 
@@ -24,10 +24,7 @@ function getEntryAndHtmlPlugin(){
   return re;
 }
 
-
-
 module.exports = function (env) {
-
   const nodeEnv = env && env.prod ? 'production' : 'development';
   const isProd = nodeEnv === 'production';
   var entryAndHtmlPlugin = getEntryAndHtmlPlugin();
