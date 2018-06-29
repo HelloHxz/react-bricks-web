@@ -7,8 +7,8 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 
 
-function getEntryAndHtmlPlugin(){
-  var siteArr = ["demo"];
+function getEntryAndHtmlPlugin(siteArr){
+ 
   var re = {entry:{},htmlplugins:[]};
   for(var i=0,j=siteArr.length;i<j;i++){
     var siteName = siteArr[i];
@@ -25,15 +25,15 @@ function getEntryAndHtmlPlugin(){
 }
 
 module.exports = function (env) {
+
+  const appName = 'demo';
+
   const nodeEnv = env && env.prod ? 'production' : 'development';
   const isProd = nodeEnv === 'production';
-  var entryAndHtmlPlugin = getEntryAndHtmlPlugin();
+  var entryAndHtmlPlugin = getEntryAndHtmlPlugin([appName]);
   var entry = entryAndHtmlPlugin.entry;
   var plugins= [
-
-      
       new webpack.NamedModulesPlugin(),
-
       new webpack.LoaderOptionsPlugin({
           minimize: true
       }),
@@ -82,14 +82,19 @@ return {
     poll: true
   },
   devtool: isProd ? 'cheap-module-source-map':'#source-map',
-
   devServer: {
     hot: true,
     // enable HMR on the server
-
     contentBase: path.resolve(__dirname, 'dist'),
     // match the output path
     publicPath: isProd?'./':'/',
+    //支持historyState
+    historyApiFallback:{
+      index:isProd?'./':'/'+appName+'.html',
+      // rewrites: [
+      //   { from: /^\/admin/, to: 'build/admin.html' }
+      // ],
+    },
     before(app){  
       mockData(app);
     }
