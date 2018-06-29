@@ -1,0 +1,110 @@
+*{
+	margin:0;
+	padding:0;
+	flex-shrink: 0;
+	box-sizing: border-box;
+}
+body{
+  font-family: "Monospaced Number", "Chinese Quote", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+html{
+  overflow: auto;
+}
+html,body{
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  width:100%;
+  height:100%;
+}
+.xz-page-base-page{
+  background-color:#fff;
+}
+input,textarea{
+  outline:none
+}
+ul,li{
+  margin:0;
+  padding:0;
+  list-style:none;
+}
+
+#xz-lightapp-root{
+   position:relative;
+  width:100%;
+  height:100%;
+}
+
+body{
+  font-size:13px;
+}
+
+.displaynone{
+  display:none !important;
+}
+
+.xz-close-icon {
+  position: relative;
+  display:block;
+  width: 15px;
+  height: 15px;
+  overflow: hidden;
+}
+.xz-close-icon:hover {
+  cursor: pointer;
+}
+.xz-close-icon::before, .xz-close-icon::after {
+  content: '';
+  position: absolute;
+  width: 2px;
+  top: 50%;
+  left: 50%;
+  height: 12px;
+  margin-top: -6px;
+  background: #333;
+}
+.xz-close-icon::before {
+  transform: rotate(45deg);
+}
+.xz-close-icon::after {
+  transform: rotate(-45deg);
+}
+
+
+.xz-spin-fast{
+  animation: a .7s infinite linear
+}
+.xz-spin-slow {
+  animation: a 1.6s infinite linear
+}
+.xz-spin-default {
+  animation: a 1s infinite linear
+}
+
+.xz-pulse {
+  animation: a 1s infinite steps(8)
+}
+
+@keyframes a {
+  0% {
+      transform: rotate(0deg)
+  }
+
+  to {
+      transform: rotate(1turn)
+  }
+}
+
+.xz-v-center{
+  position: absolute;
+  top:50%;
+  transform: translateY(-50%);
+}
+
+.xz-h-center{
+  position: absolute;
+  left:50%;
+  transform: translateX(-50%);
+}
+
+
+
+

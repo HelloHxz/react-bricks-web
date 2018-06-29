@@ -1,7 +1,8 @@
 
 
 import React from './react';
-import Run from './navigator'
+import HashNavigate from './hashNavigate';
+import HistoryNavigate from './historyNavigate';
 import RouteView from './routeview'
 import Menu from './Menu';
 import Select from './select';
@@ -68,5 +69,6 @@ export {
 	RouteView,
 	PageView,
 	React,
-	Run,
+	HashNavigate,
+	HistoryNavigate
 }

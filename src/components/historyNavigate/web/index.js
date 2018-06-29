@@ -1,9 +1,6 @@
 import React from "react";
 import PageView from "./pageview";
-import LazyLoadPage from "./lazyLoadPage";
 import ExtendsWrapper from './ExtendWrapper';
-
-
 
 /*
   路由需要支持：
@@ -17,7 +14,6 @@ var isWantToPreventRoute = false,isReplaceGo=false,splitchar='_',systemseedname=
 
 class Navigation extends React.Component {
   constructor(props) {
-
     super(props)
     this.appConfig = props.config;
     this.routeStack = [];
@@ -38,17 +34,12 @@ class Navigation extends React.Component {
 
   }
 
-
- 
-
-
-
-
   componentDidMount(){
     var _this = this;
-    window.onhashchange=function(){
-      _this.hashChange();
-    };
+    window.addEventListener('popstate', function(event) {
+      var state = history.state;
+      console.log(event);
+    });
     this.start();
   }
 
@@ -56,19 +47,12 @@ class Navigation extends React.Component {
         this.isForward = false;
         window.history.go(-1);
   }
- 
 
   start() {
-    let config = this.props.config;
-    
-    var toPage = this.getPageNameFromUrl();
     this.hashChange();
   }
 
-
-
   prepareGo(pageKey, params,isNotForward,_isReplaceGo){
-    
     if(isNotForward!==true){
       this.isForward = true;
     }
@@ -103,7 +87,6 @@ class Navigation extends React.Component {
       if(!paramsIsNotSame){
       }else{
       }
-
     }
     
     var paramsArr = [];
@@ -114,15 +97,13 @@ class Navigation extends React.Component {
   }
 
   navigate(pageKey, params,isNotForward) {
+    const p = params||{};
     if(pageKey[0]==="/"){
       pageKey = pageKey.substring(1);
     }
-    var paramsArr = this.prepareGo(pageKey, params,isNotForward);
-    if (paramsArr.length > 0) {
-        location.hash = pageKey + "?" + paramsArr.join("&");
-    } else {
-        location.hash = pageKey;
-    }
+    p.pageKey = pageKey;
+    
+    history.pushState(p,null,'?r='+new Date().valueOf());
 
     //当没有出发hashchange的时候
     setTimeout(()=>{
@@ -130,7 +111,6 @@ class Navigation extends React.Component {
     },200);
 
   }
-
 
   replace(pageKey, params) {
     if(pageKey[0]==="/"){
@@ -161,7 +141,6 @@ class Navigation extends React.Component {
     var pagename = this.getPageNameFromUrl();
     this.replaceGo(pagename,curParams);
   }
-
 
   getPageNameFromUrl() {
     var nameArr = window.location.hash.split("#");
@@ -212,22 +191,18 @@ class Navigation extends React.Component {
       this.firstLoadToChangeHash = false;
       return;
     }
-    var curParams = this.getParamsFromUrl();
     var ToPagePath = this.getPageNameFromUrl()||this.props.config.root;
     var ToPageNameArr = ToPagePath.split("/");
     var ToPageName = ToPageNameArr.shift();
     this.prePathArr = this.prePathArr||[];
-
     if(ToPageName===""){
       ToPageName = ToPageNameArr.shift();
     }
-    var key = ToPageName;
     var P = PageView;
     this.setState(
-      {pages:<P leftroute={ToPageNameArr} pagename={ToPageName} navigation={this} key={key} pkey={key}></P>}
+      {pages:<P leftroute={ToPageNameArr} pagename={ToPageName} navigation={this} key={ToPageName} pkey={ToPageName}></P>}
     );
   }
-
 
   pageUnmount(pageInstance){
     //页面销毁的时候清除相关资源
@@ -239,21 +214,6 @@ class Navigation extends React.Component {
       delete this.hashEvents[pageInstance.props.pkey];
     }
   }
-
-  listenRouteChange(pageInstance,callBack){
-    if(!pageInstance.props.basekey){
-       console.error("listenRouteChange 第一个参数必须为页面实例对象");
-    }
-    if(this.hashEvents[pageInstance.props.basekey]){
-      console.error("同一个页面请勿重复注册listenRouteChange！");
-    }
-    this.hashEvents[pageInstance.props.basekey] = {method:callBack,precalltime:new Date().valueOf()};
-    callBack(this.getUrlInfo());
-  }
-
-  
-
- 
 
 
   refreshApp(){
@@ -279,13 +239,11 @@ class Navigation extends React.Component {
     return pages;
   }
 
-
   getUrlInfo(){
     var path = this.getPageNameFromUrl();
     return {
       path:path,
       pathArr:path.split("/"),
-      tabPath:path.split("/").splice(0,2).join("/"),
       params:this.getParamsFromUrl()
     };
   }

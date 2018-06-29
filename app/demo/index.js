@@ -1,5 +1,5 @@
 import 'babel-polyfill'
-import {Run,Dynamic} from "react-bricks-web";
+import {HashNavigate,Dynamic,HistoryNavigate} from "react-bricks-web";
 import React from 'react';
 import BasicStore from './pages/basicLayout/store';
 import './icon/index.css';
@@ -37,4 +37,4 @@ var config = {
 		// }
 	}
 };
-export default Run(config)
+export default HashNavigate(config)
