@@ -50,7 +50,9 @@ export default class CheckBox extends React.Component {
         p.className = p.className.join(' ');
         return <label {...p}>
             <span className='xz-checkbox-inner'></span>
-            <span className='xz-checkbox-label xz-checkbox-label-left'>checkbox</span>
+            {
+                this.props.label?(<span className='xz-checkbox-label xz-checkbox-label-left'>{this.props.label}</span>):null
+            }
             </label>
     }
 

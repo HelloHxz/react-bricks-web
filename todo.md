@@ -45,6 +45,11 @@
 
 #### From/CheckBox
 
+
+#### From/CheckGroup
+
+> 增加label的onRender 可以渲染一个组件进去 以支持更多可输入的功能
+
 #### From/RadioBox
 
 #### From/DatePicker
