@@ -1,4 +1,4 @@
-import {React,PageView,observer,PageContainer,Row,Col,CheckBox,Form,Input,Select,Button,CheckGroup} from "react-bricks-web"
+import {React,PageView,observer,PageContainer,Row,CheckBox,Form,Input,Select,Button,CheckGroup} from "react-bricks-web"
 const {FormItem,FormRepeat} = Form;
 
 @PageView()
@@ -49,12 +49,21 @@ class FormDemo extends React.PureComponent {
           }} renderContent={(formProps)=>{
               return (
                 <React.Fragment>
-                  <FormItem {...formProps} rule={[]} dataKey='inputValue' placeholder='请输入' com={Input}  />
-                  <FormItem {...formProps} rule={[]} initialValue='200' dataKey='inputValue1' com={Input}  />
-                  <FormItem {...formProps} rule={[]} initialValue={[0]} data={[
-                    {label:'check1',value:0},
-                    {label:'check2',value:1}
-                  ]} dataKey='checkgroup' com={CheckGroup}  />
+                   <Row>
+                    <Row.Col span={{ xs: 8, sm: 8, md: 8, lg: 8 }}>
+                      <FormItem label='文本输入：' {...formProps} rule={[]} dataKey='inputValue' placeholder='请输入' com={Input}  />
+                    </Row.Col>
+                    <Row.Col span={{ sm: 8, md: 8, lg: 8 }}>
+                     <FormItem label='文本输入：' {...formProps} rule={[]} initialValue='200' dataKey='inputValue1' com={Input}  />
+                    </Row.Col>
+                    <Row.Col span={{ xs: 8, sm: 8}}>
+                        <FormItem label='多选:' {...formProps} rule={[]} initialValue={[0]} data={[
+                        {label:'check1',value:0},
+                        {label:'check2',value:1}
+                      ]} dataKey='checkgroup' com={CheckGroup}  />
+                    </Row.Col>
+                  </Row>
+                
                   <FormItem 
                   initialValue='2'
                   rule={[

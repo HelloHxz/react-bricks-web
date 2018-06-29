@@ -1,4 +1,3 @@
-//https://www.html5tricks.com/demo/jiaoben1503/index.html
 import React from 'react';
 import './index.less'
 
@@ -7,7 +6,7 @@ export default class CheckBox extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            value:this.prepareValue(props.value)
+            // value:this.prepareValue(props.value)
         };
     }
 
@@ -21,27 +20,27 @@ export default class CheckBox extends React.Component {
         }
         return false;
     }
-    componentWillReceiveProps(nextProps){
-        const newValue = this.prepareValue(nextProps.value);
-        if(newValue!==this.state.value){
-            this.setState({value:newValue});
-        }
-    }
+    // componentWillReceiveProps(nextProps){
+    //     const newValue = this.prepareValue(nextProps.value);
+    //     if(newValue!==this.state.value){
+    //         this.setState({value:newValue});
+    //     }
+    // }
     onClick(e){
         if(this.props.onChange){
             let newValue = false;
-            if(this.state.value!==true){
+            if(this.props.value!==true){
                 newValue = true;
             }
             this.props.onChange(newValue,{
-                oldValue:this.state.value,
+                oldValue:this.props.value,
                 instance:this
             });
         }
     }
     render(){
         const p = {
-            className:[`xz-checkbox xz-checkbox-${this.state.value.toString()}`]
+            className:[`xz-checkbox xz-checkbox-${this.prepareValue(this.props.value).toString()}`]
         };
         if(this.props.disabled){
             p.className.push("xz-checkbox-disabled");
