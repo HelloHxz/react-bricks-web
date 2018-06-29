@@ -7,7 +7,7 @@ import LeftMenu from './LeftMenu';
 const FormRepeat = Form.FormRepeat;
 const FormItem = Form.FormItem;
 
-@PageView({homestore:new HomeStore,baseStore:BaseStore})
+@PageView({homestore:new HomeStore,baseStore:BaseStore},{o:true})
 class HomeScreen extends React.PureComponent {
 
   componentDidMount() {
