@@ -4,8 +4,10 @@
 }
 .xz-hbox-panel{
     height: 100%;
+    z-index: 1;
     overflow: hidden;
     transition: width .3s ease;
+    background-color:#fff;
 }
 
 .xz-hbox-panel-left-dock{
@@ -15,6 +17,7 @@
 .xz-hbox-panel-left-popshow{
     position: absolute;
     right:100%;
+    z-index: 3;
     top:0;
     transform: translateX(100%);
     -ms-transform: translateX(100%);
@@ -30,6 +33,7 @@
 .xz-hbox-panel-left-pophide{
     position: absolute;
     right:100%;
+    z-index: 3;
     top:0;
     transform: translateX(0);
     -ms-transform: translateX(0);
@@ -79,6 +83,7 @@
     position: absolute;
     left:100%;
     top:0;
+    z-index: 3;
     transform: translateX(-100%);
     -ms-transform: translateX(-100%);
     animation:rightpopshow .3s ease-in;
@@ -94,6 +99,7 @@
     position: absolute;
     left:100%;
     top:0;
+    z-index: 3;
     transform: translateX(0);
     -ms-transform: translateX(0);
     animation:rightpophide .3s ease-out;
