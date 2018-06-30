@@ -122,8 +122,11 @@ class Panel extends React.Component {
         if(position==='middle'){
             const topStatus = this.getStatus('top',parent);
             const bottomStatus = this.getStatus('bottom',parent);
-            if(topStatus==='popshow'||topStatus==='pophide'||bottomStatus==='popshow'||bottomStatus==='pophide'){
-                className.push('xz-vbox-transition-none');
+            if(topStatus==='popshow'||topStatus==='pophide'){
+                className.push('xz-vbox-transition-top-none');
+            } 
+            if(bottomStatus==='popshow'||bottomStatus==='pophide'){
+                className.push('xz-vbox-transition-bottom-none');
             }
         }
         return (
