@@ -2,6 +2,8 @@ import React from 'react';
 import './index.less';
 
 const positions =['top','middle','bottom'];
+
+const statusArr = ['popshow','pophide','dock','slideshow','slidehide'];
 export default class VBox extends React.Component{
     constructor(props){
         super(props);
@@ -18,6 +20,14 @@ export default class VBox extends React.Component{
             const panel = this.props.children[i];
             if(panel.type === Panel){
                 const position = positions[seed];
+                let status = null;
+                if(position==='top'||position==='bottom'){
+                    status = panel.props.status||'dock';
+                    if(statusArr.indexOf(status)<0){
+                        status = 'dock';
+                    }
+                }
+
                 children.push(React.cloneElement(panel,{
                     position,
                     key:position,
@@ -25,7 +35,8 @@ export default class VBox extends React.Component{
                 }));
                 const propsStyle = panel.props.style || {};
                 this.layoutInfo[position] = {
-                    height:propsStyle.height
+                    height:propsStyle.height,
+                    status
                 };
                 if(children.length===3){
                     break;
@@ -53,7 +64,6 @@ export default class VBox extends React.Component{
     }
 }
 
-
 class Panel extends React.Component {
     getHeight = (position,parent) => {
         if(!parent.layoutInfo[position].height){
@@ -61,29 +71,63 @@ class Panel extends React.Component {
         }
         return parent.layoutInfo[position].height;
     }
+    getStatus = (position,parent) => {
+        return parent.layoutInfo[position].status;
+    }
     getStyle = ()=>{
         const cloneStyle = Object.assign({},this.props.style||{});
         const { position,parent } = this.props;
+        const topStatus = this.getStatus('top',parent);
+        const bottomStatus = this.getStatus('bottom',parent);
+        const topHeight = this.getHeight('top',parent);
+        const bottomHeight = this.getHeight('bottom',parent);
         delete cloneStyle['position'];
         delete cloneStyle['bottom'];
         delete cloneStyle['height'];
         delete cloneStyle['width'];
         delete cloneStyle['top'];
         if(position==='top'){
-            cloneStyle.top = 0;
-            cloneStyle.height = this.getHeight('top',parent);
+            if(topStatus==='slidehide'){
+                cloneStyle.top = (0 - parseInt(topHeight));
+            }else{
+                cloneStyle.top = 0;
+            }
+            cloneStyle.height = topHeight;
         }else if(position==='middle'){
-            cloneStyle.top = this.getHeight('top',parent);
-            cloneStyle.bottom = this.getHeight('bottom',parent);
+            if(topStatus==='popshow'||topStatus==='pophide'||topStatus==='slidehide'){
+                cloneStyle.top = 0;
+            }else{
+                cloneStyle.top = topHeight;
+            }
+            if(bottomStatus==='popshow'||bottomStatus==='pophide'||bottomStatus==='slidehide'){
+                cloneStyle.bottom = 0;
+            }else{
+                cloneStyle.bottom = bottomHeight;
+            }
+           
         }else if(position==='bottom'){
-            cloneStyle.height = this.getHeight('bottom',parent);
-            cloneStyle.bottom = 0;
+            if(bottomStatus==='slidehide'){
+                cloneStyle.bottom = (0 - parseInt(bottomHeight));
+            }else{
+                cloneStyle.bottom = 0;
+            }
+            cloneStyle.height = bottomHeight;
         }
         return cloneStyle;
     }
     render(){
+        const { position,parent } = this.props;
+        const status = this.getStatus(position,parent);
+        const className = ['xz-vbox-panel',`xz-vbox-panel-${position}${status?'-'+status:''}`];
+        if(position==='middle'){
+            const topStatus = this.getStatus('top',parent);
+            const bottomStatus = this.getStatus('bottom',parent);
+            if(topStatus==='popshow'||topStatus==='pophide'||bottomStatus==='popshow'||bottomStatus==='pophide'){
+                className.push('xz-vbox-transition-none');
+            }
+        }
         return (
-             <div style={this.getStyle()} className='xz-vbox-panel'>{this.props.children}</div>
+             <div style={this.getStyle()} className={className.join(' ')}>{this.props.children}</div>
         )
     }
 }

@@ -2,10 +2,67 @@
      height: 100%; 
      position: relative;
      width: 100%;
+     overflow: hidden;
 }
 
 .xz-vbox-panel{
     position: absolute;
     width:100%;
     left:0;
+    z-index: 1;
+    transition: height .3s ease, top .3s ease, bottom .3s ease;
+}
+
+.xz-vbox-transition-none{
+    transition: none;
+}
+
+.xz-vbox-panel-top-popshow{
+    z-index: 3;
+    animation:toppopshow .3s ease;
+    transform: translateY(0);
+}
+
+@keyframes toppopshow
+{
+    from {transform: translateY(-100%);}
+    to {transform: translateY(0);}
+}
+
+.xz-vbox-panel-top-pophide{
+    z-index: 3;
+    transform: translateY(-100%);
+    animation:toppophide .3s ease;
+}
+
+@keyframes toppophide
+{
+    from {transform: translateY(0);}
+    to {transform: translateY(-100%);}
+}
+
+
+
+
+.xz-vbox-panel-bottom-popshow{
+    z-index: 3;
+    animation:bottompopshow .3s ease;
+    transform: translateY(0);
+}
+
+@keyframes bottompopshow
+{
+    from {transform: translateY(100%);}
+    to {transform: translateY(0);}
+}
+.xz-vbox-panel-bottom-pophide{
+    z-index: 3;
+    transform: translateY(100%);
+    animation:bottompophide .3s ease;
+}
+
+@keyframes bottompophide
+{
+    from {transform: translateY(0);}
+    to {transform: translateY(100%);}
 }
