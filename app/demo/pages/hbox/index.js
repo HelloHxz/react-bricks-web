@@ -30,19 +30,31 @@ class HBoxDemo extends React.PureComponent {
   }
 
   changeLeftWidth(width){
-      this.setState({
-          leftWidth:width
-      });
+    if(width===this.state.leftWidth){
+      return;
+    }
+    this.setState({
+        leftWidth:width
+    });
   }
   changeLeftStatus(status){
-      this.setState({leftPanelStatus:status});
+    if(status===this.state.leftPanelStatus){
+      return;
+    }
+    this.setState({leftPanelStatus:status});
   }
 
   changeRightStatus(status){
+    if(status===this.state.rightPanelStatus){
+      return;
+    }
     this.setState({rightPanelStatus:status});
   }
 
   changeRightWidth(width){
+    if(width===this.state.rightWidth){
+      return;
+    }
     this.setState({
       rightWidth:width
   });
