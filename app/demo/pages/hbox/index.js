@@ -1,5 +1,5 @@
 import {React,PageView,observer,PageContainer,XZ,Button,HBox} from "react-bricks-web"
-
+import './index.less';
 
 
 @PageView()
@@ -63,7 +63,7 @@ class HBoxDemo extends React.PureComponent {
 
   render() {
     return <div>
-        <HBox style={{height:200}}>
+        <HBox className='demoHBox' style={{height:200}}>
             <HBox.Panel status={this.state.leftPanelStatus} style={{width:this.state.leftWidth,backgroundColor:'#7dbcea'}}>1</HBox.Panel>
             <HBox.Panel style={{backgroundColor:'rgba(16, 142, 233, 1)'}}>2</HBox.Panel>
             <HBox.Panel status={this.state.rightPanelStatus} style={{width:this.state.rightWidth,backgroundColor:'#7dbcea'}}>3</HBox.Panel>

@@ -57,7 +57,7 @@ export default class VBox extends React.Component{
                 if(root){
                     this.layoutInfo.height = this.root.offsetHeight;
                 }
-            }} className="xz-vbox">
+            }} className={`xz-vbox ${this.props.className||''}`}>
                 {children}
             </div>
         );
@@ -128,6 +128,9 @@ class Panel extends React.Component {
             if(bottomStatus==='popshow'||bottomStatus==='pophide'){
                 className.push('xz-vbox-transition-bottom-none');
             }
+        }
+        if(this.props.className){
+            className.push(this.props.className);
         }
         return (
              <div style={this.getStyle()} className={className.join(' ')}>{this.props.children}</div>

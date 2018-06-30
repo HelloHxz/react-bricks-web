@@ -1,5 +1,5 @@
 import {React,PageView,observer,PageContainer,XZ,Button,VBox} from "react-bricks-web"
-
+import './index.less';
 
 
 @PageView()
@@ -67,7 +67,7 @@ class VBoxDemo extends React.PureComponent {
 
   render() {
     return <div>
-        <VBox style={{height:460}}>
+        <VBox className='demoVBox' style={{height:460}}>
             <VBox.Panel status={this.state.topStatus} style={{height:this.state.topHeight,backgroundColor:'#7dbcea'}}>1</VBox.Panel>
             <VBox.Panel style={{backgroundColor:'rgba(16, 142, 233, 1)'}}>2</VBox.Panel>
             <VBox.Panel status={this.state.bottomStatus} style={{height:this.state.bottomHeight,backgroundColor:'#7dbcea'}}>3</VBox.Panel>

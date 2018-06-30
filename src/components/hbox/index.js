@@ -18,6 +18,7 @@ export default class HBox extends React.Component{
         if(!this.props.children){
             return null;
         }
+        let showBk = false;
         const len = this.props.children.length;
         let seed = 0;
         let children = [];
@@ -25,6 +26,9 @@ export default class HBox extends React.Component{
             const panel = this.props.children[i];
             if(panel.type === Panel){
                 const position = positions[seed];
+                if(panel.props.status==='popshow'){
+                    showBk = true;
+                }
                 children.push(React.cloneElement(panel,{
                     position,
                     key:position,
@@ -44,7 +48,8 @@ export default class HBox extends React.Component{
         const hboxStyle = Object.assign({},this.props.style||{});
         delete hboxStyle["position"];
         return (
-            <div style={hboxStyle} className="xz-hbox">
+            <div style={hboxStyle} className={`xz-hbox ${this.props.className||''}`}>
+                {showBk?<div className='xz-hbox-bk' />:null}
                 {children}
             </div>
         );
@@ -65,7 +70,7 @@ class Panel extends React.Component {
             }
         }
         return (
-             <div {...p} className={`xz-hbox-panel xz-hbox-panel-${this.props.position}${status?'-'+status:''}`}>{this.props.children}</div>
+             <div {...p} className={`xz-hbox-panel xz-hbox-panel-${this.props.position}${status?'-'+status:''} ${this.props.className||''}`}>{this.props.children}</div>
         )
     }
 }
