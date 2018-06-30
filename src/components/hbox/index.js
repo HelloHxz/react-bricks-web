@@ -1,7 +1,18 @@
 import React from 'react';
 import './index.less';
 
+
+/*
+    <HBox>
+        <HBox.Panel status='popshow|pophide|dock|slideshow|slidehide' style={{width:100}}></HBox.Panel>
+        <HBox.Panel></HBox.Panel>
+        <HBox.Panel status='popshow|pophide|dock|sildeshow|slidehide' style={{width:100}}></HBox.Panel>
+    </HBox>
+*/
+
 const positions =['left','middle','right'];
+const statusArr = ['popshow','pophide','dock','slideshow','slidehide'];
+
 export default class HBox extends React.Component{
     render(){
         if(!this.props.children){
@@ -25,7 +36,7 @@ export default class HBox extends React.Component{
             }
         }
         if(children.length<=1||children.length>3){
-            console.error("Vbox组件保证有俩个或者三个HBox.Panel子元素");
+            console.error("HBox组件保证有俩个或者三个HBox.Panel子元素");
         }
         if(children.length === 3){
             children = [children[0],children[2],children[1]];
@@ -40,15 +51,22 @@ export default class HBox extends React.Component{
     }
 }
 
-
 class Panel extends React.Component {
     render(){
         const p = {};
         if(this.props.style){
             p.style = this.props.style;
         }
+        let status = null;
+        if(this.props.position==='left'||this.props.position==='right'){
+            status = this.props.status||'dock';
+            if(statusArr.indexOf(status)<0){
+                status = 'dock';
+            }
+        }
+        console.log(status);
         return (
-             <div {...p} className={`xz-hbox-panel xz-hbox-panel-${this.props.position}`}>{this.props.children}</div>
+             <div {...p} className={`xz-hbox-panel xz-hbox-panel-${this.props.position}${status?'-'+status:''}`}>{this.props.children}</div>
         )
     }
 }

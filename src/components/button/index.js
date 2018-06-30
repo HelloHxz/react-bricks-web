@@ -22,16 +22,19 @@ export default class Button extends React.Component{
         return this.root.getBoundingClientRect();
     }
     render(){
-        var mouseEvent = {};
+        var p = {};
         if(this.props.onMouseLeave){
-            mouseEvent.onMouseLeave = this.onMouseLeave.bind(this);
+            p.onMouseLeave = this.onMouseLeave.bind(this);
         }
         if(this.props.onMouseOver){
-            mouseEvent.onMouseOver = this.onMouseOver.bind(this);
+            p.onMouseOver = this.onMouseOver.bind(this);
         }
         if(this.props.onClick){
-            mouseEvent.onClick = this.onClick.bind(this);
+            p.onClick = this.onClick.bind(this);
         }
-        return (<button {...mouseEvent} ref={(root)=>{this.root = root;}} className={`xz-btn xz-btn-size-${Theme.getConfig('size',this.props)} xz-btn-type-${Theme.getConfig('btn-type',this.props)}`}>{this.props.children}</button>)
+        if(this.props.style){
+            p.style = this.props.style;
+        }
+        return (<button {...p} ref={(root)=>{this.root = root;}} className={`xz-btn xz-btn-size-${Theme.getConfig('size',this.props)} xz-btn-type-${Theme.getConfig('btn-type',this.props)}`}>{this.props.children}</button>)
     }
 }

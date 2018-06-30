@@ -1,14 +1,74 @@
 .xz-hbox{
     position: relative;
+    overflow: hidden;
 }
 .xz-hbox-panel{
     height: 100%;
     overflow: hidden;
 }
 
-.xz-hbox-panel-left{
+.xz-hbox-panel-left-dock{
     float: left;
 }
-.xz-hbox-panel-right{
+
+.xz-hbox-panel-left-popshow{
+    position: absolute;
+    right:100%;
+    top:0;
+    transform: translateX(100%);
+    -ms-transform: translateX(100%);
+    animation:leftpopshow .4s ease-in;
+}
+
+@keyframes leftpopshow
+{
+    from {transform: translateX(0);}
+    to {transform: translateX(100%);}
+}
+
+.xz-hbox-panel-left-pophide{
+    position: absolute;
+    right:100%;
+    top:0;
+    transform: translateX(0);
+    -ms-transform: translateX(0);
+    animation:leftpophide .4s ease-out;
+}
+
+@keyframes leftpophide
+{
+    from {transform: translateX(100%);}
+    to {transform: translateX(0);}
+}
+
+.xz-hbox-panel-left-slidehide{
+    transform: translateX(-100%);
+    -ms-transform: translateX(-100%);
+    margin-right: -100%;
+    float: left;
+    animation:leftslidehide .4s ease-out;
+}
+
+@keyframes leftslidehide
+{
+    from {margin-right:0;transform:translateX(0%);}
+    to {margin-right:-100%;transform:translateX(-100%);}
+}
+
+.xz-hbox-panel-left-slideshow{
+    transform: translateX(0%);
+    -ms-transform: translateX(0%);
+    margin-right: 0;
+    float: left;
+    animation:leftslideshow .4s ease-in;
+}
+
+@keyframes leftslideshow
+{
+    from {margin-right:-100%;transform:translateX(-100%);}
+    to {margin-right:0;transform:translateX(0%);}
+}
+
+.xz-hbox-panel-right-dock{
     float: right;
 }

@@ -28,8 +28,8 @@ class HomeScreen extends React.PureComponent {
     // this.props.homestore.test = "huxiaohzong";
     // console.log(this.props.homestore);
     // this.props.navigation.navigate("button");
-    this.props.baseStore.MenuData[0].label = "hahah";
-    // this.props.homestore.menuCollapsed = !this.props.homestore.menuCollapsed;
+    // this.props.baseStore.MenuData[0].label = "hahah";
+    this.props.homestore.menuCollapsed = !this.props.homestore.menuCollapsed;
   }
 
   onPageBeforeLeave(params){
