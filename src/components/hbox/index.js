@@ -64,7 +64,6 @@ class Panel extends React.Component {
                 status = 'dock';
             }
         }
-        console.log(status);
         return (
              <div {...p} className={`xz-hbox-panel xz-hbox-panel-${this.props.position}${status?'-'+status:''}`}>{this.props.children}</div>
         )

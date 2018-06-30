@@ -5,6 +5,7 @@
 .xz-hbox-panel{
     height: 100%;
     overflow: hidden;
+    transition: width .3s ease;
 }
 
 .xz-hbox-panel-left-dock{
@@ -17,7 +18,7 @@
     top:0;
     transform: translateX(100%);
     -ms-transform: translateX(100%);
-    animation:leftpopshow .4s ease-in;
+    animation:leftpopshow .3s ease-in;
 }
 
 @keyframes leftpopshow
@@ -32,7 +33,7 @@
     top:0;
     transform: translateX(0);
     -ms-transform: translateX(0);
-    animation:leftpophide .4s ease-out;
+    animation:leftpophide .3s ease-out;
 }
 
 @keyframes leftpophide
@@ -46,7 +47,7 @@
     -ms-transform: translateX(-100%);
     margin-right: -100%;
     float: left;
-    animation:leftslidehide .4s ease-out;
+    animation:leftslidehide .3s ease-out;
 }
 
 @keyframes leftslidehide
@@ -60,7 +61,7 @@
     -ms-transform: translateX(0%);
     margin-right: 0;
     float: left;
-    animation:leftslideshow .4s ease-in;
+    animation:leftslideshow .3s ease-in;
 }
 
 @keyframes leftslideshow
@@ -71,4 +72,65 @@
 
 .xz-hbox-panel-right-dock{
     float: right;
+}
+
+
+.xz-hbox-panel-right-popshow{
+    position: absolute;
+    left:100%;
+    top:0;
+    transform: translateX(-100%);
+    -ms-transform: translateX(-100%);
+    animation:rightpopshow .3s ease-in;
+}
+
+@keyframes rightpopshow
+{
+    from {transform: translateX(0);}
+    to {transform: translateX(-100%);}
+}
+
+.xz-hbox-panel-right-pophide{
+    position: absolute;
+    left:100%;
+    top:0;
+    transform: translateX(0);
+    -ms-transform: translateX(0);
+    animation:rightpophide .3s ease-out;
+}
+
+@keyframes rightpophide
+{
+    from {transform: translateX(-100%);}
+    to {transform: translateX(0);}
+}
+
+
+
+.xz-hbox-panel-right-slidehide{
+    transform: translateX(100%);
+    -ms-transform: translateX(100%);
+    margin-left: -100%;
+    float: right;
+    animation:rightslidehide .3s ease-out;
+}
+
+@keyframes rightslidehide
+{
+    from {margin-left:0;transform:translateX(0%);}
+    to {margin-left:-100%;transform:translateX(100%);}
+}
+
+.xz-hbox-panel-right-slideshow{
+    transform: translateX(0%);
+    -ms-transform: translateX(0%);
+    margin-left: 0;
+    float: right;
+    animation:rightslideshow .3s ease-in;
+}
+
+@keyframes rightslideshow
+{
+    from {margin-left:-100%;transform:translateX(100%);}
+    to {margin-left:0;transform:translateX(0%);}
 }
