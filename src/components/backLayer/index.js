@@ -5,7 +5,9 @@ export default class BackLayer extends React.Component{
     constructor(props){
         super(props);
     }
-    
+    onClick(){
+        this.props.onClick();
+    }
     render(){
         const status = this.props.show?'show':'hide';
         if(status==='hide'&&this.preStatus!=='show'){
@@ -22,6 +24,9 @@ export default class BackLayer extends React.Component{
         }
         if(this.props.className){
             className.push(this.props.className);
+        }
+        if(this.props.onClick){
+            p.onClick = this.onClick.bind(this);
         }
         return (<div {...p} className={className.join(' ')}></div>)
     }

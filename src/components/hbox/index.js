@@ -15,6 +15,10 @@ const positions =['left','middle','right'];
 const statusArr = ['popshow','pophide','dock','slideshow','slidehide'];
 
 export default class HBox extends React.Component{
+    onBackLayerClick(){
+        this.props.onBackLayerClick();
+    }
+
     render(){
         if(!this.props.children){
             return null;
@@ -48,9 +52,13 @@ export default class HBox extends React.Component{
         }
         const hboxStyle = Object.assign({},this.props.style||{});
         delete hboxStyle["position"];
+        const backlayerProps = {};
+        if(this.props.onBackLayerClick){
+            backlayerProps.onClick = this.onBackLayerClick.bind(this);
+        }
         return (
             <div style={hboxStyle} className={`xz-hbox ${this.props.className||''}`}>
-                <BackLayer className='xz-hbox-bk' show={showBk} /> 
+                <BackLayer {...backlayerProps} className='xz-hbox-bk' show={showBk} /> 
                 {children}
             </div>
         );

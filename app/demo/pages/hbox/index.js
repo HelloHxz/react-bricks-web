@@ -18,6 +18,22 @@ class HBoxDemo extends React.PureComponent {
     }
   }
 
+  onBackLayerClick(){
+    const re = {};
+    let seed = 0;
+    if(this.state.leftPanelStatus==='popshow'){
+      re.leftPanelStatus = 'pophide';
+      seed +=1;
+    }
+    if(this.state.rightPanelStatus==='popshow'){
+      re.rightPanelStatus = 'pophide';
+      seed +=1;
+    }
+    if(seed>0){
+      this.setState(re);
+    }
+  }
+
   goBack(){
     this.props.navigation.goBack();
   }
@@ -63,7 +79,7 @@ class HBoxDemo extends React.PureComponent {
 
   render() {
     return <div>
-        <HBox className='demoHBox' style={{height:200}}>
+        <HBox onBackLayerClick={this.onBackLayerClick.bind(this)} className='demoHBox' style={{height:200}}>
             <HBox.Panel status={this.state.leftPanelStatus} style={{width:this.state.leftWidth,backgroundColor:'#7dbcea'}}>1</HBox.Panel>
             <HBox.Panel style={{backgroundColor:'rgba(16, 142, 233, 1)'}}>2</HBox.Panel>
             <HBox.Panel status={this.state.rightPanelStatus} style={{width:this.state.rightWidth,backgroundColor:'#7dbcea'}}>3</HBox.Panel>

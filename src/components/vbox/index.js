@@ -10,6 +10,9 @@ export default class VBox extends React.Component{
         super(props);
         this.layoutInfo = {};
     }
+    onBackLayerClick(){
+        this.props.onBackLayerClick();
+    }
     render(){
         if(!this.props.children){
             return null;
@@ -56,6 +59,10 @@ export default class VBox extends React.Component{
         
         const vboxStyle = Object.assign({},this.props.style||{});
         delete vboxStyle["position"];
+        const backlayerProps = {};
+        if(this.props.onBackLayerClick){
+            backlayerProps.onClick = this.onBackLayerClick.bind(this);
+        }
         return (
             <div 
                 style={vboxStyle}
@@ -66,7 +73,7 @@ export default class VBox extends React.Component{
                 }
             }} className={`xz-vbox ${this.props.className||''}`}>
                 {children}
-                <BackLayer className='xz-vbox-bk' show={showBk} /> 
+                <BackLayer {...backlayerProps} className='xz-vbox-bk' show={showBk} /> 
             </div>
         );
     }
