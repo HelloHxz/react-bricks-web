@@ -32,7 +32,7 @@ class HomeScreen extends React.PureComponent {
     // this.props.baseStore.MenuData[0].label = "hahah";
     // this.props.homestore.menuCollapsed = !this.props.homestore.menuCollapsed;
     this.setState({
-      leftStatus:this.state.leftStatus==='pophide'?'popshow':'pophide'
+      leftStatus:this.state.leftStatus==='slidehide'?'slideshow':'slidehide'
     });
   }
 
