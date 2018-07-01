@@ -15,35 +15,7 @@
 }
 
 .xz-modal-bk{
-    position: fixed;
-    width: 100%;
-    top:0;
-    left: 0;
-    height: 100%;
     z-index: @modal_zindex -  1;
-    background-color:#000;
-    filter:alpha(opacity=50);
-    opacity: .5;
-}
-
-.xz-modal-bk-hide{
-    animation:xzmodalhide .3s;
-    opacity: 0;
-}
-
-@keyframes xzmodalhide{
-    from {opacity:.5;}
-    to {opacity:0;}
-}
-
-.xz-modal-bk-show{
-    animation:xzmodalshow .3s;
-    opacity: .5;
-}
-
-@keyframes xzmodalshow{
-    from {opacity:0;}
-    to {opacity:0.5;}
 }
 
 .xz-modal-wrapper-show{

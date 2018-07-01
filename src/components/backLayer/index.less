@@ -1,0 +1,35 @@
+.xz-bk-layer-fixed{
+    position: fixed;
+}
+.xz-bk-layer-absolute{
+    position: absolute;
+}
+.xz-bk-layer{
+    width: 100%;
+    top:0;
+    left: 0;
+    height: 100%;
+    background-color:#000;
+    filter:alpha(opacity=50);
+    opacity: .5;
+}
+
+.xz-bk-layer-hide{
+    animation:xzbklayerhide .3s;
+    opacity: 0;
+}
+
+@keyframes xzbklayerhide{
+    from {opacity:.5;}
+    to {opacity:0;}
+}
+
+.xz-bk-layer-show{
+    animation:xzbklayershow .3s;
+    opacity: .5;
+}
+
+@keyframes xzbklayershow{
+    from {opacity:0;}
+    to {opacity:0.5;}
+}

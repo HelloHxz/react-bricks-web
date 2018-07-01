@@ -1,4 +1,5 @@
 import React from 'react';
+import BackLayer from '../backLayer';
 import './index.less';
 
 const positions =['top','middle','bottom'];
@@ -16,6 +17,7 @@ export default class VBox extends React.Component{
         const len = this.props.children.length;
         let seed = 0;
         const children = [];
+        let showBk = false;
         for(let i = 0 ;i<len;i+=1){
             const panel = this.props.children[i];
             if(panel.type === Panel){
@@ -27,7 +29,9 @@ export default class VBox extends React.Component{
                         status = 'dock';
                     }
                 }
-
+                if(panel.props.status==='popshow'){
+                    showBk = true;
+                }
                 children.push(React.cloneElement(panel,{
                     position,
                     key:position,
@@ -47,6 +51,9 @@ export default class VBox extends React.Component{
         if(children.length<=1||children.length>3){
             console.error("Vbox组件保证有俩个或者三个VBox.Panel子元素");
         }
+
+        
+        
         const vboxStyle = Object.assign({},this.props.style||{});
         delete vboxStyle["position"];
         return (
@@ -59,6 +66,7 @@ export default class VBox extends React.Component{
                 }
             }} className={`xz-vbox ${this.props.className||''}`}>
                 {children}
+                <BackLayer className='xz-vbox-bk' show={showBk} /> 
             </div>
         );
     }
@@ -133,7 +141,8 @@ class Panel extends React.Component {
             className.push(this.props.className);
         }
         return (
-             <div style={this.getStyle()} className={className.join(' ')}>{this.props.children}</div>
+             <div style={this.getStyle()} className={className.join(' ')}>{this.props.children}
+             </div>
         )
     }
 }

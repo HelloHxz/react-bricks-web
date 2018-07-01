@@ -162,6 +162,11 @@
 
 ```
 
+
+### BackLayer
+
+> <BackLayer show={true} customeClassName='' positionMode='fixed|absolute'/>
+
 ### 完善路由
 
 > 阻止离开

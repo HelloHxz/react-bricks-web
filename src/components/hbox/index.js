@@ -1,4 +1,5 @@
 import React from 'react';
+import BackLayer from '../backLayer';
 import './index.less';
 
 
@@ -49,7 +50,7 @@ export default class HBox extends React.Component{
         delete hboxStyle["position"];
         return (
             <div style={hboxStyle} className={`xz-hbox ${this.props.className||''}`}>
-                {showBk?<div className='xz-hbox-bk' />:null}
+                <BackLayer className='xz-hbox-bk' show={showBk} /> 
                 {children}
             </div>
         );
