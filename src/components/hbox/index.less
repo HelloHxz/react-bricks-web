@@ -9,6 +9,8 @@
     transition: width .3s ease;
     background-color:#fff;
     position: relative;
+    backface-visibility: hidden;
+    perspective: 1000;
 }
 
 .xz-hbox-bk{
@@ -56,7 +58,7 @@
     -ms-transform: translateX(-100%);
     margin-right: -100%;
     float: left;
-    animation:leftslidehide .3s ease;
+    animation:leftslidehide 0.6s ease;
 }
 
 @keyframes leftslidehide
@@ -70,7 +72,7 @@
     -ms-transform: translateX(0%);
     margin-right: 0;
     float: left;
-    animation:leftslideshow .3s ease;
+    animation:leftslideshow .6s ease;
 }
 
 @keyframes leftslideshow
@@ -123,7 +125,7 @@
     -ms-transform: translateX(100%);
     margin-left: -100%;
     float: right;
-    animation:rightslidehide .3s ease;
+    animation:rightslidehide .6s ease;
 }
 
 @keyframes rightslidehide
@@ -137,7 +139,7 @@
     -ms-transform: translateX(0%);
     margin-left: 0;
     float: right;
-    animation:rightslideshow .3s ease;
+    animation:rightslideshow .6s ease;
 }
 
 @keyframes rightslideshow
