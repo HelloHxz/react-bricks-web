@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .caretTrackingTextarea, .textareaMirror {
+    position:absolute;
+    top:0;
+    left:0;
+    font:14px/1 Consolas,Monaco,monospace;
+    padding:5px;
+    border:1px solid #999;
+    margin:0;
+    background:transparent;
+    width:300px;
+    max-width:300px;
+}
+.caretTrackingTextarea {
+    z-index:2;
+    min-height:200px;
+}
+.textareaMirror {
+    border-color:transparent;
+}
+.textareaMirror span {
+    opacity:0;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+.textareaCaretTracker {
+    position:absolute;
+    width:4px;
+    height:4px;
+    background:#f00;
+}
+    </style>
+    <script type="text/javascript">
+        (window.trackCaret = function (Container) {
+    // log error when element is not passed
+    if (!Container) return;
+
+
+    var createElement = function (type, parent, className) {
+        var el = document.createElement(type);
+        parent.appendChild(el);
+        el.className = className;
+        return el;
+    },
+
+    textarea = createElement('textarea', Container, 'caretTrackingTextarea'),
+        textareaMirror = createElement('div', Container, 'textareaMirror'),
+        textareaMirrorInline = createElement('span', textareaMirror, ''),
+        textareaCaretTracker = createElement('div', Container, 'textareaCaretTracker'),
+
+        update = function () {
+            textareaMirrorInline.innerHTML = textarea.value.substr(0, textarea.selectionStart).replace(/\n$/, "\n\001");
+            var rects = textareaMirrorInline.getClientRects(),
+                lastRect = rects[rects.length - 1],
+                top = lastRect.top - textarea.scrollTop,
+                left = lastRect.left + lastRect.width;
+            textareaCaretTracker.style.top = top + "px";
+            textareaCaretTracker.style.left = left + "px";
+        },
+        addEvent = function (eventType) {
+            textarea["on" + eventType] = update;
+        };
+
+    addEvent('keyup');
+    addEvent('mouseup');
+    addEvent('scroll');
+
+   
+})();
+
+window.onload = function(){
+    var main = document.getElementById('main');
+
+trackCaret(main);
+}
+
+    </script>
+</head>
+<body>
+    <div id="main"></div>
+</body>
+</html>
