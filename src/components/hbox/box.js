@@ -32,7 +32,7 @@ export default class Box extends React.Component{
         for(let i = 0 ;i<len;i+=1){
             const panel = this.props.children[i];
             if(panel.type === Panel){
-                const positions = this.boxType==='hbox'?['left','middle','right']:[this.firstBoxMark,'middle',this.lastBoxMark];
+                const positions = [this.firstBoxMark,'middle',this.lastBoxMark];
                 const position = positions[seed];
                 let status = null;
                 if(position===this.firstBoxMark||position===this.lastBoxMark||position==='left'||position==='right'){
