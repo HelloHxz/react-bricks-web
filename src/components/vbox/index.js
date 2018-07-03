@@ -3,8 +3,8 @@ import BackLayer from '../backLayer';
 import './index.less';
 
 const positions =['top','middle','bottom'];
-
 const statusArr = ['popshow','pophide','dock','slideshow','slidehide'];
+
 export default class VBox extends React.Component{
     constructor(props){
         super(props);
@@ -54,8 +54,6 @@ export default class VBox extends React.Component{
         if(children.length<=1||children.length>3){
             console.error("Vbox组件保证有俩个或者三个VBox.Panel子元素");
         }
-
-        
         
         const vboxStyle = Object.assign({},this.props.style||{});
         delete vboxStyle["position"];
