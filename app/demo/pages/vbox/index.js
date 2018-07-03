@@ -92,7 +92,6 @@ class VBoxDemo extends React.PureComponent {
         <Button type='primary' onClick={this.changeTopHeight.bind(this,100)} style={{marginRight:10}}>height:100</Button>
         <Button type='primary' onClick={this.changeTopStatus.bind(this,'popshow')} style={{marginRight:10}}>popShow</Button>
         <Button type='primary' onClick={this.changeTopStatus.bind(this,'pophide')} style={{marginRight:10}}>popHide</Button>
-        <Button type='primary' onClick={this.changeTopStatus.bind(this,'dock')} style={{marginRight:10}}>dock</Button>
         <Button type='primary' onClick={this.changeTopStatus.bind(this,'slideshow')} style={{marginRight:10}}>slideShow</Button>
         <Button type='primary' onClick={this.changeTopStatus.bind(this,'slidehide')} style={{marginRight:10}}>slideHide</Button>
     
@@ -101,7 +100,6 @@ class VBoxDemo extends React.PureComponent {
         <Button type='primary' onClick={this.changeBottomHeight.bind(this,100)} style={{marginRight:10}}>height:100</Button>
         <Button type='primary' onClick={this.changeBottomStatus.bind(this,'popshow')} style={{marginRight:10}}>popShow</Button>
         <Button type='primary' onClick={this.changeBottomStatus.bind(this,'pophide')} style={{marginRight:10}}>popHide</Button>
-        <Button type='primary' onClick={this.changeBottomStatus.bind(this,'dock')} style={{marginRight:10}}>dock</Button>
         <Button type='primary' onClick={this.changeBottomStatus.bind(this,'slideshow')} style={{marginRight:10}}>slideShow</Button>
         <Button type='primary' onClick={this.changeBottomStatus.bind(this,'slidehide')} style={{marginRight:10}}>slideHide</Button>
     

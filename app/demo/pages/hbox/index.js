@@ -89,7 +89,6 @@ class HBoxDemo extends React.PureComponent {
         <Button type='primary' onClick={this.changeLeftWidth.bind(this,100)} style={{marginRight:10}}>width:100</Button>
         <Button type='primary' onClick={this.changeLeftStatus.bind(this,'popshow')} style={{marginRight:10}}>popShow</Button>
         <Button type='primary' onClick={this.changeLeftStatus.bind(this,'pophide')} style={{marginRight:10}}>popHide</Button>
-        <Button type='primary' onClick={this.changeLeftStatus.bind(this,'dock')} style={{marginRight:10}}>dock</Button>
         <Button type='primary' onClick={this.changeLeftStatus.bind(this,'slideshow')} style={{marginRight:10}}>slideShow</Button>
         <Button type='primary' onClick={this.changeLeftStatus.bind(this,'slidehide')} style={{marginRight:10}}>slideHide</Button>
     
@@ -99,7 +98,6 @@ class HBoxDemo extends React.PureComponent {
         <Button type='primary' onClick={this.changeRightWidth.bind(this,100)} style={{marginRight:10}}>width:100</Button>
         <Button type='primary' onClick={this.changeRightStatus.bind(this,'popshow')} style={{marginRight:10}}>popShow</Button>
         <Button type='primary' onClick={this.changeRightStatus.bind(this,'pophide')} style={{marginRight:10}}>popHide</Button>
-        <Button type='primary' onClick={this.changeRightStatus.bind(this,'dock')} style={{marginRight:10}}>dock</Button>
         <Button type='primary' onClick={this.changeRightStatus.bind(this,'slideshow')} style={{marginRight:10}}>slideShow</Button>
         <Button type='primary' onClick={this.changeRightStatus.bind(this,'slidehide')} style={{marginRight:10}}>slideHide</Button>
     </div>
