@@ -6,6 +6,14 @@ import './icon/index.css';
 
 var config = {
 	root:"home",
+	ajax:{
+		onResponse:()=>{
+
+		},
+		onRequest:()=>{
+			
+		}
+	},
 	pages:{
 		"/":require("./pages/basicLayout").default,
 		home:require("./pages/home").default,
