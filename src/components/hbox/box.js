@@ -68,15 +68,15 @@ export default class Box extends React.Component{
             console.error(`${this.boxType}组件保证有俩个或者三个Panel子元素`);
         }
         
-        const vboxStyle = Object.assign({},this.props.style||{});
-        delete vboxStyle["position"];
+        const boxStyle = Object.assign({},this.props.style||{});
+        delete boxStyle["position"];
         const backlayerProps = {};
         if(this.props.onBackLayerClick){
             backlayerProps.onClick = this.onBackLayerClick.bind(this);
         }
         return (
             <div 
-                style={vboxStyle}
+                style={boxStyle}
                 ref={(root)=>{
                 this.root = root;
             }} className={`xz-${this.boxType} ${this.props.className||''}`}>
