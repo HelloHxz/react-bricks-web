@@ -35,7 +35,7 @@ export default class Box extends React.Component{
                 const positions = [this.firstBoxMark,'middle',this.lastBoxMark];
                 const position = positions[seed];
                 let status = null;
-                if(position===this.firstBoxMark||position===this.lastBoxMark||position==='left'||position==='right'){
+                if(position===this.firstBoxMark||position===this.lastBoxMark){
                     status = panel.props.status||'dock';
                     if(statusArr.indexOf(status)<0){
                         status = 'dock';
