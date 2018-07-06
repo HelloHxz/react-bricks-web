@@ -197,6 +197,11 @@ class Navigation extends React.Component {
     }
     var ToPagePath = this.getPageNameFromUrl()||this.props.config.root;
     var ToPageNameArr = ToPagePath.split("/");
+    for(var i = 0,j=ToPageNameArr.length;i<j;i+=1){
+      if(ToPageNameArr[i]==='components'){
+        ToPageNameArr[i] = 'home';
+      }
+    }
     var ToPageName = ToPageNameArr.shift();
     this.prePathArr = this.prePathArr||[];
     if(ToPageName===""){

@@ -62,7 +62,7 @@ class PageView extends React.Component {
     }
     var pagename = this.state.pagename||"";
     var realpagename = pagename.split("_")[0];
-    var ToPageClass = this.props.navigation.props.config.pages[realpagename];
+    var ToPageClass = ToPageClass = this.props.navigation.props.config.pages[realpagename];
     var params = {
       url:this.props.navigation.getUrlInfo(),
       pagemanager:this.props.pagemanager,
@@ -79,6 +79,7 @@ class PageView extends React.Component {
             ref={(instance)=>{
                this.pageInstance = instance;
             }}
+            params = {params}
             owner = {this.props.owner}
             urlinfo={this.props.navigation.getUrlInfo()}
             pagename={this.state.pagename}
