@@ -1,5 +1,6 @@
 import  React from 'react';
 import PopMenu from '../popmenu';
+import XZ from '../xz';
 import './index.less';
 import observer from '../observer';
 
@@ -7,27 +8,40 @@ import observer from '../observer';
 class Menu extends React.Component{
     constructor(props){
         super(props);
+        let selectedKey;
+        if(props.withURLChange){
+            this.hashChangeID = XZ.router.listenerHashChangeEvent((params)=>{
+                this.urlChangeSetSelectedKey(params.path);
+            });
+            const urlInfo = XZ.router.getUrlInfo();
+            selectedKey = urlInfo.path;
+        }
         this.state={
-            data:props.data,
-            collapsed:props.collapsed
+            selectedKey:selectedKey||props.selectedKey
         }
     }
+
+    urlChangeSetSelectedKey(selectedKey){
+        this.setState({selectedKey});
+    }
+    componentWillUnmount(){
+        if(this.hashChangeID){
+            XZ.router.removeHashChangeListener(this.hashChangeID);
+        }
+    }
+
     onItemClick(params){
         if(this.props.onItemClick){
             this.props.onItemClick(params);
         }
     }
     componentWillReceiveProps(nextPros){
-        if(nextPros.collapsed!==this.state.collapsed){
-            this.setState({
-                collapsed:nextPros.collapsed
-            });
-        }
+       
     }
     _getMiniVerticalItems = ()=>{
         var children = [];
-        for(var i=0,j=this.state.data.length;i<j;i++){
-            var itemData = this.state.data[i];
+        for(var i=0,j=this.props.data.length;i<j;i++){
+            var itemData = this.props.data[i];
             if(itemData.children){
                 children.push(<PopMenu level={0} key={i} data={itemData.children}>{
                     <div>{itemData.label}</div>
@@ -40,12 +54,12 @@ class Menu extends React.Component{
     }
     _getVerticalItems = ()=>{
         var children = [];
-        for(var i=0,j=this.state.data.length;i<j;i++){
-            var itemData = this.state.data[i];
+        for(var i=0,j=this.props.data.length;i<j;i++){
+            var itemData = this.props.data[i];
             if(itemData.children){
-                children.push(<MenuSection onItemClick={this.onItemClick.bind(this)} level={0} key={i} data={itemData}/>);
+                children.push(<MenuSection menu={this} onItemClick={this.onItemClick.bind(this)} level={0} key={i} data={itemData}/>);
             }else{
-                children.push(<MenuSectionItem onItemClick={this.onItemClick.bind(this)} level={0} key={i} data={itemData}/>);
+                children.push(<MenuSectionItem menu={this} onItemClick={this.onItemClick.bind(this)} level={0} key={i} data={itemData}/>);
             }
         }
         return children; 
@@ -53,7 +67,7 @@ class Menu extends React.Component{
     render(){
         let children = [];
         const p = {};
-        if(this.state.collapsed === true){
+        if(this.props.collapsed === true){
             children = this._getMiniVerticalItems();
             p.className = 'xz-menu xz-menu-vertical-mini';
         }else {
@@ -120,9 +134,9 @@ class MenuSection extends React.Component{
         for(var i=0,j=this.state.data.children.length;i<j;i++){
             var itemData = this.state.data.children[i];
             if(itemData.children){
-                children.push(<MenuSection onItemClick={this.props.onItemClick} level={this.props.level+1} key={i} data={itemData}/>);
+                children.push(<MenuSection menu={this.props.menu} onItemClick={this.props.onItemClick} level={this.props.level+1} key={i} data={itemData}/>);
             }else{
-                children.push(<MenuSectionItem onItemClick={this.props.onItemClick} level={this.props.level+1} key={i} data={itemData}/>);
+                children.push(<MenuSectionItem menu={this.props.menu} onItemClick={this.props.onItemClick} level={this.props.level+1} key={i} data={itemData}/>);
             }
         }
         return (<div className="xz-menu-group">
@@ -140,13 +154,11 @@ class MenuSection extends React.Component{
 class MenuSectionItem extends React.Component{
     constructor(props){
         super(props); 
-        this.state={
-            data:props.data
-        }
+       
     }
     itemClick(){
         this.props.onItemClick({
-            itemData:this.state.data,
+            itemData:this.props.data,
             itemInstance:this
         });
     }
@@ -155,13 +167,17 @@ class MenuSectionItem extends React.Component{
         if(this.props.level>0){
             paddingLeft = (this.props.level)*20;
         }
+        const className= ['xz-menu-item'];
         let icon = null;
-        if(this.state.data.icon){
-            icon = <i className={`${this.state.data.icon} xz-menu-icon`}/>
+        if(this.props.data.icon){
+            icon = <i className={`${this.props.data.icon} xz-menu-icon`}/>
         }
-        return (<div onClick={this.itemClick.bind(this)} className='xz-menu-item' style={{paddingLeft:paddingLeft}}>
+        if(this.props.menu.state.selectedKey===this.props.data.key){
+            className.push('xz-menu-item-selected');
+        }
+        return (<div onClick={this.itemClick.bind(this)} className={className.join(' ')} style={{paddingLeft:paddingLeft}}>
             {icon}
-            {this.state.data.label}
+            {this.props.data.label}
         </div>);
     }
 }

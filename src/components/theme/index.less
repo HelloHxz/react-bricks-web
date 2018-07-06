@@ -1,12 +1,18 @@
 @theme_background: #f2f3f4;
 @theme_color:#1890ff;
 @theme_hover_background:#e0f0ff;
+@theme_hover_color:@theme_text_color;
+@theme_selected_background:#67b6ff;
 @theme_disable_color:#e1e1e1;
-@theme_selected_color:#e6f7ff;
-@theme_textcolor:#333;
+@theme_selected_color:#67b6ff;
+@theme_text_color:#333;
 @theme_disable_text_color:rgb(119, 119, 119);
+
 @menu_item_height:22px;
-@menu_item_selected_background:@theme_selected_color;
+@menu_item_selected_background:@theme_selected_background;
+@menu_item_hover_background:@theme_hover_background;
+@menu_item_hover_color:@theme_hover_color;
+@menu_item_selected_color:#fff;
 @menu_headertext_color:#314659;
 @menu_itemtext_color:#585858;
 
@@ -24,7 +30,7 @@
 
 
 @select_hover_background_color:@theme_hover_background;
-@select_selected_background_color:@theme_color;
+@select_selected_background_color:@theme_selected_background;
 @select_dropdown_bordercolor:#eee;
 
 @table_row_hover_background_color:@theme_hover_background;

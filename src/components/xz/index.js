@@ -1,5 +1,6 @@
 import Global from '../../utils/global';
 import browser from '../../utils/browser';
+import Router from '../../utils/router';
 
 class XZ {
     constructor(){
@@ -8,6 +9,7 @@ class XZ {
         this._seed = 0;
         this.appConfig = null;
         this.browser = browser;
+        this.router = Router;
         browser.init();
     }
     _setAppConfig = (config) =>{
@@ -30,9 +32,6 @@ class XZ {
     
     hideMessage = (key) => {
         this._extendWrapperInstancer.hideMessage(key);
-    }
-
-    go = (path,params)=>{
     }
 
     listenerResizeEvent = (cb) => {

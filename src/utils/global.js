@@ -2,6 +2,7 @@ class manager{
     constructor(){
         this.seed = 1;
         this.resizeEvent={};
+        this.hashChangeEvent = {};
         // document.body.onmousewheel = function(event) {
         //     // console.log("1");
         //     // console.log(event.target.getBoundingClientRect().top+event.target.getBoundingClientRect().height);	
@@ -30,18 +31,31 @@ class manager{
         }
     }
 
+    _triggerHashChange(params){
+        for(var key in this.hashChangeEvent){
+            try{
+                this.hashChangeEvent[key](params);
+            }catch(e){
+                delete this.hashChangeEvent[key];
+            }
+        }
+    }
+
     addEvent = (type,func) => {
         this.seed += 1;
         const eventId = `${type}_${this.seed}`;
         if(type==='resize'){
             this.resizeEvent[eventId] = func;
+        }else if(type==='hashchange'){
+            this.hashChangeEvent[eventId] = func;
         }
-        
         return eventId;
     }
     removeEvent = (type,eventid) => {
         if(type==='resize'){
             delete this.resizeEvent[eventid];
+        }else if(type==='hashchange'){
+            delete this.hashChangeEvent[eventid];
         }
     }
 

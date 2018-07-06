@@ -11,7 +11,7 @@ class LeftMenu extends React.Component {
 
   render() {
     return (
-        <Menu style={{width:'100%'}} collapsed={this.props.homestore.menuCollapsed} onItemClick={this.MenuItemClick.bind(this)} data={this.props.baseStore.MenuData}/>
+        <Menu withURLChange={true} style={{width:'100%'}} collapsed={this.props.homestore.menuCollapsed} onItemClick={this.MenuItemClick.bind(this)} data={this.props.baseStore.MenuData}/>
     );
   }
 }

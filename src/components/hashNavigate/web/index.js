@@ -1,6 +1,8 @@
 import React from "react";
 import PageView from "./pageview";
 import ExtendsWrapper from './ExtendWrapper';
+import global from '../../../utils/global';
+import router from '../../../utils/router';
 
 /*
   路由需要支持：
@@ -15,6 +17,7 @@ var isWantToPreventRoute = false,isReplaceGo=false,splitchar='_',systemseedname=
 class Navigation extends React.Component {
   constructor(props) {
     super(props)
+    router.setNavigateInstance(this);
     this.appConfig = props.config;
     this.routeStack = [];
     this.isForward = false;
@@ -201,6 +204,7 @@ class Navigation extends React.Component {
     }
     var key = ToPageName;
     var P = PageView;
+    global._triggerHashChange(this.getUrlInfo());
     this.setState(
       {pages:<P leftroute={ToPageNameArr} pagename={ToPageName} navigation={this} key={key} pkey={key}></P>}
     );

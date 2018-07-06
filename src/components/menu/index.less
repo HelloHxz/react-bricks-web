@@ -88,9 +88,15 @@
 }
 
 .xz-menu-item:hover{
-    background-color: #eee;
+    background-color: @menu_item_hover_background;
+    color: @menu_item_hover_color;
 }
 
 .xz-menu-icon{
     margin-right: 4px;
+}
+ 
+.xz-menu-item-selected{
+    background-color: @menu_item_selected_background !important;
+    color: @menu_item_selected_color !important;;
 }
