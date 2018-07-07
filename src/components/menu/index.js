@@ -38,10 +38,10 @@ class Menu extends React.Component{
     componentWillReceiveProps(nextPros){
        
     }
-    _getMiniVerticalItems = ()=>{
+    _getMiniVerticalItems = (data)=>{
         var children = [];
-        for(var i=0,j=this.props.data.length;i<j;i++){
-            var itemData = this.props.data[i];
+        for(var i=0,j=data.length;i<j;i++){
+            var itemData = data[i];
             if(itemData.children){
                 children.push(<PopMenu level={0} key={i} data={itemData.children}>{
                     <div>{itemData.label}</div>
@@ -52,26 +52,41 @@ class Menu extends React.Component{
         }
         return children; 
     }
-    _getVerticalItems = ()=>{
+    _getVerticalItems = (data)=>{
         var children = [];
-        for(var i=0,j=this.props.data.length;i<j;i++){
-            var itemData = this.props.data[i];
+        for(var i=0,j=data.length;i<j;i++){
+            var itemData = data[i];
             if(itemData.children){
-                children.push(<MenuSection menu={this} onItemClick={this.onItemClick.bind(this)} level={0} key={i} data={itemData}/>);
+                children.push(<MenuSection open={true} menu={this} onItemClick={this.onItemClick.bind(this)} level={0} key={i} data={itemData}/>);
             }else{
                 children.push(<MenuSectionItem menu={this} onItemClick={this.onItemClick.bind(this)} level={0} key={i} data={itemData}/>);
             }
         }
         return children; 
     }
+    _processData(data,parentKey){
+        for(let i=0,j=data.length;i<j;i+=1){
+            const itemData = data[i];
+            if(itemData.children){
+                const clone = JSON.parse(JSON.stringify(parentKey));
+                clone.push(itemData.key);
+                this._processData(itemData.children,clone);
+            }else{
+                
+            }
+            itemData.__parentKey = parentKey;
+        }
+    }
     render(){
         let children = [];
         const p = {};
+        this._processData(this.props.data,[]);
+        console.log(this.props.data.toJS());
         if(this.props.collapsed === true){
-            children = this._getMiniVerticalItems();
+            children = this._getMiniVerticalItems(this.props.data);
             p.className = 'xz-menu xz-menu-vertical-mini';
         }else {
-            children = this._getVerticalItems();
+            children = this._getVerticalItems(this.props.data);
             p.className = 'xz-menu xz-menu-vertical';
         }
         if(this.props.style){
@@ -89,7 +104,7 @@ class MenuSection extends React.Component{
         super(props); 
         this.state={
             data:props.data,
-            open:false,
+            open:props.open,
         }
     }
     headerClick(){
