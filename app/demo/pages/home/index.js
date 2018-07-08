@@ -30,10 +30,13 @@ class HomeScreen extends React.PureComponent {
     // console.log(this.props.homestore);
     // this.props.navigation.navigate("button");
     // this.props.baseStore.MenuData[0].label = "hahah";
-    // this.props.homestore.menuCollapsed = !this.props.homestore.menuCollapsed;
+    this.props.homestore.menuCollapsed = !this.props.homestore.menuCollapsed;
     this.setState({
-      leftStatus:this.state.leftStatus==='slidehide'?'slideshow':'slidehide'
+      menuCollapsed:!this.state.menuCollapsed
     });
+    // this.setState({
+    //   leftStatus:this.state.leftStatus==='slidehide'?'slideshow':'slidehide'
+    // });
   }
 
   onPageBeforeLeave(params){
@@ -51,9 +54,9 @@ class HomeScreen extends React.PureComponent {
          </VBox.Panel>
          <VBox.Panel>
              <HBox style={{width:'100%',height:'100%'}}>
-              <HBox.Panel status={this.state.leftStatus} style={{width:220}}>
+              <HBox.Panel status={this.state.leftStatus} style={{width:( this.state.menuCollapsed? 60: 220)}}>
                 <div style={{overflow:'auto',height:'100%'}}>
-                  <LeftMenu {...this.props} />
+                  <LeftMenu {...this.props} collapsed={this.state.menuCollapsed} />
                 </div>
               </HBox.Panel>
               <HBox.Panel>
