@@ -4,20 +4,20 @@ class Store {
     @observable UserInfo = {};
     @observable MenuData = [
         {
-        icon:'fas fa-camera-retro',
+        icon:'iconfont icon-folder-open',
         label:'关于',
         key:'home/about',
         href:'home/about'
       },
       {
-        icon:'fas fa-camera-retro',
+        icon:'iconfont icon-reconciliation',
         label:'快速上手',
         key:'home',
         href:"/home"
       },
       {
         label:"组件",
-        icon:'fas fa-camera-retro',
+        icon:'iconfont icon-team',
         key:"components",
         children:[
             {label:"Grid 栅栏布局",key:'components/grid',href:'components/grid'},
@@ -52,17 +52,21 @@ class Store {
       {
         label:'页面路由',
         key:'xxxxx',
+        icon:'iconfont icon-desktop',
       },
       {
         label:'全局处理',
         key:'xxxxx',
+        icon:'iconfont icon-mail',
       },
       {
         label:'生命周期',
         key:'xxxxx',
+        icon:'iconfont icon-laptop',
       },
       {
         label:'数据状态',
+        icon:'iconfont icon-printer',
         key:'frfrf',children:[
             {label:"Mobx",key:'xxxxxxx'},
             {label:"AJAX",key:'xxxxxxx',children:[
@@ -74,9 +78,11 @@ class Store {
       {
         label:'异步加载',
         key:'xxxxx',
+        icon:'iconfont icon-moneycollect',
       },{
         label:'打包发布',
         key:'xxxxx',
+        icon:'iconfont icon-linechart',
       },
     ];
 }
