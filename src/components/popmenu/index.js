@@ -31,6 +31,7 @@ class PopMenu extends React.Component {
             <PopView 
                 mode={this.props.mode||'hover'}
                 positionMode='absolute'
+                popLayerClassName='xz-popmenu-poplayer'
                 parentPopview={this.props.parentPopview}
                 ref={(instance)=>{this.root = instance;}}
                 placement={this.props.placement||'rightbottom'}

@@ -245,7 +245,7 @@ class PopView extends React.Component{
         }
         const pos = this.getPopPositionStyle();
         const popWrapperClassName = this.props.popWrapperClassName || '';
-        var className =`xz-popview-content-${this.positionMode} ${popWrapperClassName}`+ ` xz-popview-trans-${pos.pos} `;
+        var className =`xz-popview-content-${this.positionMode} ${popWrapperClassName}`+ ` xz-popview-trans-${pos.pos} ${this.props.popLayerClassName||''}`;
         // todo .. 将这个拎出一个组件 在组件中做一个mousewhell的位置重定位
         return <div onWheel={(e)=>{ e.preventDefault(); }} onMouseOver={()=>{
             this.clearTimeout();

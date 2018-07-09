@@ -3,9 +3,7 @@ import './index.less';
 import HomeStore from './store';
 import BaseStore from '../basicLayout/store';
 import LeftMenu from './LeftMenu';
-
-const FormRepeat = Form.FormRepeat;
-const FormItem = Form.FormItem;
+import LayoutHeader from './LayoutHeader';
 
 @PageView({homestore:new HomeStore,baseStore:BaseStore},{o:true})
 class HomeScreen extends React.PureComponent {
@@ -49,8 +47,8 @@ class HomeScreen extends React.PureComponent {
   render() {
     return (
         <VBox>
-         <VBox.Panel style={{height:50,backgroundColor:'#eee'}}>header
-          <Button onClick={this.go.bind(this)}>Go</Button>
+         <VBox.Panel style={{height:50,backgroundColor:'#eee'}}>
+            <LayoutHeader {...this.props} parent={this}/>
          </VBox.Panel>
          <VBox.Panel>
              <HBox style={{width:'100%',height:'100%'}}>
