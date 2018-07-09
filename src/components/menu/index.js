@@ -43,12 +43,13 @@ class Menu extends React.Component{
         var children = [];
         for(var i=0,j=data.length;i<j;i++){
             var itemData = data[i];
+            const iconWrapper = <div className='xz-menu-vertical-icon-wrapper' key={i}><i className={`${itemData.icon} xz-menu-vertical-mini-icon`}/></div>;
             if(itemData.children){
-                children.push(<PopMenu level={0} key={i} data={itemData.children}>{
-                    <div>{itemData.label}</div>
-                }</PopMenu>);
+                children.push(<PopMenu level={0} key={i} data={itemData.children}>
+                    {iconWrapper}
+                </PopMenu>);
             }else{
-                children.push(<div key={i}>{itemData.label}</div>);
+                children.push(iconWrapper);
             }
         }
         return children; 
@@ -218,7 +219,7 @@ class MenuSectionItem extends React.Component{
         }
         return (<div ref={(root)=>{this.root = root;
             if(root&&isSelected){
-                this.root.scrollIntoViewIfNeeded();
+                this.root.scrollIntoView();
             }
         }} onClick={this.itemClick.bind(this)} className={className.join(' ')} style={{paddingLeft:paddingLeft}}>
             {icon}
