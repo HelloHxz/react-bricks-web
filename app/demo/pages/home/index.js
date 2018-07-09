@@ -52,7 +52,7 @@ class HomeScreen extends React.PureComponent {
          </VBox.Panel>
          <VBox.Panel>
              <HBox style={{width:'100%',height:'100%'}}>
-              <HBox.Panel status={this.state.leftStatus} style={{width:( this.state.menuCollapsed? 60: 220)}}>
+              <HBox.Panel status={this.state.leftStatus} style={{borderRight:'1px solid #eee',width:( this.state.menuCollapsed? 60: 220)}}>
                 <div style={{overflow:'auto',height:'100%'}}>
                   <LeftMenu {...this.props} collapsed={this.state.menuCollapsed} />
                 </div>
