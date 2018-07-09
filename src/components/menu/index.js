@@ -150,7 +150,9 @@ class MenuSection extends React.Component{
             if(this.state.open){
                 // 初始化的时候 保证高度不被固定
                 setTimeout(()=>{
-                    this.groupouter.style.height = "auto"
+                    if(this.groupouter){
+                        this.groupouter.style.height = "auto"
+                    }
                 },210);
             }
         }

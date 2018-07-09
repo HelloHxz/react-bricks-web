@@ -1,13 +1,22 @@
 import React from 'react';
-import global from '../../utils/global';
+import XZ from '../xz';
 import './t.less';
+
+const screenMap = {
+    xs: 575,
+    sm: 576,
+    md: 768,
+    lg: 992,
+    xl: 1200,
+    xxl: 1600,
+  };
 
 class Col extends React.Component{
     render(){
         const sizeArr = ['xs', 'sm', 'md', 'lg', 'xl', 'xxl'];
         const propsArr = ['span','pull','push','offset'];
         const { className, children, prefixCls = 'xz-col' } = this.props;
-        const _className = [];
+        const _className = ['xz-col'];
         let preSpan = null;
         for(let i = 0,j = sizeArr.length; i < j; i += 1){
             const size = sizeArr[i];
@@ -34,19 +43,60 @@ class Col extends React.Component{
         if(className){
             _className.push(className);
         }
-        return (<div className={_className.join(' ')}>{children}</div>)
+        if(this.props.className){
+            _className.push(this.props.className);
+        }
+        return (<div style={this.props.style} className={_className.join(' ')}>{children}</div>)
     }
 }
 
 export default class Row extends React.Component{
+
+    constructor(props){
+        super(props);
+        this.state = {
+            screenSize:this.getScreenSize()
+        };
+    }
+
+    getScreenSize(){
+        const bodyWidth = document.body.offsetWidth;
+        let size = 'xs';
+        for(const key in screenMap){
+            if(bodyWidth>=screenMap[key]){
+                size = key;
+            }
+        }
+        return size;
+    }
+
     componentDidMount = ()=>{
-        this.eventid = global.addEvent('resize',()=>{
-            console.log(this.eventid);
-        });
+        if(typeof this.props.gutter === 'object'){
+            this.eventid =XZ.listenerResizeEvent(()=>{
+                this.setState({
+                    screenSize:this.getScreenSize()
+                });
+            });
+        }
+    }
+
+    getGutter(){
+        let re = 0;
+        if(this.props.gutter){
+            if(!isNaN(this.props.gutter)){
+                re = parseInt(this.props.gutter);
+            }else if(typeof this.props.gutter === 'object'){
+                const _gutter = this.props.gutter[this.state.screenSize];
+                if(_gutter&&!isNaN(_gutter)){
+                    re = parseInt(_gutter);
+                }
+            }
+        }
+        return re;
     }
 
     componentWillUnmount = ()=>{
-        global.removeEvent('resize',this.eventid);
+        XZ.removeResizeListener(this.eventid);
     }
 
     render(){
@@ -55,12 +105,28 @@ export default class Row extends React.Component{
             className.push(this.props.className);
         }
         const child = [];
+        const style = this.props.style||{};
+        const gutter = this.getGutter();
+        const rowStyle = (gutter) > 0 ? {
+            marginLeft: (gutter) / -2,
+            marginRight: (gutter) / -2,
+            ...style,
+          } : style;
         for(let i = 0,j = this.props.children.length;i<j;i++){
-            if(this.props.children[i].type === Col){
-                child.push(this.props.children[i]);
+            const col = this.props.children[i];
+            if(col.type === Col){
+                child.push(React.cloneElement(col,
+                    {
+                        key:i,
+                        style: {
+                            paddingLeft: gutter / 2,
+                            paddingRight: gutter / 2,
+                            ...col.props.style,
+                          },
+                    }));
             }
         }
-        return (<div className={className.join(' ')}>{child}</div>)
+        return (<div style={rowStyle} className={className.join(' ')}>{child}</div>)
     }
 }
 
