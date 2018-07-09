@@ -2,7 +2,23 @@ import React from 'react';
 import Row from '../row';
 import Theme from '../theme';
 import './index.less';
+/*
+    gridLayout:{
+        label:{md:12,ms:12},
+        input:{md:12},
+        gutter:12|{md:12}
+    }
 
+    tableLayout:{
+        label:120,
+    }
+
+    labelStyle:{},
+    inputStyle:{},
+    lableClassName
+    inputClassName
+
+*/
 export default class FormComponentWrapper extends React.Component{
     render(){
         // this.props.className this.props.vertical
@@ -18,6 +34,6 @@ export default class FormComponentWrapper extends React.Component{
                 </Row>
             )
         }
-        return <React.Fragment>{this.props.children}</React.Fragment>;
+        return this.props.children;
     }
 }
