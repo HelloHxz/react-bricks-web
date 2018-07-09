@@ -219,7 +219,11 @@ class MenuSectionItem extends React.Component{
         }
         return (<div ref={(root)=>{this.root = root;
             if(root&&isSelected){
-                this.root.scrollIntoView();
+                if(!this.root.scrollIntoViewIfNeeded){
+                    this.root.scrollIntoView();
+                }else{
+                    this.root.scrollIntoViewIfNeeded();
+                }
             }
         }} onClick={this.itemClick.bind(this)} className={className.join(' ')} style={{paddingLeft:paddingLeft}}>
             {icon}
