@@ -10,10 +10,11 @@ const screenMap = {
     xl: 1200,
     xxl: 1600,
   };
+const sizeArr = ['xs', 'sm', 'md', 'lg', 'xl', 'xxl'];
+
 
 class Col extends React.Component{
     render(){
-        const sizeArr = ['xs', 'sm', 'md', 'lg', 'xl', 'xxl'];
         const propsArr = ['span','pull','push','offset'];
         const { className, children, prefixCls = 'xz-col' } = this.props;
         const _className = ['xz-col'];
@@ -86,6 +87,16 @@ export default class Row extends React.Component{
             if(!isNaN(this.props.gutter)){
                 re = parseInt(this.props.gutter);
             }else if(typeof this.props.gutter === 'object'){
+                let preVal = 8;
+                // 保证有默认值
+                for(let i=0,j=sizeArr.length;i<j;i+=1){
+                    const size = sizeArr[i];
+                    if(!this.props.gutter[size]){
+                        this.props.gutter[size] = preVal;
+                    }else{
+                        preVal = this.props.gutter[size];
+                    }
+                }
                 const _gutter = this.props.gutter[this.state.screenSize];
                 if(_gutter&&!isNaN(_gutter)){
                     re = parseInt(_gutter);
