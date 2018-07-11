@@ -27,6 +27,10 @@ class InputDemo extends React.PureComponent {
         <div style={{maxWidth:600}}>
            <Input label='姓名' />
            <Input label='姓名' />
+           <br/>
+           <Input label='姓名' size='sm' />
+           <br/>
+           <Input label='姓名' size='lg' />
         </div>
         
     </div>

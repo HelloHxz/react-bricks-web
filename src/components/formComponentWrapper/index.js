@@ -24,7 +24,7 @@ export default class FormComponentWrapper extends React.Component{
         // this.props.className this.props.vertical
         if(this.props.label){
             if(!this.props.gridLayout&&!this.props.tableLayout){
-                return <div className={`xz-formitem-size-${Theme.getConfig('size',this.props)}`}>
+                return <div className={`xz-form-item xz-form-item-vertical xz-formitem-size-${Theme.getConfig('size',this.props)}`}>
                         <div className='xz-formitem-label-wrapper'>
                             <span>{this.props.label}</span>
                         </div>
