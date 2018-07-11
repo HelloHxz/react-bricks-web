@@ -1,5 +1,6 @@
 import React from 'react';
 import CheckBox from '../checkbox';
+import FormComponentWrapper from '../formComponentWrapper';
 import './index.less'
 
 export default class CheckGroup extends React.Component {
@@ -46,9 +47,11 @@ export default class CheckGroup extends React.Component {
             const value = values.indexOf(itemdata.value)>=0;
             children.push(<CheckBox onChange={this.onChange.bind(this,itemdata)} value={value} key={itemdata.value}>{itemdata.label}</CheckBox>);
         }
-        return <div {...p}>
-        {children}
-            </div>
+        return (<FormComponentWrapper {...this.props}>
+            <div {...p}>
+            {children}
+                </div>
+        </FormComponentWrapper>);
     }
 
 }

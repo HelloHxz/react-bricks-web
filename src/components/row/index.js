@@ -18,25 +18,27 @@ class Col extends React.Component{
         const propsArr = ['span','pull','push','offset'];
         const { className, children, prefixCls = 'xz-col' } = this.props;
         const _className = ['xz-col'];
-        let preSpan = null;
-        for(let i = 0,j = sizeArr.length; i < j; i += 1){
-            const size = sizeArr[i];
-            for(let n = 0,m=propsArr.length;n<m;n+=1){
-                const p = propsArr[n];
-                let pValueConfig = this.props[p] || {};
-                if(typeof pValueConfig !== 'object'){
-                    pValueConfig = {};
-                }
-                let pValue = pValueConfig[size];
-                if(p==='span'&&!pValue&&pValue!==0){
-                    pValue = preSpan || 24;
-                }
-                if(pValue||pValue===0){
-                    preSpan = pValue;
+       
+        for(let n = 0,m=propsArr.length;n<m;n+=1){
+            const p = propsArr[n];
+            let pValueConfig = this.props[p] || {};
+            if(typeof pValueConfig !== 'object'){
+                if(!isNaN(pValueConfig)){
                     if(p==='span'){
-                        _className.push(`${prefixCls}-${size}-${pValue}`);
+                        _className.push(`${prefixCls}-${pValueConfig}`);
                     }else{
-                        _className.push(`${prefixCls}-${size}-${p}-${pValue}`);
+                        _className.push(`${prefixCls}-${p}-${pValueConfig}`);
+                    }
+                }
+            }else{
+                for(var size in pValueConfig){
+                    let pValue = pValueConfig[size];
+                    if(pValue||pValue===0){
+                        if(p==='span'){
+                            _className.push(`${prefixCls}-${size}-${pValue}`);
+                        }else{
+                            _className.push(`${prefixCls}-${size}-${p}-${pValue}`);
+                        }
                     }
                 }
             }

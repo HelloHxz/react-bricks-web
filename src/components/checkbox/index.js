@@ -1,4 +1,5 @@
 import React from 'react';
+import FormComponentWrapper from '../formComponentWrapper';
 import './index.less'
 
 export default class CheckBox extends React.Component {
@@ -48,12 +49,14 @@ export default class CheckBox extends React.Component {
             p.onClick=this.onClick.bind(this);
         }
         p.className = p.className.join(' ');
-        return <label {...p}>
+        return <FormComponentWrapper {...this.props}>
+            <label {...p}>
             <span className='xz-checkbox-inner'></span>
             {
                 this.props.children?(<span className='xz-checkbox-label xz-checkbox-label-left'>{this.props.children}</span>):null
             }
             </label>
+        </FormComponentWrapper>
     }
 
 }
