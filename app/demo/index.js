@@ -14,6 +14,9 @@ var config = {
 			
 		}
 	},
+	urlMap:{
+		components:"home"
+	},
 	pages:{
 		"/":require("./pages/basicLayout").default,
 		home:require("./pages/home").default,

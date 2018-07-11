@@ -49,7 +49,7 @@ class FormDemo extends React.PureComponent {
           }} renderContent={(formProps)=>{
               return (
                 <React.Fragment>
-                   <Row>
+                   <Row gutter={16}>
                     <Row.Col span={{ xs: 8, sm: 8, md: 8, lg: 8 }}>
                       <FormItem label='文本输入：' {...formProps} rule={[]} dataKey='inputValue' placeholder='请输入' com={Input}  />
                     </Row.Col>

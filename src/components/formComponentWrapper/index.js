@@ -23,6 +23,16 @@ export default class FormComponentWrapper extends React.Component{
     render(){
         // this.props.className this.props.vertical
         if(this.props.label){
+            if(!this.props.gridLayout&&!this.props.tableLayout){
+                return <div className={`xz-formitem-size-${Theme.getConfig('size',this.props)}`}>
+                        <div className='xz-formitem-label-wrapper'>
+                            <span>{this.props.label}</span>
+                        </div>
+                        <div>
+                            {this.props.children}
+                        </div>
+                    </div>
+            }
             return (
                 <Row className={`xz-formitem-size-${Theme.getConfig('size',this.props)}`}>
                     <Row.Col className='xz-formitem-label-wrapper' span={{md:5}}>
