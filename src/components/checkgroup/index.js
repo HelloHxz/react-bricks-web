@@ -44,7 +44,7 @@ export default class CheckGroup extends React.Component {
         for(let i = 0,j=data.length;i<j;i+=1){
             const itemdata = data[i];
             const value = values.indexOf(itemdata.value)>=0;
-            children.push(<CheckBox onChange={this.onChange.bind(this,itemdata)} value={value} key={itemdata.value} label={itemdata.label}/>);
+            children.push(<CheckBox onChange={this.onChange.bind(this,itemdata)} value={value} key={itemdata.value}>{itemdata.label}</CheckBox>);
         }
         return <div {...p}>
         {children}
