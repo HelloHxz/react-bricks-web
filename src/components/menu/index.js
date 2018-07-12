@@ -8,6 +8,7 @@ import observer from '../observer';
 class Menu extends React.Component{
     constructor(props){
         super(props);
+        this.itemOffsetLeft = props.itemOffsetLeft||24;
         let selectedKey;
         if(props.withURLChange){
             this.hashChangeID = XZ.router.listenerHashChangeEvent((params)=>{
@@ -56,19 +57,8 @@ class Menu extends React.Component{
     }
     _getVerticalItems = (data)=>{
         var children = [];
-        for(var i=0,j=data.length;i<j;i++){
-            var itemData = data[i];
-            if(itemData.children){
-                const p={level:0,key:i,data:itemData,menu:this};
-                if(this.selectedOpenKeyArray.indexOf(itemData.key)>=0){
-                    p.open = true;
-                }
-                children.push(<MenuSection {...p} onItemClick={this.onItemClick.bind(this)} />);
-            }else{
-                children.push(<MenuSectionItem menu={this} onItemClick={this.onItemClick.bind(this)} level={0} key={i} data={itemData}/>);
-            }
-        }
-        return children; 
+        const p={level:0,data:{children:data},menu:this};
+        return <MenuSection {...p} onItemClick={this.onItemClick.bind(this)} />; 
     }
     _processData(data,parentKey){
         for(let i=0,j=data.length;i<j;i+=1){
@@ -112,7 +102,6 @@ class MenuSection extends React.Component{
     constructor(props){
         super(props); 
         this.state={
-            data:props.data,
             open:props.open,
         }
     }
@@ -162,16 +151,8 @@ class MenuSection extends React.Component{
     }
     render(){
         var children = [];
-        var outerStyle ={};
-        if(this.state.open){
-            if(this.groupinner){
-                outerStyle.height = this.groupinner.offsetHeight;
-            }
-        }else{
-            outerStyle.height = 0;
-        }
-        for(var i=0,j=this.state.data.children.length;i<j;i++){
-            var itemData = this.state.data.children[i];
+        for(var i=0,j=this.props.data.children.length;i<j;i++){
+            var itemData = this.props.data.children[i];
             if(itemData.children){
                 const p={level:this.props.level+1,key:i,data:itemData,menu:this.props.menu};
                 if(this.props.menu.selectedOpenKeyArray.indexOf(itemData.key)>=0){
@@ -182,8 +163,19 @@ class MenuSection extends React.Component{
                 children.push(<MenuSectionItem menu={this.props.menu} onItemClick={this.props.onItemClick} level={this.props.level+1} key={i} data={itemData}/>);
             }
         }
+        if(this.props.level===0){
+            return <React.Fragment>{children}</React.Fragment>
+        }
+        var outerStyle ={};
+        if(this.state.open){
+            if(this.groupinner){
+                outerStyle.height = this.groupinner.offsetHeight;
+            }
+        }else{
+            outerStyle.height = 0;
+        }
         return (<div className="xz-menu-group">
-            <MenuSectionHeader open={this.state.open} onClick={this.headerClick.bind(this)} level={this.props.level} data={this.state.data}/>
+            <MenuSectionHeader menu={this.props.menu} open={this.state.open} onClick={this.headerClick.bind(this)} level={this.props.level} data={this.props.data}/>
             <div className="xz-menu-section" ref={this.outerLoad.bind(this)} style={outerStyle}>
               <div ref={this.innerLoad.bind(this)}>
                 {children}
@@ -208,7 +200,7 @@ class MenuSectionItem extends React.Component{
     render(){
         var paddingLeft = 0;
         if(this.props.level>0){
-            paddingLeft = (this.props.level)*20;
+            paddingLeft = (this.props.level)*(this.props.menu.itemOffsetLeft);
         }
         const className= ['xz-menu-item'];
         let icon = null;
@@ -238,27 +230,20 @@ class MenuSectionItem extends React.Component{
 class MenuSectionHeader extends React.Component{
     constructor(props){
         super(props); 
-        this.state={
-            data:props.data
-        }
+        
     }
     click(){
         this.props.onClick();
     }
     render(){
-        var className = ["xz-menu-group-header"];
-        if(this.props.open){
-            className.push("xz-menu-group-header-open");
-        }else{
-            className.push("xz-menu-group-header-close");
-        }
+        var className = ["xz-menu-group-header",this.props.open?"xz-menu-group-header-open":"xz-menu-group-header-close"];
         let icon = null;
-        if(this.state.data.icon){
-            icon = <i className={`${this.state.data.icon} xz-menu-icon`}/>
+        if(this.props.data.icon){
+            icon = <i className={`${this.props.data.icon} xz-menu-icon`}/>
         }
-        return <div className={className.join(' ')} onClick={this.click.bind(this)} style={{paddingLeft:(this.props.level)*20}}>
+        return <div className={className.join(' ')} onClick={this.click.bind(this)} style={{paddingLeft:(this.props.level)*(this.props.menu.itemOffsetLeft)}}>
             {icon}
-            {this.state.data.label}
+            {this.props.data.label}
             <i className='xz-menu-submenu-arrow'></i>
         </div>;
     }

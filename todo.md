@@ -4,22 +4,7 @@
 
 ### 2.Vbox & Hbox
 
- > 1. 增加resize，dock，隐藏功能
-
-### 3.TableLayout
-
-```
-    <TableLayout>
-        <TableLayout.Cell>
-        </TableLayout.Cell>
-        <TableLayout.Cell style={{width:60}}>
-        </TableLayout.Cell>
-        <TableLayout.Cell style={{width:60}}>
-        </TableLayout.Cell>
-    </TableLayout>
-```
-
-### Row Gutter
+ > 1. 增加resize
 
 ### 4.Table
 
@@ -79,7 +64,7 @@
 
 ### 8.Menu
 
-> selectedKeys
+> 互斥关闭
 
 ### 9.Tree
 
@@ -90,24 +75,6 @@
     <Icon type='' text='xx' textPlacement='bottom'></Icon>
     <Icon type='' text={()=>{}} textPlacement='bottom'></Icon>
 
-
-    .fa-spin {
-    animation: a 2s infinite linear
-}
-
-.fa-pulse {
-    animation: a 1s infinite steps(8)
-}
-
-@keyframes a {
-    0% {
-        transform: rotate(0deg)
-    }
-
-    to {
-        transform: rotate(1turn)
-    }
-}
 ```
 
 ### 11.Image
@@ -142,7 +109,6 @@
 >
 </ScrollView>
 
-
 ```
 
 > stickyview
@@ -168,9 +134,6 @@
 
 ### axio
 
-### BackLayer
-
-> <BackLayer show={true} customeClassName='' positionMode='fixed|absolute'/>
 
 ### 完善路由
 

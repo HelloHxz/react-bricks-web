@@ -24,6 +24,8 @@ class ThemeDemo extends React.PureComponent {
       或者看看能不能使用require.context去动态引入less
       <div/>
       可以充分使用less变量的可覆盖特性，比如新建一个文件先引入默认样式变量文件，然后再引入自定义的变量进行覆盖
+      <div/>
+      组件的样式可以拆分成不变的部分和主题部分 这样就可以减少css体积
     </div>
   }
 }
