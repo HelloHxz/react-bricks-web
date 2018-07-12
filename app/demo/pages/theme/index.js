@@ -16,7 +16,12 @@ class ThemeDemo extends React.PureComponent {
       通过 less modifyVars 编译时候修改实现
       <br/>
       <div>运行时主题 主题</div>
-      通过 import()语法异步引入一个组件实现，组件引用主题样式，并在加载完成的时候，将HTML的样式名称修成成为对应的样式名称
+      通过 import()语法异步引入一个组件实现，组件引用主题样式，
+      并在加载完成的时候，将HTML的样式名称修成成为对应的样式名称
+      <div/>
+      思路可以定义不同的全局的个性化变量less文件，然后使用脚本在这个less文件后面追加各个组件的less引用，或者直接写死，然后使用动态组件去引用less
+      <div/>
+      或者看看能不能使用require.context去动态引入less
     </div>
   }
 }
