@@ -22,6 +22,8 @@ class ThemeDemo extends React.PureComponent {
       思路可以定义不同的全局的个性化变量less文件，然后使用脚本在这个less文件后面追加各个组件的less引用，或者直接写死，然后使用动态组件去引用less
       <div/>
       或者看看能不能使用require.context去动态引入less
+      <div/>
+      可以充分使用less变量的可覆盖特性，比如新建一个文件先引入默认样式变量文件，然后再引入自定义的变量进行覆盖
     </div>
   }
 }
