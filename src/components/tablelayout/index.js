@@ -29,6 +29,12 @@ class Cell extends React.Component{
         if(this.props.style){
             p.style = this.props.style;
         }
+        if(this.props.width){
+            if(!p.style){
+                p.style = {};
+            }
+            p.style.width = this.props.width;
+        }
         p.className = p.className.join(' ');
         return (<div {...p}>{this.props.children}</div>);
     }

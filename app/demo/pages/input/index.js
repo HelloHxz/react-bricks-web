@@ -34,7 +34,9 @@ class InputDemo extends React.PureComponent {
            <div>tableLayout</div>
            <Input tableLayout={{
              label:{
-               width:100
+               style:{
+                 width:100
+               }
              }
            }} label='姓名' size='lg' />
            <br/>
@@ -64,12 +66,7 @@ class InputDemo extends React.PureComponent {
             <br/>
            <Input gridLayout={
              {
-               label:{
-                 span:6
-               },
-               input:{
-                 span:18
-               }
+              
              }
            } label='姓名' />
             <br/>

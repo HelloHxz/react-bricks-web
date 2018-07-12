@@ -24,24 +24,37 @@ export default class FormComponentWrapper extends React.Component{
     render(){
         if(this.props.label){
             if(this.props.tableLayout){
+                const tableLabelProps = {
+                    ...{width:100},
+                    ...(this.props.tableLayout.label||{})
+                };
+                const tableInputProps = this.props.tableLayout.input||{};
                 return (
                     <TableLayout className={`xz-formitem-size-${Theme.getConfig('size',this.props)}`}>
-                        <TableLayout.Cell className='xz-formitem-label-wrapper'>
+                        <TableLayout.Cell {...tableLabelProps} className='xz-formitem-label-wrapper'>
                             <span>{this.props.label}</span>
                         </TableLayout.Cell>
-                        <TableLayout.Cell>
+                        <TableLayout.Cell {...tableInputProps}>
                             {this.props.children}
                         </TableLayout.Cell>
                     </TableLayout>
                 )
             }
             if(this.props.gridLayout){
+                const gridLabelProps = {
+                    ...{span:{md:5}},
+                    ...this.props.gridLayout.label||{}
+                };
+                const gridInputProps = {
+                    ...{span:{md:19}},
+                    ...this.props.gridLayout.input||{}
+                };
                 return (
                     <Row className={`xz-formitem-size-${Theme.getConfig('size',this.props)}`}>
-                        <Row.Col className='xz-formitem-label-wrapper' span={{md:5}}>
+                        <Row.Col className='xz-formitem-label-wrapper' {...gridLabelProps}>
                             <span>{this.props.label}</span>
                         </Row.Col>
-                        <Row.Col span={{md:19}}>
+                        <Row.Col {...gridInputProps}>
                             {this.props.children}
                         </Row.Col>
                     </Row>
