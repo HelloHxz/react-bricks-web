@@ -44,7 +44,7 @@ class PopView extends React.Component{
     show(e){
         this.clearTimeout();
         if(this.state.show===true){
-            this.focus();
+            this.preventHide();
             return;
         }
         if(e){

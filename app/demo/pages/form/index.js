@@ -59,10 +59,19 @@ class FormDemo extends React.PureComponent {
                     <Row.Col span={{md: 12, lg: 8 }}>
                      <FormItem label='文本输入：' {...formProps} rule={[]} initialValue='200' dataKey='inputValue1' com={Input}  />
                     </Row.Col>
+                    <Row.Col span={{md: 12, lg: 8 }}>
+                     <FormItem label='日期:' {...formProps} rule={[]} initialValue='112' dataKey='inputdate' com={Input}  />
+                    </Row.Col>
                     <Row.Col span={{ md: 12, lg: 8}}>
                         <FormItem label='多选:' {...formProps} rule={[]} initialValue={[0]} data={[
                         {label:'check1',value:0},
-                        {label:'check2',value:1}
+                        {label:'check2',value:1},
+                        {label:'check3',value:2},
+                        {label:'check4',value:3},
+                        {label:'check5',value:4},
+                        {label:'check6',value:5},
+                        {label:'check7',value:6},
+                        {label:'check8',value:7}
                       ]} dataKey='checkgroup' com={CheckGroup}  />
                     </Row.Col>
                   </Row>

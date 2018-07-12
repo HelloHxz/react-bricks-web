@@ -50,7 +50,11 @@
 
 > 增加label的onRender 可以渲染一个组件进去 以支持更多可输入的功能
 
+> CheckGroup 支持customRenderCheckedItem  & customRenderUnCheckedItem
+
 #### From/RadioBox
+
+> RadioGroup 支持customRenderCheckedItem  & customRenderUnCheckedItem
 
 #### From/DatePicker
 
@@ -174,6 +178,12 @@
 
 > 参数 修改参数
 
+### Group 组件
+
+> 可以组合Button,Input,等各种Form组件 
+
+
+### dropdown 组件
 
 
 
