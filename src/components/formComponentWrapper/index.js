@@ -1,5 +1,6 @@
 import React from 'react';
 import Row from '../row';
+import TableLayout from '../tablelayout';
 import Theme from '../theme';
 import './index.less';
 /*
@@ -21,28 +22,41 @@ import './index.less';
 */
 export default class FormComponentWrapper extends React.Component{
     render(){
-        // this.props.className this.props.vertical
         if(this.props.label){
-            if(!this.props.gridLayout&&!this.props.tableLayout){
-                return <div className={`xz-form-item xz-form-item-vertical xz-formitem-size-${Theme.getConfig('size',this.props)}`}>
-                        <div className='xz-formitem-label-wrapper'>
+            if(this.props.tableLayout){
+                return (
+                    <TableLayout className={`xz-formitem-size-${Theme.getConfig('size',this.props)}`}>
+                        <TableLayout.Cell className='xz-formitem-label-wrapper'>
                             <span>{this.props.label}</span>
-                        </div>
-                        <div>
+                        </TableLayout.Cell>
+                        <TableLayout.Cell>
                             {this.props.children}
-                        </div>
-                    </div>
+                        </TableLayout.Cell>
+                    </TableLayout>
+                )
+            }
+            if(this.props.gridLayout){
+                return (
+                    <Row className={`xz-formitem-size-${Theme.getConfig('size',this.props)}`}>
+                        <Row.Col className='xz-formitem-label-wrapper' span={{md:5}}>
+                            <span>{this.props.label}</span>
+                        </Row.Col>
+                        <Row.Col span={{md:19}}>
+                            {this.props.children}
+                        </Row.Col>
+                    </Row>
+                )
             }
             return (
-                <Row className={`xz-formitem-size-${Theme.getConfig('size',this.props)}`}>
-                    <Row.Col className='xz-formitem-label-wrapper' span={{md:5}}>
+                <div className={`xz-form-item xz-form-item-vertical xz-formitem-size-${Theme.getConfig('size',this.props)}`}>
+                    <div className='xz-formitem-label-wrapper'>
                         <span>{this.props.label}</span>
-                    </Row.Col>
-                    <Row.Col span={{md:19}}>
+                    </div>
+                    <div>
                         {this.props.children}
-                    </Row.Col>
-                </Row>
-            )
+                    </div>
+                </div>)
+            
         }
         return this.props.children;
     }

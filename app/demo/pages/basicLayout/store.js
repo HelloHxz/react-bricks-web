@@ -16,6 +16,15 @@ class Store {
         href:"/home"
       },
       {
+        label:'页面路由',
+        key:'xxxxx',
+        icon:'iconfont icon-desktop',
+        children:[
+          {label:"HashRouter Hash路由",key:'hashnavigate'},
+          {label:"HistoryRouter History路由",key:'HistoryNavigate'}
+        ]
+      },
+      {
         label:"组件",
         icon:'iconfont icon-team',
         key:"components",
@@ -48,11 +57,6 @@ class Store {
                 {label:'2.2.2',key:'xxxxxxxx'}
             ]},
         ]
-      },
-      {
-        label:'页面路由',
-        key:'xxxxx',
-        icon:'iconfont icon-desktop',
       },
       {
         label:'全局处理',
