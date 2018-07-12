@@ -1,4 +1,5 @@
-import {React,PageView,observer,PageContainer,Input} from "react-bricks-web"
+import {React,PageView,observer,PageContainer,Input} from "react-bricks-web";
+import './index.less';
 
 @PageView()
 class InputDemo extends React.PureComponent {
@@ -13,7 +14,6 @@ class InputDemo extends React.PureComponent {
   goBack(){
     this.props.navigation.goBack();
   }
-
 
   onPageBeforeLeave(params){
     if(params.action==="后退"){

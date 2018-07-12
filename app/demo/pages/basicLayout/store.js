@@ -14,6 +14,11 @@ class Store {
         label:'快速上手',
         key:'home',
         href:"/home"
+      },{
+        icon:'iconfont icon-reconciliation',
+        label:'主题',
+        key:'home/theme',
+        href:"home/theme"
       },
       {
         label:'页面路由',

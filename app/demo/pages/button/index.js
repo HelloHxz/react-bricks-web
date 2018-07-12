@@ -29,6 +29,7 @@ class BottomDemo extends React.PureComponent {
       <Button onClick={()=>{
         XZ.go();
       }}>log</Button>
+      <Button type='primary'>Primary</Button>
     </div>
   }
 }

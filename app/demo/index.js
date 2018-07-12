@@ -22,6 +22,7 @@ var config = {
 		home:require("./pages/home").default,
 		button:require("./pages/button").default,
 		swiper:require("./pages/swiper").default,
+		theme:require("./pages/theme").default,
 		vbox:require("./pages/vbox").default,
 		hbox:require("./pages/hbox").default,
 		tableLayout:require("./pages/tablelayout").default,
