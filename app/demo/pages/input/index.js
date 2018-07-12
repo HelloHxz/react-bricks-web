@@ -79,6 +79,17 @@ class InputDemo extends React.PureComponent {
                  span:18
                }
              }
+           } label='姓名' size='sm' />  
+           <br/>
+           <Input gridLayout={
+             {
+               label:{
+                 span:{md:6,lg:4}
+               },
+               input:{
+                span:{md:18,lg:20}
+               }
+             }
            } label='姓名' size='sm' />
         </div>
         
