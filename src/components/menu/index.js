@@ -1,5 +1,5 @@
 import  React from 'react';
-import PopMenu from '../popmenu';
+import PopMenu from './popmenu';
 import ToolTip from '../tooltip';
 import XZ from '../xz';
 import './index.less';
@@ -39,14 +39,14 @@ class Menu extends React.Component{
             this.props.onItemClick(params);
         }
     }
-    componentWillReceiveProps(nextPros){
-       
+    popItemIsSelected(key){
+        return  key===this.state.selectedKey ||this.selectedOpenKeyArray.indexOf(key)>=0;
     }
     _getMiniVerticalItems = (data)=>{
         var children = [];
         for(var i=0,j=data.length;i<j;i++){
             var itemData = data[i];
-            const isSelected =  itemData.key===this.state.selectedKey ||this.selectedOpenKeyArray.indexOf(itemData.key)>=0;
+            const isSelected = this.popItemIsSelected(itemData.key);
             let clickEvent = {};
             if(!itemData.children){
                 clickEvent = {
@@ -70,7 +70,7 @@ class Menu extends React.Component{
                 );
             }
             if(itemData.children){
-                children.push(<PopMenu level={0} key={i} data={itemData.children}>
+                children.push(<PopMenu {...this.props} menu={this} level={0} key={i} data={itemData.children}>
                     {iconWrapper}
                 </PopMenu>);
             }else{

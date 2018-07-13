@@ -4,8 +4,8 @@ import {React,observer,PageView,Menu,PopView,Input,Form,Select,Views,Row,Col,Mod
 class LeftMenu extends React.Component {
 
   MenuItemClick(params){
-    if(params.itemData.href){
-      this.props.navigation.navigate(params.itemData.href,{test:'Lucy'});
+    if(params.itemData.key){
+      this.props.navigation.navigate(params.itemData.key,{test:'Lucy'});
     }
   }
 

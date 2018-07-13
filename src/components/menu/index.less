@@ -6,19 +6,25 @@
 }
 
 .xz-menu-item,.xz-menu-section-header{
-    height:@menu_item_height;
-    line-height: @menu_item_height;
+ 
     position: relative;
     cursor: pointer;
     white-space:nowrap;
-    color:@menu_header_text_color;
-    background-color: @menu_header_background;
 }
+
 .xz-menu-item{
     font-size: @menu_item_fontsize;
+    color:@menu_item_text_color; 
+    height:@menu_item_height;
+    line-height: @menu_item_height;
+    background-color: @menu_item_background;
 }
 .xz-menu-section-header{
-    font-size: @menu_header_fontsize;
+    font-size: @menu_header_fontsize;    
+    height:@menu_header_height;
+    line-height: @menu_header_height;
+    color:@menu_header_text_color;
+    background-color: @menu_header_background;
 }
 
 .xz-menu-group-title{
@@ -108,7 +114,7 @@
  
 .xz-menu-item-selected{
     background-color: @menu_item_selected_background !important;
-    color: @menu_item_selected_color !important;;
+    color: @menu_item_selected_color !important;
 }
 
 .xz-menu-mini .xz-menu-root-item{

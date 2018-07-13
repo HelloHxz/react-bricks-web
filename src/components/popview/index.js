@@ -98,6 +98,9 @@ class PopView extends React.Component{
     }
 
     hide(){
+        if(window.xzdebug===true){
+            return;
+        }
         this.clearTimeout();
         if(this.state.show===false||this.state.show==='noinit'){
             return;
