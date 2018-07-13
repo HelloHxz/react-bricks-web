@@ -3,19 +3,27 @@
     user-select:none;
 }
 
-.xz-menu-item,.xz-menu-group-header{
+.xz-menu-item,.xz-menu-section-header{
     height:40px;
     line-height: 40px;
     position: relative;
     cursor: pointer;
     white-space:nowrap;
+    font-size: 14px;
     color:@menu_headertext_color;
 }
 
-.xz-menu-group .xz-menu-item{
+.xz-menu-group-title{
+    height:40px;
+    line-height: 40px;
+    font-size: 13px;
+    color:#848484;
+}
+
+.xz-menu-section .xz-menu-item{
     color:@menu_itemtext_color;
 }
-.xz-menu-section{
+.xz-menu-section-items-wrapper{
     overflow: hidden;   
     transition: height 0.2s ease;
 }
@@ -55,22 +63,22 @@
     -ms-transform: rotate(-45deg) translateY(2px);
 }
 
-.xz-menu-group-header-close .xz-menu-submenu-arrow:after{
+.xz-menu-section-header-close .xz-menu-submenu-arrow:after{
     transform: rotate(45deg) translateX(-2px);
     -ms-transform: rotate(45deg) translateX(-2px);
 }
 
-.xz-menu-group-header-close .xz-menu-submenu-arrow:before {
+.xz-menu-section-header-close .xz-menu-submenu-arrow:before {
     transform: rotate(-45deg) translateX(2px);
     -ms-transform: rotate(-45deg) translateX(2px);
 }
 
-.xz-menu-group-header-open .xz-menu-submenu-arrow:after{
+.xz-menu-section-header-open .xz-menu-submenu-arrow:after{
     transform: rotate(-45deg) translateX(-2px);
     -ms-transform: rotate(-45deg) translateX(-2px);
 }
 
-.xz-menu-group-header-open .xz-menu-submenu-arrow:before {
+.xz-menu-section-header-open .xz-menu-submenu-arrow:before {
     transform: rotate(45deg) translateX(2px); 
     -ms-transform: rotate(45deg) translateX(2px); 
 }
