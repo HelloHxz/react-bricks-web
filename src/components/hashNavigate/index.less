@@ -1,3 +1,5 @@
+@import '../theme/index.less';
+
 *{
 	margin:0;
 	padding:0;
@@ -6,6 +8,7 @@
 }
 body{
   font-family: "Monospaced Number", "Chinese Quote", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: @base_fontsize;
 }
 html{
   overflow: auto;
@@ -31,10 +34,6 @@ ul,li{
    position:relative;
   width:100%;
   height:100%;
-}
-
-body{
-  font-size:13px;
 }
 
 .displaynone{

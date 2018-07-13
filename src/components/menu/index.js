@@ -1,5 +1,6 @@
 import  React from 'react';
 import PopMenu from '../popmenu';
+import ToolTip from '../tooltip';
 import XZ from '../xz';
 import './index.less';
 import observer from '../observer';
@@ -9,6 +10,7 @@ class Menu extends React.Component{
     constructor(props){
         super(props);
         this.itemOffsetLeft = props.itemOffsetLeft||24;
+        this.minMenuTitleMode = props.minMenuTitleMode || 'tooltip';
         let selectedKey;
         if(props.withURLChange){
             this.hashChangeID = XZ.router.listenerHashChangeEvent((params)=>{
@@ -44,13 +46,29 @@ class Menu extends React.Component{
         var children = [];
         for(var i=0,j=data.length;i<j;i++){
             var itemData = data[i];
-            const iconWrapper = <div className='xz-menu-vertical-icon-wrapper' key={i}><i className={`${itemData.icon} xz-menu-vertical-mini-icon`}/></div>;
+            let iconWrapper = (
+                <div className='xz-menu-root-item' key={i}>
+                    <i className={`${itemData.icon} xz-root-item-icon`}/>
+                </div>
+            );
+            if(this.minMenuTitleMode==='bottom'){
+                iconWrapper = (
+                    <div className='xz-menu-root-labelitem' key={i}>
+                        <div><i className={`${itemData.icon} xz-root-item-icon`}/></div>
+                        <div className='xz-root-item-label'>{itemData.label}</div>
+                    </div>
+                );
+            }
             if(itemData.children){
                 children.push(<PopMenu level={0} key={i} data={itemData.children}>
                     {iconWrapper}
                 </PopMenu>);
             }else{
-                children.push(iconWrapper);
+                if(this.minMenuTitleMode!=='bottom'){
+                    children.push(<ToolTip title={itemData.label} placement='right'>{iconWrapper}</ToolTip>);
+                }else{
+                    children.push(iconWrapper);
+                }
             }
         }
         return children; 
@@ -84,7 +102,7 @@ class Menu extends React.Component{
         this._processData(this.props.data,[]);
         if(this.props.collapsed === true){
             children = this._getMiniVerticalItems(this.props.data);
-            p.className = 'xz-menu xz-menu-vertical-mini';
+            p.className = 'xz-menu xz-menu-mini';
         }else {
             children = this._getVerticalItems(this.props.data);
             p.className = 'xz-menu xz-menu-vertical';

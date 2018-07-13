@@ -38,7 +38,9 @@ export default class ToolTip extends React.Component{
         const arrowStyle = this._getArrowLeft(params);
         return <div className={clsArr.join(' ')}>
             <div {...arrowStyle} className={`xz-tooltip-arrow xz-tooltip-arrow-${params.placement}`}></div>
-            <div className='xz-tooltip-inner'>ToolTipToolTipToolTipToolTip<div/>ToolTipToolTip</div>
+            <div className='xz-tooltip-inner'>
+                {this.props.title}
+            </div>
         </div>;
     }
     onChange(){
