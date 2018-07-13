@@ -75,7 +75,6 @@ class PopView extends React.Component{
         }
     }
     clearTimeout(){
-        console.log(this.timeoutid)
         if(this.timeoutid){
             window.clearTimeout(this.timeoutid);
             this.timeoutid = null;
@@ -259,7 +258,14 @@ class PopView extends React.Component{
         const popWrapperClassName = this.props.popWrapperClassName || '';
         var className =`xz-popview-content-${this.positionMode} ${popWrapperClassName}`+ ` xz-popview-trans-${pos.pos} ${this.props.popLayerClassName||''}`;
         // todo .. 将这个拎出一个组件 在组件中做一个mousewhell的位置重定位
-        return <div onWheel={(e)=>{ e.preventDefault(); }} onMouseOver={()=>{
+        return <div onWheel={(e)=>{ e.preventDefault(); }}
+        onMouseOver={()=>{
+            this.clearTimeout();
+            if(this.props.parentPopview){
+                this.props.parentPopview.clearTimeout();
+            }
+        }}
+        onMouseEnter={()=>{
             this.clearTimeout();
             if(this.props.parentPopview){
                 this.props.parentPopview.clearTimeout();
