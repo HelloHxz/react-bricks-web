@@ -10,7 +10,7 @@ class Menu extends React.Component{
     constructor(props){
         super(props);
         this.itemOffsetLeft = props.itemOffsetLeft||24;
-        this.minMenuTitleMode = props.minMenuTitleMode || 'tooltip';
+        this.minMenuTitleMode = props.minMenuTitleMode || 'bottom';
         let selectedKey;
         if(props.withURLChange){
             this.hashChangeID = XZ.router.listenerHashChangeEvent((params)=>{
