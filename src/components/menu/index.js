@@ -46,14 +46,24 @@ class Menu extends React.Component{
         var children = [];
         for(var i=0,j=data.length;i<j;i++){
             var itemData = data[i];
+            const isSelected =  itemData.key===this.state.selectedKey ||this.selectedOpenKeyArray.indexOf(itemData.key)>=0;
+            let clickEvent = {};
+            if(!itemData.children){
+                clickEvent = {
+                    onClick:this.onItemClick.bind(this,{
+                            itemData,
+                            itemInstance:this
+                    })
+                };
+            }
             let iconWrapper = (
-                <div className='xz-menu-root-item' key={i}>
+                <div {...clickEvent} className={`xz-menu-root-item ${isSelected?'xz-menu-item-selected':''}`} key={i}>
                     <i className={`${itemData.icon} xz-root-item-icon`}/>
                 </div>
             );
             if(this.minMenuTitleMode==='bottom'){
                 iconWrapper = (
-                    <div className='xz-menu-root-labelitem' key={i}>
+                    <div {...clickEvent} className={`xz-menu-root-labelitem ${isSelected?'xz-menu-item-selected':''}`} key={i}>
                         <div><i className={`${itemData.icon} xz-root-item-icon`}/></div>
                         <div className='xz-root-item-label'>{itemData.label}</div>
                     </div>
@@ -65,7 +75,7 @@ class Menu extends React.Component{
                 </PopMenu>);
             }else{
                 if(this.minMenuTitleMode!=='bottom'){
-                    children.push(<ToolTip title={itemData.label} placement='right'>{iconWrapper}</ToolTip>);
+                    children.push(<ToolTip key={i} title={itemData.label} placement='right'>{iconWrapper}</ToolTip>);
                 }else{
                     children.push(iconWrapper);
                 }
@@ -98,7 +108,6 @@ class Menu extends React.Component{
     render(){
         let children = [];
         const p = {};
-        
         this._processData(this.props.data,[]);
         if(this.props.collapsed === true){
             children = this._getMiniVerticalItems(this.props.data);

@@ -47,10 +47,8 @@ export default class ToolTip extends React.Component{
 
     }
     onShow(){
-        console.log("show");
     }
     onHide(){
-        console.log("hide");
     }
     render(){
         const popWrapperClassName = this.props.popWrapperClassName || '';

@@ -14,7 +14,7 @@ class LayoutHeader extends React.Component {
             </TableLayout.Cell>
             <TableLayout.Cell>1</TableLayout.Cell>
             <TableLayout.Cell style={{width:250}}>
-                <Tooltip positionMode='absolute' placement='bottom'><Button>Bottom</Button></Tooltip>
+                <Tooltip title='关于' positionMode='absolute' placement='bottom'><Button>Bottom</Button></Tooltip>
             </TableLayout.Cell>
         </TableLayout>
     );
