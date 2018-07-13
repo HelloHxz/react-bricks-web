@@ -47,10 +47,6 @@ class PopView extends React.Component{
             this.preventHide();
             return;
         }
-        if(e){
-            e.stopPropagation();
-            e.preventDefault();
-        }
         var mode = this.props.mode || 'hover';
         let delay = 300;
         if(this.props.showDelay||this.props.showDelay===0){
@@ -81,8 +77,8 @@ class PopView extends React.Component{
         }
     }
     onMouseLeave(e){
-       e.stopPropagation();
-       e.preventDefault();
+    //    e.stopPropagation();
+    //    e.preventDefault();
        if(this.hideMode === 'blur'){
            return;
        }
@@ -114,6 +110,7 @@ class PopView extends React.Component{
                 delay = this.props.hideDelay;
             }
         }
+      
         if(this.props.parentPopview){
             this.props.parentPopview.hide();
         }
@@ -265,12 +262,7 @@ class PopView extends React.Component{
                 this.props.parentPopview.clearTimeout();
             }
         }}
-        onMouseEnter={()=>{
-            this.clearTimeout();
-            if(this.props.parentPopview){
-                this.props.parentPopview.clearTimeout();
-            }
-        }} onMouseLeave={this.onMouseLeave.bind(this)} className={className} style={pos.style}>
+        onMouseLeave={this.onMouseLeave.bind(this)} className={className} style={pos.style}>
             <div className={(this.state.show?`xz-pop-animate-${pos.pos}`:`xz-pop-animate-${pos.pos}-hide`)}>{this.props.renderContent({instance:this,placement:pos.pos,rect:pos.rect})}</div>
         </div>;
     }
