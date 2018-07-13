@@ -7,14 +7,14 @@ class PopMenu extends React.Component {
 
     }
     onHide(){
-
+        
     }
 
     _createChildren(data,children,context){
         for(let i = 0,j=data.length;i<j;i+=1){
             const item = data[i];
             if(item.children && item.children.length>0){
-                children.push(<PopMenu parentPopview={this.root} key={item.key||i} data={item.children}>
+                children.push(<PopMenu {...this.props} parentPopview={this.root} key={item.key||i} data={item.children}>
                     <div className='xz-popmenu-header'>{item.label}</div>
                 </PopMenu>);
             }else if(item.group){
@@ -56,7 +56,7 @@ class MenuItem extends React.Component{
             itemData:this.props.data,
             instance:this
         });
-        this.props.context.instance.hide();
+        this.props.context.instance.hide(80);
     }
     render(){
         let icon = null;

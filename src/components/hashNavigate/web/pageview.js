@@ -62,7 +62,10 @@ class PageView extends React.Component {
     }
     var pagename = this.state.pagename||"";
     var realpagename = pagename.split("_")[0];
-    var ToPageClass = ToPageClass = this.props.navigation.props.config.pages[realpagename];
+    var ToPageClass = this.props.navigation.props.config.pages[realpagename];
+    if(!ToPageClass){
+      return <div>not found {realpagename} page</div>
+    }
     var params = {
       url:this.props.navigation.getUrlInfo(),
       pagemanager:this.props.pagemanager,

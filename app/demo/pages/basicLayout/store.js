@@ -22,8 +22,8 @@ class Store {
         key:'xxxxx',
         icon:'iconfont icon-desktop',
         children:[
-          {label:"HashRouter Hash路由",key:'hashnavigate',icon:'iconfont icon-desktop'},
-          {label:"HistoryRouter History路由",key:'HistoryNavigate'}
+          {label:"HashRouter Hash路由",key:'home/hasnavigate',icon:'iconfont icon-desktop'},
+          {label:"HistoryRouter History路由",key:'home/historynavigate'}
         ]
       },
       {

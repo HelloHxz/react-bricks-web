@@ -75,6 +75,7 @@ class PopView extends React.Component{
         }
     }
     clearTimeout(){
+        console.log(this.timeoutid)
         if(this.timeoutid){
             window.clearTimeout(this.timeoutid);
             this.timeoutid = null;
@@ -97,7 +98,7 @@ class PopView extends React.Component{
         this.focus();
     }
 
-    hide(){
+    hide(timeout){
         if(window.xzdebug===true){
             return;
         }
@@ -105,9 +106,17 @@ class PopView extends React.Component{
         if(this.state.show===false||this.state.show==='noinit'){
             return;
         }
+   
         let delay = 300;
-        if(this.props.showDelay||this.props.showDelay===0){
-            delay = this.props.hideDelay;
+        if(timeout===0||timeout){
+            delay = timeout;
+        }else{
+            if(this.props.showDelay||this.props.showDelay===0){
+                delay = this.props.hideDelay;
+            }
+        }
+        if(this.props.parentPopview){
+            this.props.parentPopview.hide();
         }
         this.timeoutid = setTimeout(()=>{
            this._hide();
