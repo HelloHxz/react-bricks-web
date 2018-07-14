@@ -10,7 +10,7 @@ class Menu extends React.Component{
     constructor(props){
         super(props);
         this.itemOffsetLeft = props.itemOffsetLeft||24;
-        this.minMenuTitleMode = props.minMenuTitleMode || 'bottom';
+        this.minMenuTitleMode = props.minMenuTitleMode || 'bottom'; // tooltip|bottom
         let selectedKey;
         if(props.withURLChange){
             this.hashChangeID = XZ.router.listenerHashChangeEvent((params)=>{
@@ -36,7 +36,7 @@ class Menu extends React.Component{
 
     onItemClick(params){
         if(this.props.onItemClick){
-            this.props.onItemClick(params);
+            this.props.onItemClick(params.itemData,params);
         }
     }
     popItemIsSelected(key){

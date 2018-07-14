@@ -11,6 +11,7 @@ import Row from './row';
 import message from './message';
 import Button from './button';
 import CheckBox from './checkbox';
+import DropDown from './dropdown';
 import VBox from './vbox';
 import HBox from './hbox';
 import Popover from './popover';
@@ -42,6 +43,7 @@ export {
 	XZ,
 	CheckGroup,
 	Image,
+	DropDown,
 	TableLayout,
 	Swiper,
 	Tabs,

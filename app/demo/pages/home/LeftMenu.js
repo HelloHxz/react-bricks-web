@@ -3,9 +3,9 @@ import {React,observer,PageView,Menu,PopView,Input,Form,Select,Views,Row,Col,Mod
 @observer
 class LeftMenu extends React.Component {
 
-  MenuItemClick(params){
-    if(params.itemData.key){
-      this.props.navigation.navigate(params.itemData.key,{test:'Lucy'});
+  MenuItemClick(record,params){
+    if(record.key){
+      this.props.navigation.navigate(record.key,{test:'Lucy'});
     }
   }
 
