@@ -1,4 +1,4 @@
-import {React,PageView,observer,PageContainer,XZ,Button} from "react-bricks-web"
+import {React,PageView,observer,PageContainer,XZ,Button,Icon} from "react-bricks-web"
 
 
 
@@ -25,13 +25,41 @@ class BottomDemo extends React.PureComponent {
 
 
   render() {
-    return <div>BottomDemo
+    return <div>
       <Button onClick={()=>{
         XZ.go();
       }}>log</Button>
       <Button type='primary'>Primary</Button>
       <Button size='sm' type='primary'>Primary</Button>
       <Button size='lg' type='primary'>Primary</Button>
+      <br/> <br/>
+      <Button size='lg' type='primarytext'>Primary</Button>
+      <br/> <br/>
+      <Button size='sm' type='primarytext'><Icon text='Primary' customIcon='iconfont icon-desktop'/></Button>
+      <br/> <br/>
+      <Button>
+        <Icon type='questioncircleo' text='图标'/>
+      </Button>
+      <br/>
+      <br/> 
+      <Button type='primarytext'>
+        <Icon type='questioncircleo'/>
+      </Button>
+      <br/>
+      <br/>
+      <Button>
+        <Icon type='questioncircleo'/>
+      </Button>
+      <br/>
+      <br/>
+      <Button type='primary'>
+        <Icon type='questioncircleo' text='图标'/>
+      </Button>
+      <br/>
+      <br/>
+      <Button type='primary'>
+        <Icon type='down' text='图标' textPlacement='left'/>
+      </Button>
     </div>
   }
 }

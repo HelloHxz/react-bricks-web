@@ -3,7 +3,12 @@
 .xz-btn{
     outline: none;
     cursor: pointer;
+    line-height: 1;
     border-radius: @btn_border_radius;
+}
+
+.xz-btn .xz-icon-wrapper{
+    vertical-align: middle;
 }
 
 .xz-btn-size-default{
@@ -11,6 +16,7 @@
     padding-left: 10px;
     padding-right: 10px;
 }
+
 .xz-btn-size-sm{
     height:@theme_sm_height + 2;
     padding-left: 10px;
@@ -23,8 +29,8 @@
 }
 
 .xz-btn:active{
-    opacity: .7;
-    filter:alpha(opacity=70);
+    opacity: .6;
+    filter:alpha(opacity=60);
 }
 
 .xz-btn-type-default{
@@ -32,12 +38,16 @@
     border:1px solid @btn_default_border_color;
     background-color: #fff;
 }
-
-.@{theme-namespace} .xz-btn-type-primary{
-    background-color:@theme_color;
-    border:1px solid @theme_color;
-} 
-
-.xz-btn-type-primary{
-    color:#fff;
+.@{theme-namespace}{
+    .xz-btn-type-primary,.xz-btn-type-primarytext:hover{
+        background-color:@theme_color;
+        border:1px solid @theme_color;
+        color:#fff;
+    }
+    .xz-btn-type-primarytext{
+        background-color:#fff;
+        border:1px solid transparent;
+        color:#3d3d3d;
+    }
 }
+

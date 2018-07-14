@@ -1,6 +1,6 @@
 
 const sourceMap = {
-    'btn-type':['default','primary'],
+    'btn-type':['default','primary','primarytext','text'],
     'size':['default','sm','lg']
 };
 

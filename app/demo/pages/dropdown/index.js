@@ -1,4 +1,4 @@
-import {React,PageView,observer,PageContainer,Row,DropDown} from "react-bricks-web";
+import {React,PageView,observer,PageContainer,Row,DropDown,Button,Icon} from "react-bricks-web";
 import './index.less';
 
 @PageView()
@@ -22,14 +22,22 @@ class DropDownDemo extends React.PureComponent {
           {label:'复制',key:'copy'},
           {label:'粘贴',key:'paste'},
           {label:'删除',key:'delete'},
-        ]}><a>下拉</a></DropDown>
-
+        ]}> 
+          <Button type='primary'>
+            <Icon type='down' text='操作' textPlacement='left'/>
+        </Button>
+      </DropDown>
+        <br/><br/>
         <DropDown mode='click' data={[
           {label:'剪切',key:'cut'},
           {label:'复制',key:'copy'},
           {label:'粘贴',key:'paste'},
           {label:'删除',key:'delete'},
-        ]}><a>点击</a></DropDown>
+        ]}>
+          <Button type='primarytext'>
+              <Icon type='down' text='操作' textPlacement='left'/>
+          </Button>
+        </DropDown>
     </div>
   }
 }

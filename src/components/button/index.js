@@ -35,6 +35,8 @@ export default class Button extends React.Component{
         if(this.props.style){
             p.style = this.props.style;
         }
-        return (<button {...p} ref={(root)=>{this.root = root;}} className={`xz-btn xz-btn-size-${Theme.getConfig('size',this.props)} xz-btn-type-${Theme.getConfig('btn-type',this.props)}`}>{this.props.children}</button>)
+        return (<button {...p} ref={(root)=>{this.root = root;}} className={`xz-btn xz-btn-size-${Theme.getConfig('size',this.props)} xz-btn-type-${Theme.getConfig('btn-type',this.props)}`}>
+                {this.props.children}
+            </button>)
     }
 }

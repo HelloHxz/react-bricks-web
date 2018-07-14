@@ -15,9 +15,23 @@ class IconDemo extends React.PureComponent {
   render() {
     return <div>
       <Icon textPlacement='left' type='bars' text='图标'/>
+      <br/>
+      <br/>
       <Icon type='questioncircleo' text='图标'/>
 
+      <br/>
+      <br/>
       <Icon type='questioncircleo'/>
+
+      <br/>
+      <br/>
+      <Icon customIcon='iconfont icon-desktop'/>
+      <br/>
+      <br/>
+      <Icon customIcon='iconfont icon-desktop' text='自定义'/>
+      <br/>
+      <br/>
+      <Icon customIcon='iconfont icon-desktop' textPlacement='left' text='自定义'/>
 
     </div>
   }
