@@ -30,6 +30,8 @@ class BottomDemo extends React.PureComponent {
         XZ.go();
       }}>log</Button>
       <Button type='primary'>Primary</Button>
+      <Button size='sm' type='primary'>Primary</Button>
+      <Button size='lg' type='primary'>Primary</Button>
     </div>
   }
 }
