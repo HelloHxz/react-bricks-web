@@ -34,6 +34,7 @@ import observable from './observable';
 import CheckGroup from './checkgroup';
 import extendObservable from './extendObservable';
 import observer from './observer'
+import Group from './group';
 /*
 	todo.. babel-plugin-import 按需加载
 	按照babel-plugin-import  每个引用都需要挪到components目录下 
@@ -46,6 +47,7 @@ export {
 	DropDown,
 	TableLayout,
 	Swiper,
+	Group,
 	Tabs,
 	Radio,
 	Icon,

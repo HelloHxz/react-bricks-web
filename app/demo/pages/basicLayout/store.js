@@ -36,6 +36,7 @@ class Store {
               {label:"TableLayout 表格布局",key:'components/tableLayout'},
               {label:"VBox 垂直布局",key:'components/vbox',},
               {label:"HBox 水平布局",key:'components/hbox'},
+              {label:"Group 组",key:'components/group'},
             ]},
             {label:"表单组件",group:[
               {label:"Button 按钮",key:'components/button'},

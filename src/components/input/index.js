@@ -16,8 +16,12 @@ export default class Input extends React.Component{
         }
     }
     render(){
+        const p = {};
+        if(this.props.style){
+            p.style = this.props.style;
+        }
         return <FormItemWrapper {...this.props}>
-            <div className={`xz-input xz-input-size-${Theme.getConfig('size',this.props)}`}>
+            <div {...p} className={`xz-input xz-input-size-${Theme.getConfig('size',this.props)}`}>
                 <input placeholder={this.props.placeholder} onInput={this.onInput.bind(this)} value={this.props.value} />
             </div>
          </FormItemWrapper>;

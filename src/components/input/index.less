@@ -1,11 +1,16 @@
 @import '../theme/index.less';
 
+
+.xz-input{
+    border:1px solid @input_border_color;
+    border-radius: @input_borderradius;
+    overflow: hidden;
+}
 .xz-input input{
     border:none;
     width:100%;
-    border:1px solid @input_border_color;
+    border-radius: 0;
     padding-left: 6px;
-    border-radius: @input_borderradius;
 }
 
 .xz-input-mes{
@@ -13,28 +18,25 @@
     padding-top:1px;
     color:red;
 }
-.xz-input input:hover {
+.xz-input:hover {
     border:1px solid @theme_color;
 }
-.xz-input input:focus {
+.xz-input:focus {
     border:1px solid @theme_color;
 }
 
 .xz-input-size-default input{
-    height: @input_default_height;
-    line-height:unit(unit(@input_default_height) - 2,px);
+    line-height: @input_default_height;
     font-size: @input_default_fontsize;
 }
 
 .xz-input-size-sm input{
-    height: @input_sm_height;
-    line-height:unit(unit(@input_sm_height) - 2,px);
+    line-height: @input_sm_height;
     font-size:  @input_sm_fontsize;
 }
 
 .xz-input-size-lg input{
-    height: @input_lg_height;
-    line-height:unit(unit(@input_lg_height) - 2,px);
+    line-height: @input_lg_height;
     font-size: @input_lg_fontsize;
 }
 

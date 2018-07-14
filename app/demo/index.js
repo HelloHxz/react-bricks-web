@@ -21,6 +21,7 @@ var config = {
 		"/":require("./pages/basicLayout").default,
 		home:require("./pages/home").default,
 		dropdown:require("./pages/dropdown").default,
+		group:require("./pages/group").default,
 		button:require("./pages/button").default,
 		swiper:require("./pages/swiper").default,
 		theme:require("./pages/theme").default,
