@@ -6,6 +6,26 @@
     padding-left: 6px;
     outline: none;
     border-radius: @input_borderradius;
+    position: relative;
+    cursor: pointer;
+}
+.xz-select:hover,.xz-select-open{
+    border:1px solid @theme_color;
+}
+.xz-select-arrow{
+    position: absolute;
+    right: 10px;
+    top:50%;
+    transition: transform .3s ease;
+}
+.xz-select-arrow .xz-icon{
+    font-size: 12px;
+}
+.xz-select-arrow-up{
+    transform: translateY(-50%) rotate(180deg);
+}
+.xz-select-arrow-down{
+    transform: translateY(-50%) rotate(0);
 }
 .xz-select-size-default{
     line-height: @theme_default_height;

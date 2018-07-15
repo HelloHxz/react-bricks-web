@@ -268,7 +268,7 @@ class MenuSectionHeader extends React.Component{
         this.props.onClick();
     }
     render(){
-        var className = ["xz-menu-section-header",this.props.open?"xz-menu-section-header-open":"xz-menu-section-header-close"];
+        var className = ["xz-menu-section-header"];
         let icon = null;
         if(this.props.data.icon){
             icon = <i className={`${this.props.data.icon} xz-menu-icon`}/>
@@ -276,7 +276,7 @@ class MenuSectionHeader extends React.Component{
         return <div className={className.join(' ')} onClick={this.click.bind(this)} style={{paddingLeft:(this.props.level)*(this.props.menu.itemOffsetLeft)}}>
             {icon}
             {this.props.data.label}
-            <i className='xz-menu-submenu-arrow'></i>
+            <i className={`xz-arrow ${this.props.open?'xz-arrow-up':'xz-arrow-down'}`}></i>
         </div>;
     }
 }

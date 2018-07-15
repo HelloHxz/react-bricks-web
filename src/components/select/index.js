@@ -1,6 +1,7 @@
 import React from 'react';
 import PopView from '../popview';
 import Theme from '../theme';
+import Icon from '../icon';
 import './index.less';
 import FormItemWrapper from '../formComponentWrapper';
 
@@ -77,7 +78,8 @@ export default class Select extends React.Component{
     constructor(props){
         super(props);
         this.state={
-            selectedData:this._getSelectedDataByValue(props.value,props.data)
+            selectedData:this._getSelectedDataByValue(props.value,props.data),
+            show:false
         };
     }
     renderPopView(){
@@ -133,10 +135,14 @@ export default class Select extends React.Component{
         }
     }
     onShow(){
-        console.log("show");
+        this.setState({
+            show:true
+        })
     }
     onHide(){
-        console.log("hide");
+        this.setState({
+            show:false
+        })
     }
     render(){
         let style = {};
@@ -163,9 +169,10 @@ export default class Select extends React.Component{
                     initOverLayerWidth={true}
                     renderContent={this.renderPopView.bind(this)}
                 >
-                    <div {...style} className={`xz-select xz-select-size-${Theme.getConfig('size',this.props)} ${this.props.className||''}`}>
+                    <div {...style} className={`xz-select ${this.state.show?'xz-select-open':''} xz-select-size-${Theme.getConfig('size',this.props)} ${this.props.className||''}`}>
                         {selectedData.value?<span className='xz-select-value'>{selectedData.label}</span>:
                             (<span className='placeholder'>{this.props.placeholder}</span>)}
+                         <Icon className={`xz-select-arrow xz-select-arrow-${this.state.show?'down':'up'}`} type={'up'}/>
                     </div>
                 </PopView>
         </FormItemWrapper>
