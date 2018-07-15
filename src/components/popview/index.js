@@ -77,8 +77,6 @@ class PopView extends React.Component{
         }
     }
     onMouseLeave(e){
-    //    e.stopPropagation();
-    //    e.preventDefault();
        if(this.hideMode === 'blur'){
            return;
        }
@@ -130,21 +128,94 @@ class PopView extends React.Component{
             },100);
         });
     }
-    getRootWidth(){
-        let target = this.root;
-        if(this.root.root){
-            target = this.root.root;
+
+   
+    getContentEvent(){
+        var mode = this.props.mode || 'hover'; //dbclick|click|hover|rightclick
+        if(mode==='click'){
+            return {
+            };
         }
-        return target.offsetWidth;
+        return {};
+    }
+    getRoot(){
+        let target = this.triggerRoot;
+        if(target.root){
+            target = target.root;
+        }
+        return target;
+    }
+    renderContent(){
+        if(!this.triggerRoot){
+            return null;
+        }
+        if(this.state.show==='noinit'){
+            return null;
+        }
+        if(!this.props.renderContent){
+            return null;
+        }
+        return <PopWrapper {...this.props} triggerRoot={this.getRoot()} popview={this} show={this.state.show} positionMode={this.positionMode}/>
+    }
+  
+    getEvent(){
+        var mode = this.props.mode || 'hover'; //dbclick|click|hover|rightclick
+        if(mode==='click'){
+            return {
+                onClick:this.show.bind(this),
+                onMouseLeave:this.onMouseLeave.bind(this),
+                onMouseOver:this.onMouseOverWhenClickMode.bind(this),
+            };
+        }
+        return {
+            onMouseOver:this.onMouseOver.bind(this),
+            onMouseLeave:this.onMouseLeave.bind(this),
+        };
+    }
+    onBlur=()=>{
+        this.hide();
+    }
+    focus=()=>{
+        if(this.hideMode==='blur'&&this.AInstance){
+            this.AInstance.focus();
+        }
+    }
+    render(){
+        var mode = this.props.mode || 'hover';
+        const mouseEvent = this.getEvent();
+        const element = this.props.children;
+        let A = null;
+        if(this.hideMode==='blur'){
+            A= <input style={{width:0,height:0,position:'fixed',left:-999}}  onBlur={this.onBlur.bind(this)} ref={(focusA)=>{
+                this.AInstance = focusA;
+            }}/>
+        }
+        return (
+            <React.Fragment>
+                {A}
+                <element.type {...element.props} {...mouseEvent} ref={(root)=>{this.triggerRoot = root;}}></element.type>
+                {this.renderContent()}
+            </React.Fragment>
+        );
+    }
+}
+
+
+class PopWrapper extends React.Component{
+    constructor(props){
+        super(props);
+        this.triggerRoot = props.triggerRoot;
+        this.positionMode = props.positionMode;
+    }
+    getRootWidth(){
+        
+        return this.triggerRoot.offsetWidth;
     }
     getBoundingClientRect(){
         if(this.positionMode==='fixed'){
-            return this.root.getBoundingClientRect();
+            return this.props.triggerRoot.getBoundingClientRect();
         }
-        let target = this.root;
-        if(this.root.root){
-            target = this.root.root;
-        }
+        let target = this.triggerRoot;
         const left = target.offsetLeft;
         const top = target.offsetTop;
         const width=target.offsetWidth;
@@ -159,8 +230,6 @@ class PopView extends React.Component{
         };
     }
     getPopPositionStyle(){
-        // this.props.offset
-        // topleft|top|topright|righttop|right|rightbottom|bottomright|bottom|bottomleft|leftbottom|left|lefttop|
         const offset = this.props.offset || {};
         const bodyHeight = document.body.offsetHeight;
         const bodyWidth = document.body.offsetWidth;
@@ -233,79 +302,29 @@ class PopView extends React.Component{
             rect,
         };
     }
-    getContentEvent(){
-        var mode = this.props.mode || 'hover'; //dbclick|click|hover|rightclick
-        if(mode==='click'){
-            return {
-            };
-        }
-        return {};
-    }
-    renderContent(){
-        if(!this.root){
-            return null;
-        }
-        if(this.state.show==='noinit'){
-            return null;
-        }
-        if(!this.props.renderContent){
-            return null;
-        }
-        const pos = this.getPopPositionStyle();
-        const popWrapperClassName = this.props.popWrapperClassName || '';
-        var className =`xz-popview-content-${this.positionMode} ${popWrapperClassName}`+ ` xz-popview-trans-${pos.pos} ${this.props.popLayerClassName||''}`;
-        // todo .. 将这个拎出一个组件 在组件中做一个mousewhell的位置重定位
-        return <div onWheel={(e)=>{ e.preventDefault(); }}
-        onMouseOver={()=>{
-            this.clearTimeout();
-            if(this.props.parentPopview){
-                this.props.parentPopview.clearTimeout();
-            }
-        }}
-        onMouseLeave={this.onMouseLeave.bind(this)} className={className} style={pos.style}>
-            <div className={(this.state.show?`xz-pop-animate-${pos.pos}`:`xz-pop-animate-${pos.pos}-hide`)}>{this.props.renderContent({instance:this,placement:pos.pos,rect:pos.rect})}</div>
-        </div>;
-    }
-  
-    getEvent(){
-        var mode = this.props.mode || 'hover'; //dbclick|click|hover|rightclick
-        if(mode==='click'){
-            return {
-                onClick:this.show.bind(this),
-                onMouseLeave:this.onMouseLeave.bind(this),
-                onMouseOver:this.onMouseOverWhenClickMode.bind(this),
-            };
-        }
-        return {
-            onMouseOver:this.onMouseOver.bind(this),
-            onMouseLeave:this.onMouseLeave.bind(this),
-        };
-    }
-    onBlur=()=>{
-        this.hide();
-    }
-    focus=()=>{
-        if(this.hideMode==='blur'&&this.AInstance){
-            this.AInstance.focus();
-        }
+    onMouseLeave(){
+        this.props.popview.onMouseLeave();
     }
     render(){
-        var mode = this.props.mode || 'hover';
-        const mouseEvent = this.getEvent();
-        const element = this.props.children;
-        let A = null;
-        if(this.hideMode==='blur'){
-            A= <input style={{width:0,height:0,position:'fixed',left:-999}}  onBlur={this.onBlur.bind(this)} ref={(focusA)=>{
-                this.AInstance = focusA;
-            }}/>
-        }
-        return (
-            <React.Fragment>
-                {A}
-                <element.type {...element.props} {...mouseEvent} ref={(root)=>{this.root = root;}}></element.type>
-                {this.renderContent()}
-            </React.Fragment>
-        );
+        const pos = this.getPopPositionStyle();
+        const popWrapperClassName = this.props.popWrapperClassName || '';
+        var className =`xz-popview-content-${this.positionMode} ${popWrapperClassName}`+ ` xz-popview-trans-${pos.pos} ${this.props.PopWrapperClassName||''}`;
+        return <div
+            ref={(content)=>{
+                if(content){
+                    console.log(content.offsetHeight);
+                }
+            }}
+            onWheel={(e)=>{ e.preventDefault(); }}
+            onMouseOver={()=>{
+                this.props.popview.clearTimeout();
+                if(this.props.parentPopview){
+                    this.props.parentPopview.clearTimeout();
+                }
+            }}
+            onMouseLeave={this.onMouseLeave.bind(this)} className={className} style={pos.style}>
+                <div className={(this.props.show?`xz-pop-animate-${pos.pos}`:`xz-pop-animate-${pos.pos}-hide`)}>{this.props.renderContent({instance:this,placement:pos.pos,rect:pos.rect})}</div>
+        </div>;
     }
 }
 
