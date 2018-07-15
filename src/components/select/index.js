@@ -158,6 +158,7 @@ export default class Select extends React.Component{
                     {...this.props}
                     mode='click' 
                     placement='bottomright'
+                    popWrapperClassName='xz-select-warpper'
                     positionMode={this.props.positionMode||'absolute'}
                     ref={(instance)=>{this.root = instance;}}
                     hideMode={this.props.hideMode||'blur'}

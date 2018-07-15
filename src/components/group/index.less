@@ -27,3 +27,14 @@
 .xz-group{
     display: inline-block;
 }
+
+.xz-group .xz-select-open +* +*{
+    border-left:1px solid @theme_color;
+}
+
+.xz-group .xz-select:hover +*:not(.xz-select-warpper){
+    border-left:1px solid @theme_color;
+}
+.xz-group .xz-select:hover +* +*{
+    border-left:1px solid @theme_color;
+}
