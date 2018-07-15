@@ -15,7 +15,7 @@ class PopMenu extends React.Component {
             const item = data[i];
             if(item.children && item.children.length>0){
                 children.push(<PopMenu {...this.props} parentPopview={this.root} key={item.key||i} data={item.children}>
-                    <div className='xz-popmenu-header'>{item.label}</div>
+                    <div className='xz-popmenu-header'>{item.label} <i key='icon' className={`xz-popmenu-right xz-icon xz-icon-right`}/></div>
                 </PopMenu>);
             }else if(item.group){
                 this._createChildren(item.group,children,context);
@@ -42,7 +42,7 @@ class PopMenu extends React.Component {
                 placement={this.props.placement||'rightbottom'}
                 onShow = {this.onShow.bind(this)}
                 onHide = {this.onHide.bind(this)}
-                offset = {{x: 1}}
+                offset = {{x: 2}}
                 renderContent={this.renderPopView.bind(this)}
             >
                 {this.props.children}

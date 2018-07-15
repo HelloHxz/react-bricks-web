@@ -15,7 +15,7 @@ class DropDown extends React.Component {
             const item = data[i];
             if(item.children && item.children.length>0){
                 children.push(<DropDown {...this.props} dropdown={this.props.drowndown||this} placement='rightbottom' parentPopview={this.root} key={item.key||i} data={item.children}>
-                    <div className='xz-dropdown-header'>{item.label}</div>
+                    <div className='xz-dropdown-header'>{item.label}<i key='icon' className={`xz-dropdown-right xz-icon xz-icon-right`}/></div>
                 </DropDown>);
             }else if(item.group){
                 this._createChildren(item.group,children,context);
@@ -59,7 +59,7 @@ class DropDownItem extends React.Component{
             });
         }
         if(re!==false){
-            this.props.context.instance.hide(80);
+            this.props.context.instance.hide(60);
         }
     }
     render(){

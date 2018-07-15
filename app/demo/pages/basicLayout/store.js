@@ -37,6 +37,7 @@ class Store {
               {label:"VBox 垂直布局",key:'components/vbox',},
               {label:"HBox 水平布局",key:'components/hbox'},
               {label:"Group 组",key:'components/group'},
+              {label:"Tabs 页签",key:'components/tabs',},
             ]},
             {label:"表单组件",group:[
               {label:"Button 按钮",key:'components/button'},
@@ -58,7 +59,6 @@ class Store {
               {label:"Spin 加载指示器",key:'components/spin',},
               {label:"Message 消息",key:'components/message',},
               {label:"Image 图片",key:'components/image',}, 
-              {label:"Tabs 页签",key:'components/tabs',},
               {label:"Swiper 幻灯片",key:'components/swiper',},
               {label:"Tree 树状",key:'xxxxxxx'},
             ]},

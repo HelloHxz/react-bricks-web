@@ -6,23 +6,26 @@ import './index.less';
 export default class ToolTip extends React.Component{
 
     _getArrowLeft = (params)=>{
+        if(params.visibility===false){
+            return {};
+        }
         let style = null;
         if(params.placement==='topleft'){
-            style = { right:params.rect.width/2};
+            style = { right:params.triggerRect.width/2};
         }else if(params.placement==='topright'){
-            style = { left:params.rect.width/2};
+            style = { left:params.triggerRect.width/2};
         }else if(params.placement==='righttop'){
-            style = { bottom:params.rect.height/2};
+            style = { bottom:params.triggerRect.height/2};
         }else if(params.placement==='rightbottom'){
-            style = { top:params.rect.height/2};
+            style = { top:params.triggerRect.height/2};
         }else if(params.placement ==='bottomleft'){
-            style = { right:params.rect.width/2};
+            style = { right:params.triggerRect.width/2};
         }else if(params.placement ==='bottomright'){
-            style = { left:params.rect.width/2};
+            style = { left:params.triggerRect.width/2};
         }else if(params.placement==='leftbottom'){
-            style = { top:params.rect.height/2};
+            style = { top:params.triggerRect.height/2};
         }else if(params.placement ==='lefttop'){
-            style = { bottom:params.rect.height/2};
+            style = { bottom:params.triggerRect.height/2};
         }
 
         if(style === null){

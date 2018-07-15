@@ -110,7 +110,7 @@ class PopView extends React.Component{
         }
       
         if(this.props.parentPopview){
-            this.props.parentPopview.hide();
+            this.props.parentPopview.hide(timeout);
         }
         this.timeoutid = setTimeout(()=>{
            this._hide();
@@ -120,13 +120,20 @@ class PopView extends React.Component{
         this.setState({
             show:false
         },()=>{
-            setTimeout(()=>{
+            this.hideTimeoutID = setTimeout(()=>{
                 this.setState({show:'noinit'});
                 if(this.props.onHide){
                     this.props.onHide(this);
                 }
             },100);
         });
+    }
+
+    componentWillUnmount(){
+        if(this.hideTimeoutID){
+            window.clearTimeout(this.hideTimeoutID);
+        }
+        this.clearTimeout();
     }
 
    
@@ -222,9 +229,7 @@ class PopWrapper extends React.Component{
             });
         }
     }
-    getRootWidth(){
-        return this.triggerRoot.offsetWidth;
-    }
+  
     getBoundingClientRect(){
         if(this.positionMode==='fixed'){
             return this.props.triggerRoot.getBoundingClientRect();
@@ -243,29 +248,21 @@ class PopWrapper extends React.Component{
             right:left+width,
         };
     }
-    getPopPositionStyle(){
+    getStyleByPlacement(placement,triggerRect){
         const offset = this.props.offset || {};
-        const bodyHeight = document.body.offsetHeight;
-        const bodyWidth = document.body.offsetWidth;
-        const rootWidth = this.getRootWidth();
-        var triggerRect = this.getBoundingClientRect();
-        let placement = this.props.placement || 'bottom';
-        if(bodyHeight - triggerRect.bottom < 100){
-            placement = 'top';
-        }
         let style = {
         };
         if(placement === 'bottom'){
             style.top = Common.parseInt(triggerRect.bottom)+ (offset.y||0);
             style.left = Common.parseInt(triggerRect.left)+ (offset.x||0) + triggerRect.width/2;
             if(this.props.initOverLayerWidth){
-                style.width = rootWidth;
+                style.width = triggerRect.width;
             }
         } else if(placement === 'top'){
             style.top = Common.parseInt(triggerRect.top) + (offset.y||0);
             style.left = Common.parseInt(triggerRect.left)+ (offset.x||0) + triggerRect.width/2;
             if(this.props.initOverLayerWidth){
-                style.width = rootWidth;
+                style.width = triggerRect.width;
             }
         } else if(placement === 'left'){
             style.top =  Common.parseInt(triggerRect.top) + (offset.y||0) + triggerRect.height/2;
@@ -277,13 +274,13 @@ class PopWrapper extends React.Component{
             style.top = Common.parseInt(triggerRect.top) + (offset.y||0); 
             style.left = Common.parseInt(triggerRect.right)+ (offset.x||0);
             if(this.props.initOverLayerWidth){
-                style.width = rootWidth;
+                style.width = triggerRect.width;
             }
         }else if(placement === 'topright'){
             style.top = Common.parseInt(triggerRect.top) + (offset.y||0); 
             style.left = Common.parseInt(triggerRect.left)+ (offset.x||0);
             if(this.props.initOverLayerWidth){
-                style.width = rootWidth;
+                style.width = triggerRect.width;
             }
         }else if(placement === 'righttop'){
             style.top = Common.parseInt(triggerRect.top) + (offset.y||0) + triggerRect.height;
@@ -295,13 +292,13 @@ class PopWrapper extends React.Component{
             style.top = Common.parseInt(triggerRect.bottom)+ (offset.x||0);
             style.left = Common.parseInt(triggerRect.right)+ (offset.x||0);
             if(this.props.initOverLayerWidth){
-                style.width = rootWidth;
+                style.width = triggerRect.width;
             }
         }else if(placement === 'bottomright'){
             style.top = Common.parseInt(triggerRect.bottom)+ (offset.y||0);
             style.left = Common.parseInt(triggerRect.left)+ (offset.x||0);
             if(this.props.initOverLayerWidth){
-                style.width = rootWidth;
+                style.width = triggerRect.width;
             }
         }else if(placement === 'leftbottom'){
             style.top = Common.parseInt(triggerRect.top) + (offset.y||0);
@@ -310,10 +307,31 @@ class PopWrapper extends React.Component{
             style.top = Common.parseInt(triggerRect.top) + (offset.y||0) + triggerRect.height;
             style.left = Common.parseInt(triggerRect.left)+ (offset.x||0);
         }
+        return style;
+    }
+    getPopPositionStyle(){
+        let placement = this.props.placement || 'bottom';
+        var triggerRect = this.getBoundingClientRect();
+        if(this.state.show==='preshow'){
+            return {
+                visibility:false,
+                placement,
+                style:{},
+                triggerRect
+            };
+        }
+        const offset = this.props.offset || {};
+        const popLayerRect = this.popLayer.getBoundingClientRect();
+        const bodyHeight = document.body.offsetHeight;
+        const bodyWidth = document.body.offsetWidth;
+        if(bodyHeight - triggerRect.bottom < 100){
+            placement = 'top';
+        }
         return {
             placement,
-            style,
+            style:this.getStyleByPlacement(placement,triggerRect),
             triggerRect,
+            visibility:true
         };
     }
     onMouseLeave(){
@@ -339,8 +357,8 @@ class PopWrapper extends React.Component{
         }
 
         return <div
-            ref={(root)=>{
-                this.root = root;
+            ref={(popLayer)=>{
+                this.popLayer = popLayer;
             }}
             onWheel={(e)=>{ e.preventDefault(); }}
             onMouseOver={()=>{
@@ -351,7 +369,7 @@ class PopWrapper extends React.Component{
             }}
             onMouseLeave={this.onMouseLeave.bind(this)} className={className.join(' ')} style={pos.style}>
                 <div {...innerP}>{this.props.renderContent({
-                    ...{instance:this},
+                    ...{instance:this.props.popview},
                     ...pos
                 })}</div>
         </div>;

@@ -22,6 +22,10 @@ class DropDownDemo extends React.PureComponent {
           {label:'复制',key:'copy'},
           {label:'粘贴',key:'paste'},
           {label:'删除',key:'delete'},
+          {label:'其他',key:'other',children:[
+            {label:'保存',key:'save'},
+            {label:'另存为',key:'saveAs'},
+          ]},
         ]}> 
           <Button type='primary'>
             <Icon type='down' text='操作' textPlacement='left'/>
@@ -33,6 +37,10 @@ class DropDownDemo extends React.PureComponent {
           {label:'复制',key:'copy'},
           {label:'粘贴',key:'paste'},
           {label:'删除',key:'delete'},
+          {label:'其他',key:'other',children:[
+            {label:'保存',key:'save'},
+            {label:'另存为',key:'saveAs'},
+          ]},
         ]}>
           <Button type='primarytext'>
               <Icon type='down' text='操作' textPlacement='left'/>
