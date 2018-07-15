@@ -27,6 +27,7 @@ class BottomDemo extends React.PureComponent {
          <Group>
             <Button type='primary'>第一</Button>
             <Button style={{borderLeft:'none'}}>第二</Button>
+            <Button>第三</Button>
         </Group>
         <br />
         <br />

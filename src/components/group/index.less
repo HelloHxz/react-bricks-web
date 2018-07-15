@@ -6,9 +6,11 @@
 }
 
 .xz-group>*:first-child{
-    border-right: none;
     border-top-left-radius: 3px;
     border-bottom-left-radius: 3px;
+}
+.xz-group>*:not(:last-child) {
+    border-right:none; 
 }
 
 .xz-group .xz-select,.xz-group .xz-btn{
