@@ -206,9 +206,23 @@ class PopWrapper extends React.Component{
         super(props);
         this.triggerRoot = props.triggerRoot;
         this.positionMode = props.positionMode;
+        this.state = {
+            show:props.show===true?'preshow':props.show
+        };
+    }
+    componentDidMount(){
+        this.setState({
+            show:true
+        });
+    }
+    componentWillReceiveProps(nextProps){
+        if(this.state.show !== nextProps.show){
+            this.setState({
+                show:nextProps.show
+            });
+        }
     }
     getRootWidth(){
-        
         return this.triggerRoot.offsetWidth;
     }
     getBoundingClientRect(){
@@ -234,86 +248,99 @@ class PopWrapper extends React.Component{
         const bodyHeight = document.body.offsetHeight;
         const bodyWidth = document.body.offsetWidth;
         const rootWidth = this.getRootWidth();
-        var rect = this.getBoundingClientRect();
-        let pos = this.props.placement || 'bottom';
-        if(bodyHeight - rect.bottom < 100){
-            pos = 'top';
+        var triggerRect = this.getBoundingClientRect();
+        let placement = this.props.placement || 'bottom';
+        if(bodyHeight - triggerRect.bottom < 100){
+            placement = 'top';
         }
         let style = {
         };
-        if(pos === 'bottom'){
-            style.top = Common.parseInt(rect.bottom)+ (offset.y||0);
-            style.left = Common.parseInt(rect.left)+ (offset.x||0) + rect.width/2;
+        if(placement === 'bottom'){
+            style.top = Common.parseInt(triggerRect.bottom)+ (offset.y||0);
+            style.left = Common.parseInt(triggerRect.left)+ (offset.x||0) + triggerRect.width/2;
             if(this.props.initOverLayerWidth){
                 style.width = rootWidth;
             }
-        } else if(pos === 'top'){
-            style.top = Common.parseInt(rect.top) + (offset.y||0);
-            style.left = Common.parseInt(rect.left)+ (offset.x||0) + rect.width/2;
+        } else if(placement === 'top'){
+            style.top = Common.parseInt(triggerRect.top) + (offset.y||0);
+            style.left = Common.parseInt(triggerRect.left)+ (offset.x||0) + triggerRect.width/2;
             if(this.props.initOverLayerWidth){
                 style.width = rootWidth;
             }
-        } else if(pos === 'left'){
-            style.top =  Common.parseInt(rect.top) + (offset.y||0) + rect.height/2;
-            style.left = Common.parseInt(rect.left)+ (offset.x||0);
-        } else if(pos === 'right'){
-            style.top =  Common.parseInt(rect.top) + (offset.y||0) + rect.height/2;
-            style.left = Common.parseInt(rect.right)+ (offset.x||0);
-        }else if(pos === 'topleft'){
-            style.top = Common.parseInt(rect.top) + (offset.y||0); 
-            style.left = Common.parseInt(rect.right)+ (offset.x||0);
+        } else if(placement === 'left'){
+            style.top =  Common.parseInt(triggerRect.top) + (offset.y||0) + triggerRect.height/2;
+            style.left = Common.parseInt(triggerRect.left)+ (offset.x||0);
+        } else if(placement === 'right'){
+            style.top =  Common.parseInt(triggerRect.top) + (offset.y||0) + triggerRect.height/2;
+            style.left = Common.parseInt(triggerRect.right)+ (offset.x||0);
+        }else if(placement === 'topleft'){
+            style.top = Common.parseInt(triggerRect.top) + (offset.y||0); 
+            style.left = Common.parseInt(triggerRect.right)+ (offset.x||0);
             if(this.props.initOverLayerWidth){
                 style.width = rootWidth;
             }
-        }else if(pos === 'topright'){
-            style.top = Common.parseInt(rect.top) + (offset.y||0); 
-            style.left = Common.parseInt(rect.left)+ (offset.x||0);
+        }else if(placement === 'topright'){
+            style.top = Common.parseInt(triggerRect.top) + (offset.y||0); 
+            style.left = Common.parseInt(triggerRect.left)+ (offset.x||0);
             if(this.props.initOverLayerWidth){
                 style.width = rootWidth;
             }
-        }else if(pos === 'righttop'){
-            style.top = Common.parseInt(rect.top) + (offset.y||0) + rect.height;
-            style.left = Common.parseInt(rect.right)+ (offset.x||0);
-        }else if(pos === 'rightbottom'){
-            style.top = Common.parseInt(rect.top) + (offset.y||0);
-            style.left = Common.parseInt(rect.right)+ (offset.x||0);
-        }else if(pos === 'bottomleft'){
-            style.top = Common.parseInt(rect.bottom)+ (offset.x||0);
-            style.left = Common.parseInt(rect.right)+ (offset.x||0);
+        }else if(placement === 'righttop'){
+            style.top = Common.parseInt(triggerRect.top) + (offset.y||0) + triggerRect.height;
+            style.left = Common.parseInt(triggerRect.right)+ (offset.x||0);
+        }else if(placement === 'rightbottom'){
+            style.top = Common.parseInt(triggerRect.top) + (offset.y||0);
+            style.left = Common.parseInt(triggerRect.right)+ (offset.x||0);
+        }else if(placement === 'bottomleft'){
+            style.top = Common.parseInt(triggerRect.bottom)+ (offset.x||0);
+            style.left = Common.parseInt(triggerRect.right)+ (offset.x||0);
             if(this.props.initOverLayerWidth){
                 style.width = rootWidth;
             }
-        }else if(pos === 'bottomright'){
-            style.top = Common.parseInt(rect.bottom)+ (offset.y||0);
-            style.left = Common.parseInt(rect.left)+ (offset.x||0);
+        }else if(placement === 'bottomright'){
+            style.top = Common.parseInt(triggerRect.bottom)+ (offset.y||0);
+            style.left = Common.parseInt(triggerRect.left)+ (offset.x||0);
             if(this.props.initOverLayerWidth){
                 style.width = rootWidth;
             }
-        }else if(pos === 'leftbottom'){
-            style.top = Common.parseInt(rect.top) + (offset.y||0);
-            style.left = Common.parseInt(rect.left)+ (offset.x||0);
-        }else if(pos ==='lefttop'){
-            style.top = Common.parseInt(rect.top) + (offset.y||0) + rect.height;
-            style.left = Common.parseInt(rect.left)+ (offset.x||0);
+        }else if(placement === 'leftbottom'){
+            style.top = Common.parseInt(triggerRect.top) + (offset.y||0);
+            style.left = Common.parseInt(triggerRect.left)+ (offset.x||0);
+        }else if(placement ==='lefttop'){
+            style.top = Common.parseInt(triggerRect.top) + (offset.y||0) + triggerRect.height;
+            style.left = Common.parseInt(triggerRect.left)+ (offset.x||0);
         }
         return {
-            pos,
+            placement,
             style,
-            rect,
+            triggerRect,
         };
     }
     onMouseLeave(){
         this.props.popview.onMouseLeave();
     }
+    
     render(){
         const pos = this.getPopPositionStyle();
-        const popWrapperClassName = this.props.popWrapperClassName || '';
-        var className =`xz-popview-content-${this.positionMode} ${popWrapperClassName}`+ ` xz-popview-trans-${pos.pos} ${this.props.PopWrapperClassName||''}`;
+        const className = [`xz-popview-content-${this.positionMode}`];
+        if(this.props.popWrapperClassName){
+            className.push(this.props.popWrapperClassName);
+        }
+        const innerP = {};
+        if(this.state.show ==='preshow'){
+            className.push('xz-popview-hide');
+        }else{
+            if(this.state.show){
+                innerP.className = `xz-pop-animate-${pos.placement}`;
+            }else{
+                innerP.className = `xz-pop-animate-${pos.placement}-hide`;
+            }
+            className.push(`xz-popview-trans-${pos.placement}`);
+        }
+
         return <div
-            ref={(content)=>{
-                if(content){
-                    console.log(content.offsetHeight);
-                }
+            ref={(root)=>{
+                this.root = root;
             }}
             onWheel={(e)=>{ e.preventDefault(); }}
             onMouseOver={()=>{
@@ -322,8 +349,11 @@ class PopWrapper extends React.Component{
                     this.props.parentPopview.clearTimeout();
                 }
             }}
-            onMouseLeave={this.onMouseLeave.bind(this)} className={className} style={pos.style}>
-                <div className={(this.props.show?`xz-pop-animate-${pos.pos}`:`xz-pop-animate-${pos.pos}-hide`)}>{this.props.renderContent({instance:this,placement:pos.pos,rect:pos.rect})}</div>
+            onMouseLeave={this.onMouseLeave.bind(this)} className={className.join(' ')} style={pos.style}>
+                <div {...innerP}>{this.props.renderContent({
+                    ...{instance:this},
+                    ...pos
+                })}</div>
         </div>;
     }
 }
