@@ -1,6 +1,7 @@
 import Global from '../../utils/global';
 import browser from '../../utils/browser';
 import Router from '../../utils/router';
+import Animate from '../../utils/animate';
 
 class XZ {
     constructor(){
@@ -10,6 +11,7 @@ class XZ {
         this.appConfig = null;
         this.browser = browser;
         this.router = Router;
+        this.animate = Animate;
         browser.init();
     }
     _setAppConfig = (config) =>{

@@ -214,13 +214,15 @@ export default class Tabs extends React.Component{
                 <div onClick={this.preClick.bind(this)} ref={(pre)=>{this.pre = pre;}}  className='xz-tabs-cell xz-tabs-pre'>
                     <i className='xz-icon xz-icon-left'></i>
                 </div>
-                <div className='xz-tabs-inner xz-tabs-cell'>
-                    <div ref={(scroll)=>{this.scroll = scroll;
-                    }} className='xz-tabs-scroll'>
-                        {tabs}
-                        { this.isRenderIndicator() ?  <div style={this.state.indicatorStyle} className='xz-tabs-indicator' />:null }
+                <div className='xz-tabs-cell'>
+                    <div className='xz-tabs-inner'>
+                        <div ref={(scroll)=>{this.scroll = scroll;
+                        }} className='xz-tabs-scroll'>
+                            {tabs}
+                            { this.isRenderIndicator() ?  <div style={this.state.indicatorStyle} className='xz-tabs-indicator' />:null }
+                        </div>
+                    
                     </div>
-                  
                 </div>
                 <div onClick={this.nextClick.bind(this)} ref={(next)=>{this.next = next;}} className='xz-tabs-cell xz-tabs-next'>
                     <i className='xz-icon xz-icon-right'></i>
