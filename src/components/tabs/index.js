@@ -5,6 +5,9 @@ import './index.less';
 import observer from '../observer';
 
 //https://github.com/mobxjs/mobx/issues/101
+/*
+    type: card|primary|default
+*/
 
 @observer
 class ConatinerItem extends React.Component {
@@ -64,7 +67,7 @@ class Container extends React.Component {
   
     render() {
       var re = [];
-      var className = ["xz-tabs_container-default"];
+      var className = ["xz-tabs-container-default"];
       if(this.props.className){
         className.push(this.props.className);
       }else{
@@ -167,7 +170,7 @@ export default class Tabs extends React.Component{
         });
     }
     isRenderIndicator(){
-        return this.props.indicator !== false && this.props.classType !=='card';
+        return this.props.indicator !== false && this.props.type !=='card';
     }
     itemClick(data,tabItem){
         if(this.props.onChange){
@@ -180,7 +183,7 @@ export default class Tabs extends React.Component{
     render(){
         const data = this.props.data||[];
         const outp = {};
-        const selectedItemClassName = this.props.selectedItemClassName || `xz-tabs-item-selected xz-tabs-item-selected-${this.props.classType||'1'}`;
+        const selectedItemClassName = this.props.selectedItemClassName || `xz-tabs-item-selected xz-tabs-item-selected-${this.props.type||'1'}`;
 
         const tabs = [];
         for(let i=0,j=data.length;i<j;i+=1){
@@ -222,7 +225,7 @@ class TabsItem extends React.Component{
         const { data } = this.props;
         const p = {};
         const className = ['xz-tabs-item'];
-        if(this.props.classType==='card'&&this.props.direction!=='vertical'){
+        if(this.props.type==='card'){
             className.push("xz-tabs-item-card");
         }
         if(this.props.className){

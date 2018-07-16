@@ -7,7 +7,7 @@
 .xz-tabs-scroll{
     position: relative;
     width: 100%;
-    overflow: auto;
+    overflow: hidden;
 }
 .xz-tabs-horizontal{
     border-bottom: 1px solid #bbb;
@@ -42,6 +42,12 @@
     opacity: .5;
 }
 
+.xz-tabs-lg .xz-tabs-item{
+    line-height: 42px;
+    padding-left:12px;
+    padding-right:12px;
+}
+
 .xz-tabs-default .xz-tabs-item{
     line-height: 34px;
     padding-left:12px;
@@ -49,7 +55,7 @@
 }
 
 .xz-tabs-sm .xz-tabs-item{
-    line-height: 25px;
+    line-height: 26px;
     padding-left:6px;
     padding-bottom: 1px;
     padding-right:6px;
@@ -59,11 +65,6 @@
     color:@theme_color;
 }
 
-.xz-tabs-lg .xz-tabs-item{
-    line-height: 34px;
-    padding-left:12px;
-    padding-right:12px;
-}
 
 .xz-tabs-item-card{
     border-top-left-radius: 3px;

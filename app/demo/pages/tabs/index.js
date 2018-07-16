@@ -17,6 +17,11 @@ class TabsDemo extends React.Component {
           {label:"首页",key:'home',allowClose:true},
           {label:"邮箱",key:'email',allowClose:true},
           {label:"动态",key:'info',allowClose:true},
+          {label:"收件箱",key:'Inbox',allowClose:true},
+          {label:"其他",key:'other',allowClose:true},
+          {label:"消息",key:'message',allowClose:true},
+          {label:"消息1",key:'message1',allowClose:true},
+          {label:"消息2",key:'message2',allowClose:true},
       ]
     }
   }
@@ -57,20 +62,20 @@ class TabsDemo extends React.Component {
           <Button onClick={this.modify.bind(this)}>Modify</Button>
         </div>
         <br/>
-        <Tabs selectedKey='home' onChange={this.unControlChange.bind(this)} size='sm' data={[
+        <Tabs selectedKey={this.state.selectedKey1} onChange={this.tabOnChange.bind(this)} size='sm' data={[
              {label:"首页",key:'home',allowClose:true},
              {label:"邮箱",key:'email',allowClose:true},
              {label:"动态",key:'info',allowClose:true},
         ]}>
         </Tabs>
         <br/>
-        <Tabs size='lg' data={[
+        <Tabs selectedKey={this.state.selectedKey1} onChange={this.tabOnChange.bind(this)}  data={[
              {label:"首页",key:'home',allowClose:true},
              {label:"邮箱",key:'email',allowClose:true},
              {label:"动态",key:'info',allowClose:true},
         ]} />
         <br/>
-          <Tabs size='lg' data={[
+          <Tabs size='lg' selectedKey={this.state.selectedKey1} onChange={this.tabOnChange.bind(this)}  data={[
               {label:"首页",key:'home',allowClose:true},
               {label:"邮箱",key:'email',allowClose:true},
               {label:"动态",key:'info',allowClose:true},
@@ -83,7 +88,7 @@ class TabsDemo extends React.Component {
               {label:"动态",key:'info',allowClose:true},
           ]} />
         <br/>
-        <Tabs style={{width:500}} onChange={this.tabOnChange.bind(this)} selectedKey={this.state.selectedKey1} data={this.state.data1} />
+        <Tabs style={{width:400}} onChange={this.tabOnChange.bind(this)} selectedKey={this.state.selectedKey1} data={this.state.data1} />
         <Tabs.Container cache={true} renderItem={this.renderItem1.bind(this)} selectedKey={this.state.selectedKey1} data={this.state.data1}/>
         <br/>
        <TabsOne {...this.props}/>
