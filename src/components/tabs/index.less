@@ -10,7 +10,27 @@
     overflow: hidden;
 }
 .xz-tabs-horizontal{
-    border-bottom: 1px solid #bbb;
+    display: table;
+    table-layout: fixed;
+}
+.xz-tabs-horizontal .xz-tabs-cell{
+    display: table-cell;
+}
+
+.xz-tabs-horizontal .xz-tabs-pre,.xz-tabs-horizontal .xz-tabs-next,{
+    width:16px;
+    text-align: center;
+    cursor: pointer;
+}
+.xz-tabs-horizontal .xz-tabs-more{
+    width:30px;
+    font-size: 12px;
+    text-align: center;
+    cursor: pointer;
+}
+.xz-tabs-horizontal .xz-tabs-pre:hover,.xz-tabs-horizontal .xz-tabs-next:hover{
+    background-color: @theme_color;
+    color:#fff;
 }
 .xz-tabs-horizontal .xz-tabs-inner{
     margin-bottom:-1px;
@@ -23,9 +43,9 @@
 .xz-tabs-vertical{
     width: 80px;
 }
-.xz-tabs-horizontal .xz-tabs-scroll{
-    float: left;
-}
+
+
+
 .xz-tabs-item{
     cursor: pointer;
 }
@@ -72,7 +92,9 @@
     border:1px solid transparent;
     border-bottom: 0;
 }
-
+.xz-tabs-card{
+    border-bottom:1px solid #bbb;
+}
 .xz-tabs-item-selected-card{
     border:1px solid #bbb;
     border-bottom: 0;

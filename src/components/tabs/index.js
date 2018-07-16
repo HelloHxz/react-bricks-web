@@ -17,7 +17,6 @@ class ConatinerItem extends React.Component {
 }
 
 const getSelectedKey = (selectedKey,data) => {
-
     return selectedKey;
 }
 
@@ -101,6 +100,7 @@ export default class Tabs extends React.Component{
         this.renderIndicatorTimeout = null;
     }
 
+  
     componentWillUnmount(){
         this._clearTimeout();
     }
@@ -112,6 +112,12 @@ export default class Tabs extends React.Component{
         }
     }
 
+    componentDidMount(){
+        // this.pre.parentNode.removeChild(this.pre);
+    }
+    componentDidUpdate(){
+      
+    }
     componentWillReceiveProps(nextProps){
         var curKey = getSelectedKey(nextProps.selectedKey,nextProps.data)
         if(curKey!==this.state.selectedKey){
@@ -180,6 +186,12 @@ export default class Tabs extends React.Component{
             });
         }
     }
+    nextClick(){
+        this.scroll.scrollLeft = this.scroll.scrollLeft + 10;
+    }
+    preClick(){
+        this.scroll.scrollLeft = this.scroll.scrollLeft - 10;
+    }
     render(){
         const data = this.props.data||[];
         const outp = {};
@@ -194,17 +206,26 @@ export default class Tabs extends React.Component{
             }
             tabs.push(<TabsItem {...p} key={itemdata.key} {...this.props} tabs={this} data={itemdata}/>);
         }
-        outp.className = `xz-tabs xz-tabs-${Theme.getConfig('size',this.props)} xz-tabs-${this.props.direction||'horizontal'}`;
+        outp.className = `xz-tabs xz-tabs-${this.props.type||'default'} xz-tabs-${Theme.getConfig('size',this.props)} xz-tabs-${this.props.direction||'horizontal'}`;
         if(this.props.style){
             outp.style = this.props.style;
         }
         return (<div {...outp}>
-                <div className='xz-tabs-inner'>
-                    <div className='xz-tabs-scroll'>
+                <div onClick={this.preClick.bind(this)} ref={(pre)=>{this.pre = pre;}}  className='xz-tabs-cell xz-tabs-pre'>
+                    <i className='xz-icon xz-icon-left'></i>
+                </div>
+                <div className='xz-tabs-inner xz-tabs-cell'>
+                    <div ref={(scroll)=>{this.scroll = scroll;
+                    }} className='xz-tabs-scroll'>
                         {tabs}
                         { this.isRenderIndicator() ?  <div style={this.state.indicatorStyle} className='xz-tabs-indicator' />:null }
                     </div>
+                  
                 </div>
+                <div onClick={this.nextClick.bind(this)} ref={(next)=>{this.next = next;}} className='xz-tabs-cell xz-tabs-next'>
+                    <i className='xz-icon xz-icon-right'></i>
+                </div>
+                <div ref={(more)=>{this.more = more;}} className='xz-tabs-cell xz-tabs-more'>更多</div>
         </div>)
     }
 }
@@ -221,6 +242,7 @@ class TabsItem extends React.Component{
     componentWillUnmount(){
         this.props.tabs.unRegisterTab(this.props.data.key);
     }
+    
     render(){
         const { data } = this.props;
         const p = {};
