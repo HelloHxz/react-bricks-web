@@ -1,6 +1,7 @@
 
 
 import React from './react';
+import Animate from './animate';
 import HashNavigate from './hashNavigate';
 import HistoryNavigate from './historyNavigate';
 import RouteView from './routeview'
@@ -42,6 +43,7 @@ import Group from './group';
 export {
 	Menu,
 	XZ,
+	Animate,
 	CheckGroup,
 	Image,
 	DropDown,

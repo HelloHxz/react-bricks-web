@@ -176,7 +176,7 @@ export default class Tabs extends React.Component{
         });
     }
     isRenderIndicator(){
-        return this.props.indicator !== false && this.props.type !=='card';
+        return (this.props.indicator===undefined || !!this.props.indicator ) && this.props.type !=='card';
     }
     itemClick(data,tabItem){
         if(this.props.onChange){
@@ -200,13 +200,13 @@ export default class Tabs extends React.Component{
         const tabs = [];
         for(let i=0,j=data.length;i<j;i+=1){
             const itemdata = data[i];
-            const p = {};
+            const p = {className:null};
             if(itemdata.key === this.state.selectedKey){
                 p.className = selectedItemClassName;
             }
-            tabs.push(<TabsItem {...p} key={itemdata.key} {...this.props} tabs={this} data={itemdata}/>);
+            tabs.push(<TabsItem key={itemdata.key} {...this.props}  {...p} tabs={this} data={itemdata}/>);
         }
-        outp.className = `xz-tabs xz-tabs-${this.props.type||'default'} xz-tabs-${Theme.getConfig('size',this.props)} xz-tabs-${this.props.direction||'horizontal'}`;
+        outp.className = `xz-tabs xz-tabs-${this.props.type||'default'} xz-tabs-${Theme.getConfig('size',this.props)} xz-tabs-${this.props.direction||'horizontal'} ${this.props.className||''}`;
         if(this.props.style){
             outp.style = this.props.style;
         }
@@ -214,7 +214,7 @@ export default class Tabs extends React.Component{
                 <div onClick={this.preClick.bind(this)} ref={(pre)=>{this.pre = pre;}}  className='xz-tabs-cell xz-tabs-pre'>
                     <i className='xz-icon xz-icon-left'></i>
                 </div>
-                <div className='xz-tabs-cell'>
+                <div className='xz-tabs-cell xz-tabs-content'>
                     <div className='xz-tabs-inner'>
                         <div ref={(scroll)=>{this.scroll = scroll;
                         }} className='xz-tabs-scroll'>

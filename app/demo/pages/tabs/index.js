@@ -1,6 +1,7 @@
 import {React,PageView,observer,PageContainer,Modal,Button,Select,Tabs} from "react-bricks-web";
 import TabsOne from './TabsOne';
 import TabsStore from './store';
+import './index.less';
 
 @PageView({tabsstore:new TabsStore})
 class TabsDemo extends React.Component {
@@ -80,6 +81,30 @@ class TabsDemo extends React.Component {
               {label:"邮箱",key:'email',allowClose:true},
               {label:"动态",key:'info',allowClose:true},
           ]} />
+        <br/>
+        <br/>
+          <Tabs className='custome-tab' type='card' style={{borderBottom:'1px solid rgb(189, 189, 189)'}} size='lg' selectedKey={this.state.selectedKey1} onChange={this.tabOnChange.bind(this)}  data={[
+              {label:"首页",key:'home',allowClose:true},
+              {label:"邮箱",key:'email',allowClose:true},
+              {label:"动态",key:'info',allowClose:true},
+          ]} />
+        <br/>
+        <br/>  
+        <br/>
+          <Tabs className='custome-tab1' type='card' style={{borderBottom:'1px solid rgb(189, 189, 189)'}} selectedKey={this.state.selectedKey1} onChange={this.tabOnChange.bind(this)}  data={[
+              {label:"首页",key:'home',allowClose:true},
+              {label:"邮箱",key:'email',allowClose:true},
+              {label:"动态",key:'info',allowClose:true},
+          ]} />
+        <br/>
+        <br/>  
+        <br/>
+          <Tabs className='custome-tab2' indicator={null} size='sm' selectedKey={this.state.selectedKey1} onChange={this.tabOnChange.bind(this)}  data={[
+              {label:"首页",key:'home',allowClose:true},
+              {label:"邮箱",key:'email',allowClose:true},
+              {label:"动态",key:'info',allowClose:true},
+          ]} />
+        <br/>
         <br/>
         <br/>
         <Tabs selectedKey={this.state.selectedKey1} size='lg' direction='vertical' data={[
