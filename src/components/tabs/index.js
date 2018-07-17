@@ -1,8 +1,8 @@
 import React from 'react';
 import Theme from '../theme';
-import XZ from '../xz';
 import './index.less';
 import observer from '../observer';
+import Animate from '../animate';
 
 //https://github.com/mobxjs/mobx/issues/101
 /*
@@ -187,10 +187,41 @@ export default class Tabs extends React.Component{
         }
     }
     nextClick(){
-        this.scroll.scrollLeft = this.scroll.scrollLeft + 10;
+        if(!this.animateScroll){
+            var t=0,
+            sl = this.scroll.scrollLeft;
+            this.animateScroll = Animate.run(t, sl, this.scroll.offsetWidth-100 , 400);
+            this.animateScroll.start((val)=>{
+                this.scroll.scrollLeft = val;
+                if(val>=(this.scroll.scrollWidth-this.scroll.offsetWidth)){
+                    this.animateScroll.stop();
+                    this.animateScroll = null;
+                }
+            },
+            Animate.Tween.Cubic.easeOut
+            ,()=>{
+              this.animateScroll = null;
+            });
+        }
+        
     }
     preClick(){
-        this.scroll.scrollLeft = this.scroll.scrollLeft - 10;
+        if(!this.animateScroll){
+            var t=0,
+            sl = this.scroll.scrollLeft;
+            this.animateScroll = Animate.run(t, sl, 0-(this.scroll.offsetWidth-100) , 400);
+            this.animateScroll.start((val)=>{
+                this.scroll.scrollLeft = val;
+                if(val<=0){
+                    this.animateScroll.stop();
+                    this.animateScroll = null;
+                }
+            },
+            Animate.Tween.Cubic.easeOut
+            ,()=>{
+              this.animateScroll = null;
+            });
+        }
     }
     render(){
         const data = this.props.data||[];

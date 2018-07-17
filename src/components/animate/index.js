@@ -32,7 +32,7 @@ export default {
         				}
         				tweenWay = tweenWay||_this.Tween.Expo.easeOut;
         				curval = Math.ceil(tweenWay(_t, _b, _c, _d));
-        				callback(curval);
+                        callback(curval);
         				if (_t < _d) {
 			                _t++;
 			                timeoutID = setTimeout(()=>{
