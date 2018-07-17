@@ -62,6 +62,8 @@
 
 > 个性化indicator
 
+> 结合vbox hbox 合并Tabs.Container
+
 ### 8.Menu
 
 > 互斥关闭
