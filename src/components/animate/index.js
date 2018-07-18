@@ -1,47 +1,60 @@
 /*
       var t=0,
-      b=this.state.offset;// 初始值
-      this.scrollEngine = XZ.animate.run(t, b,distance , time);
-      this.scrollEngine.start((val)=>{
-        // set val
-      },
-      XZ.animate.Tween.Cubic.easeOut
-      ,()=>{
-        this.scrollEngine = null;
-      });
+            sl = this.scroll.scrollLeft;
+            this.animateScroll = Animate.createInstance({
+                currentTime:t,
+                startValue:sl,
+                value:this.scroll.offsetWidth-100,
+                time:400
+            });
+            this.animateScroll.start({
+                callback:(val)=>{
+                    this.scroll.scrollLeft = val;
+                    if(val>=(this.scroll.scrollWidth-this.scroll.offsetWidth)){
+                        this.animateScroll.stop();
+                        this.animateScroll = null;
+                    }
+                },
+                tween:Animate.Tween.Cubic.easeOut,
+                end:()=>{
+                    this.animateScroll = null;
+                }
+            },);
 
-      var curValue = this.scrollEngine.stop();
-      //setValue
+
+        var curValue =  this.animateScroll.stop();
 */
 export default {
-	//t: current time（当前时间）；
-    //b: beginning value（初始值）；
-    //c: change in value（变化量）；
-    //d: duration（持续时间）
-    run(t, b, c, d){
+    /*
+        currentTime（当前时间）
+        startValue（初始值）；
+        value:（变化量）；
+        duration（持续时间）
+     */
+    createInstance(params){
     	var _this = this;
     	return (
-    		function(_t, _b, _c, _d){
+    		function(_params){
     			var isStop = false;
     			var curval = 0;
     			var timeoutID;
     			var re = {
-        			start:function(callback,tweenWay,endCallBack){
+        			start:function(startParams){
         				if(isStop){
         					return;
-        				}
-        				tweenWay = tweenWay||_this.Tween.Expo.easeOut;
-        				curval = Math.ceil(tweenWay(_t, _b, _c, _d));
-                        callback(curval);
-        				if (_t < _d) {
-			                _t++;
+                        }
+        				startParams.tween = startParams.tween||_this.Tween.Expo.easeOut;
+        				curval = Math.ceil(startParams.tween(_params.currentTime, _params.startValue, _params.value, _params.duration||60));
+                        startParams.callback(curval);
+        				if (_params.currentTime < _params.duration) {
+			                _params.currentTime++;
 			                timeoutID = setTimeout(()=>{
-	        					re.start(callback,tweenWay,endCallBack);
+	        					re.start(startParams);
 	        				});
 			            }else{
-                            endCallBack&&endCallBack();
+                            startParams.end&&startParams.end();
                         }
-        				
+        				return this;
         			},
         			stop:function(){
         				isStop = true;
@@ -53,7 +66,7 @@ export default {
         		};;
         		return re;
     		}
-    	)(t, b, c, d) 
+    	)(params) 
     },
     Tween:{
         Linear (t, b, c, d) {

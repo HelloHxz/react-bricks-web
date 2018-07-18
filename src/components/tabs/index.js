@@ -190,18 +190,25 @@ export default class Tabs extends React.Component{
         if(!this.animateScroll){
             var t=0,
             sl = this.scroll.scrollLeft;
-            this.animateScroll = Animate.run(t, sl, this.scroll.offsetWidth-100 , 400);
-            this.animateScroll.start((val)=>{
-                this.scroll.scrollLeft = val;
-                if(val>=(this.scroll.scrollWidth-this.scroll.offsetWidth)){
-                    this.animateScroll.stop();
+            this.animateScroll = Animate.createInstance({
+                currentTime:t,
+                startValue:sl,
+                value:this.scroll.offsetWidth-100,
+                duration:300
+            });
+            this.animateScroll.start({
+                callback:(val)=>{
+                    this.scroll.scrollLeft = val;
+                    if(val>=(this.scroll.scrollWidth-this.scroll.offsetWidth)){
+                        this.animateScroll.stop();
+                        this.animateScroll = null;
+                    }
+                },
+                tween:Animate.Tween.Cubic.easeOut,
+                end:()=>{
                     this.animateScroll = null;
                 }
-            },
-            Animate.Tween.Cubic.easeOut
-            ,()=>{
-              this.animateScroll = null;
-            });
+            },);
         }
         
     }
@@ -209,18 +216,25 @@ export default class Tabs extends React.Component{
         if(!this.animateScroll){
             var t=0,
             sl = this.scroll.scrollLeft;
-            this.animateScroll = Animate.run(t, sl, 0-(this.scroll.offsetWidth-100) , 400);
-            this.animateScroll.start((val)=>{
-                this.scroll.scrollLeft = val;
-                if(val<=0){
-                    this.animateScroll.stop();
+            this.animateScroll = Animate.createInstance({
+                currentTime:t,
+                startValue:sl,
+                value:0-(this.scroll.offsetWidth-100),
+                duration:300
+            });
+            this.animateScroll.start({
+                callback:(val)=>{
+                    this.scroll.scrollLeft = val;
+                    if(val<=0){
+                        this.animateScroll.stop();
+                        this.animateScroll = null;
+                    }
+                },
+                tween:Animate.Tween.Cubic.easeOut,
+                end:()=>{
                     this.animateScroll = null;
                 }
-            },
-            Animate.Tween.Cubic.easeOut
-            ,()=>{
-              this.animateScroll = null;
-            });
+            },);
         }
     }
     render(){
