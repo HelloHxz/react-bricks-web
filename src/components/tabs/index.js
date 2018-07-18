@@ -188,10 +188,8 @@ export default class Tabs extends React.Component{
     }
     nextClick(){
         if(!this.animateScroll){
-            var t=0,
-            sl = this.scroll.scrollLeft;
+            var sl = this.scroll.scrollLeft;
             this.animateScroll = Animate.createInstance({
-                currentTime:t,
                 startValue:sl,
                 value:this.scroll.offsetWidth-100,
                 duration:300
@@ -214,10 +212,8 @@ export default class Tabs extends React.Component{
     }
     preClick(){
         if(!this.animateScroll){
-            var t=0,
-            sl = this.scroll.scrollLeft;
+            var sl = this.scroll.scrollLeft;
             this.animateScroll = Animate.createInstance({
-                currentTime:t,
                 startValue:sl,
                 value:0-(this.scroll.offsetWidth-100),
                 duration:300

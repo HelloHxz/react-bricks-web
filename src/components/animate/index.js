@@ -2,7 +2,6 @@
       var t=0,
             sl = this.scroll.scrollLeft;
             this.animateScroll = Animate.createInstance({
-                currentTime:t,
                 startValue:sl,
                 value:this.scroll.offsetWidth-100,
                 time:400
@@ -26,7 +25,6 @@
 */
 export default {
     /*
-        currentTime（当前时间）
         startValue（初始值）；
         value:（变化量）；
         duration（持续时间）
@@ -35,7 +33,8 @@ export default {
     	var _this = this;
     	return (
     		function(_params){
-    			var isStop = false;
+                var isStop = false;
+                var currentTime = 0;
     			var curval = 0;
     			var timeoutID;
     			var re = {
@@ -44,10 +43,10 @@ export default {
         					return;
                         }
         				startParams.tween = startParams.tween||_this.Tween.Expo.easeOut;
-        				curval = Math.ceil(startParams.tween(_params.currentTime, _params.startValue, _params.value, _params.duration||60));
+        				curval = Math.ceil(startParams.tween(currentTime, _params.startValue, _params.value, _params.duration||60));
                         startParams.callback(curval);
-        				if (_params.currentTime < _params.duration) {
-			                _params.currentTime++;
+        				if (currentTime < _params.duration) {
+			                currentTime++;
 			                timeoutID = setTimeout(()=>{
 	        					re.start(startParams);
 	        				});
