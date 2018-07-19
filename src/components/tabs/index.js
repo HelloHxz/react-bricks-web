@@ -137,6 +137,7 @@ export default class Tabs extends React.Component{
     }
 
     renderIndicator(){
+        console.log("-1");
         if(!this.isRenderIndicator()){
             return;
         }
@@ -146,9 +147,11 @@ export default class Tabs extends React.Component{
         },80);
     }
     _renderIndicator(){
+        console.log("1");
         if(!this.isRenderIndicator()){
             return;
         }
+        console.log("---")
         const curTabInstance = this.itemsDict[this.state.selectedKey];
         if(!curTabInstance){
             return;
@@ -156,7 +159,8 @@ export default class Tabs extends React.Component{
         const dom = curTabInstance.root;
         const rect = dom.getBoundingClientRect();
         let indicatorStyle = {};
-        if(this.props.tabPosition==='left'||this.props.tabPosition==='right'){
+        const tabPosition = this.props.tabPosition||'top';
+        if(tabPosition==='left'||tabPosition==='right'){
             indicatorStyle = {
                 height:rect.height,
                 width:2,
@@ -258,7 +262,9 @@ export default class Tabs extends React.Component{
             }} className={wrapperClassName.join(' ')}>
                 <div className='xz-tabs-wrapper-inner'>
                     {this.renderTabs({tabPosition,})}
-                    <div className='xz-tabs-content'>Content</div>
+                    <div className='xz-tabs-wrapper-content'>
+                        <div style={{width:'100%',height:'30px',background:'#eee'}}>content</div>
+                    </div>
                 </div>
             </div>
         }
