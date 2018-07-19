@@ -111,6 +111,13 @@ class TabsDemo extends React.Component {
           </div>
         <br/>
         <br/>
+        <Tabs tabPosition='left' renderItem={this.renderItem1.bind(this)} selectedKey={this.state.selectedKey1} onChange={this.tabOnChange.bind(this)}  data={[
+             {label:"首页",key:'home',allowClose:true},
+             {label:"邮箱",key:'email',allowClose:true},
+             {label:"动态",key:'info',allowClose:true},
+        ]} />
+        <br/>
+        <br/>
           <Tabs bottom='right' renderItem={this.renderItem1.bind(this)} tabClassName='custome-tab' type='card'  size='lg' selectedKey={this.state.selectedKey1} onChange={this.tabOnChange.bind(this)}  data={[
               {label:"首页",key:'home',allowClose:true},
               {label:"邮箱",key:'email',allowClose:true},
@@ -141,7 +148,7 @@ class TabsDemo extends React.Component {
           ]} />
         <br/>
         <br/>
-          <Tabs style={{borderBottom:'2px solid #1890ff'}} tabClassName='custome-tab3' indicator={null} selectedKey={this.state.selectedKey1} onChange={this.tabOnChange.bind(this)}  data={[
+          <Tabs tabStyle={{borderBottom:'2px solid #1890ff'}} tabClassName='custome-tab3' indicator={null} selectedKey={this.state.selectedKey1} onChange={this.tabOnChange.bind(this)}  data={[
               {label:"首页",key:'home',allowClose:true},
               {label:"邮箱",key:'email',allowClose:true},
               {label:"动态",key:'info',allowClose:true},

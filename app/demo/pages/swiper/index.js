@@ -1,15 +1,15 @@
 import {React,PageView,observer,PageContainer,Modal,Button,Select,Swiper} from "react-bricks-web"
 
 var siwperData = [
-    {src:"",title:"xxxx",style:{backgroundColor:'red',height:'100%'}},
+    {src:"",title:"xxxx",style:{backgroundColor:'red',height:'100%'},autoHeight:100},
     {
-      src:"",title:"xx1x",style:{backgroundColor:'yellow',height:'100%'}
+      src:"",title:"xx1x",style:{backgroundColor:'yellow',height:'100%'},autoHeight:200
      },
-     {src:"",title:"xxx13",style:{backgroundColor:'gray',height:'100%'}},
-     {src:"s",title:"huhuhuhuhuhuhuhs",style:{backgroundColor:'yellow',height:'100%'}},
-     {src:"huhuhuhuhuhuhuhs",title:"xxxx,,,.,.,",style:{backgroundColor:'green',height:'100%'}}
+     {src:"",title:"xxx13",style:{backgroundColor:'gray',height:'100%'},autoHeight:150},
+     {src:"s",title:"huhuhuhuhuhuhuhs",style:{backgroundColor:'yellow',height:'100%'},autoHeight:'auto'},
+     {src:"huhuhuhuhuhuhuhs",title:"xxxx,,,.,.,",style:{backgroundColor:'green',height:'100%'},autoHeight:'auto'}
    ];
-   
+
 
 @PageView()
 class SwiperDemo extends React.PureComponent {
@@ -26,6 +26,13 @@ class SwiperDemo extends React.PureComponent {
 
   renderSwiperItem=(params)=>{
     return ( <div style={params.data.style}>{params.data.title}</div>);
+  }
+
+  renderSwiperHeightAutoItem=(params)=>{
+    return ( <div style={{
+      ...params.data.style,
+      ...{height:params.data.autoHeight}
+    }}><div>{params.data.title}</div></div>);
   }
 
   render() {
@@ -55,7 +62,8 @@ class SwiperDemo extends React.PureComponent {
           </Swiper>
 
           </div>
-    </div>
+        
+        </div>
   }
 }
 export default SwiperDemo;

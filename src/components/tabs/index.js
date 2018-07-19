@@ -335,7 +335,8 @@ class TabsItem extends React.Component{
         const { data } = this.props;
         const p = {};
         const className = ['xz-tabs-item'];
-        if(this.props.type==='card'){
+        const isCard = this.props.type==='card';
+        if(isCard==='card'){
             className.push("xz-tabs-item-card");
         }
         if(this.props.className){
@@ -348,7 +349,9 @@ class TabsItem extends React.Component{
         }
 
         p.className = className.join(' ');
-        return (<div {...p} ref={(root)=>{ this.root = root; }}>{data.label||''}</div>)
+        return (<div {...p} ref={(root)=>{ this.root = root; }}>
+            {data.label||''}
+        </div>)
     }
 }
 
