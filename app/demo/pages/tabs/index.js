@@ -15,8 +15,8 @@ class TabsDemo extends React.Component {
         visible:false,
         selectedKey1:'home',
         data1:[
-          {label:"首页",key:'home',allowClose:true},
-          {label:"邮箱",key:'email',allowClose:true},
+          {label:"代码示例",key:'home',allowClose:true},
+          {label:"知识点",key:'email',allowClose:true},
           {label:"动态",key:'info',allowClose:true},
           {label:"收件箱",key:'Inbox',allowClose:true},
           {label:"其他",key:'other',allowClose:true},
@@ -68,8 +68,8 @@ class TabsDemo extends React.Component {
           style={{height:300}} tabPosition='top'
           renderItem={this.renderItem1.bind(this)}
           onChange={this.tabOnChange.bind(this)} size='sm' data={[
-             {label:"首页",key:'home',allowClose:true},
-             {label:"邮箱",key:'email',allowClose:true},
+            {label:"代码示例",key:'home',allowClose:true},
+            {label:"知识点讲解",key:'email',allowClose:true},
              {label:"动态",key:'info',allowClose:true},
         ]}>
         </Tabs>
@@ -81,8 +81,8 @@ class TabsDemo extends React.Component {
             tabPosition='top'
             renderItem={this.renderItem1.bind(this)}
             onChange={this.tabOnChange.bind(this)} size='sm' data={[
-              {label:"首页",key:'home',allowClose:true},
-              {label:"邮箱",key:'email',allowClose:true},
+              {label:"代码示例",key:'home',allowClose:true},
+              {label:"知识点讲解",key:'email',allowClose:true},
               {label:"动态",key:'info',allowClose:true},
           ]}>
           </Tabs>
@@ -90,75 +90,75 @@ class TabsDemo extends React.Component {
         <br/> 
         <br/>
         <Tabs style={{height:300}}  tabPosition='bottom' renderItem={this.renderItem1.bind(this)} selectedKey={this.state.selectedKey1} onChange={this.tabOnChange.bind(this)} data={[
-             {label:"首页",key:'home',allowClose:true},
-             {label:"邮箱",key:'email',allowClose:true},
+              {label:"代码示例",key:'home',allowClose:true},
+              {label:"知识点讲解",key:'email',allowClose:true},
              {label:"动态",key:'info',allowClose:true},
         ]}>
         </Tabs>
         <br/>
         <Tabs style={{height:300}}  tabPosition='left' renderItem={this.renderItem1.bind(this)} selectedKey={this.state.selectedKey1} onChange={this.tabOnChange.bind(this)}  data={[
-             {label:"首页",key:'home',allowClose:true},
-             {label:"邮箱",key:'email',allowClose:true},
+               {label:"代码示例",key:'home',allowClose:true},
+               {label:"知识点讲解",key:'email',allowClose:true},
              {label:"动态",key:'info',allowClose:true},
         ]} />
         <br/>
           <div style={{height:320}}>
             <Tabs style={{height:'100%'}} size='lg' tabPosition='right' renderItem={this.renderItem1.bind(this)} selectedKey={this.state.selectedKey1} onChange={this.tabOnChange.bind(this)}  data={[
-                {label:"首页",key:'home',allowClose:true},
-                {label:"邮箱",key:'email',allowClose:true},
+                  {label:"代码示例",key:'home',allowClose:true},
+                  {label:"知识点讲解",key:'email',allowClose:true},
                 {label:"动态",key:'info',allowClose:true},
             ]} />
           </div>
         <br/>
         <br/>
         <Tabs tabPosition='left' renderItem={this.renderItem1.bind(this)} selectedKey={this.state.selectedKey1} onChange={this.tabOnChange.bind(this)}  data={[
-             {label:"首页",key:'home',allowClose:true},
-             {label:"邮箱",key:'email',allowClose:true},
+              {label:"代码示例",key:'home',allowClose:true},
+              {label:"知识点讲解",key:'email',allowClose:true},
              {label:"动态",key:'info',allowClose:true},
         ]} />
         <br/>
         <br/>
           <Tabs bottom='right' renderItem={this.renderItem1.bind(this)} tabClassName='custome-tab' type='card'  size='lg' selectedKey={this.state.selectedKey1} onChange={this.tabOnChange.bind(this)}  data={[
-              {label:"首页",key:'home',allowClose:true},
-              {label:"邮箱",key:'email',allowClose:true},
+                {label:"代码示例",key:'home',allowClose:true},
+                {label:"知识点讲解",key:'email',allowClose:true},
               {label:"动态",key:'info',allowClose:true},
           ]} />
         <br/>
         <br/>  
         <br/>
           <Tabs tabClassName='custome-tab1' renderItem={this.renderItem1.bind(this)} type='card' selectedKey={this.state.selectedKey1} onChange={this.tabOnChange.bind(this)}  data={[
-              {label:"首页",key:'home',allowClose:true},
-              {label:"邮箱",key:'email',allowClose:true},
+               {label:"代码示例",key:'home',allowClose:true},
+               {label:"知识点讲解",key:'email',allowClose:true},
               {label:"动态",key:'info',allowClose:true},
           ]} />
         <br/>
         <br/>  
         <br/>
           <Tabs tabClassName='custome-tab2' renderItem={this.renderItem1.bind(this)} indicator={null} size='sm' selectedKey={this.state.selectedKey1} onChange={this.tabOnChange.bind(this)}  data={[
-              {label:"首页",key:'home',allowClose:true},
-              {label:"邮箱",key:'email',allowClose:true},
+            {label:"代码示例",key:'home',allowClose:true},
+            {label:"知识点讲解",key:'email',allowClose:true},
               {label:"动态",key:'info',allowClose:true},
           ]} />
         <br/>
         <br/>
           <Tabs tabClassName='custome-tab4' renderItem={this.renderItem1.bind(this)} indicator={null} size='sm' selectedKey={this.state.selectedKey1} onChange={this.tabOnChange.bind(this)}  data={[
-              {label:"首页",key:'home',allowClose:true},
-              {label:"邮箱",key:'email',allowClose:true},
+               {label:"代码示例",key:'home',allowClose:true},
+               {label:"知识点讲解",key:'email',allowClose:true},
               {label:"动态",key:'info',allowClose:true},
           ]} />
         <br/>
         <br/>
           <Tabs tabStyle={{borderBottom:'2px solid #1890ff'}} tabClassName='custome-tab3' indicator={null} selectedKey={this.state.selectedKey1} onChange={this.tabOnChange.bind(this)}  data={[
-              {label:"首页",key:'home',allowClose:true},
-              {label:"邮箱",key:'email',allowClose:true},
+              {label:"代码示例",key:'home',allowClose:true},
+              {label:"知识点讲解",key:'email',allowClose:true},
               {label:"动态",key:'info',allowClose:true},
           ]} />
         <br/>
         <br/>
         <br/>
         <Tabs selectedKey={this.state.selectedKey1} size='lg' direction='vertical' data={[
-              {label:"首页",key:'home',allowClose:true},
-              {label:"邮箱",key:'email',allowClose:true},
+                 {label:"代码示例",key:'home',allowClose:true},
+                 {label:"知识点讲解",key:'email',allowClose:true},
               {label:"动态",key:'info',allowClose:true},
           ]} />
         <br/>

@@ -137,7 +137,6 @@ export default class Tabs extends React.Component{
     }
 
     renderIndicator(){
-        console.log("-1");
         if(!this.isRenderIndicator()){
             return;
         }
@@ -147,11 +146,9 @@ export default class Tabs extends React.Component{
         },80);
     }
     _renderIndicator(){
-        console.log("1");
         if(!this.isRenderIndicator()){
             return;
         }
-        console.log("---")
         const curTabInstance = this.itemsDict[this.state.selectedKey];
         if(!curTabInstance){
             return;
