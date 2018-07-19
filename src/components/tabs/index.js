@@ -239,25 +239,24 @@ export default class Tabs extends React.Component{
     }
     render(){
         const tabPosition = this.props.tabPosition||'top';
+        const propsStyle = this.props.style||{};
         if(this.props.renderItem){
             const wrapperStyle ={};
-            const wrapperClassName = ['xz-tabs-wrapper',`xz-tabs-wrapper-${Theme.getConfig('size',this.props)}`,`xz-tabs-${tabPosition}`,];
-            if(!this.props.height||this.props.height==='auto'){
+            const wrapperClassName = ['xz-tabs-wrapper',`xz-tabs-wrapper-size-${Theme.getConfig('size',this.props)}`,`xz-tabs-${tabPosition}`,];
+            if(!propsStyle.height||propsStyle.height==='auto'){
                 wrapperClassName.push('xz-tabs-wrapper-auto-height');
-                wrapperStyle.height = 'auto';
+                propsStyle.height = 'auto';
             }else{
                 wrapperClassName.push('xz-tabs-wrapper-fixed-height');
-                wrapperStyle.height = this.props.height;
             }
-            if(!this.props.width||this.props.width==='auto'){
+            if(!propsStyle.width||propsStyle.width==='auto'){
                 wrapperClassName.push('xz-tabs-wrapper-auto-width');
                 wrapperStyle.width = '100%';
             }else{
                 wrapperClassName.push('xz-tabs-wrapper-fixed-width');
-                wrapperStyle.width = this.props.width;
             }
             return <div style={{
-                ...(this.props.style||{}),
+                ...propsStyle,
                 ...wrapperStyle
             }} className={wrapperClassName.join(' ')}>
                 <div className='xz-tabs-wrapper-inner'>
@@ -274,7 +273,7 @@ export default class Tabs extends React.Component{
     }
     renderTabs(config){
         const data = this.props.data||[];
-        const tabsProperty = {className:[`xz-tabs xz-tabs-${this.props.type||'default'} xz-tabs-${Theme.getConfig('size',this.props)}`]};
+        const tabsProperty = {className:[`xz-tabs xz-tabs-${this.props.type||'default'} xz-tabs-size-${Theme.getConfig('size',this.props)}`]};
         const selectedItemClassName = this.props.selectedItemClassName || `xz-tabs-item-selected xz-tabs-item-selected-${this.props.type||'1'}`;
 
         const tabs = [];
@@ -294,8 +293,8 @@ export default class Tabs extends React.Component{
         }else{
             tabsProperty.className.push('xz-tabs-horizontal');
         }
-        if(this.props.style){
-            tabsProperty.style = this.props.style;
+        if(this.props.tabStyle){
+            tabsProperty.style = this.props.tabStyle;
         }
         tabsProperty.className = tabsProperty.className.join(' ');
         return (<div {...tabsProperty}>
