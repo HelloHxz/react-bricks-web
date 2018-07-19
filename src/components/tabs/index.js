@@ -262,7 +262,11 @@ export default class Tabs extends React.Component{
                 <div className='xz-tabs-wrapper-inner'>
                     {this.renderTabs({tabPosition,})}
                     <div className='xz-tabs-wrapper-content'>
-                        <div style={{width:'100%',height:'30px',background:'#eee'}}>content</div>
+                        <Container 
+                            cache={true} 
+                            renderItem={this.props.renderItem.bind(this)} 
+                            selectedKey={this.props.selectedKey} 
+                            data={this.props.data}/>
                     </div>
                 </div>
             </div>
