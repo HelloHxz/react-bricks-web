@@ -351,7 +351,7 @@ class TabsItem extends React.Component{
 
         p.className = className.join(' ');
         return (<div {...p} ref={(root)=>{ this.root = root; }}>
-            {data.label||''}
+            <span className='xz-tabs-label'>{data.label||''}</span>
         </div>)
     }
 }
