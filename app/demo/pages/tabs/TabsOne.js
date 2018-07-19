@@ -34,8 +34,7 @@ class TabsOne extends React.Component {
         <Button type='primary' onClick={this.Modify.bind(this)}>Modify</Button>
         <Button type='primary' onClick={this.Replace.bind(this)}>Replace</Button>
         <br/>   <br/>
-        <Tabs type='card' onChange={this.tabOnChange.bind(this)} selectedKey={this.props.tabsstore.selectedKey} data={this.props.tabsstore.TabsData} />
-        <Tabs.Container cache={true} renderItem={this.renderItem1.bind(this)} selectedKey={this.props.tabsstore.selectedKey} data={this.props.tabsstore.TabsData}/>
+        <Tabs type='card' renderItem={this.renderItem1.bind(this)} onChange={this.tabOnChange.bind(this)} selectedKey={this.props.tabsstore.selectedKey} data={this.props.tabsstore.TabsData} />
     </React.Fragment>
   }
 }

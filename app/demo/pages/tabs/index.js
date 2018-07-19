@@ -63,35 +63,35 @@ class TabsDemo extends React.Component {
           <Button onClick={this.modify.bind(this)}>Modify</Button>
         </div>
         <br/>
-        <Tabs style={{borderBottom:'1px solid rgb(189, 189, 189)'}} selectedKey={this.state.selectedKey1} onChange={this.tabOnChange.bind(this)} size='sm' data={[
+        <Tabs height={300} tabPosition='top' renderItem={this.renderItem1.bind(this)}  onChange={this.tabOnChange.bind(this)} size='sm' data={[
+             {label:"首页",key:'home',allowClose:true},
+             {label:"邮箱",key:'email',allowClose:true},
+             {label:"动态",key:'info',allowClose:true},
+        ]}>
+        </Tabs>
+        <br/> 
+        <br/>
+        <Tabs height={300} tabPosition='bottom' renderItem={this.renderItem1.bind(this)} selectedKey={this.state.selectedKey1} onChange={this.tabOnChange.bind(this)} data={[
              {label:"首页",key:'home',allowClose:true},
              {label:"邮箱",key:'email',allowClose:true},
              {label:"动态",key:'info',allowClose:true},
         ]}>
         </Tabs>
         <br/>
-        <Tabs style={{borderBottom:'1px solid rgb(189, 189, 189)'}} selectedKey={this.state.selectedKey1} onChange={this.tabOnChange.bind(this)}  data={[
+        <Tabs tabPosition='left' renderItem={this.renderItem1.bind(this)} selectedKey={this.state.selectedKey1} onChange={this.tabOnChange.bind(this)}  data={[
              {label:"首页",key:'home',allowClose:true},
              {label:"邮箱",key:'email',allowClose:true},
              {label:"动态",key:'info',allowClose:true},
         ]} />
         <br/>
-          <Tabs style={{borderBottom:'1px solid rgb(189, 189, 189)'}} size='lg' selectedKey={this.state.selectedKey1} onChange={this.tabOnChange.bind(this)}  data={[
+          <Tabs tabPosition='right' renderItem={this.renderItem1.bind(this)} size='lg' selectedKey={this.state.selectedKey1} onChange={this.tabOnChange.bind(this)}  data={[
               {label:"首页",key:'home',allowClose:true},
               {label:"邮箱",key:'email',allowClose:true},
               {label:"动态",key:'info',allowClose:true},
           ]} />
         <br/>
         <br/>
-          <Tabs className='custome-tab' type='card' style={{borderBottom:'1px solid rgb(189, 189, 189)'}} size='lg' selectedKey={this.state.selectedKey1} onChange={this.tabOnChange.bind(this)}  data={[
-              {label:"首页",key:'home',allowClose:true},
-              {label:"邮箱",key:'email',allowClose:true},
-              {label:"动态",key:'info',allowClose:true},
-          ]} />
-        <br/>
-        <br/>  
-        <br/>
-          <Tabs className='custome-tab1' type='card' style={{borderBottom:'1px solid rgb(189, 189, 189)'}} selectedKey={this.state.selectedKey1} onChange={this.tabOnChange.bind(this)}  data={[
+          <Tabs bottom='right' renderItem={this.renderItem1.bind(this)} tabClassName='custome-tab' type='card'  size='lg' selectedKey={this.state.selectedKey1} onChange={this.tabOnChange.bind(this)}  data={[
               {label:"首页",key:'home',allowClose:true},
               {label:"邮箱",key:'email',allowClose:true},
               {label:"动态",key:'info',allowClose:true},
@@ -99,21 +99,29 @@ class TabsDemo extends React.Component {
         <br/>
         <br/>  
         <br/>
-          <Tabs className='custome-tab2' indicator={null} size='sm' selectedKey={this.state.selectedKey1} onChange={this.tabOnChange.bind(this)}  data={[
+          <Tabs tabClassName='custome-tab1' renderItem={this.renderItem1.bind(this)} type='card' selectedKey={this.state.selectedKey1} onChange={this.tabOnChange.bind(this)}  data={[
+              {label:"首页",key:'home',allowClose:true},
+              {label:"邮箱",key:'email',allowClose:true},
+              {label:"动态",key:'info',allowClose:true},
+          ]} />
+        <br/>
+        <br/>  
+        <br/>
+          <Tabs tabClassName='custome-tab2' renderItem={this.renderItem1.bind(this)} indicator={null} size='sm' selectedKey={this.state.selectedKey1} onChange={this.tabOnChange.bind(this)}  data={[
               {label:"首页",key:'home',allowClose:true},
               {label:"邮箱",key:'email',allowClose:true},
               {label:"动态",key:'info',allowClose:true},
           ]} />
         <br/>
         <br/>
-          <Tabs className='custome-tab4' indicator={null} size='sm' selectedKey={this.state.selectedKey1} onChange={this.tabOnChange.bind(this)}  data={[
+          <Tabs tabClassName='custome-tab4' renderItem={this.renderItem1.bind(this)} indicator={null} size='sm' selectedKey={this.state.selectedKey1} onChange={this.tabOnChange.bind(this)}  data={[
               {label:"首页",key:'home',allowClose:true},
               {label:"邮箱",key:'email',allowClose:true},
               {label:"动态",key:'info',allowClose:true},
           ]} />
         <br/>
         <br/>
-          <Tabs style={{borderBottom:'2px solid #1890ff'}} className='custome-tab3' indicator={null} selectedKey={this.state.selectedKey1} onChange={this.tabOnChange.bind(this)}  data={[
+          <Tabs style={{borderBottom:'2px solid #1890ff'}} tabClassName='custome-tab3' indicator={null} selectedKey={this.state.selectedKey1} onChange={this.tabOnChange.bind(this)}  data={[
               {label:"首页",key:'home',allowClose:true},
               {label:"邮箱",key:'email',allowClose:true},
               {label:"动态",key:'info',allowClose:true},
@@ -127,8 +135,7 @@ class TabsDemo extends React.Component {
               {label:"动态",key:'info',allowClose:true},
           ]} />
         <br/>
-        <Tabs style={{width:400}} onChange={this.tabOnChange.bind(this)} selectedKey={this.state.selectedKey1} data={this.state.data1} />
-        <Tabs.Container cache={true} renderItem={this.renderItem1.bind(this)} selectedKey={this.state.selectedKey1} data={this.state.data1}/>
+        <Tabs style={{width:400}} renderItem={this.renderItem1.bind(this)} onChange={this.tabOnChange.bind(this)} selectedKey={this.state.selectedKey1} data={this.state.data1} />
         <br/>
        <TabsOne {...this.props}/>
     </div>

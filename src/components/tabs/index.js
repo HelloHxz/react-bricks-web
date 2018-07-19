@@ -156,7 +156,7 @@ export default class Tabs extends React.Component{
         const dom = curTabInstance.root;
         const rect = dom.getBoundingClientRect();
         let indicatorStyle = {};
-        if(this.props.direction==='vertical'){
+        if(this.props.tabPosition==='left'||this.props.tabPosition==='right'){
             indicatorStyle = {
                 height:rect.height,
                 width:2,
@@ -234,8 +234,41 @@ export default class Tabs extends React.Component{
         }
     }
     render(){
+        const tabPosition = this.props.tabPosition||'top';
+        if(this.props.renderItem){
+            const wrapperStyle ={};
+            const wrapperClassName = ['xz-tabs-wrapper',`xz-tabs-wrapper-${Theme.getConfig('size',this.props)}`,`xz-tabs-${tabPosition}`,];
+            if(!this.props.height||this.props.height==='auto'){
+                wrapperClassName.push('xz-tabs-wrapper-auto-height');
+                wrapperStyle.height = 'auto';
+            }else{
+                wrapperClassName.push('xz-tabs-wrapper-fixed-height');
+                wrapperStyle.height = this.props.height;
+            }
+            if(!this.props.width||this.props.width==='auto'){
+                wrapperClassName.push('xz-tabs-wrapper-auto-width');
+                wrapperStyle.width = '100%';
+            }else{
+                wrapperClassName.push('xz-tabs-wrapper-fixed-width');
+                wrapperStyle.width = this.props.width;
+            }
+            return <div style={{
+                ...(this.props.style||{}),
+                ...wrapperStyle
+            }} className={wrapperClassName.join(' ')}>
+                <div className='xz-tabs-wrapper-inner'>
+                    {this.renderTabs({tabPosition,})}
+                    <div className='xz-tabs-content'>Content</div>
+                </div>
+            </div>
+        }
+        return this.renderTabs({
+            tabPosition,
+        });
+    }
+    renderTabs(config){
         const data = this.props.data||[];
-        const outp = {};
+        const tabsProperty = {className:[`xz-tabs xz-tabs-${this.props.type||'default'} xz-tabs-${Theme.getConfig('size',this.props)}`]};
         const selectedItemClassName = this.props.selectedItemClassName || `xz-tabs-item-selected xz-tabs-item-selected-${this.props.type||'1'}`;
 
         const tabs = [];
@@ -247,11 +280,19 @@ export default class Tabs extends React.Component{
             }
             tabs.push(<TabsItem key={itemdata.key} {...this.props}  {...p} tabs={this} data={itemdata}/>);
         }
-        outp.className = `xz-tabs xz-tabs-${this.props.type||'default'} xz-tabs-${Theme.getConfig('size',this.props)} xz-tabs-${this.props.direction||'horizontal'} ${this.props.className||''}`;
-        if(this.props.style){
-            outp.style = this.props.style;
+        if(this.props.tabClassName){
+            tabsProperty.className.push(this.props.tabClassName);
         }
-        return (<div {...outp}>
+        if(config.tabPosition==='left'||config.tabPosition==='right'){
+            tabsProperty.className.push('xz-tabs-vertical');
+        }else{
+            tabsProperty.className.push('xz-tabs-horizontal');
+        }
+        if(this.props.style){
+            tabsProperty.style = this.props.style;
+        }
+        tabsProperty.className = tabsProperty.className.join(' ');
+        return (<div {...tabsProperty}>
                 <div onClick={this.preClick.bind(this)} ref={(pre)=>{this.pre = pre;}}  className='xz-tabs-cell xz-tabs-pre'>
                     <i className='xz-icon xz-icon-left'></i>
                 </div>
@@ -260,9 +301,8 @@ export default class Tabs extends React.Component{
                         <div ref={(scroll)=>{this.scroll = scroll;
                         }} className='xz-tabs-scroll'>
                             {tabs}
-                            { this.isRenderIndicator() ?  <div style={this.state.indicatorStyle} className='xz-tabs-indicator' />:null }
+                            { this.isRenderIndicator() ? <div style={this.state.indicatorStyle} className='xz-tabs-indicator' />:null }
                         </div>
-                    
                     </div>
                 </div>
                 <div onClick={this.nextClick.bind(this)} ref={(next)=>{this.next = next;}} className='xz-tabs-cell xz-tabs-next'>
