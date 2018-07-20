@@ -3,6 +3,7 @@ import {HashNavigate,Dynamic,HistoryNavigate} from "react-bricks-web";
 import React from 'react';
 import BasicStore from './pages/basicLayout/store';
 import './icon/index.css';
+import './index.less';
 
 var config = {
 	root:"home",

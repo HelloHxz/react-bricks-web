@@ -11,8 +11,10 @@ import Animate from '../animate';
 
 @observer
 class ConatinerItem extends React.Component {
+    componentWillReceiveProps(){
+    }
     render(){
-        return <div>{this.props.renderItem(this.props.pkey)}</div>
+        return <React.Fragment>{this.props.renderItem(this.props.pkey)}</React.Fragment>
     }
 }
 
@@ -50,7 +52,7 @@ class Container extends React.Component {
                 return;
             }
         }
-        this.dict[selectedKey] = <ConatinerItem pkey={selectedKey} {...this.props} container={this}/>
+        this.dict[selectedKey] = true;
     }
    
     componentWillReceiveProps(nextProps){
@@ -75,15 +77,14 @@ class Container extends React.Component {
       if(this.props.cache===true){
         for(var key in this.dict){
           if(key===this.state.selectedKey){
-            re.push(<div key={key+"_containerwrapper"}>{this.dict[key]}</div>);
+            re.push(<div key={key+"_containerwrapper"}><ConatinerItem pkey={key} {...this.props} container={this}/></div>);
           }else{
-            re.push(<div key={key+"_containerwrapper"} style={{display:"none"}}>{this.dict[key]}</div>);
+            re.push(<div key={key+"_containerwrapper"} style={{display:"none"}}><ConatinerItem pkey={key} {...this.props} container={this}/></div>);
           }
         }
       }else{
-        re = this.dict[this.state.selectedKey];
+        re = <ConatinerItem pkey={this.state.selectedKey} {...this.props} container={this}/>;
       }
-      
       return (<div className={className.join(" ")}>{re}</div>);
     }
   }

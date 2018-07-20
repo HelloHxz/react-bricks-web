@@ -128,7 +128,7 @@ class TabsDemo extends React.Component {
         ]} />
         <br/>
         <br/>
-          <Tabs bottom='right' renderItem={this.renderItem1.bind(this)} tabClassName='custome-tab' type='card'  size='lg' selectedKey={this.state.selectedKey1} onChange={this.tabOnChange.bind(this)}  data={[
+          <Tabs renderItem={this.renderItem1.bind(this)} tabClassName='custome-tab' type='card'  size='lg' selectedKey={this.state.selectedKey1} onChange={this.tabOnChange.bind(this)}  data={[
                 {label:"代码示例",key:'home',allowClose:true},
                 {label:"知识点讲解",key:'email',allowClose:true},
               {label:"动态",key:'info',allowClose:true},
