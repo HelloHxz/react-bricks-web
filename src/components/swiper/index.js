@@ -57,7 +57,6 @@ class Swiper extends Base{
         if(this.props.itemWidth){
           itemStyle.width = this.WrapperSizeValue+"px";
         }
-        console.log(this.animate)
         if(!this.animate){
           itemStyle["msTransition"] = "none";
           itemStyle["WebkitTransition"] = "none";
