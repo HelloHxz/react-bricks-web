@@ -240,11 +240,13 @@ export default class Tabs extends React.Component{
         if(this.props.renderItem){
             const wrapperStyle ={};
             const wrapperClassName = ['xz-tabs-wrapper',`xz-tabs-wrapper-size-${Theme.getConfig('size',this.props)}`,`xz-tabs-${tabPosition}`,];
+            let isFixedHeight = false;
             if(!propsStyle.height||propsStyle.height==='auto'){
                 wrapperClassName.push('xz-tabs-wrapper-auto-height');
                 propsStyle.height = 'auto';
             }else{
                 wrapperClassName.push('xz-tabs-wrapper-fixed-height');
+                isFixedHeight = true;
             }
             if(!propsStyle.width||propsStyle.width==='auto'){
                 wrapperClassName.push('xz-tabs-wrapper-auto-width');
@@ -257,7 +259,7 @@ export default class Tabs extends React.Component{
                 ...wrapperStyle
             }} className={wrapperClassName.join(' ')}>
                 <div className='xz-tabs-wrapper-inner'>
-                    {this.renderTabs({tabPosition,})}
+                    {this.renderTabs({tabPosition,isFixedHeight})}
                     <div className='xz-tabs-wrapper-content'>
                         <Container 
                             cache={true} 
@@ -289,7 +291,8 @@ export default class Tabs extends React.Component{
         if(this.props.tabClassName){
             tabsProperty.className.push(this.props.tabClassName);
         }
-        if(config.tabPosition==='left'||config.tabPosition==='right'){
+        let isVertical = config.tabPosition==='left'||config.tabPosition==='right';
+        if(isVertical){
             tabsProperty.className.push('xz-tabs-vertical');
         }else{
             tabsProperty.className.push('xz-tabs-horizontal');
@@ -298,19 +301,36 @@ export default class Tabs extends React.Component{
             tabsProperty.style = this.props.tabStyle;
         }
         tabsProperty.className = tabsProperty.className.join(' ');
+        if(isVertical){
+            return (<div {...tabsProperty}>
+            <div className='xz-tabs-scroll-extra-wrapper'>
+                <div className='xz-tabs-scroll-wrapper'>
+                    <div onClick={this.preClick.bind(this)} ref={(pre)=>{this.pre = pre;}}  className='xz-tabs-pre'>
+                        <i className='xz-icon xz-icon-up'></i>
+                    </div>
+                        <div ref={(scroll)=>{this.scroll = scroll;
+                        }} className='xz-tabs-scroll'>
+                            {tabs}
+                            { this.isRenderIndicator() ? <div style={this.state.indicatorStyle} className='xz-tabs-indicator' />:null }
+                        </div>
+                    <div onClick={this.nextClick.bind(this)} ref={(next)=>{this.next = next;}} className='xz-tabs-next'>
+                        <i className='xz-icon xz-icon-down'></i>
+                    </div>
+                </div>
+            </div>
+        </div>);
+        }
         return (<div {...tabsProperty}>
                 <div onClick={this.preClick.bind(this)} ref={(pre)=>{this.pre = pre;}}  className='xz-tabs-cell xz-tabs-pre'>
                     <i className='xz-icon xz-icon-left'></i>
                 </div>
                 <div className='xz-tabs-cell xz-tabs-content'>
-                    <div className='xz-tabs-inner'>
                         <div ref={(scroll)=>{this.scroll = scroll;
                         }} className='xz-tabs-scroll'>
                             {tabs}
                             { this.isRenderIndicator() ? <div style={this.state.indicatorStyle} className='xz-tabs-indicator' />:null }
                         </div>
                     </div>
-                </div>
                 <div onClick={this.nextClick.bind(this)} ref={(next)=>{this.next = next;}} className='xz-tabs-cell xz-tabs-next'>
                     <i className='xz-icon xz-icon-right'></i>
                 </div>

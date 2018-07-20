@@ -15,6 +15,10 @@
     width: 100%;
     overflow: hidden;
 }
+.xz-tabs-horizontal .xz-tabs-scroll{
+    margin-bottom:-1px;
+    white-space: nowrap;
+}
 .xz-tabs-horizontal{
     display: table;
     table-layout: fixed;
@@ -22,20 +26,45 @@
 .xz-tabs-horizontal .xz-tabs-cell{
     display: table-cell;
 }
-
+.xz-tabs-scroll-extra-wrapper{
+    height: 100%;
+}
+.xz-tabs-wrapper-fixed-height .xz-tabs-scroll-wrapper{
+    height: 100%;
+}
+.xz-tabs-vertical .xz-tabs-scroll{
+    height: 100%;
+    overflow: hidden;
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
+.xz-tabs-vertical .xz-tabs-pre{
+    position: absolute;
+    top:0;
+    width:100%;
+}
+.xz-tabs-wrapper-fixed-height .xz-tabs-content{
+  
+}
+.xz-tabs-vertical .xz-tabs-next{
+    position: absolute;
+    bottom:0;
+    width:100%;
+}
 .xz-tabs-horizontal .xz-tabs-pre,.xz-tabs-horizontal .xz-tabs-next,{
     width:16px;
     text-align: center;
     cursor: pointer;
 }
-.xz-tabs-horizontal .xz-tabs-pre:hover,.xz-tabs-horizontal .xz-tabs-next:hover{
+.xz-tabs-vertical .xz-tabs-pre,.xz-tabs-vertical .xz-tabs-next,{
+    height:20px;
+    text-align: center;
+    cursor: pointer;
+}
+.xz-tabs-pre:hover,.xz-tabs-next:hover{
     color:@theme_color;
 }
-.xz-tabs-horizontal .xz-tabs-inner{
-    margin-bottom:-1px;
-    white-space: nowrap;
-    overflow: hidden;
-}
+
 .xz-tabs-vertical .xz-tabs-inner{
     overflow: hidden;
 }
@@ -162,4 +191,8 @@
 
 .xz-tabs-right .xz-tabs{
     float: right;
+}
+
+.xz-tabs-left.xz-tabs-wrapper-fixed-height .xz-tabs,.xz-tabs-right.xz-tabs-wrapper-fixed-height .xz-tabs{
+    height: 100%;
 }
