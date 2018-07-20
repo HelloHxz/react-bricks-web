@@ -14,17 +14,12 @@ class BottomDemo extends React.PureComponent {
     this.state={
         visible:false,
         value:"111xxxxx",
-        selectedKey1:'code'
     }
   }
 
   handleOnChange(value,params){
     this.setState({value});
   }
-  tabOnChange = (data,params) => {
-    this.setState({selectedKey1: data.key});
-  }
-
   renderItem(key){
       if(key==='code'){
           console.log("renderItemCode");
@@ -94,10 +89,8 @@ class BottomDemo extends React.PureComponent {
          { height:'100%'}
       } renderItem={this.renderItem.bind(this)} tabClassName='pages-tabs'
         size='lg' 
+        defaultSelectedKey='code'
         indicator={null}
-        tabStyle={{borderBottom:'2px solid #1890ff'}}
-        selectedKey={this.state.selectedKey1} 
-        onChange={this.tabOnChange.bind(this)} 
         data={[
             {label:"代码示例",key:'code'},
             {label:"知识点讲解",key:'knowdge'},

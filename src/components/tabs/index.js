@@ -11,6 +11,9 @@ import Animate from '../animate';
 
 @observer
 class ConatinerItem extends React.Component {
+    constructor(props){
+        super(props);
+    }
     componentWillReceiveProps(){
     }
     render(){
@@ -95,7 +98,7 @@ export default class Tabs extends React.Component{
         super(props);
         this.state = {
             indicatorStyle:{},
-            selectedKey: getSelectedKey(props.selectedKey,props.data)
+            selectedKey: getSelectedKey(props.selectedKey||props.defaultSelectedKey,props.data)
         };
         this.itemsDict = {};
         this.renderIndicatorTimeout = null;
@@ -120,7 +123,7 @@ export default class Tabs extends React.Component{
       
     }
     componentWillReceiveProps(nextProps){
-        var curKey = getSelectedKey(nextProps.selectedKey,nextProps.data)
+        var curKey = getSelectedKey(nextProps.selectedKey||nextProps.defaultSelectedKey,nextProps.data)
         if(curKey!==this.state.selectedKey){
             this.setState({
                 selectedKey: curKey
@@ -181,6 +184,11 @@ export default class Tabs extends React.Component{
         return (this.props.indicator===undefined || !!this.props.indicator ) && this.props.type !=='card';
     }
     itemClick(data,tabItem){
+        if(!('selectedKey' in this.props)){
+            this.setState({
+                selectedKey:data.key
+            });
+        }
         if(this.props.onChange){
             this.props.onChange(data,{
                 tabsInstance:this,
@@ -265,7 +273,7 @@ export default class Tabs extends React.Component{
                         <Container 
                             cache={true} 
                             renderItem={this.props.renderItem.bind(this)} 
-                            selectedKey={this.props.selectedKey} 
+                            selectedKey={this.state.selectedKey||this.props.defaultSelectedKey} 
                             data={this.props.data}/>
                     </div>
                 </div>
