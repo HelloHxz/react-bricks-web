@@ -305,17 +305,16 @@ export default class Tabs extends React.Component{
             return (<div {...tabsProperty}>
             <div className='xz-tabs-scroll-extra-wrapper'>
                 <div className='xz-tabs-scroll-wrapper'>
-                    <div onClick={this.preClick.bind(this)} ref={(pre)=>{this.pre = pre;}}  className='xz-tabs-pre'>
+                    {config.isFixedHeight?(<div onClick={this.preClick.bind(this)} ref={(pre)=>{this.pre = pre;}}  className='xz-tabs-pre'>
                         <i className='xz-icon xz-icon-up'></i>
-                    </div>
+                    </div>):null}
                         <div ref={(scroll)=>{this.scroll = scroll;
                         }} className='xz-tabs-scroll'>
                             {tabs}
                             { this.isRenderIndicator() ? <div style={this.state.indicatorStyle} className='xz-tabs-indicator' />:null }
                         </div>
-                    <div onClick={this.nextClick.bind(this)} ref={(next)=>{this.next = next;}} className='xz-tabs-next'>
-                        <i className='xz-icon xz-icon-down'></i>
-                    </div>
+                    {config.isFixedHeight?(<div onClick={this.nextClick.bind(this)} ref={(next)=>{this.next = next;}} className='xz-tabs-next'>
+                        <i className='xz-icon xz-icon-down'></i> </div>):null}
                 </div>
             </div>
         </div>);

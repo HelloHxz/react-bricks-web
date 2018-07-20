@@ -1,10 +1,5 @@
 @import '../theme/index.less';
 
-
-@tabs_item_sm_height:26px;
-@tabs_item_default_height:34px;
-@tabs_item_lg_height:42px;
-
 .xz-tabs{
     position: relative;
     user-select: none;
@@ -15,8 +10,11 @@
     width: 100%;
     overflow: hidden;
 }
-.xz-tabs-horizontal .xz-tabs-scroll{
+.xz-tabs-horizontal.xz-tabs-card .xz-tabs-scroll{
     margin-bottom:-1px;
+    white-space: nowrap;
+}
+.xz-tabs-horizontal .xz-tabs-scroll{
     white-space: nowrap;
 }
 .xz-tabs-horizontal{
@@ -71,7 +69,6 @@
 .xz-tabs-vertical{
     width: 80px;
 }
-
 
 
 .xz-tabs-item{
