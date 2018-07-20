@@ -66,6 +66,12 @@ class TabsDemo extends React.Component {
         <Tabs 
           selectedKey={this.state.selectedKey1} 
           style={{height:300}} tabPosition='top'
+          extraBefore={()=>{
+            return <Button>add</Button>
+          }}
+          extraAfter={(params)=>{
+            return <Button {...params.more}>more</Button>
+          }}
           renderItem={this.renderItem1.bind(this)}
           onChange={this.tabOnChange.bind(this)} size='sm' data={[
              {label:"首页",key:'home',allowClose:true},

@@ -137,7 +137,6 @@ export default class Tabs extends React.Component{
     }
 
     renderIndicator(){
-        console.log("-1");
         if(!this.isRenderIndicator()){
             return;
         }
@@ -147,11 +146,9 @@ export default class Tabs extends React.Component{
         },80);
     }
     _renderIndicator(){
-        console.log("1");
         if(!this.isRenderIndicator()){
             return;
         }
-        console.log("---")
         const curTabInstance = this.itemsDict[this.state.selectedKey];
         if(!curTabInstance){
             return;
@@ -317,7 +314,6 @@ export default class Tabs extends React.Component{
                 <div onClick={this.nextClick.bind(this)} ref={(next)=>{this.next = next;}} className='xz-tabs-cell xz-tabs-next'>
                     <i className='xz-icon xz-icon-right'></i>
                 </div>
-                <div ref={(more)=>{this.more = more;}} className='xz-tabs-cell xz-tabs-more'>更多</div>
         </div>)
     }
 }
