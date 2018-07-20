@@ -16,13 +16,11 @@ class BottomDemo extends React.PureComponent {
         value:"111xxxxx",
     }
   }
-
   handleOnChange(value,params){
     this.setState({value});
   }
   renderItem(key){
       if(key==='code'){
-          console.log("renderItemCode");
           return (
             <div style={{padding:10,height:'100%',overflow:'auto'}}>
                 <Group>

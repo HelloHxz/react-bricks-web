@@ -1,4 +1,4 @@
-import {React,PageView,observer,PageContainer,XZ,Button,Icon} from "react-bricks-web"
+import {React,PageView,observer,PageContainer,XZ,Button,Icon,Tabs} from "react-bricks-web"
 
 
 
@@ -23,8 +23,13 @@ class BottomDemo extends React.PureComponent {
     }
   }
 
-
-  render() {
+  renderItem(key){
+    if(key==='code'){
+      return this.renderCode();
+    }
+    return <div>{key}</div>
+  }
+  renderCode() {
     return <div>
       <Button onClick={()=>{
         XZ.go();
@@ -61,6 +66,19 @@ class BottomDemo extends React.PureComponent {
         <Icon type='down' text='图标' textPlacement='left'/>
       </Button>
     </div>
+  }
+
+  render(){
+      return <Tabs style={
+          { height:'100%'}
+      } renderItem={this.renderItem.bind(this)} tabClassName='pages-tabs'
+        size='lg' 
+        defaultSelectedKey='code'
+        indicator={null}
+        data={[
+            {label:"代码示例",key:'code'},
+            {label:"知识点讲解",key:'knowdge'},
+    ]} />;
   }
 }
 
