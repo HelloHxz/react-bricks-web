@@ -73,11 +73,7 @@ class TabsDemo extends React.Component {
             return <Button {...params.more}>more</Button>
           }}
           renderItem={this.renderItem1.bind(this)}
-          onChange={this.tabOnChange.bind(this)} size='sm' data={[
-            {label:"代码示例",key:'home',allowClose:true},
-            {label:"知识点讲解",key:'email',allowClose:true},
-             {label:"动态",key:'info',allowClose:true},
-        ]}>
+          onChange={this.tabOnChange.bind(this)} size='sm' data={this.state.data1}>
         </Tabs>
         <br/>  <br/> 
         <div style={{height:320}}>
