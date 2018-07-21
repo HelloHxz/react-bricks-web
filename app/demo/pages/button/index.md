@@ -5,7 +5,9 @@
 ```javascript
 import React from 'react';
 export default class MD extends React.Component{
-
+    constructor(props){
+        super(props);
+    };
 }
 ```
 

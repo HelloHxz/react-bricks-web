@@ -137,7 +137,7 @@ export default class Tabs extends React.Component{
             this.next.style["visibility"]='visible';
         }else{
             this.pre.style["display"]='none';
-            this.pre.style["display"]='none';
+            this.next.style["display"]='none';
         }
     }
 
