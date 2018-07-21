@@ -2,6 +2,7 @@ import React from 'react';
 import Theme from '../theme';
 import './index.less';
 import observer from '../observer';
+import XZ from '../xz';
 import Animate from '../animate';
 
 //https://github.com/mobxjs/mobx/issues/101
@@ -103,10 +104,7 @@ export default class Tabs extends React.Component{
         this.itemsDict = {};
         this.renderIndicatorTimeout = null;
     }
-    componentWillUnmount(){
-        this._clearTimeout();
-    }
-
+  
     _clearTimeout(){
         if(this.renderIndicatorTimeout){
             window.clearTimeout(this.renderIndicatorTimeout);
@@ -114,6 +112,7 @@ export default class Tabs extends React.Component{
         }
     }
     checkOverflow(){
+        this.hasScroll = false;
         if(!this.pre||!this.next){return;}
         let configKeys;
         if(this.isVertical()){
@@ -130,6 +129,7 @@ export default class Tabs extends React.Component{
             };
         }
         if(this.scroll[configKeys.rangeKey]>this.scroll[configKeys.sizeKey]){
+            this.hasScroll = true;
             this.pre.style["display"]=configKeys.display;
             this.next.style["display"]=configKeys.display;
             this.pre.style["visibility"]='visible';
@@ -146,7 +146,17 @@ export default class Tabs extends React.Component{
     componentDidMount(){
         // this.pre.parentNode.removeChild(this.pre);
         this.checkOverflow();
+        this.reSizeID = XZ.listenerResizeEvent(()=>{
+            this.checkOverflow();
+            this._renderIndicator();
+        });
+        this.scrollByKey(this.state.selectedKey);
     }
+    componentWillUnmount(){
+        this._clearTimeout();
+        XZ.removeResizeListener(this.reSizeID);
+    }
+
     componentDidUpdate(){
       
     }
@@ -233,19 +243,32 @@ export default class Tabs extends React.Component{
         }
     }
     scrollByKey(key){
+        if(!this.hasScroll){
+            return;
+        }
         const curTabInstance = this.itemsDict[key];
         if(!curTabInstance){
             return null; 
         }
         const dom = curTabInstance.root;
-
+        if(this.isVertical()){
+            var domTop = dom.offsetTop;
+            if(this.scroll.scrollHeight+dom.offsetHeight>domTop || (this.scroll.scrollTop+this.scroll.offsetHeight)<(domLeft+dom.offsetHeight)){
+                this.autoScroll(domTop);
+            }
+        }else{
+            var domLeft = dom.offsetLeft;
+            if(this.scroll.scrollLeft+dom.offsetWidth>domLeft || (this.scroll.scrollLeft+this.scroll.offsetWidth)<(domLeft+dom.offsetWidth)){
+                this.autoScroll(domLeft);
+            }
+        }
     }
 
     isVertical(){
         const {tabPosition} = this.props;
         return tabPosition==='left'||tabPosition==='right';
     }
-    autoScroll(next_or_pre){
+    autoScroll(toValue){
         let configKeys;
         if(!this.isVertical()){
             configKeys={
@@ -265,22 +288,15 @@ export default class Tabs extends React.Component{
             var sl = this.scroll[configKeys.scrollKey];
             this.animateScroll = Animate.createInstance({
                 startValue:sl,
-                value:next_or_pre==='next'?this.scroll[configKeys.sizeKey]-50:50-this.scroll[configKeys.sizeKey],
+                value:toValue,
                 duration:400
             });
             this.animateScroll.start({
                 callback:(val)=>{
                     this.scroll[configKeys.scrollKey] = val;
-                    if(next_or_pre==='next'){
-                        if(val>=(this.scroll[configKeys.rangeKey]-this.scroll[configKeys.sizeKey])){
-                            this.animateScroll.stop();
-                            this.animateScroll = null;
-                        }
-                    }else{
-                        if(val<=0){
-                            this.animateScroll.stop();
-                            this.animateScroll = null;
-                        }
+                    if(val<0||val>(this.scroll[configKeys.rangeKey]-this.scroll[configKeys.sizeKey])){
+                        this.animateScroll.stop();
+                        this.animateScroll = null;
                     }
                 },
                 end:()=>{
@@ -291,10 +307,10 @@ export default class Tabs extends React.Component{
 
     }
     nextClick(){
-        this.autoScroll('next');
+        this.autoScroll(this.isVertical()?this.scroll['offsetHeight']-50:this.scroll['offsetWidth']-50);
     }
     preClick(){
-        this.autoScroll('pre');
+        this.autoScroll(this.isVertical()?50-this.scroll['offsetHeight']:50-this.scroll['offsetWidth']);
     }
     render(){
         const tabPosition = this.props.tabPosition||'top';
@@ -339,16 +355,12 @@ export default class Tabs extends React.Component{
     renderTabs(config){
         const data = this.props.data||[];
         const tabsProperty = {className:[`xz-tabs xz-tabs-${this.props.type||'default'} xz-tabs-size-${Theme.getConfig('size',this.props)}`]};
-        const selectedItemClassName = this.props.selectedItemClassName || `xz-tabs-item-selected xz-tabs-item-selected-${this.props.type||'1'}`;
-
+     
         const tabs = [];
         for(let i=0,j=data.length;i<j;i+=1){
             const itemdata = data[i];
-            const p = {className:null};
-            if(itemdata.key === this.state.selectedKey){
-                p.className = selectedItemClassName;
-            }
-            tabs.push(<TabsItem key={itemdata.key} {...this.props}  {...p} tabs={this} data={itemdata}/>);
+           
+            tabs.push(<TabsItem selected={itemdata.key === this.state.selectedKey} key={itemdata.key} {...this.props} tabs={this} data={itemdata}/>);
         }
         if(this.props.tabClassName){
             tabsProperty.className.push(this.props.tabClassName);
@@ -414,6 +426,12 @@ class TabsItem extends React.Component{
     componentWillUnmount(){
         this.props.tabs.unRegisterTab(this.props.data.key);
     }
+
+    componentWillReceiveProps(nextProps){
+        if(nextProps.selected&&!this.props.selected){
+            this.props.tabs.scrollByKey(this.props.data.key);
+        }
+    }
     
     render(){
         const { data } = this.props;
@@ -431,7 +449,9 @@ class TabsItem extends React.Component{
         }else{
             p.onClick = this.itemClick.bind(this,data);
         }
-
+        if(this.props.selected){
+            className.push(`xz-tabs-item-selected xz-tabs-item-selected-${this.props.type||'1'}`);
+        }
         p.className = className.join(' ');
         return (<div {...p} ref={(root)=>{ this.root = root; }}>
             <span className='xz-tabs-label'>{data.label||''}</span>

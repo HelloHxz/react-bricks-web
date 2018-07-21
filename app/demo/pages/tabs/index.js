@@ -168,7 +168,7 @@ class TabsDemo extends React.Component {
               {label:"动态",key:'info',allowClose:true},
           ]} />
         <br/>
-        <Tabs style={{width:400}} renderItem={this.renderItem1.bind(this)} onChange={this.tabOnChange.bind(this)} selectedKey={this.state.selectedKey1} data={this.state.data1} />
+        <Tabs style={{width:380}} renderItem={this.renderItem1.bind(this)} onChange={this.tabOnChange.bind(this)} selectedKey={this.state.selectedKey1} data={this.state.data1} />
         <br/>
        <TabsOne {...this.props}/>
     </div>
