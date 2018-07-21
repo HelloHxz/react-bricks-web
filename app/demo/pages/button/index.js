@@ -71,10 +71,13 @@ class BottomDemo extends React.PureComponent {
   render(){
       return <Tabs style={
           { height:'100%'}
-      } renderItem={this.renderItem.bind(this)} tabClassName='pages-tabs'
+      } renderItem={this.renderItem.bind(this)} 
         size='lg' 
+        tabStyle={{
+          textAlign:'center',
+          borderBottom:'1px solid #ccc'
+        }}
         defaultSelectedKey='code'
-        indicator={null}
         data={[
             {label:"代码示例",key:'code'},
             {label:"知识点讲解",key:'knowdge'},

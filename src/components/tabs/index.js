@@ -103,8 +103,6 @@ export default class Tabs extends React.Component{
         this.itemsDict = {};
         this.renderIndicatorTimeout = null;
     }
-
-  
     componentWillUnmount(){
         this._clearTimeout();
     }
@@ -115,9 +113,39 @@ export default class Tabs extends React.Component{
             this.renderIndicatorTimeout = null;
         }
     }
+    checkOverflow(){
+        if(!this.pre||!this.next){return;}
+        let configKeys;
+        if(this.isVertical()){
+            configKeys = {
+                rangeKey:'scrollHeight',
+                sizeKey:'offsetHeight',
+                display:'block'
+            };
+        }else{
+            configKeys = {
+                rangeKey:'scrollWidth',
+                sizeKey:'offsetWidth',
+                display:'table-cell'
+            };
+        }
+        if(this.scroll[configKeys.rangeKey]>this.scroll[configKeys.sizeKey]){
+            this.pre.style["display"]=configKeys.display;
+            this.next.style["display"]=configKeys.display;
+            this.pre.style["visibility"]='visible';
+            this.next.style["visibility"]='visible';
+        }else{
+            this.pre.style["display"]='none';
+            this.pre.style["display"]='none';
+        }
+    }
 
+    onScroll(){
+        
+    }
     componentDidMount(){
         // this.pre.parentNode.removeChild(this.pre);
+        this.checkOverflow();
     }
     componentDidUpdate(){
       
@@ -149,19 +177,18 @@ export default class Tabs extends React.Component{
             this._renderIndicator();
         },80);
     }
-    _renderIndicator(){
+    _getIndicatorStyle(selectedKey){
         if(!this.isRenderIndicator()){
-            return;
+            return null; 
         }
-        const curTabInstance = this.itemsDict[this.state.selectedKey];
+        const curTabInstance = this.itemsDict[selectedKey];
         if(!curTabInstance){
-            return;
+            return null; 
         }
         const dom = curTabInstance.root;
         const rect = dom.getBoundingClientRect();
         let indicatorStyle = {};
-        const tabPosition = this.props.tabPosition||'top';
-        if(tabPosition==='left'||tabPosition==='right'){
+        if(this.isVertical()){
             indicatorStyle = {
                 height:rect.height,
                 width:2,
@@ -175,18 +202,27 @@ export default class Tabs extends React.Component{
                 left:dom.offsetLeft,
                 bottom:0
             }
+
         }
-        this.setState({
-            indicatorStyle
-        });
+        return indicatorStyle;
+    }
+    _renderIndicator(){
+        const indicatorStyle = this._getIndicatorStyle(this.state.selectedKey);
+        if(indicatorStyle){
+            this.setState({
+                indicatorStyle
+            });
+        }
     }
     isRenderIndicator(){
         return (this.props.indicator===undefined || !!this.props.indicator ) && this.props.type !=='card';
     }
     itemClick(data,tabItem){
         if(!('selectedKey' in this.props)){
+            const indicatorStyle = this._getIndicatorStyle(data.key);
             this.setState({
-                selectedKey:data.key
+                selectedKey:data.key,
+                indicatorStyle
             });
         }
         if(this.props.onChange){
@@ -196,52 +232,69 @@ export default class Tabs extends React.Component{
             });
         }
     }
-    nextClick(){
+    scrollByKey(key){
+        const curTabInstance = this.itemsDict[key];
+        if(!curTabInstance){
+            return null; 
+        }
+        const dom = curTabInstance.root;
+
+    }
+
+    isVertical(){
+        const {tabPosition} = this.props;
+        return tabPosition==='left'||tabPosition==='right';
+    }
+    autoScroll(next_or_pre){
+        let configKeys;
+        if(!this.isVertical()){
+            configKeys={
+                scrollKey:'scrollLeft',
+                sizeKey:'offsetWidth',
+                rangeKey:'scrollWidth'
+            }
+        }else{
+            configKeys={
+                scrollKey:'scrollTop',
+                sizeKey:'offsetHeight',
+                rangeKey:'scrollHeight'
+            }
+        }
+
         if(!this.animateScroll){
-            var sl = this.scroll.scrollLeft;
+            var sl = this.scroll[configKeys.scrollKey];
             this.animateScroll = Animate.createInstance({
                 startValue:sl,
-                value:this.scroll.offsetWidth-100,
-                duration:300
+                value:next_or_pre==='next'?this.scroll[configKeys.sizeKey]-50:50-this.scroll[configKeys.sizeKey],
+                duration:400
             });
             this.animateScroll.start({
                 callback:(val)=>{
-                    this.scroll.scrollLeft = val;
-                    if(val>=(this.scroll.scrollWidth-this.scroll.offsetWidth)){
-                        this.animateScroll.stop();
-                        this.animateScroll = null;
+                    this.scroll[configKeys.scrollKey] = val;
+                    if(next_or_pre==='next'){
+                        if(val>=(this.scroll[configKeys.rangeKey]-this.scroll[configKeys.sizeKey])){
+                            this.animateScroll.stop();
+                            this.animateScroll = null;
+                        }
+                    }else{
+                        if(val<=0){
+                            this.animateScroll.stop();
+                            this.animateScroll = null;
+                        }
                     }
                 },
-                tween:Animate.Tween.Cubic.easeOut,
                 end:()=>{
                     this.animateScroll = null;
                 }
             },);
         }
-        
+
+    }
+    nextClick(){
+        this.autoScroll('next');
     }
     preClick(){
-        if(!this.animateScroll){
-            var sl = this.scroll.scrollLeft;
-            this.animateScroll = Animate.createInstance({
-                startValue:sl,
-                value:0-(this.scroll.offsetWidth-100),
-                duration:300
-            });
-            this.animateScroll.start({
-                callback:(val)=>{
-                    this.scroll.scrollLeft = val;
-                    if(val<=0){
-                        this.animateScroll.stop();
-                        this.animateScroll = null;
-                    }
-                },
-                tween:Animate.Tween.Cubic.easeOut,
-                end:()=>{
-                    this.animateScroll = null;
-                }
-            },);
-        }
+        this.autoScroll('pre');
     }
     render(){
         const tabPosition = this.props.tabPosition||'top';
@@ -300,8 +353,7 @@ export default class Tabs extends React.Component{
         if(this.props.tabClassName){
             tabsProperty.className.push(this.props.tabClassName);
         }
-        let isVertical = config.tabPosition==='left'||config.tabPosition==='right';
-        if(isVertical){
+        if(this.isVertical()){
             tabsProperty.className.push('xz-tabs-vertical');
         }else{
             tabsProperty.className.push('xz-tabs-horizontal');
@@ -310,14 +362,16 @@ export default class Tabs extends React.Component{
             tabsProperty.style = this.props.tabStyle;
         }
         tabsProperty.className = tabsProperty.className.join(' ');
-        if(isVertical){
+        if(this.isVertical()){
             return (<div {...tabsProperty}>
             <div className='xz-tabs-scroll-extra-wrapper'>
                 <div className='xz-tabs-scroll-wrapper'>
                     {config.isFixedHeight?(<div onClick={this.preClick.bind(this)} ref={(pre)=>{this.pre = pre;}}  className='xz-tabs-pre'>
                         <i className='xz-icon xz-icon-up'></i>
                     </div>):null}
-                        <div ref={(scroll)=>{this.scroll = scroll;
+                        <div 
+                        onScroll={this.onScroll.bind(this)}
+                        ref={(scroll)=>{this.scroll = scroll;
                         }} className='xz-tabs-scroll'>
                             {tabs}
                             { this.isRenderIndicator() ? <div style={this.state.indicatorStyle} className='xz-tabs-indicator' />:null }
@@ -334,7 +388,9 @@ export default class Tabs extends React.Component{
                 </div>
                 <div className='xz-tabs-cell xz-tabs-content'>
                         <div ref={(scroll)=>{this.scroll = scroll;
-                        }} className='xz-tabs-scroll'>
+                        }} 
+                        onScroll={this.onScroll.bind(this)}
+                        className='xz-tabs-scroll'>
                             {tabs}
                             { this.isRenderIndicator() ? <div style={this.state.indicatorStyle} className='xz-tabs-indicator' />:null }
                         </div>
