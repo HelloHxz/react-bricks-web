@@ -253,11 +253,16 @@ export default class Tabs extends React.Component{
             return null; 
         }
         const dom = curTabInstance.root;
+        // item的宽度或者高度
         var domSize = dom[this.configKeys.sizeKey];
+        // item的位置 offsetLeft 或者 offsetTop
         var domValue = dom[this.configKeys.offsetKey];
+        //滚动区域的大小 offsetWidth 或者 offsetHeight
         var scrollSize = this.scroll[this.configKeys.sizeKey];
-        if(this.scroll[this.configKeys.scrollKey]>domValue||(this.scroll[this.configKeys.scrollKey]+scrollSize)<(domValue+domSize)){
-            this.autoScroll(domValue-this.scroll[this.configKeys.scrollKey]-(scrollSize-domSize)/2,120);
+        //滚动的位置  scrollLeft 或者 scrollTop
+        var scrollValue = this.scroll[this.configKeys.scrollKey];
+        if(scrollValue>domValue||(scrollValue+scrollSize)<(domValue+domSize)){
+            this.autoScroll(domValue-scrollValue-(scrollSize-domSize)/2,120);
         }
     }
 
