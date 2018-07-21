@@ -1,5 +1,7 @@
 import {React,PageView,observer,PageContainer,XZ,Button,Icon,Tabs} from "react-bricks-web"
-
+import MD from '../../components/md';
+import mdtext from './index.md';
+import './md.less';
 
 
 @PageView()
@@ -34,6 +36,8 @@ class BottomDemo extends React.PureComponent {
       <Button onClick={()=>{
         XZ.go();
       }}>log</Button>
+        <MD source={mdtext} />
+      
       <Button type='primary'>Primary</Button>
       <Button size='sm' type='primary'>Primary</Button>
       <Button size='lg' type='primary'>Primary</Button>

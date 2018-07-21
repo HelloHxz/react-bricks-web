@@ -11,8 +11,10 @@
   "dependencies": {
     "babel-polyfill": "^6.26.0",
     "es6-promise": "^4.1.0",
+    "marked": "^0.4.0",
     "mobx": "^4.3.0",
     "mobx-react": "^5.2.3",
+    "prismjs": "^1.15.0",
     "react": "^16.4.1",
     "react-dom": "^16.4.1"
   },
@@ -47,6 +49,7 @@
     "npm-check": "^5.5.2",
     "postcss-import": "^11.1.0",
     "postcss-loader": "^2.1.5",
+    "raw-loader": "^0.5.1",
     "react-hot-loader": "^3.0.0-beta.6",
     "react-test-renderer": "16.0.0",
     "style-loader": "^0.16.1",
