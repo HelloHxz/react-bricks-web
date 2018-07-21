@@ -253,16 +253,11 @@ export default class Tabs extends React.Component{
             return null; 
         }
         const dom = curTabInstance.root;
-        if(this.isVertical){
-            var domTop = dom.offsetTop;
-            if(this.scroll.scrollHeight+dom.offsetHeight>domTop || (this.scroll.scrollTop+this.scroll.offsetHeight)<(domLeft+dom.offsetHeight)){
-                this.autoScroll(domTop);
-            }
-        }else{
-            var domLeft = dom.offsetLeft;
-            if(this.scroll.scrollLeft+dom.offsetWidth>domLeft || (this.scroll.scrollLeft+this.scroll.offsetWidth)<(domLeft+dom.offsetWidth)){
-                this.autoScroll(domLeft);
-            }
+        var domSize = dom[this.configKeys.sizeKey];
+        var domValue = dom[this.configKeys.offsetKey];
+        var scrollSize = this.scroll[this.configKeys.sizeKey];
+        if(this.scroll[this.configKeys.scrollKey]>domValue||(this.scroll[this.configKeys.scrollKey]+scrollSize)<(domValue+domSize)){
+            this.autoScroll(domValue-this.scroll[this.configKeys.scrollKey]-(scrollSize-domSize)/2,120);
         }
     }
 
@@ -271,25 +266,27 @@ export default class Tabs extends React.Component{
         this.isVertical = props.tabPosition==='left'||props.tabPosition==='right';
         if(!this.isVertical){
             this.configKeys={
+                offsetKey:'offsetLeft',
                 scrollKey:'scrollLeft',
                 sizeKey:'offsetWidth',
                 rangeKey:'scrollWidth'
             }
         }else{
             this.configKeys={
+                offsetKey:'offsetTop',
                 scrollKey:'scrollTop',
                 sizeKey:'offsetHeight',
                 rangeKey:'scrollHeight'
             }
         }
     }
-    autoScroll(toValue){
+    autoScroll(toValue,time){
         if(!this.animateScroll){
             var sl = this.scroll[this.configKeys.scrollKey];
             this.animateScroll = Animate.createInstance({
                 startValue:sl,
                 value:toValue,
-                duration:400
+                duration:time||400
             });
             this.animateScroll.start({
                 callback:(val)=>{
