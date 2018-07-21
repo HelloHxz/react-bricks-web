@@ -97,6 +97,7 @@ class Container extends React.Component {
 export default class Tabs extends React.Component{
     constructor(props){
         super(props);
+        this.init(props);
         this.state = {
             indicatorStyle:{},
             selectedKey: getSelectedKey(props.selectedKey||props.defaultSelectedKey,props.data)
@@ -115,7 +116,7 @@ export default class Tabs extends React.Component{
         this.hasScroll = false;
         if(!this.pre||!this.next){return;}
         let configKeys;
-        if(this.isVertical()){
+        if(this.isVertical){
             configKeys = {
                 rangeKey:'scrollHeight',
                 sizeKey:'offsetHeight',
@@ -161,7 +162,8 @@ export default class Tabs extends React.Component{
       
     }
     componentWillReceiveProps(nextProps){
-        var curKey = getSelectedKey(nextProps.selectedKey||nextProps.defaultSelectedKey,nextProps.data)
+        var curKey = getSelectedKey(nextProps.selectedKey||nextProps.defaultSelectedKey,nextProps.data);
+        this.init(nextProps);
         if(curKey!==this.state.selectedKey){
             this.setState({
                 selectedKey: curKey
@@ -198,7 +200,7 @@ export default class Tabs extends React.Component{
         const dom = curTabInstance.root;
         const rect = dom.getBoundingClientRect();
         let indicatorStyle = {};
-        if(this.isVertical()){
+        if(this.isVertical){
             indicatorStyle = {
                 height:rect.height,
                 width:2,
@@ -251,7 +253,7 @@ export default class Tabs extends React.Component{
             return null; 
         }
         const dom = curTabInstance.root;
-        if(this.isVertical()){
+        if(this.isVertical){
             var domTop = dom.offsetTop;
             if(this.scroll.scrollHeight+dom.offsetHeight>domTop || (this.scroll.scrollTop+this.scroll.offsetHeight)<(domLeft+dom.offsetHeight)){
                 this.autoScroll(domTop);
@@ -264,28 +266,26 @@ export default class Tabs extends React.Component{
         }
     }
 
-    isVertical(){
-        const {tabPosition} = this.props;
-        return tabPosition==='left'||tabPosition==='right';
-    }
-    autoScroll(toValue){
-        let configKeys;
-        if(!this.isVertical()){
-            configKeys={
+   
+    init(props){
+        this.isVertical = props.tabPosition==='left'||props.tabPosition==='right';
+        if(!this.isVertical){
+            this.configKeys={
                 scrollKey:'scrollLeft',
                 sizeKey:'offsetWidth',
                 rangeKey:'scrollWidth'
             }
         }else{
-            configKeys={
+            this.configKeys={
                 scrollKey:'scrollTop',
                 sizeKey:'offsetHeight',
                 rangeKey:'scrollHeight'
             }
         }
-
+    }
+    autoScroll(toValue){
         if(!this.animateScroll){
-            var sl = this.scroll[configKeys.scrollKey];
+            var sl = this.scroll[this.configKeys.scrollKey];
             this.animateScroll = Animate.createInstance({
                 startValue:sl,
                 value:toValue,
@@ -293,8 +293,8 @@ export default class Tabs extends React.Component{
             });
             this.animateScroll.start({
                 callback:(val)=>{
-                    this.scroll[configKeys.scrollKey] = val;
-                    if(val<0||val>(this.scroll[configKeys.rangeKey]-this.scroll[configKeys.sizeKey])){
+                    this.scroll[this.configKeys.scrollKey] = val;
+                    if(val<0||val>(this.scroll[this.configKeys.rangeKey]-this.scroll[this.configKeys.sizeKey])){
                         this.animateScroll.stop();
                         this.animateScroll = null;
                     }
@@ -307,10 +307,10 @@ export default class Tabs extends React.Component{
 
     }
     nextClick(){
-        this.autoScroll(this.isVertical()?this.scroll['offsetHeight']-50:this.scroll['offsetWidth']-50);
+        this.autoScroll(this.isVertical?this.scroll['offsetHeight']-50:this.scroll['offsetWidth']-50);
     }
     preClick(){
-        this.autoScroll(this.isVertical()?50-this.scroll['offsetHeight']:50-this.scroll['offsetWidth']);
+        this.autoScroll(this.isVertical?50-this.scroll['offsetHeight']:50-this.scroll['offsetWidth']);
     }
     render(){
         const tabPosition = this.props.tabPosition||'top';
@@ -365,7 +365,7 @@ export default class Tabs extends React.Component{
         if(this.props.tabClassName){
             tabsProperty.className.push(this.props.tabClassName);
         }
-        if(this.isVertical()){
+        if(this.isVertical){
             tabsProperty.className.push('xz-tabs-vertical');
         }else{
             tabsProperty.className.push('xz-tabs-horizontal');
@@ -374,7 +374,7 @@ export default class Tabs extends React.Component{
             tabsProperty.style = this.props.tabStyle;
         }
         tabsProperty.className = tabsProperty.className.join(' ');
-        if(this.isVertical()){
+        if(this.isVertical){
             return (<div {...tabsProperty}>
             <div className='xz-tabs-scroll-extra-wrapper'>
                 <div className='xz-tabs-scroll-wrapper'>
