@@ -31,7 +31,7 @@ export default class MD extends React.Component{
         });
     }
     render(){
-        return (<div className='xz-doc-md'>
-        <div dangerouslySetInnerHTML={{__html:this.state.source}} /></div>);
+        return (
+        <div className='xz-doc-md' dangerouslySetInnerHTML={{__html:this.state.source}} />);
     }
 }
