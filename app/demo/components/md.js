@@ -3,6 +3,8 @@ import myMarked from 'marked';
 import 'prismjs/themes/prism.css';
 import Prism from 'prismjs';
 
+// 用正则取出不同代码
+
 export default class MD extends React.Component{
     constructor(props){
         super(props);
@@ -25,7 +27,7 @@ export default class MD extends React.Component{
             smartypants: false,
             xhtml: false
         });
-  
+        console.log(this.props.source);
         this.setState({
             source:myMarked(this.props.source)
         });
