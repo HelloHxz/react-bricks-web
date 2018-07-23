@@ -45,7 +45,7 @@ class BottomDemo extends React.PureComponent {
   }
   
   renderCode() {
-    return <div>
+    return <div style={{overflowX:'hidden'}}>
         <MD source={mdtext} />
         <CodeList data={this.getCodeListData()}/>
     </div>
