@@ -81,9 +81,9 @@ class Container extends React.Component {
       if(this.props.cache===true){
         for(var key in this.dict){
           if(key===this.state.selectedKey){
-            re.push(<div key={key+"_containerwrapper"}><ConatinerItem pkey={key} {...this.props} container={this}/></div>);
+            re.push(<div className='xz-tabs-container-item' key={key+"_containerwrapper"}><ConatinerItem pkey={key} {...this.props} container={this}/></div>);
           }else{
-            re.push(<div key={key+"_containerwrapper"} style={{display:"none"}}><ConatinerItem pkey={key} {...this.props} container={this}/></div>);
+            re.push(<div className='xz-tabs-container-item' key={key+"_containerwrapper"} style={{display:"none"}}><ConatinerItem pkey={key} {...this.props} container={this}/></div>);
           }
         }
       }else{
