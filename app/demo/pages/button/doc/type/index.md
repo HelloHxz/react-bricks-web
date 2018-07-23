@@ -1,6 +1,6 @@
 
 {
-    title:'禁用状态'
+    title:'按钮类型'
 }
 -分割线-
-# Disabled
+# Type
