@@ -1,13 +1,11 @@
 import {React,PageView,observer,PageContainer,XZ,Button,Icon,Tabs} from "react-bricks-web"
 import MD from '../../components/md';
 import mdtext from './index.md';
-import code from '!babel-loader!raw-loader!./code.js';
 
 
 @PageView()
 class BottomDemo extends React.PureComponent {
   componentDidMount() {
-    console.log(code)
   }
   constructor(props){
     super(props);
@@ -36,7 +34,7 @@ class BottomDemo extends React.PureComponent {
         XZ.go();
       }}>log</Button>
         <MD source={mdtext} />
-        <MD source={'```javascript\r\n'+code+'\r\n```'} />
+      
       <Button type='primary'>Primary</Button>
       <Button size='sm' type='primary'>Primary</Button>
       <Button size='lg' type='primary'>Primary</Button>
