@@ -28,10 +28,11 @@
     h1, h2, h3, h4, h5, h6 {
       margin: 20px 0 10px;
       padding: 0;
-      font-weight: bold;
+      font-weight: 200;
       -webkit-font-smoothing: antialiased;
       cursor: text;
-      position: relative; }
+      position: relative; 
+    }
     
     h1:hover a.anchor, h2:hover a.anchor, h3:hover a.anchor, h4:hover a.anchor, h5:hover a.anchor, h6:hover a.anchor {
       background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA09pVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoMTMuMCAyMDEyMDMwNS5tLjQxNSAyMDEyLzAzLzA1OjIxOjAwOjAwKSAgKE1hY2ludG9zaCkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OUM2NjlDQjI4ODBGMTFFMTg1ODlEODNERDJBRjUwQTQiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OUM2NjlDQjM4ODBGMTFFMTg1ODlEODNERDJBRjUwQTQiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo5QzY2OUNCMDg4MEYxMUUxODU4OUQ4M0REMkFGNTBBNCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo5QzY2OUNCMTg4MEYxMUUxODU4OUQ4M0REMkFGNTBBNCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PsQhXeAAAABfSURBVHjaYvz//z8DJYCRUgMYQAbAMBQIAvEqkBQWXI6sHqwHiwG70TTBxGaiWwjCTGgOUgJiF1J8wMRAIUA34B4Q76HUBelAfJYSA0CuMIEaRP8wGIkGMA54bgQIMACAmkXJi0hKJQAAAABJRU5ErkJggg==) no-repeat 10px center;
@@ -57,29 +58,49 @@
     
     h1 {
       font-size: 28px;
-      color: #2B3F52; }
+      color: #2B3F52; 
+      padding-top: 6px;
+      padding-bottom: 6px;
+      background: #f9f9f9;
+    }
     
     h2 {
-      font-size: 24px;
-      border-bottom: 1px solid #DDE4E9;
-      color: #2B3F52; }
+      font-size: 20px;
+      padding-top: 6px;
+      padding-bottom: 6px;
+      background: #f8f8f8;
+      color: #2B3F52; 
+    }
     
     h3 {
-      font-size: 18px;
-      color: #2B3F52;  }
+      font-size: 16px;
+      color: #2B3F52;  
+      padding-top: 6px;
+      padding-bottom: 6px;
+      background: #f8f8f8;
+    }
     
     h4 {
-      font-size: 16px;
-      color: #2B3F52;  }
+      font-size: 14px;
+      color: #2B3F52;  
+      padding-top: 6px;
+      padding-bottom: 6px;
+      background: #f8f8f8;
+    }
     
     h5 {
-      font-size: 14px;
-      color: #2B3F52;  }
+      font-size: 12px;
+      color: #2B3F52; 
+      padding-top: 6px;
+      padding-bottom: 6px;
+      background: #f8f8f8;
+    }
     
     h6 {
       color: #2B3F52;
-      font-size: 14px;
-     }
+      font-size: 12px;
+      background: #f9f9f9;
+    }
     
     p, blockquote, ul, ol, dl, li, table, pre {
       margin: 15px 0;
@@ -119,7 +140,9 @@
     li {
       margin: 0; }
     ul, ol {
-      padding-left: 30px; }
+      padding-left: 30px; 
+      line-height: 1.5;
+    }
     
     ul :first-child, ol :first-child {
       margin-top: 0; }
@@ -147,11 +170,13 @@
           margin-bottom: 0; }
     
     blockquote {
-      border-left: 4px solid #ECF0F3;
-      /*padding: 0 15px;*/
-      padding: 15px;
+      border-left: 4px solid #abd7ff;
+      padding: 12px;
       background-color:#F7F9FA;
       color: #2B3F52; }
+      blockquote:hover{
+        border-left: 4px solid #67b6ff;
+      }
       blockquote > :first-child {
         margin-top: 0; }
       blockquote > :last-child {
@@ -257,6 +282,8 @@
       padding: 0;
       white-space: pre;
       border: none;
+      display: block;
+      color: #333;
       background: transparent; }
     
     .highlight pre {
@@ -287,8 +314,14 @@
     code {
         white-space: pre-wrap;
         word-break: break-all;
-        display: block;
+        display: inline-block;
+        font-family: Consolas,Monaco,Andale Mono,Ubuntu Mono,monospace;
         font-size: 12px;
+        line-height: 1;
+        border:none;
+        padding: 2px 5px;
+        color: #fff;
+        background-color: #67b6ff;
     }
     * {
      -webkit-print-color-adjust: exact;

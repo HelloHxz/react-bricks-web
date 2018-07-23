@@ -13,22 +13,26 @@ class manager{
         //     // console.log(event.target.getBoundingClientRect());	
         //     event.stopPropagation();
         // });
-        var resizeTimeoutID = null;
+        this.resizeTimeoutID = null;
         window.onresize = () => {
-            if(resizeTimeoutID){
-                window.clearTimeout(resizeTimeoutID);
-                resizeTimeoutID = null;
-            }
-            resizeTimeoutID = setTimeout(()=>{
-                for(var key in this.resizeEvent){
-                    try{
-                        this.resizeEvent[key]();
-                    }catch(e){
-                        delete this.resizeEvent[key];
-                    }
-                }
-            },200);
+           this.triggerResizeEvent();
         }
+    }
+
+    triggerResizeEvent = ()=>{
+        if(this.resizeTimeoutID){
+            window.clearTimeout(this.resizeTimeoutID);
+            this.resizeTimeoutID = null;
+        }
+        this.resizeTimeoutID = setTimeout(()=>{
+            for(var key in this.resizeEvent){
+                try{
+                    this.resizeEvent[key]();
+                }catch(e){
+                    delete this.resizeEvent[key];
+                }
+            }
+        },200);
     }
 
     _triggerHashChange(params){

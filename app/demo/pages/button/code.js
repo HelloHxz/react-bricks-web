@@ -1,4 +1,4 @@
-import {React,PageView,observer,PageContainer,XZ,Button,Icon,Tabs} from "react-bricks-web"
+import { React,PageView,observer,PageContainer,XZ,Button,Icon,Tabs } from "react-bricks-web"
 import MD from '../../components/md';
 import mdtext from './index.md';
 

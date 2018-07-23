@@ -27,7 +27,6 @@ export default class MD extends React.Component{
             smartypants: false,
             xhtml: false
         });
-        console.log(this.props.source);
         this.setState({
             source:myMarked(this.props.source)
         });

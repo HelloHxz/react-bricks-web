@@ -41,6 +41,10 @@ class XZ {
         Global.removeEvent('resize',id);
     }
 
+    triggerResizeEvent = () => {
+        Global.triggerResizeEvent();
+    }
+
     // 作为事件总线 用作于组件之间的交互
     listener = (eventkey,cb) => {
 

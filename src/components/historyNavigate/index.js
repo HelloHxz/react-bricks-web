@@ -1,6 +1,6 @@
 import ReactDOM from 'react-dom';
 import React from 'react';
-import "./index.less"
+import "../hashNavigate/index.less"
 import Navigation from './web'
 import XZ from '../xz';
 

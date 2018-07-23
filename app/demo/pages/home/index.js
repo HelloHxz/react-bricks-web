@@ -1,4 +1,4 @@
-import {React,PageView,Menu,PopView,Input,Form,Select,RouteView,Row,Col,Modal,Button,VBox,HBox} from "react-bricks-web"
+import {React,PageView,Menu,PopView,Input,Form,Select,RouteView,Row,Col,Modal,Button,VBox,HBox,XZ} from "react-bricks-web"
 import './index.less';
 import HomeStore from './store';
 import BaseStore from '../basicLayout/store';
@@ -31,6 +31,10 @@ class HomeScreen extends React.PureComponent {
     this.props.homestore.menuCollapsed = !this.props.homestore.menuCollapsed;
     this.setState({
       menuCollapsed:!this.state.menuCollapsed
+    },()=>{
+      setTimeout(()=>{
+         XZ.triggerResizeEvent();
+      },200);
     });
     // this.setState({
     //   leftStatus:this.state.leftStatus==='slidehide'?'slideshow':'slidehide'
