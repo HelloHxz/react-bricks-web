@@ -2,21 +2,16 @@ import React from 'react';
 import myMarked from 'marked';
 import 'prismjs/themes/prism.css';
 import Prism from 'prismjs';
-
-// 用正则取出不同代码
-
 export default class MD extends React.Component{
     constructor(props){
         super(props);
-        this.state={
-            source:''
-        };
     }
-    componentDidMount(){
+    getHtml(){
+        const language =  this.props.language||'javascript';
         myMarked.setOptions({
             renderer: new myMarked.Renderer(),
             highlight: function(code) {
-                return Prism.highlight(code, Prism.languages.javascript, 'javascript');
+                return Prism.highlight(code,language==='less'? Prism.languages.css : Prism.languages.javascript,language);
             },
             pedantic: false,
             gfm: true,
@@ -27,12 +22,10 @@ export default class MD extends React.Component{
             smartypants: false,
             xhtml: false
         });
-        this.setState({
-            source:myMarked(this.props.source)
-        });
+        return myMarked(this.props.source);
     }
     render(){
         return (
-        <div className='xz-doc-md' dangerouslySetInnerHTML={{__html:this.state.source}} />);
+        <div className='xz-doc-md' dangerouslySetInnerHTML={{__html:this.getHtml()}} />);
     }
 }
