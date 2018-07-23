@@ -3,6 +3,6 @@ import { Button } from 'react-bricks-web';
 
 export default class Example extends React.Component{
     render(){
-        return <div>xxxxxx</div>;
+        return <div>disabled</div>;
     }
 }

@@ -1,16 +1,27 @@
 import {React,PageView,observer,PageContainer,XZ,Button,Icon,Tabs} from "react-bricks-web"
 import MD from '../../components/md';
 import mdtext from './index.md';
-import code from '!babel-loader!raw-loader!./code.js';
+import code from '!raw-loader!./code.js';
 
 
 @PageView()
 class BottomDemo extends React.PureComponent {
-  componentDidMount() {
-    console.log(code)
-  }
+  
   constructor(props){
     super(props);
+  }
+  componentDidMount() {
+    const docList = require.context('./doc', true, /code\.js$/).keys();
+    const pages = {};
+    for(var i=0,j=docList.length;i<j;i+=1){
+      const codePath = docList[i];
+      let commonPath = (codePath.split("code.js")[0]);
+      commonPath = commonPath.substring(2,commonPath.length);
+      console.log("---->>>>");
+      console.log(require('./doc/'+commonPath+'index.md'));
+      console.log(require('!raw-loader!./doc/'+commonPath+'index.js'));
+      console.log(require('!raw-loader!./doc/'+commonPath+'index.less'));
+    }
   }
 
   goBack(){
