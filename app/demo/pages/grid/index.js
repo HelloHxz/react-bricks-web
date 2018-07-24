@@ -1,36 +1,30 @@
-import {React,PageView,observer,PageContainer,Row} from "react-bricks-web";
-import './index.less';
+import {React,PageView} from "react-bricks-web"
+import mdText from './index.md';
+import CodePage from '../../components/codePage';
 
 @PageView()
-class GridDemo extends React.PureComponent {
-
-  componentDidMount() {
+class Example extends React.PureComponent {
+  
+  getCodeListData() {
+    const docList = require.context('./doc', true, /index\.js$/).keys();
+    const Re = [];
+    for(var i=0,j=docList.length;i<j;i+=1){
+      const codePath = docList[i];
+      let commonPath = (codePath.split("index.js")[0]);
+      commonPath = commonPath.substring(2,commonPath.length);
+      Re.push({
+        JSCode:require('!raw-loader!./doc/'+commonPath+'index.js'),
+        LessCode:require('!raw-loader!./doc/'+commonPath+'index.less'),
+        CodeComponent:require('./doc/'+commonPath+'index.js').default,
+        MDStr:require('./doc/'+commonPath+'index.md')
+      });
+    }
+    return Re;
   }
 
-  constructor(props){
-    super(props);
-  }
-  render() {
-    return <div style={{height:'100%',overflow:'auto'}}>
-         <Row className='demo-grid'>
-            <Row.Col offset={{md:2}} span={{ xs:24, sm: 24, md: 12, lg: 8 }}><div className='demo-grid-inner'>11</div></Row.Col>
-            <Row.Col span={{ sm: 24, md: 12, lg: 8 }}><div className='demo-grid-inner'>11</div></Row.Col>
-            <Row.Col span={{ xs: 24, sm:24,md:12, lg: 6}}><div className='demo-grid-inner'>111</div></Row.Col>
-         </Row>
-
-         <Row className='demo-grid' gutter={16}>
-            <Row.Col span={8}><div className='demo-grid-inner'>11</div></Row.Col>
-            <Row.Col span={8}><div className='demo-grid-inner'>11</div></Row.Col>
-            <Row.Col span={8}><div className='demo-grid-inner'>111</div></Row.Col>
-         </Row>
-
-          <Row className='demo-grid' gutter={{lg:12,md:16,xl:24}}>
-            <Row.Col span={{ xs:24, sm: 24, md: 12, lg: 8 }}><div className='demo-grid-inner'>11</div></Row.Col>
-            <Row.Col span={{ sm: 24, md: 12, lg: 8 }}><div className='demo-grid-inner'>11</div></Row.Col>
-            <Row.Col span={{ xs: 24, sm:24,md:12, lg: 8}}><div className='demo-grid-inner'>111</div></Row.Col>
-         </Row>
-    </div>
+  render(){
+      return <CodePage mdText={mdText} getCodeListData={this.getCodeListData.bind(this)} />;
   }
 }
 
-export default GridDemo;
+export default Example;

@@ -22,7 +22,7 @@ class Store {
         key:'xxxxx',
         icon:'iconfont icon-desktop',
         children:[
-          {label:"HashRouter Hash路由",key:'home/hasnavigate',icon:'iconfont icon-desktop'},
+          {label:"HashRouter Hash路由",key:'home/hasnavigate'},
           {label:"HistoryRouter History路由",key:'home/historynavigate'}
         ]
       },
@@ -32,7 +32,7 @@ class Store {
         key:"components",
         children:[
             {label:"布局组件",group:[
-              {label:"Grid 栅栏布局",key:'components/grid',icon:'iconfont icon-desktop',},
+              {label:"Grid 栅栏布局",key:'components/grid'},
               {label:"TableLayout 表格布局",key:'components/tableLayout'},
               {label:"VBox 垂直布局",key:'components/vbox',},
               {label:"HBox 水平布局",key:'components/hbox'},
