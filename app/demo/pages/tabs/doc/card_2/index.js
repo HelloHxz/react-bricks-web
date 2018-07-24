@@ -12,7 +12,6 @@ export default class Example extends React.Component{
                 defaultSelectedKey='home'
                 type='card'
                 style={{height:200}} 
-                tabPosition='top' 
                 renderItem={this.renderItem.bind(this)} 
                 data={[
                     {label:"首页",key:'home'},

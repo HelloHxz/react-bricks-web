@@ -1,5 +1,6 @@
 {
-    "title":"基础使用方法"
+    "title":"标签样式类型"
 }
 -分割线-
-# Card
+
+> 通过指定**type**属性来选择tab标签的UI, *type='card'*

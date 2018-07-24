@@ -11,8 +11,8 @@
 }
 .doc-code-item{
   border:1px solid #e4e4e4;
-  margin-bottom: 10px;
-  padding: 6px;
+  margin-bottom: 15px;
+  padding:20px 10px;
   border-radius: 4px;
 }
 
@@ -20,7 +20,38 @@
   border-color:#67b6ff;
   background-color: #f9f9f9;
 }
-
+.doc-code-title{
+  position: relative;
+  user-select: none;
+  margin-top: 15px;
+  margin-bottom: 10px;
+  margin-left: -10px;
+  margin-right:-10px;
+}
+.doc-code-title span{
+  position: relative;
+  z-index: 2;
+  padding: 3px 12px;
+  background-color: #efefef;
+  border-radius: 30px;
+  display: inline-block;
+}
+.doc-code-title .toggle{
+  cursor: pointer;
+  color:#2c95fd;
+  margin-right:10px;
+}
+.doc-code-title .title{
+  margin-left:10px;
+}
+.doc-code-title .line{
+  position: relative;
+  z-index: 1;
+  height:1px;
+  background-color: #efefef;
+  width: 100%;
+  top:-12px;
+}
 .xz-doc-md{
     a {
       color: #4183C4; }

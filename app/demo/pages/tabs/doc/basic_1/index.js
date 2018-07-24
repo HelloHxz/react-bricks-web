@@ -10,9 +10,6 @@ export default class Example extends React.Component{
         return <div>
             <Tabs 
                 defaultSelectedKey='home'
-                // 如果外层元素高度固定的话 也可以指定height:100% 来固定高度
-                style={{height:200}} 
-                tabPosition='top' 
                 renderItem={this.renderItem.bind(this)} 
                 data={[
                     {label:"首页",key:'home'},
