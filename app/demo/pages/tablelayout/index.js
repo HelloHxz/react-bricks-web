@@ -1,38 +1,30 @@
-import {React,PageView,observer,PageContainer,Modal,Button,message,TableLayout} from "react-bricks-web";
-import './index.less';
+import {React,PageView} from "react-bricks-web"
+import mdText from './index.md';
+import CodePage from '../../components/codePage';
 
 @PageView()
-class TableLayoutDemo extends React.PureComponent {
-
-  componentDidMount() {
-  }
-
-  constructor(props){
-    super(props);
-    this.state={
-        visible:false
+class Example extends React.PureComponent {
+  
+  getCodeListData() {
+    const docList = require.context('./doc', true, /index\.js$/).keys();
+    const Re = [];
+    for(var i=0,j=docList.length;i<j;i+=1){
+      const codePath = docList[i];
+      let commonPath = (codePath.split("index.js")[0]);
+      commonPath = commonPath.substring(2,commonPath.length);
+      Re.push({
+        JSCode:require('!raw-loader!./doc/'+commonPath+'index.js'),
+        LessCode:require('!raw-loader!./doc/'+commonPath+'index.less'),
+        CodeComponent:require('./doc/'+commonPath+'index.js').default,
+        MDStr:require('./doc/'+commonPath+'index.md')
+      });
     }
+    return Re;
   }
 
-
-
-  render() {
-    return <div>
-        <TableLayout className='demo-tablelayout' style={{height:100}}>
-            <TableLayout.Cell style={{width:150,}}>width:150px</TableLayout.Cell>
-            <TableLayout.Cell>auto</TableLayout.Cell>
-            <TableLayout.Cell style={{width:100,}}>width:100px</TableLayout.Cell>
-            <TableLayout.Cell style={{width:70,}}>width:70px</TableLayout.Cell>
-        </TableLayout>
-        <br/>
-        <TableLayout className='demo-tablelayout'>
-            <TableLayout.Cell style={{width:150,}}>width:150px</TableLayout.Cell>
-            <TableLayout.Cell>auto</TableLayout.Cell>
-            <TableLayout.Cell>auto</TableLayout.Cell>
-            <TableLayout.Cell style={{width:70,}}>width:70px</TableLayout.Cell>
-        </TableLayout>
-    </div>
+  render(){
+      return <CodePage mdText={mdText} getCodeListData={this.getCodeListData.bind(this)} />;
   }
 }
 
-export default TableLayoutDemo;
+export default Example;
