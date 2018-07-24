@@ -9,6 +9,12 @@
 .pages-tabs{
     border-bottom: 2px solid  #67b6ff;
 }
+.doc-code-item{
+  border:1px solid #e4e4e4;
+  margin-bottom: 10px;
+  padding: 6px;
+  border-radius: 4px;
+}
 
 .xz-doc-md{
     a {
@@ -61,14 +67,12 @@
       color: #2B3F52; 
       padding-top: 6px;
       padding-bottom: 6px;
-      background: #f9f9f9;
     }
     
     h2 {
       font-size: 20px;
       padding-top: 6px;
       padding-bottom: 6px;
-      background: #f8f8f8;
       color: #2B3F52; 
     }
     
@@ -77,7 +81,6 @@
       color: #2B3F52;  
       padding-top: 6px;
       padding-bottom: 6px;
-      background: #f8f8f8;
     }
     
     h4 {
@@ -85,7 +88,6 @@
       color: #2B3F52;  
       padding-top: 6px;
       padding-bottom: 6px;
-      background: #f8f8f8;
     }
     
     h5 {
@@ -93,13 +95,11 @@
       color: #2B3F52; 
       padding-top: 6px;
       padding-bottom: 6px;
-      background: #f8f8f8;
     }
     
     h6 {
       color: #2B3F52;
       font-size: 12px;
-      background: #f9f9f9;
     }
     
     p, blockquote, ul, ol, dl, li, table, pre {
@@ -183,9 +183,12 @@
         margin-bottom: 0; }
     
     table {
-      padding: 0;border-collapse: collapse; }
+      width:100%;
+      padding: 0;
+      border-collapse: collapse; 
+    }
       table tr {
-        border-top: 1px solid #cccccc;
+        border-bottom: 1px solid #eee;
         background-color: white;
         margin: 0;
         padding: 0; }
@@ -193,11 +196,10 @@
           background-color: #f8f8f8; }
         table tr th {
           font-weight: bold;
-          border: 1px solid #cccccc;
           margin: 0;
+          text-align: left;
           padding: 6px 13px; }
         table tr td {
-          border: 1px solid #cccccc;
           margin: 0;
           padding: 6px 13px; }
         table tr th :first-child, table tr td :first-child {

@@ -16,7 +16,7 @@ export default class CodeItem extends React.Component{
     render(){
         const { CodeComponent,MDStr,JSCode,LessCode } = this.props.data;
         const MDArr = MDStr.split('-分割线-');
-        return (<div>
+        return (<div className='doc-code-item'>
             <CodeComponent />
             <MD source={MDArr[1]} />
             <MD source={'```javascript\r\n'+JSCode+'\r\n```'} />

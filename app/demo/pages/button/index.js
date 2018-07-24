@@ -1,14 +1,10 @@
-import {React,PageView,observer,PageContainer,XZ,Button,Icon,Tabs} from "react-bricks-web"
-import MD from '../../components/md';
-import CodeList from '../../components/codeList';
-import mdtext from './index.md';
+import {React,PageView} from "react-bricks-web"
+import mdText from './index.md';
+import CodePage from '../../components/codePage';
 
 @PageView()
 class BottomDemo extends React.PureComponent {
   
-  constructor(props){
-    super(props);
-  }
   getCodeListData() {
     const docList = require.context('./doc', true, /index\.js$/).keys();
     const Re = [];
@@ -26,45 +22,8 @@ class BottomDemo extends React.PureComponent {
     return Re;
   }
 
-  goBack(){
-    this.props.navigation.goBack();
-  }
-
-
-  onPageBeforeLeave(params){
-    if(params.action==="后退"){
-      return true;
-    }
-  }
-
-  renderItem(key){
-    if(key==='code'){
-      return this.renderCode();
-    }
-    return <div>{key}</div>
-  }
-  
-  renderCode() {
-    return <div style={{overflowX:'hidden'}}>
-        <MD source={mdtext} />
-        <CodeList data={this.getCodeListData()}/>
-    </div>
-  }
-
   render(){
-      return <Tabs style={
-          { height:'100%'}
-      } renderItem={this.renderItem.bind(this)} 
-        size='lg' 
-        tabStyle={{
-          textAlign:'center',
-          borderBottom:'1px solid #ccc'
-        }}
-        defaultSelectedKey='code'
-        data={[
-            {label:"代码示例",key:'code'},
-            {label:"知识点讲解",key:'knowdge'},
-    ]} />;
+      return <CodePage mdText={mdText} getCodeListData={this.getCodeListData.bind(this)} />;
   }
 }
 
