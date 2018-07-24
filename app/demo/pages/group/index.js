@@ -13,6 +13,7 @@ class Example extends React.PureComponent {
       let commonPath = (codePath.split("index.js")[0]);
       commonPath = commonPath.substring(2,commonPath.length);
       Re.push({
+        name: commonPath.substring(0,commonPath.length-1),
         JSCode:require('!raw-loader!./doc/'+commonPath+'index.js'),
         LessCode:require('!raw-loader!./doc/'+commonPath+'index.less'),
         CodeComponent:require('./doc/'+commonPath+'index.js').default,
