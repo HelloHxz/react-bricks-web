@@ -1,5 +1,6 @@
 import {React,PageView} from "react-bricks-web"
 import mdText from './index.md';
+import knowledgeText from './knowledge.md';
 import CodePage from '../../components/codePage';
 
 @PageView()
@@ -24,7 +25,7 @@ class BottomDemo extends React.PureComponent {
   }
 
   render(){
-      return <CodePage mdText={mdText} getCodeListData={this.getCodeListData.bind(this)} />;
+      return <CodePage mdText={mdText} knowledgeText={knowledgeText} getCodeListData={this.getCodeListData.bind(this)} />;
   }
 }
 

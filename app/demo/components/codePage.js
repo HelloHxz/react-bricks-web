@@ -7,6 +7,8 @@ export default class BottomDemo extends React.PureComponent {
   renderItem(key){
     if(key==='code'){
       return this.renderCode();
+    }else if(key==='knowdge'){
+      return <div style={{padding:10}}><MD source={this.props.knowledgeText} /></div>
     }
     return <div>{key}</div>
   }
