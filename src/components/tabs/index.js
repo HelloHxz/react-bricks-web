@@ -309,10 +309,10 @@ export default class Tabs extends React.Component{
 
     }
     nextClick(){
-        this.autoScroll(this.isVertical?this.scroll['offsetHeight']-50:this.scroll['offsetWidth']-50);
+        this.autoScroll(this.isVertical?this.scroll['offsetHeight']-30:this.scroll['offsetWidth']-50);
     }
     preClick(){
-        this.autoScroll(this.isVertical?50-this.scroll['offsetHeight']:50-this.scroll['offsetWidth']);
+        this.autoScroll(this.isVertical?30-this.scroll['offsetHeight']:50-this.scroll['offsetWidth']);
     }
     render(){
         const tabPosition = this.props.tabPosition||'top';
