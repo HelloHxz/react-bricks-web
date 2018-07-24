@@ -16,7 +16,7 @@ class BottomDemo extends React.PureComponent {
         JSCode:require('!raw-loader!./doc/'+commonPath+'index.js'),
         LessCode:require('!raw-loader!./doc/'+commonPath+'index.less'),
         CodeComponent:require('./doc/'+commonPath+'index.js').default,
-        MDStr:require('./doc/'+commonPath+'index.md')
+        MDText:require('./doc/'+commonPath+'index.md')
       });
     }
     return Re;
