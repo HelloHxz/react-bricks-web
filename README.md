@@ -15,7 +15,7 @@ http://localhost:8080/demo.html
 
 ## 在线地址
 
-https://hellohxz.github.io/website/
+https://hellohxz.github.io/react-bricks-web/
 
 
 
