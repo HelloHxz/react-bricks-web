@@ -7,17 +7,18 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 
 
-function getEntryAndHtmlPlugin(siteArr){
+function getEntryAndHtmlPlugin(siteArr,isProd){
  
   var re = {entry:{},htmlplugins:[]};
   for(var i=0,j=siteArr.length;i<j;i++){
     var siteName = siteArr[i];
     re.entry[siteName] = "./"+siteName+"/index.js";//js多入口字典对象
     re.htmlplugins.push(new HtmlWebpackPlugin({
-        filename: siteName+'.html', //打包出来的html名字
+        // 打包的时候将html输出到git根目录下面 方便发布
+        // 正常的：filename: siteName+'.html', //打包出来的html名字
+        filename: isProd?'../'+siteName+'.html':(siteName)+'.html', //打包出来的html名字
         template: './'+siteName+'/index.html', //模版路径
         inject: 'body' ,
-        chunks:[siteName],//js注入的名字
         hash:true
       }));
   }
@@ -26,11 +27,11 @@ function getEntryAndHtmlPlugin(siteArr){
 
 module.exports = function (env) {
 
-  const appName = 'demo';
+  const appName = 'index';
 
   const nodeEnv = env && env.prod ? 'production' : 'development';
   const isProd = nodeEnv === 'production';
-  var entryAndHtmlPlugin = getEntryAndHtmlPlugin([appName]);
+  var entryAndHtmlPlugin = getEntryAndHtmlPlugin([appName],isProd);
   var entry = entryAndHtmlPlugin.entry;
   var plugins= [
       new webpack.NamedModulesPlugin(),
@@ -74,8 +75,9 @@ return {
     // the output bundle
 
     path: path.resolve(__dirname, 'dist'),
-
-    publicPath: isProd?'./':'/'
+    // 打包的时候将html输出到git根目录下面 方便发布 目录引用 加dist
+    // 正常： publicPath: isProd?'./':'/'
+    publicPath: isProd?'./dist/':'/'
   },
  
   watchOptions: {
