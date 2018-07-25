@@ -18,19 +18,17 @@ class Store {
         key:'home/theme',
       },
       {
-        label:'页面路由',
-        key:'xxxxx',
-        icon:'iconfont icon-desktop',
-        children:[
-          {label:"HashRouter 路由",key:'home/hasnavigate'},
-          {label:"HistoryRouter 路由",key:'home/historynavigate'}
-        ]
-      },
-      {
         label:"组件",
         icon:'iconfont icon-team',
         key:"components",
         children:[
+            {
+              label:'路由',
+              key:'router',
+              group:[
+                {label:"Router 路由",key:'home/hasnavigate'},
+              ]
+            },
             {label:"布局组件",group:[
               {label:"Grid 栅栏布局",key:'components/grid'},
               {label:"TableLayout 表格布局",key:'components/tableLayout'},
