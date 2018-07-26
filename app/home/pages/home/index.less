@@ -1,0 +1,41 @@
+.home-top{
+    position: relative;
+    overflow: hidden;
+}
+
+.home-top .xz-image{
+    position: relative;
+    z-index: 1;
+    -webkit-filter: blur(2px);
+       -moz-filter: blur(2px);
+        -ms-filter: blur(2px);    
+            filter: blur(2px);
+    filter: progid:DXImageTransform.Microsoft.Blur(PixelRadius=2, MakeShadow=false);
+    transition:top .5s ease;
+    top:0;
+    vertical-align: middle;
+}
+.home-top .title-content{
+    vertical-align: middle;
+    display: inline-block;
+}
+
+.home-top .main-title{
+    font-size: 38px;
+}
+
+.home-top:hover .xz-image{
+    top: -20px;
+    -webkit-filter: blur(1px);
+    -moz-filter: blur(1px);
+     -ms-filter: blur(1px);    
+         filter: blur(1px);
+ filter: progid:DXImageTransform.Microsoft.Blur(PixelRadius=1, MakeShadow=false);
+}
+
+
+
+.home-body{
+    min-height: 500px;
+    background-color: #f2f2f9;
+}
