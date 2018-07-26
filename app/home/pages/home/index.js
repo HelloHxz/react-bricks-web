@@ -26,7 +26,10 @@ class HomeScreen extends React.PureComponent {
            ]} />
         <div className='home-top'>
           <Image style={{ width:300,height:300 }} src={BkImage} resizeMode="contain" />
-          <div className='title-content'><span className='main-title'>拥抱React 拥抱全端</span></div>
+          <div className='title-content'>
+            <span className='main-title'>Bricks UI</span>
+            <span className='sub-title'>拥抱React&nbsp;&nbsp;&nbsp;&nbsp;拥抱Bricks&nbsp;&nbsp;&nbsp;&nbsp;拥抱全端&nbsp;&nbsp;</span>
+          </div>
         </div>
         <div className='home-body'></div>
       </div>
