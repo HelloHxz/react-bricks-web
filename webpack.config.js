@@ -92,6 +92,7 @@ return {
     // match the output path
     publicPath: isProd?'./':'/',
     //支持historyState
+    //historyApiFallback:true ???
     historyApiFallback:{
       index:isProd?'./':'/'+appList[0]+'.html',
       // rewrites: [
