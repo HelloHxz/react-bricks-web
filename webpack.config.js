@@ -19,6 +19,7 @@ function getEntryAndHtmlPlugin(siteArr,isProd){
         filename: isProd?'../'+siteName+'.html':(siteName)+'.html', //打包出来的html名字
         template: './'+siteName+'/index.html', //模版路径
         inject: 'body' ,
+        chunks:[siteName],//js注入的名字
         hash:true
       }));
   }
@@ -27,11 +28,11 @@ function getEntryAndHtmlPlugin(siteArr,isProd){
 
 module.exports = function (env) {
 
-  const appName = 'index';
+  const appList = ['index','home'];
 
   const nodeEnv = env && env.prod ? 'production' : 'development';
   const isProd = nodeEnv === 'production';
-  var entryAndHtmlPlugin = getEntryAndHtmlPlugin([appName],isProd);
+  var entryAndHtmlPlugin = getEntryAndHtmlPlugin(appList,isProd);
   var entry = entryAndHtmlPlugin.entry;
   var plugins= [
       new webpack.NamedModulesPlugin(),
@@ -92,7 +93,7 @@ return {
     publicPath: isProd?'./':'/',
     //支持historyState
     historyApiFallback:{
-      index:isProd?'./':'/'+appName+'.html',
+      index:isProd?'./':'/'+appList[0]+'.html',
       // rewrites: [
       //   { from: /^\/admin/, to: 'build/admin.html' }
       // ],
