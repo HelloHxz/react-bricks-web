@@ -334,6 +334,9 @@ export default class Tabs extends React.Component{
             }else{
                 wrapperClassName.push('xz-tabs-wrapper-fixed-width');
             }
+            if(this.props.className){
+                wrapperClassName.push(this.props.className);
+            }
             return <div style={{
                 ...propsStyle,
                 ...wrapperStyle
