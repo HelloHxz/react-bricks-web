@@ -11,7 +11,13 @@ class HomeScreen extends React.PureComponent {
     super(props);
   }
 
-
+  renderWTFPL(){
+    const spans = [];
+    for(let i=0;i<1000;i+=1){
+      spans.push(<span key={i}>WTFPL</span>);
+    }
+    return <div className='wtfpl'>{spans}</div>;
+  }
 
   render() {
     return (
@@ -23,10 +29,13 @@ class HomeScreen extends React.PureComponent {
             data={[
                 {label:"首页",key:'home'},
                 {label:"Bricks Web",key:'email'},
-                {label:"Bricks MobileWeb & Bricks Native",key:'info'},
+                {label:"Bricks Mobile Web & Bricks Native",key:'info'},
+                {label:"Bricks Desktop",key:'electron'},
+                {label:"Bricks Super Example",key:'superdemo'},
                 {label:"关于我们",key:'about'},
            ]} />
         <div className='home-top'>
+           {this.renderWTFPL()}
           <Image style={{ width:300,height:300 }} src={BkImage} resizeMode="contain" />
           <div className='title-content'>
             <span className='main-title'>Bricks UI</span>
@@ -44,19 +53,19 @@ class HomeScreen extends React.PureComponent {
               </Row.Col>
               <Row.Col span={{sm:24,md:12,lg:6}}>
                 <div className='class-card'>
-                  <span>Bricks Mobile Web</span>
+                  <span>Bricks Mobile Web & Bricks Mobile Native</span>
                   <span>实验中</span>
                 </div>
               </Row.Col>
               <Row.Col span={{sm:24,md:12,lg:6}}>
                 <div className='class-card'>
-                  <span>Bricks Mobile App</span>
+                  <span>Bricks Desktop</span>
                   <span>实验中</span>
                 </div>
               </Row.Col>
               <Row.Col span={{sm:24,md:12,lg:6}}>
                 <div className='class-card'>
-                  <span>Bricks ERP</span>
+                  <span>Bricks Super Example</span>
                   <span>规划中</span>
                 </div>
               </Row.Col>
