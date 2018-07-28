@@ -13,7 +13,7 @@
         -ms-filter: blur(2px);    
             filter: blur(2px);
     filter: progid:DXImageTransform.Microsoft.Blur(PixelRadius=2, MakeShadow=false);
-    transition:top .7s ease;
+    transition:top .5s ease, filter .5s ease;
     top:0;
 }
 .home-top .title-content{
@@ -86,8 +86,9 @@
     top:0;
 }
 .class-card-wrapper{
-    padding: 0 20px 20px 20px;
+    padding: 0 20px 5px 20px;
 }
+
 .class-card-title{
     font-size: 21px;
     position: relative;
@@ -100,8 +101,10 @@
 }
 .class-card{
     height: 240px;
-    margin-top: 20px;
+    margin-top: 15px;
+    margin-bottom: 15px;
     padding-top: 30px;
+    box-shadow: #ccc 0px 5px 10px; 
     width: 100%;
     position: relative;
     text-align:center;
@@ -139,10 +142,59 @@
 }
 
 .feature-warpper{
-    height:450px;
+    height:250px;
     background-color: #1a80de;
+    margin-bottom: 20px;
+    color:#fff;
+    padding: 40px 80px;
+    position: relative;
+}
+.right-tri-bk{
+    width: 0;
+    height: 0;
+    border-top: 250px solid transparent;
+    border-right: 350px solid #fff;
+    border-left: 150px solid transparent;
+    position: absolute;
+    bottom: 0;
+    right: 0;
 }
 
+.feature-title{
+    font-size: 27px;
+    margin-top:10px;
+    width:80%;
+    font-family: Impact, Charcoal, sans-serif;
+    transition: transform .3s ease;
+    transform-origin: center center;
+}
+
+.feature-warpper:hover .feature-title{
+    transform: scale(1.05);
+}
+
+.feature-desc{
+    display: inline-block;
+    width: 50%;
+    margin-top: 30px;
+    color:#f3f3f3;
+    line-height: 1.6;
+    font-size: 14px;
+}
+
+.bw.feature-warpper{
+    background-color: #fff;
+}
+
+.bw .right-tri-bk{
+    border-right-color: #1a80de;
+}
+.bw .feature-title{
+    color: #000;
+}
+.bw .feature-desc{
+    color: #333;
+}
 .footer{
     height:200px;
     background-color: #000;
