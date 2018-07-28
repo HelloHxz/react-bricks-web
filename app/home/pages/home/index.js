@@ -19,7 +19,6 @@ class HomeScreen extends React.PureComponent {
   }
 
 
-
   render() {
     return (
       <div>
@@ -31,7 +30,9 @@ class HomeScreen extends React.PureComponent {
             data={[
                 {label:"首页",key:'home'},
                 {label:"Bricks Web",key:'email'},
-                {label:"Bricks MobileWeb & Bricks Native",key:'info'},
+                {label:"Bricks Mobile Web & Bricks Native",key:'info'},
+                {label:"Bricks Desktop",key:'electron'},
+                {label:"Bricks Super Example",key:'superdemo'},
                 {label:"关于我们",key:'about'},
            ]} />
       </div>
