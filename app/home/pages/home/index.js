@@ -3,6 +3,7 @@ import './index.less';
 import Web from './components/web';
 import Home from './components/home';
 import Desktop from './components/desktop';
+import Mobile from './components/mobile';
 
 @PageView()
 class HomeScreen extends React.PureComponent {
@@ -20,6 +21,8 @@ class HomeScreen extends React.PureComponent {
       return <Web />
     }else if(key==='desktop'){
       return <Desktop/>
+    }else if(key==='mobile'){
+      return <Mobile/>;
     }
     return <div>{key}</div>;
   }
@@ -36,7 +39,7 @@ class HomeScreen extends React.PureComponent {
             data={[
                 {label:"首页",key:'home'},
                 {label:"Bricks Web",key:'web'},
-                {label:"Bricks Mobile Web & Bricks Native",key:'app'},
+                {label:"Bricks Mobile Web & Bricks Native",key:'mobile'},
                 {label:"Bricks Desktop",key:'desktop'},
                 {label:"Bricks Super Example",key:'superdemo'},
                 {label:"关于我们",key:'about'},
