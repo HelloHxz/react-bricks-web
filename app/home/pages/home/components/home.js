@@ -1,5 +1,6 @@
 import {React,PageView,Image,Tabs,Input,Form,Select,RouteView,Row,Modal,Button,VBox,HBox,XZ} from "react-bricks-web"
 import BkImage from '../../../imgs/bk.jpg';
+import './home.less';
 
 class HomeScreen extends React.PureComponent {
 
@@ -27,26 +28,58 @@ class HomeScreen extends React.PureComponent {
             <Row gutter={20}>
               <Row.Col span={{sm:24,md:12,lg:6}}>
                 <div className='class-card'>
-                  <span>Bricks PC Web</span>
-                  <span>开发中</span>
+                  <span className='class-card-status'>开发中</span>
+                  <span className='class-card-title'>
+                  Bricks PC Web</span>
+                  <p>
+                      用于构建PC端中后台管理系统,包含丰富的组件让您快速轻松的开发体验. 采用<a href='https://reactjs.org/'>React</a>/<a href='https://mobx.js.org/'>Mobx</a>作为开发技术栈
+                  </p>
+                  <div className='class-card-bottom'>
+                    
+                    <a href='./index.html'><Button type='primary'>Demo</Button></a>
+                    <a href='https://github.com/HelloHxz/react-bricks-web'><Button>github</Button></a>
+                 </div>
                 </div>
               </Row.Col>
               <Row.Col span={{sm:24,md:12,lg:6}}>
                 <div className='class-card'>
-                  <span>Bricks Mobile Web & Bricks Mobile Native</span>
-                  <span>实验中</span>
+                <span className='class-card-status'>实验中</span>
+                  <span className='class-card-title'>Bricks Mobile Web & Native</span>
+                  <p>
+                       一套代码用于构建IOS,Android,Mobile Web的组件库,采用<a href='https://reactjs.org/'>React</a>/
+                       <a href='https://facebook.github.io/react-native/'>React Native</a>/
+                       <a href='https://mobx.js.org/'>Mobx</a>作为开发技术栈
+                  </p>
+                 <div className='class-card-bottom'>
+                    <Button type='primary'>Demo</Button>
+                    <a href='https://github.com/HelloHxz/react-bricks'><Button>github</Button></a>
+                 </div>
                 </div>
               </Row.Col>
               <Row.Col span={{sm:24,md:12,lg:6}}>
                 <div className='class-card'>
-                  <span>Bricks Desktop</span>
-                  <span>实验中</span>
+                <span className='class-card-status'>策划中</span>
+                  <span className='class-card-title'>Bricks Desktop</span>
+                  <p>
+                      用于构建PC端中后台管理系统,包含丰富的组件让您快速轻松的开发体验. 采用React/Mobx作为开发技术栈
+                  </p>
+                  <div className='class-card-bottom'>
+                    <Button type='primary'>Demo</Button>
+                    <Button>github</Button>
+                 </div>
                 </div>
               </Row.Col>
               <Row.Col span={{sm:24,md:12,lg:6}}>
                 <div className='class-card'>
-                  <span>Bricks Super Example</span>
-                  <span>规划中</span>
+                <span className='class-card-status'>幻想中</span>
+                  <span className='class-card-title'>Bricks Super Example</span>
+                  <p>
+                      使用Bricks UI 开发的全端的超级DEMO,以IM为核心,包括企业动态,审批,通讯录...等企业管理应用
+                  </p>
+                  <div className='class-card-bottom'>
+                    <a href='./index.html'><Button type='primary'>Demo</Button></a>
+                    <Button>github</Button>
+                 </div>
                 </div>
               </Row.Col>
             </Row>
