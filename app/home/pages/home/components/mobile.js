@@ -14,10 +14,10 @@ class MobilePage extends React.PureComponent {
     return (
         <React.Fragment>
           <div className='mobile-top'>
-              <i style={{position:'absolute',left:30,top:30,color:'#137a92',fontSize:170}} className='icon iconfont icon-android'/>
-              <i style={{position:'absolute',left:'45%',top:0,color:'#137a92',fontSize:160}} className='icon iconfont icon-html5'/>
-              <i style={{position:'absolute',left:'31%',bottom:10,color:'#137a92',fontSize:180}} className='icon iconfont icon-ios'/>
-              <i style={{position:'absolute',right:-10,bottom:10,color:'#137a92',fontSize:260}} className='icon iconfont icon-mobile2'/>
+              <i style={{position:'absolute',left:30,top:30,color:'#0f6173',fontSize:170}} className='icon iconfont icon-android'/>
+              <i style={{position:'absolute',left:'45%',top:0,color:'#0f6173',fontSize:160}} className='icon iconfont icon-html5'/>
+              <i style={{position:'absolute',left:'31%',bottom:10,color:'#0f6173',fontSize:180}} className='icon iconfont icon-ios'/>
+              <i style={{position:'absolute',right:-10,bottom:10,color:'#0f6173',fontSize:260}} className='icon iconfont icon-mobile2'/>
               {this.renderWTFPL()}
               <p className='mobile-top-title'>Bricks Mobile</p>
               <p className='mobile-top-desc'>专注移动端组件封装,用于构建专业的手机端移动应用,

@@ -15,7 +15,7 @@ class ExamplePage extends React.PureComponent {
         <React.Fragment>
           <div className='example-top'>
             {this.renderWTFPL()}
-            <i style={{position:'absolute',right:0,bottom:-30,fontSize:320,color:'#8e7c6c'}} className='icon iconfont icon-jimushizuzhuang'/>
+            <i style={{position:'absolute',right:0,bottom:-30,fontSize:320,color:'#8a7a6c'}} className='icon iconfont icon-jimushizuzhuang'/>
             <p className='example-top-title'>Bricks Super Example</p>
             <p className='example-top-desc'>
             使用Bricks UI开发的超级DEMO,用来证明Bricks UI的开发能力,能够适用不同的开发业务场景,

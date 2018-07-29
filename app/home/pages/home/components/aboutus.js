@@ -17,7 +17,7 @@ class AboutUsPage extends React.PureComponent {
             {this.renderWTFPL()}
             <p className='aboutus-top-title'>About us</p>
             <p className='aboutus-top-desc'>
-            我们有一个专业的团队来维护当前项目的设计,开发,测试.多年的企业应用开发经验积累,让我们想的更多...</p>
+            我们有一个专业的团队来维护当前项目的设计,开发,测试.多年的企业应用开发经验积累,让我们想的更多...想的更远...</p>
           </div>
         </React.Fragment>
     );
