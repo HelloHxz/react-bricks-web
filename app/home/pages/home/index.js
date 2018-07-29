@@ -4,6 +4,8 @@ import Web from './components/web';
 import Home from './components/home';
 import Desktop from './components/desktop';
 import Mobile from './components/mobile';
+import Example from './components/example';
+import AboutUS from './components/aboutus';
 import '../../icon/iconfont.css';
 
 @PageView()
@@ -24,6 +26,11 @@ class HomeScreen extends React.PureComponent {
       return <Desktop/>
     }else if(key==='mobile'){
       return <Mobile/>;
+    }else if(key==='example'){
+      return <Example/>;
+    }
+    else if(key==='about'){
+      return <AboutUS/>;
     }
     return <div>{key}</div>;
   }
@@ -42,7 +49,7 @@ class HomeScreen extends React.PureComponent {
                 {label:"Bricks Web",key:'web'},
                 {label:"Bricks Mobile Web & Bricks Native",key:'mobile'},
                 {label:"Bricks Desktop",key:'desktop'},
-                {label:"Bricks Super Example",key:'superdemo'},
+                {label:"Bricks Super Example",key:'example'},
                 {label:"关于我们",key:'about'},
            ]} />
       </div>

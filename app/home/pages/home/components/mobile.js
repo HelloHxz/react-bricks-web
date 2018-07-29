@@ -1,7 +1,7 @@
 import {React,PageView,Image,Tabs,Input,Form,Select,RouteView,Row,Icon,Modal,Button,VBox,HBox,XZ} from "react-bricks-web"
 import './mobile.less';
 
-class HomeScreen extends React.PureComponent {
+class MobilePage extends React.PureComponent {
   renderWTFPL(){
     const spans = [];
     for(let i=0;i<1000;i+=1){
@@ -14,9 +14,9 @@ class HomeScreen extends React.PureComponent {
     return (
         <React.Fragment>
           <div className='mobile-top'>
-              <Icon style={{position:'absolute',left:30,top:30}} customIcon='icon iconfont icon-android mbkicon'/>
-              <Icon style={{position:'absolute',left:'31%',bottom:'-10%'}} customIcon='icon iconfont icon-ios mbkicon'/>
-              <Icon style={{position:'absolute',right:20,bottom:100}} customIcon='icon iconfont icon-mobile2 mbkicon'/>
+              <i style={{position:'absolute',left:30,top:30,color:'#137a92'}} className='icon iconfont icon-android mbkicon'/>
+              <i style={{position:'absolute',left:'31%',bottom:'-10%',color:'#137a92'}} className='icon iconfont icon-ios mbkicon'/>
+              <i style={{position:'absolute',right:20,bottom:100,color:'#137a92'}} className='icon iconfont icon-mobile2 mbkicon'/>
               {this.renderWTFPL()}
               <p className='mobile-top-title'>Bricks Mobile</p>
               <p className='mobile-top-desc'>专注移动端组件封装,用于构建专业的手机端移动应用,
@@ -28,4 +28,4 @@ class HomeScreen extends React.PureComponent {
   }
 }
 
-export default HomeScreen;
+export default MobilePage;
