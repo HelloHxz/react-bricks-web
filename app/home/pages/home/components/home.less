@@ -8,10 +8,7 @@
 .home-top .xz-image{
     position: relative;
     z-index: 1;
-    -webkit-filter: blur(2px);
-       -moz-filter: blur(2px);
-        -ms-filter: blur(2px);    
-            filter: blur(2px);
+    filter: blur(2px);
     filter: progid:DXImageTransform.Microsoft.Blur(PixelRadius=2, MakeShadow=false);
     transition:top .5s ease, filter .5s ease;
     top:0;
@@ -35,14 +32,9 @@
 
 .home-top:hover .xz-image{
     top: -8px;
-    -webkit-filter: blur(1px);
-    -moz-filter: blur(1px);
-     -ms-filter: blur(1px);    
-         filter: blur(1px);
- filter: progid:DXImageTransform.Microsoft.Blur(PixelRadius=1, MakeShadow=false);
+    filter: blur(1px);
+    filter: progid:DXImageTransform.Microsoft.Blur(PixelRadius=1, MakeShadow=false);
 }
-
-
 
 .home-body{
     background-color: #f2f2f9;
@@ -55,76 +47,13 @@
     line-height: 60px;
 }
 
-.class-card-status{
-    font-size: 12px;
-    color: #fff;
-    background-color: #1890ff;
-    position: absolute;
-    top: -10px;
-    border-radius: 10px;
-    padding: 1px 8px;
-    left:10px;
+.home-body .class-card{
+    height: 240px;
 }
 
 .top-tabs .xz-tabs-indicator{
     top:0;
 }
-.class-card-wrapper{
-    padding: 0 20px 5px 20px;
-}
-
-.class-card-title{
-    font-size: 21px;
-    position: relative;
-    display: inline-block;
-    font-family: Impact, Charcoal, sans-serif;
-    transition: transform .5s ease;
-}
-.class-card:hover .class-card-title{
-    transform: scale(1.2);
-}
-.class-card{
-    height: 240px;
-    margin-top: 15px;
-    margin-bottom: 15px;
-    padding-top: 30px;
-    box-shadow: #ccc 0px 5px 10px; 
-    width: 100%;
-    position: relative;
-    text-align:center;
-    background-color: #fff;
-    transition: transform .3s ease;
-}
-.class-card-bottom{
-    position: absolute;
-    bottom: 30px;
-    left: 0;
-    width: 100%;
-}
-
-.class-card button{
-    border-radius: 30px;
-    width: 90px;
-}
-
-.class-card button:first-child{
-    margin-right: 30px;
-}
-
-.class-card a{
-    text-decoration: none;
-    color:#1890ff;
-    padding-left:4px;
-    padding-right:4px; 
-}
-
-.class-card p{
-    padding:20px 10px;
-    font-size: 14px;
-    color:#757474;
-    line-height: 1.5;
-}
-
 .feature-warpper{
     height:250px;
     background-color: #1a80de;
@@ -180,5 +109,5 @@
 }
 .footer{
     height:200px;
-    background-color: #000;
+    background-color: #383838;
 }
