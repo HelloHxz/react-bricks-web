@@ -4,6 +4,7 @@ import Web from './components/web';
 import Home from './components/home';
 import Desktop from './components/desktop';
 import Mobile from './components/mobile';
+import '../../icon/iconfont.css';
 
 @PageView()
 class HomeScreen extends React.PureComponent {

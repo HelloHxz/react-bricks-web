@@ -20,7 +20,7 @@ export default class Icon extends React.Component{
         if(this.props.type){
             children.push(<i key='icon' className={`xz-icon xz-icon-${this.props.type}`}/>);
         }else if(this.props.customIcon){
-            children.push(<i key='icon' className={`xz-icon ${this.props.customIcon}`}/>);
+            children.push(<i key='icon' className={`${this.props.customIcon}`}/>);
         }
         if(text){
             outP.className.push(`xz-icon-text-${textPlacement||'right'}`);
