@@ -1,7 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 var mockData = require("./mock")
-// var fs= require('fs');
+var fs = require('fs');
 // var CopyWebpackPlugin = require('copy-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 
@@ -26,10 +26,57 @@ function getEntryAndHtmlPlugin(siteArr,isProd){
   return re;
 }
 
+function exists(path){  
+  return fs.existsSync(path);  
+}  
+function isFile(path){  
+  return exists(path) && fs.statSync(path).isFile();  
+} 
+function createTheme(pathArr){
+  if(!pathArr||pathArr.length===0){
+    return;
+  }
+  const ComPath = './src/components';
+  const libLessFiles = fs.readdirSync(ComPath);
+  const LessArr = [];
+  let DefaultTheme = null;
+  for(var i=0,j=libLessFiles.length;i<j;i+=1){
+    const folder = libLessFiles[i];
+    const LessPath = ComPath+"/"+folder+'/index.less';
+    if(isFile(LessPath)){
+      var data = fs.readFileSync(LessPath, 'utf8');
+      if(folder!=='theme'){
+        LessArr.push(data);
+      }else{
+        DefaultTheme = data;
+      }
+    }
+  }
+
+  const seed = 0;
+  if(DefaultTheme && LessArr.length>0){
+      for(var n=0,m=pathArr.length;n<m;n+=1){
+        const customThemeDir = pathArr[n];
+        const customLessFileList = fs.readdirSync(customThemeDir);
+        customLessFileList.forEach((customLessPath)=>{
+          const customLessName = customLessPath.split('.')[0];
+          const fullPath = path.join(customThemeDir,customLessPath);
+          if(isFile(fullPath)){
+            var customLessText = fs.readFileSync(fullPath, 'utf8');
+            console.log(">>>>");
+            console.log(customLessText);
+          }
+        });
+      }
+  }
+      // console.log(LessArr.join(' '))
+}
+
 module.exports = function (env) {
 
   const appList = ['index','home'];
-
+  const ThemePathArr = ['./app/index/theme/'];
+  createTheme(ThemePathArr);
   const nodeEnv = env && env.prod ? 'production' : 'development';
   const isProd = nodeEnv === 'production';
   var entryAndHtmlPlugin = getEntryAndHtmlPlugin(appList,isProd);
