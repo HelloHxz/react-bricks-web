@@ -65,9 +65,13 @@ function createTheme(pathArr){
             var customLessText = fs.readFileSync(fullPath, 'utf8');
             console.log(">>>>");
             console.log(customLessText);
+            seed+=1;
           }
         });
       }
+  }
+  if(seed===0){
+    console.log("自定义主题生成失败！是否路径配置正确")
   }
       // console.log(LessArr.join(' '))
 }
