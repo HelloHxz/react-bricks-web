@@ -53,7 +53,7 @@ function createTheme(pathArr){
     }
   }
 
-  const seed = 0;
+  let seed = 0;
   if(DefaultTheme && LessArr.length>0){
       for(var n=0,m=pathArr.length;n<m;n+=1){
         const customThemeDir = pathArr[n];
