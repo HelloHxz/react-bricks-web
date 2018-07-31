@@ -32,6 +32,9 @@ function exists(path){
 function isFile(path){  
   return exists(path) && fs.statSync(path).isFile();  
 } 
+function isDir(path){  
+  return exists(path) && fs.statSync(path).isDirectory();  
+}  
 function createTheme(pathArr){
   if(!pathArr||pathArr.length===0){
     return;
@@ -46,7 +49,7 @@ function createTheme(pathArr){
     if(isFile(LessPath)){
       var data = fs.readFileSync(LessPath, 'utf8');
       if(folder!=='theme'){
-        LessArr.push(data);
+        LessArr.push(data.replace("@import '../theme/index.less';",''));
       }else{
         DefaultTheme = data;
       }
@@ -55,17 +58,33 @@ function createTheme(pathArr){
 
   let seed = 0;
   if(DefaultTheme && LessArr.length>0){
+    const allComLess = LessArr.join(" ");
+    const newLessFolderPath = path.join(ComPath,'/theme/custom');
+
+    if(isDir(newLessFolderPath)){
+      // 清空
+      var dirList = fs.readdirSync(newLessFolderPath);
+      dirList.forEach(function(fileName) {
+       fs.unlinkSync(path.join(newLessFolderPath,fileName));
+      });
+    }else{
+      fs.mkdirSync(newLessFolderPath);
+    }
+
       for(var n=0,m=pathArr.length;n<m;n+=1){
         const customThemeDir = pathArr[n];
         const customLessFileList = fs.readdirSync(customThemeDir);
         customLessFileList.forEach((customLessPath)=>{
-          const customLessName = customLessPath.split('.')[0];
-          const fullPath = path.join(customThemeDir,customLessPath);
-          if(isFile(fullPath)){
-            var customLessText = fs.readFileSync(fullPath, 'utf8');
-            console.log(">>>>");
-            console.log(customLessText);
-            seed+=1;
+          const clpArr = customLessPath.split('.');
+          const customLessName = clpArr[0];
+          const type = clpArr[1];
+          if(type==='less'){
+            const fullPath = path.join(customThemeDir,customLessPath);
+            if(isFile(fullPath)){
+              var customLessText = fs.readFileSync(fullPath, 'utf8');
+              seed+=1;
+              fs.writeFileSync(path.join(newLessFolderPath,customLessName+".less"), DefaultTheme + "  @theme-namespace:"+customLessName+"; "+customLessText+" "+allComLess);
+            }
           }
         });
       }
