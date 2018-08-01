@@ -1,4 +1,6 @@
 
+import XZ from '../xz';
+
 const sourceMap = {
     'btn-type':['default','primary','primarytext','text'],
     'size':['default','sm','lg']
@@ -6,6 +8,12 @@ const sourceMap = {
 
 let translateKeys = null;
 class Theme {
+    static setTheme(name){
+        const ComInstance = null;
+        XZ._setTheme(ComInstance,()=>{
+            // set html classname
+        })
+    }
     static getConfig = (key,props)=>{
         let rkey = key;
         const source = sourceMap[key];

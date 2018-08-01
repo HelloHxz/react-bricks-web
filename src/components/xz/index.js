@@ -12,6 +12,11 @@ class XZ {
         this.router = Router;
         browser.init();
     }
+    _setTheme = (themeComponentInstance,cb) => {
+        if(this._extendWrapperInstancer && themeComponentInstance){
+            this._extendWrapperInstancer.setThemeComponent(themeComponentInstance,cb);
+        }
+    }
     _setAppConfig = (config) =>{
         this.appConfig = config;
     }
