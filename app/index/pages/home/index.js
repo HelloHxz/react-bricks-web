@@ -37,7 +37,7 @@ class HomeScreen extends React.PureComponent {
       },200);
     });
 
-    XZ.setTheme("theme-2");
+    XZ.setTheme("b");
     // this.setState({
     //   leftStatus:this.state.leftStatus==='slidehide'?'slideshow':'slidehide'
     // });
