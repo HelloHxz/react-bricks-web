@@ -36,6 +36,8 @@ class HomeScreen extends React.PureComponent {
          XZ.triggerResizeEvent();
       },200);
     });
+
+    XZ.setTheme("index");
     // this.setState({
     //   leftStatus:this.state.leftStatus==='slidehide'?'slideshow':'slidehide'
     // });

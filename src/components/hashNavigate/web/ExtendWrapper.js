@@ -13,7 +13,6 @@ export default class ExtendWrapper extends React.Component{
         this.state = {
             messages:[],
             Modals:[],
-            ThemeCom:null,
         };
     }
     showMessage(content,timeout){
@@ -26,15 +25,7 @@ export default class ExtendWrapper extends React.Component{
         });
         return messageKey;
     }
-    setThemeComponent(Com,cb){
-        this.setState({
-            ThemeCom:Com
-        },()=>{
-            if(cb){
-                cb();
-            }
-        });
-    }
+  
     hideMessage(messageKey){
         delete this.componentDict[messageKey];
         for(let i = this.state.messages.length;i>=0;i-=1){
@@ -62,7 +53,6 @@ export default class ExtendWrapper extends React.Component{
             messageDom = <div className='xz-mes-container'>{messageChild}</div>
         }
         return (<React.Fragment>
-            {ThemeCom}
             {messageDom}
             </React.Fragment>);
     }

@@ -14,9 +14,12 @@ class Theme {
         if(!Themes[name]){
             return;
         }
-        XZ._setTheme(ComInstance,()=>{
-            // set html classname
-        })
+        const Pro = Themes[name].ThemePromise;
+        Pro().then((Com)=>{
+            document.documentElement.className = name;
+        }).catch(()=>{
+
+        });
     }
     static getConfig = (key,props)=>{
         let rkey = key;
@@ -59,6 +62,6 @@ class Theme {
     }
 }
 
-
+XZ.theme = Theme;
 
 export default Theme;
