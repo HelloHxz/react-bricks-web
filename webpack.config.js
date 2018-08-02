@@ -70,7 +70,7 @@ function createTheme(pathArr){
     }else{
       fs.mkdirSync(newLessFolderPath);
     }
-
+    const extendFileArr = [];
       for(var n=0,m=pathArr.length;n<m;n+=1){
         const customThemeDir = pathArr[n];
         const customLessFileList = fs.readdirSync(customThemeDir);
@@ -84,10 +84,24 @@ function createTheme(pathArr){
               var customLessText = fs.readFileSync(fullPath, 'utf8');
               seed+=1;
               fs.writeFileSync(path.join(newLessFolderPath,customLessName+".less"), DefaultTheme + "  @theme-namespace:"+customLessName+"; "+customLessText+" "+allComLess);
+              extendFileArr.push(`"${customLessName}":ThemeWrapper(()=>import(/* webpackChunkName: "${customLessName}-theme" */ "./custom/${customLessName}.less"))`);
             }
           }
         });
       }
+
+      const extendThemeFilePath = path.join(ComPath,'/theme/extendTheme.js');
+      if(isFile(extendThemeFilePath)){
+        fs.unlinkSync(extendThemeFilePath);
+      }
+
+    // 创建 extendTheme
+    const extendFileText = `
+    import ThemeWrapper from './themeWrapper';
+    export default {
+       ${extendFileArr.join(',')}
+    }`;
+    fs.writeFileSync(extendThemeFilePath,extendFileText)
   }
   if(seed===0){
     console.log("自定义主题生成失败！是否路径配置正确")
