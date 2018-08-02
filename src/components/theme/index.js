@@ -1,5 +1,6 @@
 
 import XZ from '../xz';
+import Themes from './extendTheme';
 
 const sourceMap = {
     'btn-type':['default','primary','primarytext','text'],
@@ -10,6 +11,9 @@ let translateKeys = null;
 class Theme {
     static setTheme(name){
         const ComInstance = null;
+        if(!Themes[name]){
+            return;
+        }
         XZ._setTheme(ComInstance,()=>{
             // set html classname
         })
