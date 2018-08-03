@@ -42,7 +42,6 @@ function createTheme(pathArr){
   const ComPath = './src/components';
   const libLessFiles = fs.readdirSync(ComPath);
   const LessArr = [];
-  let DefaultTheme = null;
   for(var i=0,j=libLessFiles.length;i<j;i+=1){
     const folder = libLessFiles[i];
     const LessPath = ComPath+"/"+folder+'/index.less';
@@ -55,58 +54,12 @@ function createTheme(pathArr){
       }
     }
   }
-
   let seed = 0;
-  if(DefaultTheme && LessArr.length>0){
-    const allComLess = LessArr.join(" ");
-    const newLessFolderPath = path.join(ComPath,'/theme/custom');
-
-    if(isDir(newLessFolderPath)){
-      // 清空
-      var dirList = fs.readdirSync(newLessFolderPath);
-      dirList.forEach(function(fileName) {
-       fs.unlinkSync(path.join(newLessFolderPath,fileName));
-      });
-    }else{
-      fs.mkdirSync(newLessFolderPath);
-    }
-    const extendFileArr = [];
-      for(var n=0,m=pathArr.length;n<m;n+=1){
-        const customThemeDir = pathArr[n];
-        const customLessFileList = fs.readdirSync(customThemeDir);
-        customLessFileList.forEach((customLessPath)=>{
-          const clpArr = customLessPath.split('.');
-          const customLessName = clpArr[0];
-          const type = clpArr[1];
-          if(type==='less'){
-            const fullPath = path.join(customThemeDir,customLessPath);
-            if(isFile(fullPath)){
-              var customLessText = fs.readFileSync(fullPath, 'utf8');
-              seed+=1;
-              fs.writeFileSync(path.join(newLessFolderPath,customLessName+".less"), DefaultTheme + "  @theme-namespace:"+customLessName+"; "+customLessText+" "+allComLess);
-              extendFileArr.push(`"${customLessName}":ThemeWrapper(()=>import(/* webpackChunkName: "${customLessName}-theme" */ "./custom/${customLessName}.less"))`);
-            }
-          }
-        });
-      }
-
-      const extendThemeFilePath = path.join(ComPath,'/theme/extendTheme.js');
-      if(isFile(extendThemeFilePath)){
-        fs.unlinkSync(extendThemeFilePath);
-      }
-
-    // 创建 extendTheme
-    const extendFileText = `
-    import ThemeWrapper from './themeWrapper';
-    export default {
-       ${extendFileArr.join(',')}
-    }`;
-    fs.writeFileSync(extendThemeFilePath,extendFileText)
+  const allLessPath = path.join(ComPath,'/theme/all.less');
+  if(isFile(allLessPath)){
+      fs.unlinkSync(allLessPath);
   }
-  if(seed===0){
-    console.log("自定义主题生成失败！是否路径配置正确")
-  }
-      // console.log(LessArr.join(' '))
+  fs.writeFileSync(allLessPath,LessArr.join(' '));
 }
 
 module.exports = function (env) {
