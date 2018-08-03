@@ -229,7 +229,8 @@ return {
                   "regenerator": true,
                   "moduleName": "babel-runtime"
                 }
-              ]
+              ],
+              ["import", { "libraryName": "react-bricks-web","camel2DashComponentName":false}],
             ]
           }
         },
