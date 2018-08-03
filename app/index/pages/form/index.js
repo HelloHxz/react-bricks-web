@@ -46,7 +46,7 @@ class FormDemo extends React.PureComponent {
   }
 
   render() {
-    return <div style={{height:'100%',overflow:'auto',padding:10}}>
+    return <div className='doc-page-content'>
           <Form initialValue={{
             inputValue:'hahha'
           }} renderContent={(formProps)=>{

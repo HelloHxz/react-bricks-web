@@ -39,7 +39,7 @@ class WebPage extends React.PureComponent {
                 <div className='class-card'>
                   <span className='class-card-title'>兼容IE9</span>
                   <p>
-                       一套代码用于构建IOS,Android,Mobile Web的组件库,采用
+                       没有抛弃IE9,无论在CSS层面,JS层面还是构建层面都全方面兼容IE9
                        <a href='https://reactjs.org/'>React</a>/
                        <a href='https://facebook.github.io/react-native/'>React Native</a>/
                        <a href='https://mobx.js.org/'>Mobx</a>作为开发技术栈
