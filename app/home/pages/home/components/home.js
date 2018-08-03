@@ -1,4 +1,4 @@
-import {React,PageView,Image,Tabs,Input,Form,Select,RouteView,Row,Modal,Button,VBox,HBox,XZ} from "react-bricks-web"
+import {React,Image,Row,Button} from "react-bricks-web"
 import BkImage from '../../../imgs/bk.jpg';
 import './home.less';
 

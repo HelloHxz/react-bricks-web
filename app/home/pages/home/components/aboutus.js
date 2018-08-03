@@ -1,4 +1,4 @@
-import {React,PageView,Image,Tabs,Input,Form,Select,RouteView,Row,Modal,Button,VBox,HBox,XZ} from "react-bricks-web"
+import {React} from "react-bricks-web"
 import './aboutus.less';
 
 class AboutUsPage extends React.PureComponent {

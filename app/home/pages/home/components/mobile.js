@@ -1,4 +1,4 @@
-import {React,PageView,Image,Tabs,Input,Form,Select,RouteView,Row,Icon,Modal,Button,VBox,HBox,XZ} from "react-bricks-web"
+import {React,Row} from "react-bricks-web"
 import './mobile.less';
 
 class MobilePage extends React.PureComponent {
