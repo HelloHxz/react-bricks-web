@@ -23,7 +23,7 @@ class HomeScreen extends React.PureComponent {
     this.props.navigation.goBack();
   }
 
-  go(){
+  headerButtonClick(){
     // this.props.homestore.test = "huxiaohzong";
     // console.log(this.props.homestore);
     // this.props.navigation.navigate("button");
@@ -37,12 +37,7 @@ class HomeScreen extends React.PureComponent {
       },200);
     });
 
-    import(/* webpackChunkName: "b-theme" */ '../../theme/theme_2.less').then(()=>{
-      document.documentElement.className = 'theme_2';
-      document.documentElement.className = 'theme_2';
-    }).catch(()=>{
-
-    })
+ 
     // this.setState({
     //   leftStatus:this.state.leftStatus==='slidehide'?'slideshow':'slidehide'
     // });

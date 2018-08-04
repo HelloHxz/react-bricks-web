@@ -15,7 +15,7 @@ export default class BottomDemo extends React.PureComponent {
   
   renderCode() {
     const arr = this.props.mdText.split('-分割线-');
-    return <div style={{overflowX:'hidden',padding:10}}>
+    return <div className='doc-page-content' style={{overflowX:'hidden',padding:10}}>
         <MD source={arr[0]} />
         <CodeList data={this.props.getCodeListData()}/>
         <MD source={arr[1]} />
