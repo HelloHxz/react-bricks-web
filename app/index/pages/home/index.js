@@ -53,7 +53,7 @@ class HomeScreen extends React.PureComponent {
   render() {
     return (
         <VBox>
-         <VBox.Panel style={{height:50,backgroundColor:'#eee'}}>
+         <VBox.Panel style={{height:50,borderBottom:'1px solid #eee'}}>
             <LayoutHeader {...this.props} parent={this}/>
          </VBox.Panel>
          <VBox.Panel>
@@ -68,7 +68,6 @@ class HomeScreen extends React.PureComponent {
               </HBox.Panel>
             </HBox>
          </VBox.Panel>
-         <VBox.Panel style={{height:40,backgroundColor:'#ddd'}}>footer</VBox.Panel>
        </VBox>
     );
   }
