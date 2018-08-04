@@ -1,4 +1,4 @@
-import {React,Image,Row,Button} from "react-bricks-web"
+import {React,Image,Row,Button} from "bricks-web"
 import BkImage from '../../../imgs/bk.jpg';
 import './home.less';
 
@@ -37,7 +37,7 @@ class HomeScreen extends React.PureComponent {
                   <div className='class-card-bottom'>
                     
                     <a href='./index.html'><Button type='primary'>Demo</Button></a>
-                    <a href='https://github.com/HelloHxz/react-bricks-web'><Button>github</Button></a>
+                    <a href='https://github.com/HelloHxz/bricks-web'><Button>github</Button></a>
                  </div>
                 </div>
               </Row.Col>

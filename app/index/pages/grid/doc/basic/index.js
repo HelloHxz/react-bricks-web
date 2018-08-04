@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row } from 'react-bricks-web';
+import { Row } from 'bricks-web';
 import './index.less';
 
 export default class Example extends React.Component{

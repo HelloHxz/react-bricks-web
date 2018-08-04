@@ -1,4 +1,4 @@
-import {React,observer,TableLayout,Button,Tooltip,Icon} from "react-bricks-web"
+import {React,observer,TableLayout,Button,Tooltip,Icon} from "bricks-web"
 
 
 const Themes = [

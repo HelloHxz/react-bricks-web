@@ -1,4 +1,4 @@
-import {React,PageView,Tabs} from "react-bricks-web"
+import {React,PageView,Tabs} from "bricks-web"
 import './index.less';
 import Web from './components/web';
 import Home from './components/home';

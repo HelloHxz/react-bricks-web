@@ -1,4 +1,4 @@
-import {React,PageView,observer,PageContainer,Row,CheckGroup,Button} from "react-bricks-web"
+import {React,PageView,observer,PageContainer,Row,CheckGroup,Button} from "bricks-web"
 
 @PageView()
 class CheckGroupDemo extends React.PureComponent {

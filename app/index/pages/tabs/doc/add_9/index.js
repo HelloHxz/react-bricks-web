@@ -1,5 +1,5 @@
 import React from 'react';
-import { Tabs,Button } from 'react-bricks-web';
+import { Tabs,Button } from 'bricks-web';
 import './index.less';
 
 export default class Example extends React.Component{

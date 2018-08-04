@@ -1,7 +1,6 @@
 {
-  "name": "react-bricks-web-web",
+  "name": "bricks-web",
   "version": "0.0.1",
-  "private": true,
   "scripts": {
     "build": "webpack -p --progress --config  webpack.config.js  --env.prod=true",
     "start": "webpack-dev-server --host 0.0.0.0 --port 8080 --profile --display-modules",

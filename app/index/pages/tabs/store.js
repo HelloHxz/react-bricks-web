@@ -1,4 +1,4 @@
-import {observable} from 'react-bricks-web';
+import {observable} from 'bricks-web';
 
 class Store {
     @observable TabsData = [

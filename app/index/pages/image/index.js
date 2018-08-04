@@ -1,4 +1,4 @@
-import {React,PageView,observer,PageContainer,XZ,Button,Image} from "react-bricks-web"
+import {React,PageView,observer,PageContainer,XZ,Button,Image} from "bricks-web"
 
 @PageView()
 class ImageDemo extends React.PureComponent {

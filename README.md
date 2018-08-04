@@ -1,4 +1,4 @@
-# react-bricks-web-web
+# bricks-web-web
 
 Web端框架
 
@@ -15,7 +15,7 @@ http://localhost:8080/demo.html
 
 ## 在线地址
 
-https://hellohxz.github.io/react-bricks-web/
+https://hellohxz.github.io/bricks-web/
 
 
 

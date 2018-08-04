@@ -1,4 +1,4 @@
-import {React} from "react-bricks-web"
+import {React} from "bricks-web"
 import './aboutus.less';
 
 class AboutUsPage extends React.PureComponent {

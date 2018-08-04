@@ -195,7 +195,7 @@ return {
                   {
                     "cwd":"babelrc",
                     "alias": {
-                      "react-bricks-web": "./"
+                      "bricks-web": "./"
                   },
                     "extensions": [".js",".ios.js",".android.js",".web.js"]
                   }
@@ -212,7 +212,7 @@ return {
                   "moduleName": "babel-runtime"
                 }
               ],
-              ["import", { "libraryName": "react-bricks-web","camel2DashComponentName":false}],
+              ["import", { "libraryName": "bricks-web","camel2DashComponentName":false}],
             ]
           }
         },

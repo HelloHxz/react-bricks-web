@@ -1,5 +1,5 @@
 import React from 'react';
-import { Group,Button,Input,Select } from 'react-bricks-web';
+import { Group,Button,Input,Select } from 'bricks-web';
 import './index.less';
 
 export default class Example extends React.Component{

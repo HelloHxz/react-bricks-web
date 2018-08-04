@@ -1,4 +1,4 @@
-import {React,PageView,Menu,PopView,Input,Form,Select,RouteView,Row,Col,Modal,Button,VBox,HBox,XZ} from "react-bricks-web"
+import {React,PageView,Menu,PopView,Input,Form,Select,RouteView,Row,Col,Modal,Button,VBox,HBox,XZ} from "bricks-web"
 import './index.less';
 import HomeStore from './store';
 import BaseStore from '../basicLayout/store';

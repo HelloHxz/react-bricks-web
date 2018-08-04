@@ -1,6 +1,6 @@
 import React from 'react';
 import MD from './md';
-import { Tabs } from 'react-bricks-web';
+import { Tabs } from 'bricks-web';
 
 /*
     {

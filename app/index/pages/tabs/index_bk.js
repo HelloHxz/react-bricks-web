@@ -1,4 +1,4 @@
-import {React,PageView,observer,PageContainer,Modal,Button,Select,Tabs} from "react-bricks-web";
+import {React,PageView,observer,PageContainer,Modal,Button,Select,Tabs} from "bricks-web";
 import TabsOne from './TabsOne';
 import TabsStore from './store';
 import './index.less';

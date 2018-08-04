@@ -1,5 +1,5 @@
 import React from 'react';
-import { VBox,Button } from 'react-bricks-web';
+import { VBox,Button } from 'bricks-web';
 import './index.less';
 
 export default class Example extends React.Component{

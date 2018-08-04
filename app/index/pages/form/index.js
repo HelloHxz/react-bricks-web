@@ -1,4 +1,4 @@
-import {React,PageView,observer,PageContainer,Row,CheckBox,Form,Input,Select,Button,CheckGroup} from "react-bricks-web"
+import {React,PageView,observer,PageContainer,Row,CheckBox,Form,Input,Select,Button,CheckGroup} from "bricks-web"
 const {FormItem,FormRepeat} = Form;
 
 @PageView()
