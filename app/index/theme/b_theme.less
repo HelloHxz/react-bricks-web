@@ -20,4 +20,26 @@
 @menu_group_text_color:rgba(255, 255, 255,.7);
 @menu_background:@theme_color;
 
+.@{theme-namespace}{
+    .demo-grid .xz-col:nth-child(2n) .demo-grid-inner
+    {
+        background:@theme_color_6;
+    }
+    .demo-grid .xz-col:nth-child(2n+1) .demo-grid-inner
+    {
+        background:@theme_color_4;
+    }
+    .demo-tablelayout .xz-tablelayout-cell:nth-child(2n)
+    {
+        background:@theme_color_6;
+    }
+    .demo-tablelayout .xz-tablelayout-cell:nth-child(2n+1)
+    {
+        background:@theme_color_4;
+    }
+    .doc-code-item:hover{
+        border-color:@theme_color_2;
+    }
+}
+
 @import '../../../src/components/theme/all.less';

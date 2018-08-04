@@ -64,9 +64,9 @@ export default class Example extends React.Component{
         return (
         <div>
             <HBox onBackLayerClick={this.onBackLayerClick.bind(this)} className='demoHBox' style={{height:200}}>
-                <HBox.Panel status={this.state.leftPanelStatus} style={{width:this.state.leftWidth,backgroundColor:'#7dbcea'}}>1</HBox.Panel>
-                <HBox.Panel style={{backgroundColor:'rgba(16, 142, 233, 1)'}}>2</HBox.Panel>
-                <HBox.Panel status={this.state.rightPanelStatus} style={{width:this.state.rightWidth,backgroundColor:'#7dbcea'}}>3</HBox.Panel>
+                <HBox.Panel className='theme-background-6' status={this.state.leftPanelStatus} style={{width:this.state.leftWidth}}>1</HBox.Panel>
+                <HBox.Panel className='theme-background-4'>2</HBox.Panel>
+                <HBox.Panel className='theme-background-6' status={this.state.rightPanelStatus} style={{width:this.state.rightWidth}}>3</HBox.Panel>
             </HBox>
             <div style={{marginTop:10,marginBottom:5}}>left:</div>
             <Button type='primary' onClick={this.changeLeftWidth.bind(this,300)} style={{marginRight:10}}>width:300</Button>

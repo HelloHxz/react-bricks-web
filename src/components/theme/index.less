@@ -2,7 +2,17 @@
 
 @theme_background: #f2f3f4;
 @theme_color:#1890ff;
-@theme_hover_background:tint(@theme_color, 90%);
+
+@theme_color_9:tint(@theme_color, 90%);
+@theme_color_8:tint(@theme_color, 80%);
+@theme_color_7:tint(@theme_color, 70%);
+@theme_color_6:tint(@theme_color, 60%);
+@theme_color_5:tint(@theme_color, 50%);
+@theme_color_4:tint(@theme_color, 40%);
+@theme_color_3:tint(@theme_color, 30%);
+@theme_color_2:tint(@theme_color, 20%);
+@theme_color_1:tint(@theme_color, 10%);
+@theme_hover_background:@theme_color_9;
 @theme_hover_color:@theme_text_color;
 @theme_selected_background:@theme_color;
 @theme_selected_color:@theme_color;
@@ -13,7 +23,6 @@
 @theme_default_height:30px;
 @theme_lg_height:36px;
 @theme_sm_height:24px;
-
 
 @menu_item_height:40px;
 @menu_item_text_color:#585858;
@@ -34,10 +43,6 @@
 @menu_background:#fff;
 
 
-
-
-
-
 @tabs_item_sm_height:26px;
 @tabs_item_default_height:34px;
 @tabs_item_lg_height:42px;
@@ -53,7 +58,6 @@
 @message_zindex:1001;
 @popview_dp_zindex:900;
 
-
 @input_label_color:#333;
 @input_border_color:#d9d9d9;
 @input_default_fontsize:14px;
@@ -63,7 +67,6 @@
 
 @form_item_marginbottom:5px;
 
-
 @select_hover_background_color:@theme_hover_background;
 @select_selected_background_color:@theme_selected_background;
 @select_dropdown_bordercolor:#eee;
@@ -72,5 +75,38 @@
 
 @placeholder:gray;
 
+
+.@{theme-namespace}{
+    .theme-background{
+        background-color:@theme_color;
+    }
+    .theme-background-1{
+        background-color:@theme_color_1;
+    }
+    .theme-background-2{
+        background-color:@theme_color_2;
+    }
+    .theme-background-3{
+        background-color:@theme_color_3;
+    }
+    .theme-background-4{
+        background-color:@theme_color_4;
+    }
+    .theme-background-5{
+        background-color:@theme_color_5;
+    }
+    .theme-background-6{
+        background-color:@theme_color_6;
+    }
+    .theme-background-7{
+        background-color:@theme_color_7;
+    }
+    .theme-background-8{
+        background-color:@theme_color_8;
+    }
+    .theme-background-9{
+        background-color:@theme_color_9;
+    }
+}
 
 
