@@ -112,7 +112,7 @@
         height: 16px;
         vertical-align: middle;
         border: 1px solid #d9d9d9;
-        border-radius: 2px;
+        border-radius: @checkbox_borderradius;
         background-color: #fff;
         transition: all .3s;
     }
@@ -277,8 +277,8 @@
     }
 
     .xz-group>*:first-child{
-        border-top-left-radius: 3px;
-        border-bottom-left-radius: 3px;
+        border-top-left-radius: @group_borderradius;
+        border-bottom-left-radius: @group_borderradius;
         border-top-right-radius: 0px;
         border-bottom-right-radius: 0px;
     }
@@ -296,8 +296,8 @@
     .xz-group>*:last-child{
         border-top-left-radius: 0px;
         border-bottom-left-radius: 0px;
-        border-top-right-radius: 3px;
-        border-bottom-right-radius: 3px;
+        border-top-right-radius: @group_borderradius;
+        border-bottom-right-radius: @group_borderradius;
     }
     .xz-group{
         display: inline-block;
@@ -323,7 +323,7 @@
 }
 body{
   font-family: "Monospaced Number", "Chinese Quote", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: @base_fontsize;
+  font-size: @theme_fontsize_default;
 }
 html{
   overflow: auto;
