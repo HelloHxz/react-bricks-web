@@ -12,7 +12,28 @@ class Store {
         icon:'iconfont icon-reconciliation',
         label:'快速上手',
         key:'home',
-      },{
+      },
+      {
+        label:'Router 路由',
+        key:'router',
+        icon:'iconfont icon-printer',
+        children:[
+          {label:"Router 路由",key:'home/hasnavigate'},
+          {label:"GlobalPage 全局页面",key:'home/basicpage'},
+        ]
+      },
+      {
+        label:'数据状态',
+        icon:'iconfont icon-printer',
+        key:'frfrf',children:[
+            {label:"Mobx",key:'xxxxxxx1'},
+            {label:"AJAX",key:'xxxxxxx2',children:[
+                {label:'4.2.1',key:'xxxxxxxx3'},
+                {label:'4.2.2',key:'xxxxxxxx4'}
+            ]},
+        ]
+      },
+      {
         icon:'iconfont icon-reconciliation',
         label:'主题',
         key:'home/theme',
@@ -22,13 +43,6 @@ class Store {
         icon:'iconfont icon-team',
         key:"components",
         children:[
-            {
-              label:'路由',
-              key:'router',
-              group:[
-                {label:"Router 路由",key:'home/hasnavigate'},
-              ]
-            },
             {label:"布局组件",group:[
               {label:"Grid 栅栏布局",key:'components/grid'},
               {label:"TableLayout 表格布局",key:'components/tableLayout'},
@@ -63,25 +77,9 @@ class Store {
         ]
       },
       {
-        label:'全局处理',
-        key:'xxxxx',
-        icon:'iconfont icon-mail',
-      },
-      {
         label:'生命周期',
         key:'xxxxx',
         icon:'iconfont icon-laptop',
-      },
-      {
-        label:'数据状态',
-        icon:'iconfont icon-printer',
-        key:'frfrf',children:[
-            {label:"Mobx",key:'xxxxxxx1'},
-            {label:"AJAX",key:'xxxxxxx2',children:[
-                {label:'4.2.1',key:'xxxxxxxx3'},
-                {label:'4.2.2',key:'xxxxxxxx4'}
-            ]},
-        ]
       },
       {
         label:'异步加载',

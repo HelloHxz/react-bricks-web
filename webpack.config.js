@@ -195,7 +195,7 @@ return {
                   {
                     "cwd":"babelrc",
                     "alias": {
-                      "react-bricks-web": "./src/components"
+                      "react-bricks-web": "./"
                   },
                     "extensions": [".js",".ios.js",".android.js",".web.js"]
                   }
