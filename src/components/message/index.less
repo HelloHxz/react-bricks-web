@@ -1,50 +1,52 @@
 
 @import '../theme/index.less';
-.xz-mes-container{
-    position: fixed;
-    height: 0px;
-    width:0;
-    top: 10px;
-    z-index: @message_zindex;
-    left:50%;
-    transform: translateX(-50%);
-    -ms-transform: translateX(-50%);
-}
+.@{theme-namespace}{
+    .xz-mes-container{
+        position: fixed;
+        height: 0px;
+        width:0;
+        top: 10px;
+        z-index: @message_zindex;
+        left:50%;
+        transform: translateX(-50%);
+        -ms-transform: translateX(-50%);
+    }
 
-.xz-message-wraper{
-    text-align: center;
-    position: relative;
-    opacity: 0;
-}
-.xz-message-wraper .xz-message-wraper-inner{
-    display: inline-block;
-    border: 1px solid #eee;
-    background-color: #fff;
-    box-shadow: 0 4px 12px rgba(0,0,0,.15);
-    padding: 8px 16px;
-    left:50%;
-    transform: translateX(-50%);
-    -ms-transform: translateX(-50%);
-}
+    .xz-message-wraper{
+        text-align: center;
+        position: relative;
+        opacity: 0;
+    }
+    .xz-message-wraper .xz-message-wraper-inner{
+        display: inline-block;
+        border: 1px solid #eee;
+        background-color: #fff;
+        box-shadow: 0 4px 12px rgba(0,0,0,.15);
+        padding: 8px 16px;
+        left:50%;
+        transform: translateX(-50%);
+        -ms-transform: translateX(-50%);
+    }
 
-.xz-message-wraper-show{
-    animation: show .3s ease;
-    padding-bottom: 6px;
-    opacity: 1;
-    margin-top:0;
-}
+    .xz-message-wraper-show{
+        animation: show .3s ease;
+        padding-bottom: 6px;
+        opacity: 1;
+        margin-top:0;
+    }
 
-.xz-message-wraper-hide{
-    animation: hide .3s ease;
-    opacity: 0;
-    max-height: 0;
-}
-@keyframes show{
-    from {margin-top:-20px;opacity: 0;}
-    to {margin-top:0;opacity: 1;}
-}
-@keyframes hide{
-    from {max-height: 40px;opacity: 1;}
-    to {max-height: 0;opacity: 0;}
-    
+    .xz-message-wraper-hide{
+        animation: hide .3s ease;
+        opacity: 0;
+        max-height: 0;
+    }
+    @keyframes show{
+        from {margin-top:-20px;opacity: 0;}
+        to {margin-top:0;opacity: 1;}
+    }
+    @keyframes hide{
+        from {max-height: 40px;opacity: 1;}
+        to {max-height: 0;opacity: 0;}
+        
+    }
 }

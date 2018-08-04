@@ -1,46 +1,48 @@
 @import '../theme/index.less';
 
-.xz-dropdown-section{
-    min-width: 100px;
-    border-radius: 3px;
-    border:1px solid #eee;
-    font-size: @dropdown_item_fontsize;
-}
+.@{theme-namespace}{
+    .xz-dropdown-section{
+        min-width: 100px;
+        border-radius: 3px;
+        border:1px solid #eee;
+        font-size: @dropdown_item_fontsize;
+    }
 
-.xz-dropdown-item{
-    position: relative;
-    height:@dropdown_item_height;
-    line-height: @dropdown_item_height;
-    cursor: pointer;
-    white-space:nowrap;
-    color:@menu_item_text_color;
-    background-color: @menu_item_background;
-    padding-left:10px;
-    padding-right: 10px;
-}
-.xz-dropdown-header{
-    height:@dropdown_item_height;
-    line-height: @dropdown_item_height;
-    position: relative;
-    cursor: pointer;
-    white-space:nowrap;
-    padding-left:10px;
-    background-color: @menu_header_background;
-    padding-right: 10px;
-}
-.xz-dropdown-item:hover,.xz-dropdown-header:hover{
-    background-color: @menu_item_hover_background;
-    color: @menu_item_hover_text_color;
-}
-.xz-dropdown-icon{
-    margin-right: 8px;
-}
-.xz-dropdown-right{
-    position: absolute;
-    color:@menu_arrow_color;
-    right:10px;
-    top:50%;
-    transform: translateY(-50%);
-    -ms-transform: translateY(-50%);
-    font-size:12px;
+    .xz-dropdown-item{
+        position: relative;
+        height:@dropdown_item_height;
+        line-height: @dropdown_item_height;
+        cursor: pointer;
+        white-space:nowrap;
+        color:@menu_item_text_color;
+        background-color: @menu_item_background;
+        padding-left:10px;
+        padding-right: 10px;
+    }
+    .xz-dropdown-header{
+        height:@dropdown_item_height;
+        line-height: @dropdown_item_height;
+        position: relative;
+        cursor: pointer;
+        white-space:nowrap;
+        padding-left:10px;
+        background-color: @menu_header_background;
+        padding-right: 10px;
+    }
+    .xz-dropdown-item:hover,.xz-dropdown-header:hover{
+        background-color: @menu_item_hover_background;
+        color: @menu_item_hover_text_color;
+    }
+    .xz-dropdown-icon{
+        margin-right: 8px;
+    }
+    .xz-dropdown-right{
+        position: absolute;
+        color:@menu_arrow_color;
+        right:10px;
+        top:50%;
+        transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+        font-size:12px;
+    }
 }

@@ -1,30 +1,31 @@
 @import '../theme/index.less';
 
+.@{theme-namespace}{
+    .xz-formitem-label-wrapper{
+        display: inline-block;
+        vertical-align: middle;
+        overflow: hidden;
+        font-size: 13px;
+        white-space: nowrap;
+        color:@input_label_color;
+    }
+    .xz-formitem-size-default .xz-formitem-label-wrapper{
+        line-height: @theme_default_height;
+    }
 
-.xz-formitem-label-wrapper{
-    display: inline-block;
-    vertical-align: middle;
-    overflow: hidden;
-    font-size: 13px;
-    white-space: nowrap;
-    color:@input_label_color;
-}
-.xz-formitem-size-default .xz-formitem-label-wrapper{
-    line-height: @theme_default_height;
-}
+    .xz-formitem-size-lg .xz-formitem-label-wrapper{
+        line-height: @theme_lg_height;
+    }
 
-.xz-formitem-size-lg .xz-formitem-label-wrapper{
-    line-height: @theme_lg_height;
-}
+    .xz-formitem-size-sm .xz-formitem-label-wrapper{
+        line-height: @theme_sm_height;
+    }
 
-.xz-formitem-size-sm .xz-formitem-label-wrapper{
-    line-height: @theme_sm_height;
-}
+    .xz-form-item-vertical .xz-formitem-label-wrapper{
+        line-height:20px;
+    }
 
-.xz-form-item-vertical .xz-formitem-label-wrapper{
-    line-height:20px;
-}
-
-.xz-form-item{
-    margin-bottom: @form_item_marginbottom;
+    .xz-form-item{
+        margin-bottom: @form_item_marginbottom;
+    }
 }

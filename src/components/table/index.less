@@ -1,88 +1,90 @@
 @import '../theme/index.less';
+.@{theme-namespace}{
 
-.xz-table{
-    border-collapse: collapse;
-    background-color: #fff;
-}
-.xz-table-outer-wrapper{
-    overflow:hidden;
-    position: relative;
-    height: 100%;
-}
-.xz-table-inner-wrapper{
-    border-top:1px solid #eee; 
-    height: 100%;
-    position: relative;
-    overflow:auto;
-}
-.xz-table-outer-fixedleft .xz-table-inner-wrapper{
-    margin-right:-17px;
-}
-.xz-table-pos-mac .xz-table-outer-fixedleft .xz-table-inner-wrapper,.xz-table-outer-fixedleft-ie .xz-table-inner-wrapper{
-    padding-right:17px;
-}
-.xz-table-outer-fixedright-ie .xz-table-inner-wrapper{
-    padding-right:17px;
-}
-.xz-table-pos-left,.xz-table-pos-right{
-    position:absolute;
-    top:0;
-    z-index:2;
-    overflow-x:hidden;
-}
-.xz-table-pos-left .xz-table-inner-wrapper,.xz-table-pos-right .xz-table-inner-wrapper{
-    overflow-x:hidden;
-}
-.xz-table-pos-left{
-    left:0;
-}
-.xz-table-fixed-left-shadow{
-    box-shadow: 6px 0 6px -4px rgba(0,0,0,.15);
-}
-.xz-table-fixed-right-shadow{
-    box-shadow: -6px 0 6px -4px rgba(0,0,0,.15);
-}
-.xz-table-pos-right{
-    right:0;
-}
-.xz-table-pos-right-ie{
-    right:17px;
-}
-.xz-table-pos-mac{
-    height: 100%;
-}
-.xz-table-pos-other{
-    bottom:17px;
+    .xz-table{
+        border-collapse: collapse;
+        background-color: #fff;
+    }
+    .xz-table-outer-wrapper{
+        overflow:hidden;
+        position: relative;
+        height: 100%;
+    }
+    .xz-table-inner-wrapper{
+        border-top:1px solid #eee; 
+        height: 100%;
+        position: relative;
+        overflow:auto;
+    }
+    .xz-table-outer-fixedleft .xz-table-inner-wrapper{
+        margin-right:-17px;
+    }
+    .xz-table-pos-mac .xz-table-outer-fixedleft .xz-table-inner-wrapper,.xz-table-outer-fixedleft-ie .xz-table-inner-wrapper{
+        padding-right:17px;
+    }
+    .xz-table-outer-fixedright-ie .xz-table-inner-wrapper{
+        padding-right:17px;
+    }
+    .xz-table-pos-left,.xz-table-pos-right{
+        position:absolute;
+        top:0;
+        z-index:2;
+        overflow-x:hidden;
+    }
+    .xz-table-pos-left .xz-table-inner-wrapper,.xz-table-pos-right .xz-table-inner-wrapper{
+        overflow-x:hidden;
+    }
+    .xz-table-pos-left{
+        left:0;
+    }
+    .xz-table-fixed-left-shadow{
+        box-shadow: 6px 0 6px -4px rgba(0,0,0,.15);
+    }
+    .xz-table-fixed-right-shadow{
+        box-shadow: -6px 0 6px -4px rgba(0,0,0,.15);
+    }
+    .xz-table-pos-right{
+        right:0;
+    }
+    .xz-table-pos-right-ie{
+        right:17px;
+    }
+    .xz-table-pos-mac{
+        height: 100%;
+    }
+    .xz-table-pos-other{
+        bottom:17px;
+    }
+
+    .xz-table-fixed-header-outer{
+        overflow:hidden;
+        position:absolute;
+        left:0;
+        top:0;
+        margin-right:-17px;
+        padding-right:17px;
+        z-index:1;
+        width: 100%;
+    }
+    .xz-table-outer-fixedmain .xz-table-fixed-header-inner{
+        padding-bottom: 17px;
+        margin-bottom: -17px;
+        overflow-x:auto;
+    }
+    .xz-table thead th,.xz-table tbody td{
+        border: 1px solid #eee;
+        font-weight: normal;
+        
+    }
+    .xz-table-row-hover{
+        background-color: @table_row_hover_background_color;
+    }
+    .xz-table thead th .xz-table-cell-inner,.xz-table tbody td .xz-table-cell-inner{
+    height: 30px;
+    }
 }
 
-.xz-table-fixed-header-outer{
-    overflow:hidden;
-    position:absolute;
-    left:0;
-    top:0;
-    margin-right:-17px;
-    padding-right:17px;
-    z-index:1;
-    width: 100%;
-}
-.xz-table-outer-fixedmain .xz-table-fixed-header-inner{
-    padding-bottom: 17px;
-    margin-bottom: -17px;
-    overflow-x:auto;
-}
-.xz-table thead th,.xz-table tbody td{
-    border: 1px solid #eee;
-    font-weight: normal;
-    
-}
-.xz-table-row-hover{
-    background-color: @table_row_hover_background_color;
-}
-.xz-table thead th .xz-table-cell-inner,.xz-table tbody td .xz-table-cell-inner{
-   height: 30px;
-}
 
-
-// .xz-table tbody tr td:last-child,.xz-table thead tr th:last-child{
-    
-// }
+    // .xz-table tbody tr td:last-child,.xz-table thead tr th:last-child{
+        
+    // }
