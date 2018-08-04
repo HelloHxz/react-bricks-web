@@ -8,6 +8,8 @@ const Themes = [
     key:'b_theme',name:'B站红',Theme:()=>{ return import(/* webpackChunkName: "b_theme" */ '../../theme/b_theme.less'); },color:'#f25d8e',
   },{
     key:'c_theme',name:'红',Theme:()=>{ return import(/* webpackChunkName: "c_theme" */ '../../theme/c_theme.less'); },color:'green',
+  },{
+    key:'d_theme',name:'黑',Theme:()=>{ return import(/* webpackChunkName: "d_theme" */ '../../theme/d_theme.less'); },color:'black',
   },
 ];
 
