@@ -8,6 +8,7 @@
     "start-pro": "webpack-dev-server --host localhost --port 8080"
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "babel-polyfill": "^6.26.0",
     "es6-promise": "^4.1.0",
     "marked": "^0.4.0",

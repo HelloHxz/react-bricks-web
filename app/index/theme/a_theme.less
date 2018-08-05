@@ -2,7 +2,7 @@
 
 @import '../../../src/components/theme/index.less';
 @theme-namespace:a_theme;
-@theme_color:#d81919;
+@theme_color:#e64343;
 @menu_item_height:32px;
 @menu_item_background:@theme_color;
 @menu_item_fontsize:12px;
@@ -45,6 +45,16 @@
     }
     .doc-code-title span{
         background-color:@theme_color_8;
+    }
+    .xz-doc-md code{
+        background-color: @theme_color_3;
+    }
+    .xz-doc-md blockquote{
+        border-color: @theme_color_8;
+        background-color: tint(@theme_color, 96%);
+    }
+    .xz-doc-md blockquote:hover{
+        border-color: @theme_color_6;
     }
 }
 

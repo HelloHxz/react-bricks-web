@@ -18,7 +18,7 @@ class Store {
         key:'router',
         icon:'iconfont icon-printer',
         children:[
-          {label:"Router 路由",key:'home/router'},
+          {label:"Hash & History 路由",key:'home/router'},
           {label:"GlobalPage 全局页面",key:'home/globalpage'},
         ]
       },
@@ -72,16 +72,6 @@ class Store {
               {label:"Tree 树状",key:'xxxxxxx'},
             ]},
         ]
-      },
-      {
-        label:'生命周期',
-        key:'xxxxx',
-        icon:'iconfont icon-laptop',
-      },
-      {
-        label:'异步加载',
-        key:'xxxxx',
-        icon:'iconfont icon-moneycollect',
       },{
         label:'打包发布',
         key:'xxxxx',
