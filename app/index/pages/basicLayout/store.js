@@ -11,26 +11,23 @@ class Store {
       {
         icon:'iconfont icon-reconciliation',
         label:'快速上手',
-        key:'home',
+        key:'home/quickstart',
       },
       {
         label:'Router 路由',
         key:'router',
         icon:'iconfont icon-printer',
         children:[
-          {label:"Router 路由",key:'home/hasnavigate'},
-          {label:"GlobalPage 全局页面",key:'home/basicpage'},
+          {label:"Router 路由",key:'home/router'},
+          {label:"GlobalPage 全局页面",key:'home/globalpage'},
         ]
       },
       {
         label:'数据状态',
         icon:'iconfont icon-printer',
         key:'frfrf',children:[
-            {label:"Mobx",key:'xxxxxxx1'},
-            {label:"AJAX",key:'xxxxxxx2',children:[
-                {label:'4.2.1',key:'xxxxxxxx3'},
-                {label:'4.2.2',key:'xxxxxxxx4'}
-            ]},
+            {label:"Mobx",key:'xxxxxxx1',key:'home/mobx'},
+            {label:"AJAX",key:'xxxxxxx2',key:'home/ajax'},
         ]
       },
       {

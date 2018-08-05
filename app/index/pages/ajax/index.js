@@ -4,7 +4,7 @@ import knowledgeText from './knowledge.md';
 import CodePage from '../../components/codePage';
 
 @PageView()
-class BottomDemo extends React.PureComponent {
+class Example extends React.PureComponent {
   
   getCodeListData() {
     return [];
@@ -15,4 +15,4 @@ class BottomDemo extends React.PureComponent {
   }
 }
 
-export default BottomDemo;
+export default Example;

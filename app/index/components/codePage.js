@@ -18,7 +18,7 @@ export default class BottomDemo extends React.PureComponent {
     return <div className='doc-page-content' style={{overflowX:'hidden',padding:10}}>
         <MD source={arr[0]} />
         <CodeList data={this.props.getCodeListData()}/>
-        <MD source={arr[1]} />
+        {arr.length>1?<MD source={arr[1]} />:null}
     </div>
   }
 

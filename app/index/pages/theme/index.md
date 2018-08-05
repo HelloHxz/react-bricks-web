@@ -1,32 +1,32 @@
 
 # Theme 样式
 
-提供编译时自定义样式,以及运行时自定义样式
+提供运行时自定义样式切换
 
-## 编译时 主题
+## 第一步
 
-通过 less modifyVars 编译时候修改实现
+## 第二步
 
-## 运行时主题 主题
+```css
 
-通过 import()语法异步引入一个组件实现，组件引用主题样式，
+// 系统的默认变量
+@import '../../../src/components/theme/index.less';
+// 很重要 定义当前样式的名称
+@theme-namespace:a_theme;
 
-并在加载完成的时候，将HTML的样式名称修成成为对应的样式名称
+// 在这里定义覆盖系统的组件变量 以及一些覆盖样式
 
-思路可以定义不同的全局的个性化变量less文件，然后使用脚本在这个less文件后面追加各个组件的less引用，或者直接写死，然后使用动态组件去引用less
 
-或者看看能不能使用require.context去动态引入less
+// 所有组件的样式
+@import '../../../src/components/theme/all.less';
 
-可以充分使用less变量的可覆盖特性，比如新建一个文件先引入默认样式变量文件，然后再引入自定义的变量进行覆盖
-组件的样式可以拆分成不变的部分和主题部分 这样就可以减少css体积
 
-## 代码示例
+```
 
--分割线-
+## 第三步
 
-## 属性 & API
+使用import()引入样式并且切换主题名称
 
-名称 | 类型 | 默认值| 说明
----|---|---|---
-row 1 col 1 | row 1 col 2| row 1 col 2| row 1 col 2
-row 2 col 1 | row 2 col 2| row 2 col 2| row 1 col 2
+
+```javascript
+```
