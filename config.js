@@ -1,13 +1,13 @@
 module.exports = {
     define:{
         development:{
-            SERVER:'localhost:8080'
+            SERVER:"localhost:8080"
         },
         uat:{
-            SERVER:''
+            SERVER:"x"
         },
         production:{
-
+            SERVER:''
         }
     }
 };

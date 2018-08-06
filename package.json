@@ -2,7 +2,7 @@
   "name": "bricks-web",
   "version": "0.0.1",
   "scripts": {
-    "build": "webpack -p --progress --config  webpack.config.js  --env.prod=true",
+    "build": "webpack -p --progress --config  webpack.config.js  --env.action=build",
     "start": "webpack-dev-server --host 0.0.0.0 --port 8080 --profile --display-modules --env.env=development",
     "start-uat": "webpack-dev-server --host localhost --port 8080 --env.env=uat",
     "start-pro": "webpack-dev-server --host localhost --port 8080 --env.env=production"

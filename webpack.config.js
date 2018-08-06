@@ -62,8 +62,14 @@ var rmdirSync = (function(){
 module.exports = function (env) {
   const appList = ['index','home'];
   createTheme();
-  const nodeEnv = env && env.prod ? 'production' : 'development';
+  const nodeEnv =  env.env || 'development';
+  const action = env.action||'start';
   const isProd = nodeEnv === 'production';
+  const define = Config.define || {};
+  const defineValue = define[nodeEnv]||{};
+  for(var key in defineValue){
+    defineValue[key] = JSON.stringify(defineValue[key]);
+  }
   var entryAndHtmlPlugin = getEntryAndHtmlPlugin(appList,isProd);
   var entry = entryAndHtmlPlugin.entry;
   var plugins= [
@@ -71,21 +77,16 @@ module.exports = function (env) {
       new webpack.LoaderOptionsPlugin({
           minimize: true
       }),
-      new webpack.DefinePlugin({
-          __DEV__: true,
-          huxiaozhong:JSON.stringify("hshsh"),
-          SEVER:{
-            path:JSON.stringify("22"),
-            url:JSON.stringify("1333")
-          }
-      }),
+      new webpack.DefinePlugin(defineValue),
   ];
 
   plugins = plugins.concat(entryAndHtmlPlugin.htmlplugins);
 
   if(!isProd){
     plugins.push(new webpack.HotModuleReplacementPlugin());
-  }else{
+  }
+  
+  if(action==='build'){
     rmdirSync('./dist');
   }
 
