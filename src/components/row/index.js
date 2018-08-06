@@ -1,6 +1,6 @@
 import React from 'react';
 import XZ from '../xz';
-import './index.less';
+import './row.less';
 
 const screenMap = {
     xs: 575,

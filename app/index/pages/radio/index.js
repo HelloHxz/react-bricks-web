@@ -1,4 +1,4 @@
-import {React,PageView,observer,PageContainer,Row,Radio} from "react-bricks-web";
+import {React,PageView,observer,PageContainer,Row,Radio} from "bricks-web";
 import './index.less';
 
 @PageView()

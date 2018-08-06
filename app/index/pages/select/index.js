@@ -1,4 +1,4 @@
-import {React,PageView,observer,PageContainer,Modal,Button,Select} from "react-bricks-web"
+import {React,PageView,observer,PageContainer,Modal,Button,Select} from "bricks-web"
 
 /*
   data: Array|'error'|'loading'|

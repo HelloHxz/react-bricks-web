@@ -1,4 +1,4 @@
-import {React,PageView,observer,PageContainer,Modal,Button,message} from "react-bricks-web"
+import {React,PageView,observer,PageContainer,Modal,Button,message} from "bricks-web"
 
 @PageView()
 class ModalDemo extends React.PureComponent {

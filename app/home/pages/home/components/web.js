@@ -1,4 +1,4 @@
-import {React,Row} from "react-bricks-web"
+import {React,Row} from "bricks-web"
 import './web.less';
 
 class WebPage extends React.PureComponent {

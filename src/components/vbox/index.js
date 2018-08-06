@@ -1,6 +1,6 @@
 import React from 'react';
 import Box from '../hbox/box';
-import './index.less';
+import './vbox.less';
 
 export default class VBox extends React.Component{
     render(){

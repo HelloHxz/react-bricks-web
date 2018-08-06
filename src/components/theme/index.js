@@ -1,6 +1,6 @@
 
 import XZ from '../xz';
-import Themes from './extendTheme';
+
 
 const sourceMap = {
     'btn-type':['default','primary','primarytext','text'],
@@ -9,18 +9,7 @@ const sourceMap = {
 
 let translateKeys = null;
 class Theme {
-    static setTheme(name){
-        const ComInstance = null;
-        if(!Themes[name]){
-            return;
-        }
-        const Pro = Themes[name].ThemePromise;
-        Pro().then((Com)=>{
-            document.documentElement.className = name;
-        }).catch(()=>{
-
-        });
-    }
+  
     static getConfig = (key,props)=>{
         let rkey = key;
         const source = sourceMap[key];

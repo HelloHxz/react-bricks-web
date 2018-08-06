@@ -1,32 +1,69 @@
 
 # Theme 样式
 
-提供编译时自定义样式,以及运行时自定义样式
+提供运行时自定义样式切换
 
-## 编译时 主题
+## 第一步
 
-通过 less modifyVars 编译时候修改实现
+## 第二步
 
-## 运行时主题 主题
+```css
 
-通过 import()语法异步引入一个组件实现，组件引用主题样式，
+// 系统的默认变量
+@import '[视具体路径而定]/node_modules/bricks-web/src/components/theme/index.less';
+// 很重要 定义当前样式的名称
+@theme-namespace:a_theme;
 
-并在加载完成的时候，将HTML的样式名称修成成为对应的样式名称
+// 在这里定义覆盖系统的组件变量 以及一些覆盖样式
 
-思路可以定义不同的全局的个性化变量less文件，然后使用脚本在这个less文件后面追加各个组件的less引用，或者直接写死，然后使用动态组件去引用less
 
-或者看看能不能使用require.context去动态引入less
+// 所有组件的样式
+@import '[视具体路径而定]/node_modules/bricks-web/src/components/theme/all.less';
 
-可以充分使用less变量的可覆盖特性，比如新建一个文件先引入默认样式变量文件，然后再引入自定义的变量进行覆盖
-组件的样式可以拆分成不变的部分和主题部分 这样就可以减少css体积
 
-## 代码示例
+```
 
--分割线-
+## 第三步
 
-## 属性 & API
+使用import()引入样式并且切换主题名称
 
-名称 | 类型 | 默认值| 说明
----|---|---|---
-row 1 col 1 | row 1 col 2| row 1 col 2| row 1 col 2
-row 2 col 1 | row 2 col 2| row 2 col 2| row 1 col 2
+一下是DEMO中的使用例子
+
+```javascript
+
+import {React} from "bricks-web"
+
+// key值就是less文件中定义的theme-namespace  color,name属性主要为了界面展示需要
+const Themes = [
+  {
+    key:'a_theme',name:'绿',Theme:()=>{ return import(/* webpackChunkName: "a_theme" */ '../../theme/a_theme.less'); },color:'red',
+  },{
+    key:'b_theme',name:'B站红',Theme:()=>{ return import(/* webpackChunkName: "b_theme" */ '../../theme/b_theme.less'); },color:'#f25d8e',
+  },{
+    key:'c_theme',name:'红',Theme:()=>{ return import(/* webpackChunkName: "c_theme" */ '../../theme/c_theme.less'); },color:'green',
+  },{
+    key:'d_theme',name:'黑',Theme:()=>{ return import(/* webpackChunkName: "d_theme" */ '../../theme/d_theme.less'); },color:'black',
+  },
+];
+
+export default class Demo extends React.Component {
+  themeChange = (data)=>{
+    data.Theme().then(()=>{
+        //切换主题名称
+      document.documentElement.className = data.key;
+    }).catch(()=>{
+
+    })
+  }
+  render() {
+    const themeBlocks = [];
+    for(let i = 0,j=Themes.length;i<j;i+=1){
+      const item = Themes[i];
+      themeBlocks.push(<div key={item.key} onClick={this.themeChange.bind(this,item)} style={{cursor:'pointer',backgroundColor:item.color,marginRight:20,width:30,height:30,display:'inline-block'}}></div>);
+    }
+    return (
+        <React.Fragment>{themeBlocks}</React.Fragment>
+    );
+  }
+}
+```

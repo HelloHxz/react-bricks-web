@@ -1,4 +1,4 @@
-import {React,PageView,observer,PageContainer,Modal,Button,Select,PopView} from "react-bricks-web"
+import {React,PageView,observer,PageContainer,Modal,Button,Select,PopView} from "bricks-web"
 
 @PageView()
 class PopViewDemo extends React.PureComponent {

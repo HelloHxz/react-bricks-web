@@ -1,9 +1,6 @@
-var Mock  = require("mockjs");
 var bodyParser = require('body-parser');
 var FirstMock =require("./firstMock");
-
 var DemoMock = require("./demo")
-
 
 var AllApi = Object.assign({},FirstMock,DemoMock)
 
@@ -22,7 +19,6 @@ module.exports = (app)=>{
 		      	if(keyInfo.length===2){
 			      	var ajaxType = keyInfo[0].toUpperCase();
 			      	var url = keyInfo[1];
-			      	var method;
 			      	if(ajaxType==="GET"){
 			      		app.get(url,function(req,res){
 				      		_fun(req,res);

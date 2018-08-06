@@ -1,4 +1,4 @@
-import {React,PageView,PageContainer,observer,Modal,Button,Select,Tabs,message} from "react-bricks-web"
+import {React,PageView,PageContainer,observer,Modal,Button,Select,Tabs,message} from "bricks-web"
 
 @observer
 class TabsOne extends React.Component {

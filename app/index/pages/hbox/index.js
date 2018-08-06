@@ -1,4 +1,4 @@
-import {React,PageView} from "react-bricks-web"
+import {React,PageView} from "bricks-web"
 import mdText from './index.md';
 import knowledgeText from './knowledge.md';
 import CodePage from '../../components/codePage';

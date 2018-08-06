@@ -1,4 +1,4 @@
-import {React,PageView,observer,PageContainer,Row,CheckBox,Button} from "react-bricks-web"
+import {React,PageView,observer,PageContainer,Row,CheckBox,Button} from "bricks-web"
 
 @PageView()
 class CheckBoxDemo extends React.PureComponent {

@@ -1,35 +1,36 @@
 @import '../theme/index.less';
+.@{theme-namespace}{
+    .xz-icon-wrapper{
+        display: inline-block;
+    }
 
-.xz-icon-wrapper{
-    display: inline-block;
-}
+    .xz-icon-wrapper .xz-icon{
+        font-size: 18px;
+    }
 
-.xz-icon-wrapper .xz-icon{
-    font-size: 18px;
-}
+    .xz-icon-wrapper .xz-icon-text{
+        display: inline-block;
+    }
 
-.xz-icon-wrapper .xz-icon-text{
-    display: inline-block;
-}
+    .xz-icon-text-right .xz-icon,.xz-icon-text-right .xz-icon-text,.xz-icon-text-left .xz-icon,.xz-icon-text-left .xz-icon-text{
+        vertical-align: middle;
+    }
 
-.xz-icon-text-right .xz-icon,.xz-icon-text-right .xz-icon-text,.xz-icon-text-left .xz-icon,.xz-icon-text-left .xz-icon-text{
-    vertical-align: middle;
-}
+    .xz-icon-text-right .xz-icon-text{
+        margin-left:5px;
+    }
 
-.xz-icon-text-right .xz-icon-text{
-    margin-left:5px;
-}
+    .xz-icon-text-left .xz-icon-text{
+        margin-right:5px;
+    }
 
-.xz-icon-text-left .xz-icon-text{
-    margin-right:5px;
-}
-
-.xz-btn-size-default .xz-icon{
-    font-size:13px;
-}
-.xz-btn-size-lg .xz-icon{
-    font-size:14px;
-}
-.xz-btn-size-sm .xz-icon{
-    font-size:12px;
+    .xz-btn-size-default .xz-icon{
+        font-size:13px;
+    }
+    .xz-btn-size-lg .xz-icon{
+        font-size:14px;
+    }
+    .xz-btn-size-sm .xz-icon{
+        font-size:12px;
+    }
 }

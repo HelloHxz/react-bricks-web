@@ -2,13 +2,13 @@ const path = require('path');
 const webpack = require('webpack');
 var mockData = require("./mock")
 var fs = require('fs');
+var Config = require("./config");
+var createTheme = require('./scripts/createTheme');
 // var CopyWebpackPlugin = require('copy-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 
-
 function getEntryAndHtmlPlugin(siteArr,isProd){
- 
   var re = {entry:{},htmlplugins:[]};
   for(var i=0,j=siteArr.length;i<j;i++){
     var siteName = siteArr[i];
@@ -26,94 +26,42 @@ function getEntryAndHtmlPlugin(siteArr,isProd){
   return re;
 }
 
-function exists(path){  
-  return fs.existsSync(path);  
-}  
-function isFile(path){  
-  return exists(path) && fs.statSync(path).isFile();  
-} 
-function isDir(path){  
-  return exists(path) && fs.statSync(path).isDirectory();  
-}  
-function createTheme(pathArr){
-  if(!pathArr||pathArr.length===0){
-    return;
-  }
-  const ComPath = './src/components';
-  const libLessFiles = fs.readdirSync(ComPath);
-  const LessArr = [];
-  let DefaultTheme = null;
-  for(var i=0,j=libLessFiles.length;i<j;i+=1){
-    const folder = libLessFiles[i];
-    const LessPath = ComPath+"/"+folder+'/index.less';
-    if(isFile(LessPath)){
-      var data = fs.readFileSync(LessPath, 'utf8');
-      if(folder!=='theme'){
-        LessArr.push(data.replace("@import '../theme/index.less';",''));
-      }else{
-        DefaultTheme = data;
+
+var rmdirSync = (function(){
+  function iterator(url,dirs){
+      var stat = fs.statSync(url);
+      if(stat.isDirectory()){
+          dirs.unshift(url);//收集目录
+          inner(url,dirs);
+      }else if(stat.isFile()){
+          fs.unlinkSync(url);//直接删除文件
       }
-    }
   }
+  function inner(path,dirs){
+      var arr = fs.readdirSync(path);
+      for(var i = 0, el ; el = arr[i++];){
+          iterator(path+"/"+el,dirs);
+      }
+  }
+  return function(dir,cb){
+      cb = cb || function(){};
+      var dirs = [];
 
-  let seed = 0;
-  if(DefaultTheme && LessArr.length>0){
-    const allComLess = LessArr.join(" ");
-    const newLessFolderPath = path.join(ComPath,'/theme/custom');
-
-    if(isDir(newLessFolderPath)){
-      // 清空
-      var dirList = fs.readdirSync(newLessFolderPath);
-      dirList.forEach(function(fileName) {
-       fs.unlinkSync(path.join(newLessFolderPath,fileName));
-      });
-    }else{
-      fs.mkdirSync(newLessFolderPath);
-    }
-    const extendFileArr = [];
-      for(var n=0,m=pathArr.length;n<m;n+=1){
-        const customThemeDir = pathArr[n];
-        const customLessFileList = fs.readdirSync(customThemeDir);
-        customLessFileList.forEach((customLessPath)=>{
-          const clpArr = customLessPath.split('.');
-          const customLessName = clpArr[0];
-          const type = clpArr[1];
-          if(type==='less'){
-            const fullPath = path.join(customThemeDir,customLessPath);
-            if(isFile(fullPath)){
-              var customLessText = fs.readFileSync(fullPath, 'utf8');
-              seed+=1;
-              fs.writeFileSync(path.join(newLessFolderPath,customLessName+".less"), DefaultTheme + "  @theme-namespace:"+customLessName+"; "+customLessText+" "+allComLess);
-              extendFileArr.push(`"${customLessName}":ThemeWrapper(()=>import(/* webpackChunkName: "${customLessName}-theme" */ "./custom/${customLessName}.less"))`);
-            }
+      try{
+          iterator(dir,dirs);
+          for(var i = 0, el ; el = dirs[i++];){
+              fs.rmdirSync(el);//一次性删除所有收集到的目录
           }
-        });
+          cb()
+      }catch(e){//如果文件或目录本来就不存在，fs.statSync会报错，不过我们还是当成没有异常发生
+          e.code === "ENOENT" ? cb() : cb(e);
       }
-
-      const extendThemeFilePath = path.join(ComPath,'/theme/extendTheme.js');
-      if(isFile(extendThemeFilePath)){
-        fs.unlinkSync(extendThemeFilePath);
-      }
-
-    // 创建 extendTheme
-    const extendFileText = `
-    import ThemeWrapper from './themeWrapper';
-    export default {
-       ${extendFileArr.join(',')}
-    }`;
-    fs.writeFileSync(extendThemeFilePath,extendFileText)
   }
-  if(seed===0){
-    console.log("自定义主题生成失败！是否路径配置正确")
-  }
-      // console.log(LessArr.join(' '))
-}
+})();
 
 module.exports = function (env) {
-
   const appList = ['index','home'];
-  const ThemePathArr = ['./app/index/theme/'];
-  createTheme(ThemePathArr);
+  createTheme();
   const nodeEnv = env && env.prod ? 'production' : 'development';
   const isProd = nodeEnv === 'production';
   var entryAndHtmlPlugin = getEntryAndHtmlPlugin(appList,isProd);
@@ -137,6 +85,8 @@ module.exports = function (env) {
 
   if(!isProd){
     plugins.push(new webpack.HotModuleReplacementPlugin());
+  }else{
+    rmdirSync('./dist');
   }
 
   console.log("isProd："+isProd);
@@ -213,7 +163,7 @@ return {
                   {
                     "cwd":"babelrc",
                     "alias": {
-                      "react-bricks-web": "./src/components"
+                      "bricks-web": "./"
                   },
                     "extensions": [".js",".ios.js",".android.js",".web.js"]
                   }
@@ -230,7 +180,7 @@ return {
                   "moduleName": "babel-runtime"
                 }
               ],
-              ["import", { "libraryName": "react-bricks-web","camel2DashComponentName":false}],
+              ["import", { "libraryName": "bricks-web","camel2DashComponentName":false}],
             ]
           }
         },
@@ -290,7 +240,10 @@ return {
               }
             },
             {
-                loader: "less-loader" 
+                loader: "less-loader",
+                options: {
+                  javascriptEnabled: true
+                }
             }]
       }
     ],

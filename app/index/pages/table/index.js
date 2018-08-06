@@ -1,4 +1,4 @@
-import {React,PageView,observer,PageContainer,Modal,Button,Select,Table} from "react-bricks-web"
+import {React,PageView,observer,PageContainer,Modal,Button,Select,Table} from "bricks-web"
 
 const columns = [{
     title: 'Name',

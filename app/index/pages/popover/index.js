@@ -1,4 +1,4 @@
-import {React,PageView,observer,PageContainer,Modal,Button,Select,Popover} from "react-bricks-web"
+import {React,PageView,observer,PageContainer,Modal,Button,Select,Popover} from "bricks-web"
 
 @PageView()
 class PopoverDemo extends React.PureComponent {

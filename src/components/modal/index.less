@@ -1,40 +1,41 @@
 
 @import '../theme/index.less';
+.@{theme-namespace}{
+    .xz-modal-wrapper{
+        position: fixed;
+        z-index: @modal_zindex;
+        width: 100%;
+        left:0;
+        top:100px;
+    }
+    .xz-modal{
+    margin:auto;
+    background: #fff;
+    width:700px;
+    }
 
-.xz-modal-wrapper{
-    position: fixed;
-    z-index: @modal_zindex;
-    width: 100%;
-    left:0;
-    top:100px;
-}
-.xz-modal{
-   margin:auto;
-   background: #fff;
-   width:700px;
-}
+    .xz-modal-bk{
+        z-index: @modal_zindex -  1;
+    }
 
-.xz-modal-bk{
-    z-index: @modal_zindex -  1;
-}
+    .xz-modal-wrapper-show{
+        animation:xzwrappershow .2s;
+        transform: scale(1);
+    }
+    @keyframes xzwrappershow{
+        from { transform: scale(.4);}
+        to {transform: scale(1);}
+    }
 
-.xz-modal-wrapper-show{
-    animation:xzwrappershow .2s;
-    transform: scale(1);
-}
-@keyframes xzwrappershow{
-    from { transform: scale(.4);}
-    to {transform: scale(1);}
-}
-
-.xz-modal-wrapper-hide{
-    animation:xzwrapperhide .3s;
-    transform: scale(0.3);
-    opacity: 0;
-}
-@keyframes xzwrapperhide{
-    from { transform: scale(1); opacity: 1;}
-    to {transform: scale(0.3);opacity: 0;}
+    .xz-modal-wrapper-hide{
+        animation:xzwrapperhide .3s;
+        transform: scale(0.3);
+        opacity: 0;
+    }
+    @keyframes xzwrapperhide{
+        from { transform: scale(1); opacity: 1;}
+        to {transform: scale(0.3);opacity: 0;}
+    }
 }
 
 

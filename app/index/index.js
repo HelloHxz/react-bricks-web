@@ -1,5 +1,5 @@
 import 'babel-polyfill'
-import {HashNavigate,Dynamic,HistoryNavigate} from "react-bricks-web";
+import {HashNavigate,Dynamic,HistoryNavigate} from "bricks-web";
 import React from 'react';
 import BasicStore from './pages/basicLayout/store';
 import './icon/index.css';
@@ -22,8 +22,13 @@ var config = {
 		"/":require("./pages/basicLayout").default,
 		home:require("./pages/home").default,
 		about:require("./pages/about").default,
+		quickstart:require("./pages/quickstart").default,
 		dropdown:require("./pages/dropdown").default,
 		group:require("./pages/group").default,
+		globalpage:require("./pages/globalpage").default,
+		router:require("./pages/router").default,
+		mobx:require("./pages/mobx").default,
+		ajax:require("./pages/ajax").default,
 		button:require("./pages/button").default,
 		swiper:require("./pages/swiper").default,
 		theme:require("./pages/theme").default,

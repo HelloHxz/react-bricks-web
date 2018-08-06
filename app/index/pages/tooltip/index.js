@@ -1,4 +1,4 @@
-import {React,PageView,observer,PageContainer,Modal,Button,Select,Tooltip} from "react-bricks-web"
+import {React,PageView,observer,PageContainer,Modal,Button,Select,Tooltip} from "bricks-web"
 
 @PageView()
 class ToolTipDemo extends React.PureComponent {

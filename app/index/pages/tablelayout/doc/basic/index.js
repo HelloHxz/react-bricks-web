@@ -1,5 +1,5 @@
 import React from 'react';
-import { TableLayout } from 'react-bricks-web';
+import { TableLayout } from 'bricks-web';
 import './index.less';
 
 export default class Example extends React.Component{

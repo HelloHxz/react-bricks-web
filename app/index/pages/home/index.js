@@ -1,4 +1,4 @@
-import {React,PageView,Menu,PopView,Input,Form,Select,RouteView,Row,Col,Modal,Button,VBox,HBox,XZ} from "react-bricks-web"
+import {React,PageView,Menu,PopView,Input,Form,Select,RouteView,Row,Col,Modal,Button,VBox,HBox,XZ} from "bricks-web"
 import './index.less';
 import HomeStore from './store';
 import BaseStore from '../basicLayout/store';
@@ -23,7 +23,7 @@ class HomeScreen extends React.PureComponent {
     this.props.navigation.goBack();
   }
 
-  go(){
+  headerButtonClick(){
     // this.props.homestore.test = "huxiaohzong";
     // console.log(this.props.homestore);
     // this.props.navigation.navigate("button");
@@ -37,7 +37,7 @@ class HomeScreen extends React.PureComponent {
       },200);
     });
 
-    XZ.setTheme("index");
+ 
     // this.setState({
     //   leftStatus:this.state.leftStatus==='slidehide'?'slideshow':'slidehide'
     // });
@@ -53,7 +53,7 @@ class HomeScreen extends React.PureComponent {
   render() {
     return (
         <VBox>
-         <VBox.Panel style={{height:50,backgroundColor:'#eee'}}>
+         <VBox.Panel style={{height:50,borderBottom:'1px solid #eee'}}>
             <LayoutHeader {...this.props} parent={this}/>
          </VBox.Panel>
          <VBox.Panel>
@@ -68,7 +68,6 @@ class HomeScreen extends React.PureComponent {
               </HBox.Panel>
             </HBox>
          </VBox.Panel>
-         <VBox.Panel style={{height:40,backgroundColor:'#ddd'}}>footer</VBox.Panel>
        </VBox>
     );
   }

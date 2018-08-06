@@ -1,0 +1,66 @@
+
+
+@import '../../../src/components/theme/index.less';
+@theme-namespace:d_theme;
+@theme_color:#001529;
+
+@menu_item_height:40px;
+@menu_item_background:#001529;
+@menu_item_fontsize:13px;
+@menu_item_text_color:rgba(255, 255, 255, 0.65);
+@menu_item_selected_background:#001529;
+@menu_item_hover_background:#001529;
+@menu_item_hover_text_color:#fff;
+@menu_item_selected_color:#fff;
+@menu_header_text_color:rgba(255, 255, 255, 0.65);
+@menu_header_background:#001529;
+@menu_header_fontsize:14px;
+@menu_arrow_color:rgba(255, 255, 255, 0.65);
+@menu_group_background:#001529;
+@menu_group_fontsize:12px;
+@menu_group_text_color:rgba(255, 255, 255, 0.55);
+@menu_background:#001529;
+
+.@{theme-namespace}{
+    .demo-grid .xz-col:nth-child(2n) .demo-grid-inner
+    {
+        background:@theme_color_6;
+    }
+    .demo-grid .xz-col:nth-child(2n+1) .demo-grid-inner
+    {
+        background:@theme_color_4;
+    }
+    .demo-tablelayout .xz-tablelayout-cell:nth-child(2n)
+    {
+        background:@theme_color_6;
+    }
+    .demo-tablelayout .xz-tablelayout-cell:nth-child(2n+1)
+    {
+        background:@theme_color_4;
+    }
+    .doc-code-item:hover{
+        border-color:@theme_color_2;
+    }
+    .doc-code-title span{
+        background-color:@theme_color_9;
+        color:#444;
+    }
+    .doc-code-title .toggle{
+        color:@theme_color;
+    }
+    .xz-doc-md code{
+        background-color: @theme_color_3;
+    }
+    .xz-doc-md blockquote{
+        border-color: @theme_color_8;
+        background-color: tint(@theme_color, 96%);
+    }
+    .xz-doc-md blockquote:hover{
+        border-color: @theme_color_6;
+    }
+    .xz-doc-md pre code, .xz-doc-md pre tt{
+        background-color: transparent;
+    }
+}
+
+@import '../../../src/components/theme/all.less';

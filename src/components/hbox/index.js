@@ -1,6 +1,6 @@
 import React from 'react';
 import Box from './box';
-import './index.less';
+import './hbox.less';
 
 
 export default class HBox extends React.Component{

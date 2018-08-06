@@ -1,5 +1,5 @@
 import React from 'react';
-import { VBox,Button } from 'react-bricks-web';
+import { VBox,Button } from 'bricks-web';
 import './index.less';
 
 export default class Example extends React.Component{
@@ -75,9 +75,9 @@ export default class Example extends React.Component{
             <Button type='primary' onClick={this.changeTopStatus.bind(this,'slidehide')} style={{marginRight:10}}>slideHide</Button>
         
             <VBox onBackLayerClick={this.onBackLayerClick.bind(this)} className='demoVBox' style={{height:460}}>
-                <VBox.Panel status={this.state.topStatus} style={{height:this.state.topHeight,backgroundColor:'#7dbcea'}}>1</VBox.Panel>
-                <VBox.Panel style={{backgroundColor:'rgba(16, 142, 233, 1)'}}>2</VBox.Panel>
-                <VBox.Panel status={this.state.bottomStatus} style={{height:this.state.bottomHeight,backgroundColor:'#7dbcea'}}>3</VBox.Panel>
+                <VBox.Panel className='theme-background-4' status={this.state.topStatus} style={{height:this.state.topHeight}}>1</VBox.Panel>
+                <VBox.Panel className='theme-background-6'>2</VBox.Panel>
+                <VBox.Panel className='theme-background-4' status={this.state.bottomStatus} style={{height:this.state.bottomHeight}}>3</VBox.Panel>
             </VBox>
        
             <div style={{marginTop:10,marginBottom:5}}>bottom:</div>

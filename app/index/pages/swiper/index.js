@@ -1,4 +1,4 @@
-import {React,PageView,observer,PageContainer,Modal,Button,Select,Swiper} from "react-bricks-web"
+import {React,PageView,observer,PageContainer,Modal,Button,Select,Swiper} from "bricks-web"
 
 var siwperData = [
     {src:"",title:"xxxx",style:{backgroundColor:'red',height:'100%'},autoHeight:100},

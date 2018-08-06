@@ -1,14 +1,14 @@
 {
-  "name": "react-bricks-web-web",
+  "name": "bricks-web",
   "version": "0.0.1",
-  "private": true,
   "scripts": {
     "build": "webpack -p --progress --config  webpack.config.js  --env.prod=true",
-    "start": "webpack-dev-server --host 0.0.0.0 --port 8080 --profile --display-modules",
-    "start-uat": "webpack-dev-server --host localhost --port 8080",
-    "start-pro": "webpack-dev-server --host localhost --port 8080"
+    "start": "webpack-dev-server --host 0.0.0.0 --port 8080 --profile --display-modules --env.env=development",
+    "start-uat": "webpack-dev-server --host localhost --port 8080 --env.env=uat",
+    "start-pro": "webpack-dev-server --host localhost --port 8080 --env.env=production"
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "babel-polyfill": "^6.26.0",
     "es6-promise": "^4.1.0",
     "marked": "^0.4.0",

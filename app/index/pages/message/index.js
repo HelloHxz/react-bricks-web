@@ -1,4 +1,4 @@
-import {React,PageView,observer,PageContainer,message,Button} from "react-bricks-web"
+import {React,PageView,observer,PageContainer,message,Button} from "bricks-web"
 
 
 

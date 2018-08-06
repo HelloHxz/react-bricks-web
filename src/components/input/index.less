@@ -1,49 +1,51 @@
 @import '../theme/index.less';
 
+.@{theme-namespace}{
 
-.xz-input{
-    border:1px solid @input_border_color;
-    border-radius: @input_borderradius;
-    overflow: hidden;
-}
-.xz-input input{
-    border:none;
-    width:100%;
-    border-radius: 0;
-    padding-left: 6px;
-}
+    .xz-input{
+        border:1px solid @input_border_color;
+        border-radius: @input_borderradius;
+        overflow: hidden;
+    }
+    .xz-input input{
+        border:none;
+        width:100%;
+        border-radius: 0;
+        padding-left: 6px;
+    }
 
-.xz-input-mes{
-    position: relative;
-    padding-top:1px;
-    color:red;
-}
-.xz-input:hover {
-    border:1px solid @theme_color;
-}
-.xz-input-focus {
-    border:1px solid @theme_color;
-}
+    .xz-input-mes{
+        position: relative;
+        padding-top:1px;
+        color:red;
+    }
+    .xz-input:hover {
+        border:1px solid @theme_color;
+    }
+    .xz-input-focus {
+        border:1px solid @theme_color;
+    }
 
-.xz-input-size-default input{
-    line-height: @theme_default_height;
-    height: @theme_default_height;
-    font-size: @input_default_fontsize;
-}
+    .xz-input-size-default input{
+        line-height: @theme_default_height;
+        height: @theme_default_height;
+        font-size: @input_default_fontsize;
+    }
 
-.xz-input-size-sm input{
-    line-height: @theme_sm_height;
-    height: @theme_sm_height;
-    font-size:  @input_sm_fontsize;
-}
+    .xz-input-size-sm input{
+        line-height: @theme_sm_height;
+        height: @theme_sm_height;
+        font-size:  @input_sm_fontsize;
+    }
 
-.xz-input-size-lg input{
-    line-height: @theme_lg_height;
-    height: @theme_lg_height;
-    font-size: @input_lg_fontsize;
-}
+    .xz-input-size-lg input{
+        line-height: @theme_lg_height;
+        height: @theme_lg_height;
+        font-size: @input_lg_fontsize;
+    }
 
 
-.xz-input-default{
-    overflow: hidden;
+    .xz-input-default{
+        overflow: hidden;
+    }
 }
