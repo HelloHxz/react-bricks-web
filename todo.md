@@ -1,3 +1,6 @@
+> primary, secondary, tertiary 色系
+
+
 ### 1.dockpanel
 
 > 看是否集成到vbox和hbox
@@ -15,6 +18,11 @@
 > 集成pagination
 
 ### 5. Pagination
+
+
+### button
+
+> (glost  -> outline solid)
 
 ### 6.Form
 
