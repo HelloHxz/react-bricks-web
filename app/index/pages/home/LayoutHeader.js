@@ -37,7 +37,7 @@ class LayoutHeader extends React.Component {
     return (
         <TableLayout style={{height:'100%'}}>
             <TableLayout.Cell>
-              <Button onClick={this.headerBtn.bind(this)} type='hover'><Icon type='bars' /></Button>
+              <Button style={{ width:100,height:'100%',borderRadius:0}} onClick={this.headerBtn.bind(this)} type='hover'><Icon type='bars' /></Button>
             </TableLayout.Cell>
             <TableLayout.Cell>
               <div>{themeBlocks}</div>
