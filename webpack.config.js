@@ -68,7 +68,9 @@ module.exports = function (env) {
   const define = Config.define || {};
   const defineValue = define[nodeEnv]||{};
   for(var key in defineValue){
-    defineValue[key] = JSON.stringify(defineValue[key]);
+    if(typeof(defineValue[key])==='string'){
+      defineValue[key] = JSON.stringify(defineValue[key]);
+    }
   }
   var entryAndHtmlPlugin = getEntryAndHtmlPlugin(appList,isProd);
   var entry = entryAndHtmlPlugin.entry;
@@ -82,17 +84,10 @@ module.exports = function (env) {
 
   plugins = plugins.concat(entryAndHtmlPlugin.htmlplugins);
 
-  if(!isProd){
-    plugins.push(new webpack.HotModuleReplacementPlugin());
-  }
-  
   if(action==='build'){
     rmdirSync('./dist');
-  }
-
-  console.log("isProd："+isProd);
-  
-  if(!isProd){
+  }else{
+    plugins.push(new webpack.HotModuleReplacementPlugin());
     var ip = arguments["1"].host||"localhost";
     var port =   arguments["1"].port||8080;
     var url = "http://"+ip+":"+port;
@@ -100,6 +95,8 @@ module.exports = function (env) {
     entry.dev_client = 'webpack-dev-server/client?'+url;
     entry.dev_server= 'webpack/hot/only-dev-server';
   }
+
+
 
 return {
   context: path.resolve(__dirname, 'app'),
