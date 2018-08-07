@@ -3,7 +3,7 @@ import XZ from '../xz';
 
 
 const sourceMap = {
-    'btn-type':['default','primary','primarytext','text'],
+    'btn-type':['default','primary','hover'],
     'size':['default','sm','lg']
 };
 
