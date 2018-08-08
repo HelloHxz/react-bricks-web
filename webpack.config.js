@@ -8,7 +8,7 @@ var createTheme = require('./scripts/createTheme');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 
-function getEntryAndHtmlPlugin(siteArr,isProd){
+function getEntryAndHtmlPlugin(siteArr,isBuild){
   var re = {entry:{},htmlplugins:[]};
   for(var i=0,j=siteArr.length;i<j;i++){
     var siteName = siteArr[i];
@@ -16,7 +16,7 @@ function getEntryAndHtmlPlugin(siteArr,isProd){
     re.htmlplugins.push(new HtmlWebpackPlugin({
         // 打包的时候将html输出到git根目录下面 方便发布
         // 正常的：filename: siteName+'.html', //打包出来的html名字
-        filename: isProd?'../'+siteName+'.html':(siteName)+'.html', //打包出来的html名字
+        filename: isBuild?'../'+siteName+'.html':(siteName)+'.html', //打包出来的html名字
         template: './'+siteName+'/index.html', //模版路径
         inject: 'body' ,
         chunks:[siteName],//js注入的名字
@@ -64,7 +64,6 @@ module.exports = function (env) {
   createTheme();
   const nodeEnv =  env.env || 'development';
   const action = env.action||'start';
-  const isProd = nodeEnv === 'production';
   const define = Config.define || {};
   const defineValue = define[nodeEnv]||{};
   for(var key in defineValue){
@@ -72,7 +71,8 @@ module.exports = function (env) {
       defineValue[key] = JSON.stringify(defineValue[key]);
     }
   }
-  var entryAndHtmlPlugin = getEntryAndHtmlPlugin(appList,isProd);
+  const isBuild = action==='build';
+  var entryAndHtmlPlugin = getEntryAndHtmlPlugin(appList,isBuild);
   var entry = entryAndHtmlPlugin.entry;
   var plugins= [
       new webpack.NamedModulesPlugin(),
@@ -84,7 +84,7 @@ module.exports = function (env) {
 
   plugins = plugins.concat(entryAndHtmlPlugin.htmlplugins);
 
-  if(action==='build'){
+  if(isBuild){
     rmdirSync('./dist');
   }else{
     plugins.push(new webpack.HotModuleReplacementPlugin());
@@ -104,29 +104,29 @@ return {
   entry:entry,
   output: {
     filename: '[name].[hash:8].js',
-    chunkFilename: !isProd ? '[name].bundle.js' : '[name].[chunkhash:8].min.js',
+    chunkFilename: !isBuild ? '[name].bundle.js' : '[name].[chunkhash:8].min.js',
     // the output bundle
 
     path: path.resolve(__dirname, 'dist'),
     // 打包的时候将html输出到git根目录下面 方便发布 目录引用 加dist
-    // 正常： publicPath: isProd?'./':'/'
-    publicPath: isProd?'./dist/':'/'
+    // 正常： publicPath: isBuild?'./':'/'
+    publicPath: isBuild?'./dist/':'/'
   },
  
   watchOptions: {
     poll: true
   },
-  devtool: isProd ? 'cheap-module-source-map':'#source-map',
+  devtool: isBuild ? 'cheap-module-source-map':'#source-map',
   devServer: {
     hot: true,
     // enable HMR on the server
     contentBase: path.resolve(__dirname, 'dist'),
     // match the output path
-    publicPath: isProd?'./':'/',
+    publicPath: isBuild?'./':'/',
     //支持historyState
     //historyApiFallback:true ???
     historyApiFallback:{
-      index:isProd?'./':'/'+appList[0]+'.html',
+      index:isBuild?'./':'/'+appList[0]+'.html',
       // rewrites: [
       //   { from: /^\/admin/, to: 'build/admin.html' }
       // ],
