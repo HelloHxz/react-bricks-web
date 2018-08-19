@@ -4,13 +4,15 @@ import XZ from '../xz';
 
 const sourceMap = {
     'btn-type':['default','primary','hover'],
-    'size':['default','sm','lg']
+    'size':['default','sm','lg'],
+    'position':['fixed','absolute'],
+    'direction':['right','top','bottom','left','center'],
 };
 
 let translateKeys = null;
 class Theme {
   
-    static getConfig = (key,props)=>{
+    static getConfig = (key,props,defaultValue)=>{
         let rkey = key;
         const source = sourceMap[key];
         const rkeyArr = rkey.split('-');
@@ -19,7 +21,7 @@ class Theme {
         }
         const value = props[rkey]||'';
         if(source.indexOf(value)<0){
-            return source[0];
+            return defaultValue || source[0];
         }
         return value;
     }

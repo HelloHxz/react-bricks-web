@@ -26,6 +26,7 @@ var config = {
 		dropdown:require("./pages/dropdown").default,
 		group:require("./pages/group").default,
 		globalpage:require("./pages/globalpage").default,
+		drawer:require("./pages/drawer").default,
 		router:require("./pages/router").default,
 		mobx:require("./pages/mobx").default,
 		ajax:require("./pages/ajax").default,

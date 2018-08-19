@@ -65,6 +65,7 @@ class Store {
               {label:"Icon 图标",key:'components/icon',},
               {label:"DropDown 下拉选择",key:'components/dropdown',},
               {label:"Modal 弹出层",key:'components/modal',},
+              {label:"Drawer 抽屉",key:'components/drawer',},
               {label:"Spin 加载指示器",key:'components/spin',},
               {label:"Message 消息",key:'components/message',},
               {label:"Image 图片",key:'components/image',}, 

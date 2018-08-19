@@ -1,5 +1,6 @@
 import React from 'react';
 import './index.less';
+import Theme from '../theme';
 
 export default class BackLayer extends React.Component{
     constructor(props){
@@ -15,7 +16,7 @@ export default class BackLayer extends React.Component{
         }
         const className=['xz-bk-layer'];
         this.preStatus = status;
-        const positionMode = this.props.positionMode || 'absolute';
+        const positionMode = Theme.getConfig('position',this.props);
         className.push('xz-bk-layer-'+positionMode);
         className.push('xz-bk-layer-'+status);
         const p = {};

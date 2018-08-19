@@ -1,8 +1,9 @@
 import React from 'react';
 import BackLayer from '../backLayer';
 import './index.less';
+import Theme from '../theme';
 
-export default class Modal extends React.Component{
+export default class Drawer extends React.Component{
     constructor(props){
         super(props);
         this.isInit = true;
@@ -44,14 +45,19 @@ export default class Modal extends React.Component{
         }
         this.isInit = false;
         const subfix = this.state.show?'show':'hide';
-        const wrapperClassName = ['xz-modal-wrapper',`xz-modal-wrapper-${subfix}`];
+        const placement = Theme.getConfig('direction',this.props);
+        const position = Theme.getConfig('position',this.props);
+        const wrapperClassName = [`xz-drawer-wrapper xz-drawer-wrapper-${position} xz-drawer-wrapper-${placement}`,`xz-drawer-wrapper-${placement}-${subfix}`];
+        if(this.props.className){
+            wrapperClassName.push(this.props.className);
+        }
         return (<React.Fragment>
             <div className={wrapperClassName.join(' ')}>
-                <div className='xz-modal'>{
+                <div className='xz-drawer'>{
                     this.props.children
                 }</div>
             </div>
-            <BackLayer show={this.state.show} className='xz-modal-bk' position='fixed'/>
+            <BackLayer onClick={this.props.onHide} show={this.state.show} className='xz-drawer-bk' position={position}/>
         </React.Fragment>)
     }
 }

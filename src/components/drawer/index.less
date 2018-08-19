@@ -1,0 +1,55 @@
+
+@import '../theme/index.less';
+.@{theme-namespace}{
+    .xz-drawer-wrapper{
+        z-index: @drawer_zindex;
+    }
+    .xz-drawer-wrapper-absolute{
+        position: absolute;
+    }
+    .xz-drawer-wrapper-fixed{
+        position: fixed;
+    }
+    .xz-drawer{
+        background: #fff;
+        width:400px;
+        height: 100%;
+    }
+
+    .xz-drawer-wrapper-right .xz-drawer{
+        box-shadow: -2px 0 8px rgba(0,0,0,.15);
+    }
+
+    .xz-drawer-wrapper-right{
+        right: 0;
+        top:0;
+        bottom: 0;
+        transform: translateX(100%);
+    }
+    .xz-drawer-wrapper-right-show{
+        animation:xzwrapperrightshow .3s ease;
+        transform: translateX(0);
+    }
+
+    .xz-drawer-bk{
+        z-index: @drawer_zindex -  1;
+    }
+
+    @keyframes xzwrapperrightshow{
+        from { transform: translateX(100%);}
+        to { transform: translateX(0%);}
+    }
+
+    .xz-drawer-wrapper-right-hide{
+        animation:xzwrapperrighthide .3s ease;
+        transform: translateX(100%);
+    }
+    @keyframes xzwrapperrighthide{
+        from { transform: translateX(0%);}
+        to { transform: translateX(100%);}
+    }
+}
+
+
+
+

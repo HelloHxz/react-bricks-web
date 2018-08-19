@@ -8,6 +8,7 @@ import RouteView from './src/components/routeview'
 import Menu from './src/components/Menu';
 import Select from './src/components/select';
 import Modal from './src/components/modal';
+import Drawer from './src/components/drawer';
 import Row from './src/components/row';
 import message from './src/components/message';
 import Button from './src/components/button';
@@ -65,6 +66,7 @@ export {
 	Form,
 	Modal,
 	Dynamic,
+	Drawer,
 	Row,
 	PopView,
 	Select,

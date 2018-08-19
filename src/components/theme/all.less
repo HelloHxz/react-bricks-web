@@ -1,3 +1,6 @@
+
+
+.@{theme-namespace}{
 .xz-bk-layer-fixed{
     position: fixed;
 }
@@ -5,33 +8,35 @@
     position: absolute;
 }
 .xz-bk-layer{
+    @o:@bk_layer_opacity*100;
     width: 100%;
     top:0;
     left: 0;
     height: 100%;
     background-color:#000;
-    filter:alpha(opacity=50);
-    opacity: .5;
+    filter: alpha(opacity=@o);
+    opacity: @bk_layer_opacity;
 }
 
 .xz-bk-layer-hide{
-    animation:xzbklayerhide .3s;
+    animation:xzbklayerhide .4s ease; 
     opacity: 0;
 }
 
 @keyframes xzbklayerhide{
-    from {opacity:.5;}
+    from {opacity:@bk_layer_opacity;}
     to {opacity:0;}
 }
 
 .xz-bk-layer-show{
-    animation:xzbklayershow .3s;
-    opacity: .5;
+    animation:xzbklayershow .4s ease; 
+    opacity: @bk_layer_opacity;
 }
 
 @keyframes xzbklayershow{
     from {opacity:0;}
-    to {opacity:0.5;}
+    to {opacity:@bk_layer_opacity;}
+}
 }
  
 
@@ -195,6 +200,61 @@
         margin-bottom:10px;
     }
 } 
+
+.@{theme-namespace}{
+    .xz-drawer-wrapper{
+        z-index: @drawer_zindex;
+    }
+    .xz-drawer-wrapper-absolute{
+        position: absolute;
+    }
+    .xz-drawer-wrapper-fixed{
+        position: fixed;
+    }
+    .xz-drawer{
+        background: #fff;
+        width:400px;
+        height: 100%;
+    }
+
+    .xz-drawer-wrapper-right .xz-drawer{
+        box-shadow: -2px 0 8px rgba(0,0,0,.15);
+    }
+
+    .xz-drawer-wrapper-right{
+        right: 0;
+        top:0;
+        bottom: 0;
+        transform: translateX(100%);
+    }
+    .xz-drawer-wrapper-right-show{
+        animation:xzwrapperrightshow .3s ease;
+        transform: translateX(0);
+    }
+
+    .xz-drawer-bk{
+        z-index: @drawer_zindex -  1;
+    }
+
+    @keyframes xzwrapperrightshow{
+        from { transform: translateX(100%);}
+        to { transform: translateX(0%);}
+    }
+
+    .xz-drawer-wrapper-right-hide{
+        animation:xzwrapperrighthide .3s ease;
+        transform: translateX(100%);
+    }
+    @keyframes xzwrapperrighthide{
+        from { transform: translateX(0%);}
+        to { transform: translateX(100%);}
+    }
+}
+
+
+
+
+ 
 
 .@{theme-namespace}{
     .xz-dropdown-section{

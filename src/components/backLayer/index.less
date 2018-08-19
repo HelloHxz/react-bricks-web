@@ -1,3 +1,6 @@
+@import '../theme/index.less';
+
+.@{theme-namespace}{
 .xz-bk-layer-fixed{
     position: fixed;
 }
@@ -5,31 +8,33 @@
     position: absolute;
 }
 .xz-bk-layer{
+    @o:@bk_layer_opacity*100;
     width: 100%;
     top:0;
     left: 0;
     height: 100%;
     background-color:#000;
-    filter:alpha(opacity=50);
-    opacity: .5;
+    filter: alpha(opacity=@o);
+    opacity: @bk_layer_opacity;
 }
 
 .xz-bk-layer-hide{
-    animation:xzbklayerhide .3s;
+    animation:xzbklayerhide .4s ease; 
     opacity: 0;
 }
 
 @keyframes xzbklayerhide{
-    from {opacity:.5;}
+    from {opacity:@bk_layer_opacity;}
     to {opacity:0;}
 }
 
 .xz-bk-layer-show{
-    animation:xzbklayershow .3s;
-    opacity: .5;
+    animation:xzbklayershow .4s ease; 
+    opacity: @bk_layer_opacity;
 }
 
 @keyframes xzbklayershow{
     from {opacity:0;}
-    to {opacity:0.5;}
+    to {opacity:@bk_layer_opacity;}
+}
 }
