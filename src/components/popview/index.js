@@ -75,6 +75,10 @@ class PopView extends React.Component{
             window.clearTimeout(this.timeoutid);
             this.timeoutid = null;
         }
+        if(this.hideTimeoutID){
+            window.clearTimeout(this.hideTimeoutID);
+            this.hideTimeoutID = null;
+        }
     }
     onMouseLeave(e){
        if(this.hideMode === 'blur'){
@@ -125,14 +129,11 @@ class PopView extends React.Component{
                 if(this.props.onHide){
                     this.props.onHide(this);
                 }
-            },100);
+            },200);
         });
     }
 
     componentWillUnmount(){
-        if(this.hideTimeoutID){
-            window.clearTimeout(this.hideTimeoutID);
-        }
         this.clearTimeout();
     }
 
