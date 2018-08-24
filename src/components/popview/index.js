@@ -42,7 +42,8 @@ class PopView extends React.Component{
         }
     }
     show(e){
-        this.clearTimeout();
+        this.clearShowTimeout();
+        this.clearDestoryTimeout();
         if(this.state.show===true){
             this.preventHide();
             return;
@@ -70,14 +71,10 @@ class PopView extends React.Component{
             this.props.onShow(this);
         }
     }
-    clearTimeout(){
+    clearShowTimeout(){
         if(this.timeoutid){
             window.clearTimeout(this.timeoutid);
             this.timeoutid = null;
-        }
-        if(this.hideTimeoutID){
-            window.clearTimeout(this.hideTimeoutID);
-            this.hideTimeoutID = null;
         }
     }
     onMouseLeave(e){
@@ -87,19 +84,27 @@ class PopView extends React.Component{
        this.hide();
     }
     onMouseOverWhenClickMode(){
-        this.clearTimeout();
+        this.clearShowTimeout();
     }
     
     preventHide(){
-        this.clearTimeout();
+        this.clearShowTimeout();
+        this.clearDestoryTimeout();
         this.focus();
+    }
+
+    clearDestoryTimeout(){
+        if(this.destoryTimeoutID){
+            window.clearTimeout(this.destoryTimeoutID);
+            this.destoryTimeoutID = null;
+        }
     }
 
     hide(timeout){
         if(window.xzdebug===true){
             return;
         }
-        this.clearTimeout();
+        this.clearShowTimeout();
         if(this.state.show===false||this.state.show==='noinit'){
             return;
         }
@@ -124,7 +129,7 @@ class PopView extends React.Component{
         this.setState({
             show:false
         },()=>{
-            this.hideTimeoutID = setTimeout(()=>{
+            this.destoryTimeoutID = setTimeout(()=>{
                 this.setState({show:'noinit'});
                 if(this.props.onHide){
                     this.props.onHide(this);
@@ -134,9 +139,9 @@ class PopView extends React.Component{
     }
 
     componentWillUnmount(){
-        this.clearTimeout();
+        this.clearShowTimeout();
+        this.clearDestoryTimeout();
     }
-
    
     getContentEvent(){
         var mode = this.props.mode || 'hover'; //dbclick|click|hover|rightclick
@@ -363,9 +368,9 @@ class PopWrapper extends React.Component{
             }}
             onWheel={(e)=>{ e.preventDefault(); }}
             onMouseOver={()=>{
-                this.props.popview.clearTimeout();
+                this.props.popview.clearShowTimeout();
                 if(this.props.parentPopview){
-                    this.props.parentPopview.clearTimeout();
+                    this.props.parentPopview.clearShowTimeout();
                 }
             }}
             onMouseLeave={this.onMouseLeave.bind(this)} className={className.join(' ')} style={pos.style}>
