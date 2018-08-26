@@ -22,7 +22,11 @@ class Example extends React.PureComponent {
   }
 
   hide(){
-    // message.show("show");
+    // 因为遮罩层fixed被translate影响 所以子Drawer的遮罩层不能覆盖全部
+    if(this.state.childrenShow){
+        this.hideChildren();
+        return;
+    }
     this.setState({
         parentShow:false
     });

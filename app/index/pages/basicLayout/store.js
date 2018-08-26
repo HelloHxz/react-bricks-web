@@ -47,6 +47,8 @@ class Store {
               {label:"HBox 水平布局",key:'components/hbox'},
               {label:"Group 组",key:'components/group'},
               {label:"Tabs 页签",key:'components/tabs',},
+              {label:"Modal 弹出层",key:'components/modal',},
+              {label:"Drawer 抽屉",key:'components/drawer',},
             ]},
             {label:"表单组件",group:[
               {label:"Button 按钮",key:'components/button'},
@@ -64,8 +66,6 @@ class Store {
               {label:"Popover 泡芙",key:'components/popover',},
               {label:"Icon 图标",key:'components/icon',},
               {label:"DropDown 下拉选择",key:'components/dropdown',},
-              {label:"Modal 弹出层",key:'components/modal',},
-              {label:"Drawer 抽屉",key:'components/drawer',},
               {label:"Spin 加载指示器",key:'components/spin',},
               {label:"Message 消息",key:'components/message',},
               {label:"Image 图片",key:'components/image',}, 

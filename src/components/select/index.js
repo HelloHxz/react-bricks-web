@@ -165,7 +165,7 @@ export default class Select extends React.Component{
                     onShow = {this.onShow.bind(this)}
                     onHide = {this.onHide.bind(this)}
                     showDelay={this.props.showDelay||50}
-                    hideDelay={this.props.hideDelay||50}
+                    hideDelay={this.props.hideDelay||80}
                     offset = {{y: 2}}
                     initOverLayerWidth={true}
                     renderContent={this.renderPopView.bind(this)}
