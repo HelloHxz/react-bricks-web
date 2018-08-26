@@ -6,7 +6,7 @@ import './icon/index.css';
 import './index.less';
 
 var config = {
-	root:"home",
+	root:"login",
 	ajax:{
 		onResponse:()=>{
 
@@ -20,6 +20,7 @@ var config = {
 	},
 	pages:{
 		"/":require("./pages/basicLayout").default,
+		login:require("./pages/login").default,
 		home:require("./pages/home").default,
 		about:require("./pages/about").default,
 		quickstart:require("./pages/quickstart").default,

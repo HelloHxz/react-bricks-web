@@ -209,7 +209,11 @@ class Navigation extends React.Component {
     }
     var key = ToPageName;
     var P = PageView;
-    global._triggerHashChange(this.getUrlInfo());
+    const urlInfo = this.getUrlInfo();
+    global._triggerHashChange(urlInfo);
+    if(this.basicLayoutPage && this.basicLayoutPage.pageInstance.onRouterChange){
+      this.basicLayoutPage.pageInstance.onRouterChange(urlInfo);
+    }
     this.setState(
       {pages:<P leftroute={ToPageNameArr} pagename={ToPageName} navigation={this} key={key} pkey={key}></P>}
     );
@@ -242,7 +246,9 @@ class Navigation extends React.Component {
       </React.Fragment>);
     if(this.props.config.pages["/"]){
       const Wrapper = this.props.config.pages["/"];
-      return <Wrapper  pagename={'/'}
+      return <Wrapper ref={(ins)=>{ 
+        this.basicLayoutPage = ins; 
+      }}  pagename={'/'}
           navigation={this}>
         {pages}
       </Wrapper>

@@ -32,7 +32,6 @@ class PageView extends React.Component {
   }
 
 
-
   destroy(){
     this.setState({isDestory:true});
   }
@@ -43,10 +42,10 @@ class PageView extends React.Component {
   }
 
   componentDidMount(){
-    console.log(this.props.pkey+"     didmount>>>");
+    console.log(this.props.pkey+" >>>> mount");
   }
 
-   componentWillUpdate(nextProps,nextState){
+  componentWillUpdate(nextProps,nextState){
     return false;
   }
 

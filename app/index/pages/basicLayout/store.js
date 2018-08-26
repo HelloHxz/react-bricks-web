@@ -1,7 +1,7 @@
 import {observable} from 'bricks-web';
 
 class Store {
-    @observable UserInfo = {};
+    @observable UserInfo = null;
     @observable MenuData = [
         {
         icon:'iconfont icon-folder-open',
