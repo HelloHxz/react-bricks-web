@@ -13,19 +13,21 @@
     top:0;
     left: 0;
     height: 100%;
-    background-color:#000;
+    background-color:@bk_layer_background;
     filter: alpha(opacity=@o);
     opacity: @bk_layer_opacity;
+    visibility: visible;
 }
 
 .xz-bk-layer-hide{
     animation:xzbklayerhide .4s ease; 
     opacity: 0;
+    visibility: hidden;
 }
 
 @keyframes xzbklayerhide{
-    from {opacity:@bk_layer_opacity;}
-    to {opacity:0;}
+    from {opacity:@bk_layer_opacity; visibility: visible; }
+    to {opacity:0; visibility: hidden; }
 }
 
 .xz-bk-layer-show{
@@ -34,7 +36,7 @@
 }
 
 @keyframes xzbklayershow{
-    from {opacity:0;}
-    to {opacity:@bk_layer_opacity;}
+    from {opacity:0; visibility: hidden;}
+    to {opacity:@bk_layer_opacity; visibility: visible;}
 }
 }

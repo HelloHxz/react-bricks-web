@@ -81,7 +81,7 @@ export default class Box extends React.Component{
                 this.root = root;
             }} className={`xz-${this.boxType} ${this.props.className||''}`}>
                 {children}
-                <BackLayer {...backlayerProps} className={`xz-${this.boxType}-bk`} show={showBk} /> 
+                <BackLayer position='absolute' {...backlayerProps} className={`xz-${this.boxType}-bk`} show={showBk} /> 
             </div>
         );
     }
