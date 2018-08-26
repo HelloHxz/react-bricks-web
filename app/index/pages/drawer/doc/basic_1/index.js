@@ -34,7 +34,7 @@ class Example extends React.PureComponent {
   render() {
     return <div>
         <Drawer show={this.state.show}>
-            <VBox className='demoVBox'>
+            <VBox>
                 <VBox.Panel style={{height:50}}>1</VBox.Panel>
                 <VBox.Panel style={{ borderTop:'1px solid #eee',borderBottom:'1px solid #eee'}}>2</VBox.Panel>
                 <VBox.Panel style={{height:50,paddingTop:10,paddingLeft:30}}>
