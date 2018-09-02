@@ -26,11 +26,11 @@ class FormDemo extends React.PureComponent {
       <div>
           <FormItem {...rowProps} dataKey='name' label={"姓名"} com={Input}/>
           <FormItem label='地址:' {...rowProps} dataKey='address' com={Input}/>
-          <FormItem label="选择:" {...rowProps} dataKey='isChecked' initialValue={false} com={CheckBox}>
+          <FormItem label="选择:" {...rowProps} dataKey='isChecked' defaultValue={false} com={CheckBox}>
             单选框
           </FormItem>
           <FormItem 
-          initialValue='2'
+          defaultValue='2'
           label='地区:'
           rule={[
             {message:'必填!',regex:'required'},
@@ -44,12 +44,34 @@ class FormDemo extends React.PureComponent {
       </div>
     )
   }
-
+  /*
+     tableLayout={{
+            label:{
+              width:100
+            }
+          }}
+              gridLayout={
+             {
+               label:{
+                 span:6
+               },
+               input:{
+                 span:18
+               }
+             }
+           }
+  */
   render() {
     return <div className='doc-page-content'>
-          <Form initialValue={{
+          <Form defaultValue={{
             inputValue:'hahha'
-          }} renderContent={(formProps)=>{
+          }} 
+          tableLayout={{
+            label:{
+              width:80
+            }
+          }}
+          renderContent={(formProps)=>{
               return (
                 <React.Fragment>
                    <Row gutter={16}>
@@ -57,13 +79,13 @@ class FormDemo extends React.PureComponent {
                       <FormItem label='文本输入：' {...formProps} rule={[]} dataKey='inputValue' placeholder='请输入' com={Input}  />
                     </Row.Col>
                     <Row.Col span={{md: 12, lg: 8 }}>
-                     <FormItem label='文本输入：' {...formProps} rule={[]} initialValue='200' dataKey='inputValue1' com={Input}  />
+                     <FormItem label='文本输入：' {...formProps} rule={[]} defaultValue='200' dataKey='inputValue1' com={Input}  />
                     </Row.Col>
                     <Row.Col span={{md: 12, lg: 8 }}>
-                     <FormItem label='日期:' {...formProps} rule={[]} initialValue='112' dataKey='inputdate' com={Input}  />
+                     <FormItem label='日期:' {...formProps} rule={[]} defaultValue='112' dataKey='inputdate' com={Input}  />
                     </Row.Col>
                     <Row.Col span={{ md: 12, lg: 8}}>
-                        <FormItem label='多选:' {...formProps} rule={[]} initialValue={[0]} data={[
+                        <FormItem label='多选:' {...formProps} rule={[]} defaultValue={[0]} data={[
                         {label:'check1',value:0},
                         {label:'check2',value:1},
                         {label:'check3',value:2},
@@ -77,7 +99,7 @@ class FormDemo extends React.PureComponent {
                   </Row>
                 
                   <FormItem 
-                    initialValue='2'
+                    defaultValue='2'
                     rule={[
                       {message:'必填!',regex:'required'},
                       {message:'小于10',regex:(val)=>{
@@ -90,7 +112,7 @@ class FormDemo extends React.PureComponent {
                     {...formProps} 
                     label='地区:'
                     dataKey='selectorValue' data={[{label:"江西",value:'1'},{label:"湖南",value:'2'},{label:"湖北",value:'3'}]} placeholder='请选择' com={Select}  />
-                  <FormRepeat initialValue={[{name:"hxz",isChecked:true}]} {...formProps} dataKey='Lists' renderRow={(rowProps)=>{
+                  <FormRepeat defaultValue={[{name:"hxz",isChecked:true}]} {...formProps} dataKey='Lists' renderRow={(rowProps)=>{
                     return this.createRow(rowProps);
                   }} />
                   <Button type='primary' onClick={this.add.bind(this,formProps)}>添加</Button>

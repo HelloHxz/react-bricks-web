@@ -35,16 +35,27 @@ class Form extends React.Component{
 
     }
     render(){
-        return <div>{this.props.renderContent({form:this})}</div>
+        const p = setProperty({form:this},this.props);
+        return <div>{this.props.renderContent(p)}</div>
     }
 }
 
+function setProperty(p,props){
+    if(props.tableLayout){
+        p.tableLayout = props.tableLayout;
+    }
+    if(props.gridLayout){
+        p.gridLayout = props.gridLayout;
+    }
+    return p;
+}
 
-function extendObservableDataKey(props,initialValue){
+
+function extendObservableDataKey(props,defaultValue){
     const store = props.rowData||props.form.store;
     if(!store.hasOwnProperty(props.dataKey)){
         const kv = {};
-        kv[props.dataKey] = initialValue;
+        kv[props.dataKey] = defaultValue;
         extendObservable(store,kv);
     }
 }
@@ -53,7 +64,7 @@ function extendObservableDataKey(props,initialValue){
 class FormItem extends React.Component{
     constructor(props){
         super(props);
-        extendObservableDataKey(props,props.initialValue);
+        extendObservableDataKey(props,props.defaultValue);
     }
     validate(){
     }
@@ -77,7 +88,8 @@ class FormRow extends React.Component{
     }
     render(){
         const rowData = this.props.rowData;
-        return this.props.renderRow({rowData,index:this.props.index,rowInstance:this,form:this.props.form})
+        const p = setProperty({rowData,index:this.props.index,rowInstance:this,form:this.props.form},this.props);
+        return this.props.renderRow(p)
     }
 }
 
@@ -85,11 +97,11 @@ class FormRow extends React.Component{
 class FormRepeat extends React.Component{
     constructor(props){
         super(props);
-        let initialValue = [];
-        if(props.initialValue&&props.initialValue instanceof Array){
-            initialValue = props.initialValue;
+        let defaultValue = [];
+        if(props.defaultValue&&props.defaultValue instanceof Array){
+            defaultValue = props.defaultValue;
         }
-        extendObservableDataKey(props,initialValue);
+        extendObservableDataKey(props,defaultValue);
     }
     validate(){
     }
@@ -101,7 +113,7 @@ class FormRepeat extends React.Component{
         var children = [];
         for(var i=0,j=values.length;i<j;i++){
             const rowdata = values[i];
-            children.push(<FormRow key={i} index={i} renderRow={this.props.renderRow} rowData={rowdata}/>);
+            children.push(<FormRow {...this.props} key={i} index={i} renderRow={this.props.renderRow} rowData={rowdata}/>);
         }
         return children;
     }

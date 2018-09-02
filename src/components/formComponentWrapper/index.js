@@ -30,7 +30,7 @@ export default class FormComponentWrapper extends React.Component{
                 };
                 const tableInputProps = this.props.tableLayout.input||{};
                 return (
-                    <TableLayout className={`xz-formitem-size-${Theme.getConfig('size',this.props)}`}>
+                    <TableLayout className={`xz-form-item xz-formitem-size-${Theme.getConfig('size',this.props)}`}>
                         <TableLayout.Cell {...tableLabelProps} className='xz-formitem-label-wrapper'>
                             <span>{this.props.label}</span>
                         </TableLayout.Cell>
@@ -50,7 +50,7 @@ export default class FormComponentWrapper extends React.Component{
                     ...this.props.gridLayout.input||{}
                 };
                 return (
-                    <Row className={`xz-formitem-size-${Theme.getConfig('size',this.props)}`}>
+                    <Row className={`xz-form-item xz-formitem-size-${Theme.getConfig('size',this.props)}`}>
                         <Row.Col className='xz-formitem-label-wrapper' {...gridLabelProps}>
                             <span>{this.props.label}</span>
                         </Row.Col>
