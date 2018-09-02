@@ -47,6 +47,9 @@ function setProperty(p,props){
     if(props.gridLayout){
         p.gridLayout = props.gridLayout;
     }
+    if(props.size){
+        p.size = props.size;
+    }
     return p;
 }
 

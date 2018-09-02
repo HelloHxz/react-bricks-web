@@ -60,6 +60,7 @@ class FormDemo extends React.PureComponent {
                }
              }
            }
+          size='lg'
   */
   render() {
     return <div className='doc-page-content'>
